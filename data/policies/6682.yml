@@ -1,0 +1,38 @@
+id: 6682
+name: ending financial support for some 16-19 year olds in training and further education
+chamber_id: commons
+context_description: ending <b>financial support</b> for some 16-19 year olds in training
+  and further education
+policy_description: 'The government ought stop payments made to some 16-18 year olds
+  to support them in education and training. '
+notes: ''
+status: active
+group_ids:
+- education
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2011-01-19
+    division_number: 176
+    key: commons-2011-01-19-176
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-01-19-176
+- division:
+    chamber_slug: commons
+    date: 2011-01-19
+    division_number: 177
+    key: commons-2011-01-19-177
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-01-19-177

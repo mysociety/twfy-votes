@@ -1,0 +1,218 @@
+id: 6699
+name: higher taxes on plane tickets
+chamber_id: commons
+context_description: higher <b>taxes on plane tickets</b>
+policy_description: Air Passenger Duty should be increased
+notes: ''
+status: active
+group_ids:
+- taxation
+- environment
+- transport
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2012-03-26
+    division_number: 505
+    key: commons-2012-03-26-505
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-03-26-505
+- division:
+    chamber_slug: commons
+    date: 2012-04-16
+    division_number: 507
+    key: commons-2012-04-16-507
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-04-16-507
+- division:
+    chamber_slug: commons
+    date: 2012-04-16
+    division_number: 508
+    key: commons-2012-04-16-508
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-04-16-508
+- division:
+    chamber_slug: commons
+    date: 2012-04-18
+    division_number: 524
+    key: commons-2012-04-18-524
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-04-18-524
+- division:
+    chamber_slug: commons
+    date: 2012-07-03
+    division_number: 41
+    key: commons-2012-07-03-41
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-07-03-41
+- division:
+    chamber_slug: commons
+    date: 2013-03-25
+    division_number: 199
+    key: commons-2013-03-25-199
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-03-25-199
+- division:
+    chamber_slug: commons
+    date: 2013-04-15
+    division_number: 201
+    key: commons-2013-04-15-201
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-04-15-201
+- division:
+    chamber_slug: commons
+    date: 2013-04-18
+    division_number: 219
+    key: commons-2013-04-18-219
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-04-18-219
+- division:
+    chamber_slug: commons
+    date: 2013-04-18
+    division_number: 220
+    key: commons-2013-04-18-220
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-04-18-220
+- division:
+    chamber_slug: commons
+    date: 2013-07-02
+    division_number: 43
+    key: commons-2013-07-02-43
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-07-02-43
+- division:
+    chamber_slug: commons
+    date: 2014-03-25
+    division_number: 238
+    key: commons-2014-03-25-238
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-03-25-238
+- division:
+    chamber_slug: commons
+    date: 2014-04-01
+    division_number: 241
+    key: commons-2014-04-01-241
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-04-01-241
+- division:
+    chamber_slug: commons
+    date: 2014-04-01
+    division_number: 242
+    key: commons-2014-04-01-242
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-04-01-242
+- division:
+    chamber_slug: commons
+    date: 2014-04-01
+    division_number: 243
+    key: commons-2014-04-01-243
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-04-01-243
+- division:
+    chamber_slug: commons
+    date: 2014-07-02
+    division_number: 32
+    key: commons-2014-07-02-32
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-07-02-32
+- division:
+    chamber_slug: commons
+    date: 2017-09-12
+    division_number: 16
+    key: commons-2017-09-12-16
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2017-09-12-16
+- division:
+    chamber_slug: commons
+    date: 2017-10-31
+    division_number: 31
+    key: commons-2017-10-31-31
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2017-10-31-31

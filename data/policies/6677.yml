@@ -1,0 +1,98 @@
+id: 6677
+name: restricting the provision of services to private patients by the NHS
+chamber_id: commons
+context_description: restricting the provision of services to <b>private patients</b>
+  by the NHS
+policy_description: the ability of NHS Foundation Trusts to make money from private
+  patients ought be restricted and reduced
+notes: ''
+status: active
+group_ids:
+- health
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2011-03-16
+    division_number: 233
+    key: commons-2011-03-16-233
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-03-16-233
+- division:
+    chamber_slug: commons
+    date: 2011-09-06
+    division_number: 338
+    key: commons-2011-09-06-338
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-09-06-338
+- division:
+    chamber_slug: commons
+    date: 2011-09-07
+    division_number: 342
+    key: commons-2011-09-07-342
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-09-07-342
+- division:
+    chamber_slug: commons
+    date: 2011-10-26
+    division_number: 377
+    key: commons-2011-10-26-377
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-10-26-377
+- division:
+    chamber_slug: commons
+    date: 2012-01-16
+    division_number: 423
+    key: commons-2012-01-16-423
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-01-16-423
+- division:
+    chamber_slug: commons
+    date: 2012-03-13
+    division_number: 488
+    key: commons-2012-03-13-488
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-03-13-488
+- division:
+    chamber_slug: commons
+    date: 2012-03-13
+    division_number: 489
+    key: commons-2012-03-13-489
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-03-13-489

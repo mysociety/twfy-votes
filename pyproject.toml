@@ -7,14 +7,33 @@ readme = "README.md"
 license = "MIT"
 homepage = "https://github.com/mysociety/twfy-votes"
 repository = "https://github.com/mysociety/twfy-votes"
-include = [
-    "LICENSE.md",
-]
+include = ["LICENSE.md"]
 
 [tool.poetry_bumpversion.file."src/twfy_votes/__init__.py"]
 
+[tool.ruff]
+exclude = []
+extend-include = ["*.ipynb"]
+select = ["E", "F", "PTH"]
+ignore = ["E501"]
+
+
 [tool.poetry.dependencies]
 python = "^3.8"
+uvicorn = { extras = ["standard"], version = "^0.23.2" }
+fastapi = "^0.101.1"
+pandas = "^2.0.3"
+duckdb = "^0.8.1"
+typer = "^0.9.0"
+jinja2 = "^3.1.2"
+aiofiles = "^23.2.1"
+pydantic-settings = "^2.0.3"
+tqdm = "^4.66.1"
+httpx = "^0.24.1"
+aioduckdb = { git = "https://github.com/NickCrews/aioduckdb.git", rev = "patch-1" }
+ruamel-yaml = "0.18.3"
+pyarrow = "^13.0.0"
+jinjasql2 = "^0.1.10"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.1.2"
@@ -23,6 +42,7 @@ pylint = "^2.12.2"
 black = "^22.3.0"
 pyright = "^1.1"
 toml = "^0.10.2"
+ruff = "^0.0.285"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

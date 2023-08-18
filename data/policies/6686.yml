@@ -1,0 +1,169 @@
+id: 6686
+name: allowing marriage between two people of same sex
+chamber_id: commons
+context_description: allowing <b>marriage</b> between two people of same sex
+policy_description: Same sex couples ought be allowed to marry.  (This is a subset
+  of the equal rights for homosexuals policy)
+notes: ''
+status: active
+group_ids:
+- social
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2004-05-25
+    division_number: 188
+    key: commons-2004-05-25-188
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2004-05-25-188
+- division:
+    chamber_slug: commons
+    date: 2013-02-05
+    division_number: 151
+    key: commons-2013-02-05-151
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-02-05-151
+- division:
+    chamber_slug: commons
+    date: 2013-02-05
+    division_number: 152
+    key: commons-2013-02-05-152
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-02-05-152
+- division:
+    chamber_slug: commons
+    date: 2013-02-05
+    division_number: 153
+    key: commons-2013-02-05-153
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-02-05-153
+- division:
+    chamber_slug: commons
+    date: 2013-02-05
+    division_number: 154
+    key: commons-2013-02-05-154
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-02-05-154
+- division:
+    chamber_slug: commons
+    date: 2013-05-21
+    division_number: 11
+    key: commons-2013-05-21-11
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-05-21-11
+- division:
+    chamber_slug: commons
+    date: 2014-03-05
+    division_number: 216
+    key: commons-2014-03-05-216
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-03-05-216
+- division:
+    chamber_slug: commons
+    date: 2014-03-05
+    division_number: 217
+    key: commons-2014-03-05-217
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-03-05-217
+- division:
+    chamber_slug: commons
+    date: 2014-03-05
+    division_number: 218
+    key: commons-2014-03-05-218
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-03-05-218
+- division:
+    chamber_slug: commons
+    date: 2014-03-05
+    division_number: 219
+    key: commons-2014-03-05-219
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-03-05-219
+- division:
+    chamber_slug: commons
+    date: 2014-03-05
+    division_number: 220
+    key: commons-2014-03-05-220
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-03-05-220
+- division:
+    chamber_slug: commons
+    date: 2014-03-05
+    division_number: 221
+    key: commons-2014-03-05-221
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-03-05-221
+- division:
+    chamber_slug: commons
+    date: 2019-07-09
+    division_number: 427
+    key: commons-2019-07-09-427
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2019-07-09-427

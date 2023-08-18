@@ -1,0 +1,111 @@
+id: 6716
+name: allowing employees to exchange some employment rights for shares in the company
+  they work for
+chamber_id: commons
+context_description: allowing employees to exchange some employment <b>rights for
+  shares</b> in the company they work for
+policy_description: Employers ought be permitted not to extend certain employment
+  rights to those with employee shareholders status.
+notes: ''
+status: active
+group_ids:
+- taxation
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2012-11-05
+    division_number: 93
+    key: commons-2012-11-05-93
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-11-05-93
+- division:
+    chamber_slug: commons
+    date: 2012-12-17
+    division_number: 123
+    key: commons-2012-12-17-123
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-12-17-123
+- division:
+    chamber_slug: commons
+    date: 2012-12-17
+    division_number: 124
+    key: commons-2012-12-17-124
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-12-17-124
+- division:
+    chamber_slug: commons
+    date: 2013-03-25
+    division_number: 198
+    key: commons-2013-03-25-198
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-03-25-198
+- division:
+    chamber_slug: commons
+    date: 2013-04-16
+    division_number: 202
+    key: commons-2013-04-16-202
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-04-16-202
+- division:
+    chamber_slug: commons
+    date: 2013-04-23
+    division_number: 224
+    key: commons-2013-04-23-224
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-04-23-224
+- division:
+    chamber_slug: commons
+    date: 2013-04-25
+    division_number: 226
+    key: commons-2013-04-25-226
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-04-25-226
+- division:
+    chamber_slug: commons
+    date: 2014-07-01
+    division_number: 27
+    key: commons-2014-07-01-27
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-07-01-27

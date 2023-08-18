@@ -1,0 +1,36 @@
+id: 6697
+name: selling England&rsquo;s state owned forests
+chamber_id: commons
+context_description: selling England&rsquo;s state owned <b>forests</b>
+policy_description: England's public forests should be sold
+notes: ''
+status: active
+group_ids:
+- environment
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2011-02-02
+    division_number: 188
+    key: commons-2011-02-02-188
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-02-02-188
+- division:
+    chamber_slug: commons
+    date: 2011-02-02
+    division_number: 189
+    key: commons-2011-02-02-189
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-02-02-189

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ settings.site_name }}{% endblock %}
+
+{% block content %}
+
+<h1>{{ policy.name.title() }}</h1>
+
+<p>Status: {{ policy.status.title() }}</p>
+
+<p>Groups: {% for group in policy.groups %}{{group.name}}{% if not loop.last %},{% endif %} {% endfor %}</p>
+{% if policy.highlightable %}
+<p>Policy may be highlighted in absence of interested votes.</p>
+{% endif %}
+
+<h2>Description</h2>
+<p>{{ policy.policy_description }}</p>
+
+<h2>Decisions</h2>
+
+<p>Decisions may be read as agreeing with the policy, or being against the policy.</p>
+<p>Votes may be neutral when relevant to a topic, but not clearly for or against.</p>
+
+<p>{{ policy.decision_df(request)|safe }}</p>
+
+{% endblock content %}

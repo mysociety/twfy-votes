@@ -13,3 +13,5 @@ local.properties
 .settings/
 __pycache__
 dist
+_site
+.env

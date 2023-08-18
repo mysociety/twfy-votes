@@ -1,0 +1,100 @@
+policy_id,label,group,summary,multiple_groups
+363,introducing <b>foundation hospitals</b>,health,False,False
+810,greater <b>regulation of gambling</b>,misc,False,False
+811,<b>smoking bans</b>,social,False,True
+811,<b>smoking bans</b>,health,False,True
+826,equal <b>gay rights</b>,social,False,False
+837,a <strong>wholly elected</strong> House of Lords,reform,True,False
+842,a lower <b>voting age</b>,reform,False,False
+975,<strong>investigations</strong> into the Iraq war,foreignpolicy,False,False
+984,replacing <b>Trident</b> with a new nuclear weapons system,foreignpolicy,True,False
+996,a <b>transparent Parliament</b>,reform,False,False
+1027,a referendum on the UK's membership of the <b>EU</b>,foreignpolicy,True,False
+1030,measures to <b>prevent climate change</b>,environment,False,False
+1049,the <b>Iraq war</b>,foreignpolicy,False,False
+1050,the <b>hunting ban</b>,social,False,False
+1051,introducing <b>ID cards</b>,home,False,False
+1052,university <b>tuition fees</b>,education,True,False
+1053,"Labour's <b title=""Including voting to maintain them"">anti-terrorism laws</b>",misc,False,False
+1065,more <b>EU integration</b>,foreignpolicy,True,False
+1071,allowing ministers to <b>intervene in inquests</b>,home,False,False
+1074,greater <b>autonomy for schools</b>,education,False,False
+1079,removing <b>hereditary peers</b> from the House of Lords,reform,True,False
+1084,"a more <a href=""https://en.wikipedia.org/wiki/Proportional_representation"">proportional system</a> for electing MPs",reform,True,False
+1087,a <b>stricter asylum system</b>,home,False,False
+1105,the privatisation of <b>Royal Mail</b>,misc,False,False
+1109,encouraging <b>occupational pensions</b>,taxation,True,False
+1110,increasing the <b>rate of VAT</b>,taxation,True,False
+1113,an <b>equal number of electors</b> per parliamentary constituency,reform,True,False
+1120,capping <b>civil service redundancy payments</b>,misc,False,False
+1124,automatic enrolment in <b>occupational pensions</b>,taxation,False,False
+1132,"raising England&rsquo;s <b>undergraduate tuition fee</b> cap to &pound;9,000 per year",education,True,False
+1136,<b>fewer MPs</b> in the House of Commons,reform,True,False
+6667,"the policies included in the 2010 <b><a href=""http://webarchive.nationalarchives.gov.uk/20100527091800/http://programmeforgovernment.hmg.gov.uk/"">Conservative - Liberal Democrat Coalition Agreement</a></b>",misc,False,False
+6670,a reduction in spending on <b>welfare benefits</b>,welfare,True,False
+6671,reducing central government <b>funding of local government</b>,reform,True,False
+6672,"reducing <b>housing benefit</b> for social tenants deemed to have excess bedrooms (which Labour describe as the ""bedroom tax"")",welfare,True,False
+6673,paying higher benefits over longer periods for those unable to work due to <b>illness or disability</b>,welfare,True,False
+6674,raising <b>welfare benefits</b> at least in line with prices,welfare,True,False
+6676,reforming the <b>NHS</b> so GPs buy services on behalf of their patients,health,False,False
+6677,restricting the provision of services to <b>private patients</b> by the NHS,health,False,False
+6678,"greater restrictions on <b>campaigning by third parties</b>, such as charities, during elections",reform,True,False
+6679,reducing the rate of <b>corporation tax</b>,business,False,False
+6680,raising the threshold at which people start to pay <b>income tax</b>,taxation,False,False
+6681,"increasing the tax rate applied to <b>income over &pound;150,000</b>",taxation,False,False
+6682,ending <b>financial support</b> for some 16-19 year olds in training and further education,education,False,False
+6683,local councils keeping money raised from <b>taxes on business premises</b> in their areas,reform,False,False
+6684,making local councils responsible for helping those in <b>financial need</b> afford their <b>council tax</b> and reducing the amount spent on such support,welfare,False,False
+6685,a <b>banker&rsquo;s bonus tax</b>,taxation,False,False
+6686,allowing <b>marriage</b> between two people of same sex,social,False,False
+6687,"<a href=""https://en.wikipedia.org/wiki/Academy_(English_school)"">academy schools</a>",education,False,False
+6688,use of <b>UK military forces</b> in combat operations overseas,foreignpolicy,False,False
+6690,measures to reduce <b>tax avoidance</b>,business,False,False
+6691,stronger tax <b>incentives for companies to invest</b> in assets,business,False,False
+6692,slowing the rise in <b>rail fares</b>,transport,False,False
+6693,lower taxes on <b>fuel for motor vehicles</b>,transport,False,True
+6693,lower taxes on <b>fuel for motor vehicles</b>,taxation,False,True
+6693,lower taxes on <b>fuel for motor vehicles</b>,environment,False,True
+6694,higher taxes on <b>alcoholic drinks</b>,taxation,False,False
+6695,more <b>powers for local councils</b>,reform,False,False
+6696,the introduction of elected <b>Police and Crime Commissioners</b>,home,False,False
+6697,selling England&rsquo;s state owned <b>forests</b>,environment,False,False
+6698,<b>fixed periods between parliamentary elections</b>,reform,False,False
+6699,higher <b>taxes on plane tickets</b>,taxation,False,True
+6699,higher <b>taxes on plane tickets</b>,environment,False,True
+6699,higher <b>taxes on plane tickets</b>,transport,False,True
+6702,spending public money to create <b>guaranteed jobs for young people</b> who have spent a long time unemployed,welfare,False,False
+6703,laws to promote <b>equality and human rights</b>,social,False,False
+6704,financial incentives for <b>low carbon</b> emission <b>electricity generation</b> methods,environment,False,False
+6705,requiring pub companies to offer <b>pub landlords rent-only leases</b>,misc,False,False
+6706,strengthening the <b>Military Covenant</b>,foreignpolicy,False,False
+6707,restricting the scope of <b>legal aid</b>,misc,False,False
+6708,transferring <b>more powers to the Senedd/Welsh Parliament</b>,reform,False,False
+6709,transferring <b>more powers to the Scottish Parliament</b>,reform,False,False
+6710,<b>culling badgers</b> to tackle bovine tuberculosis,environment,False,False
+6711,an annual tax on the value of expensive homes (popularly known as a <b>mansion tax</b>),taxation,False,False
+6715,allowing national security sensitive evidence to be put before <b>courts in secret sessions</b>,misc,False,False
+6716,allowing employees to exchange some employment <b>rights for shares</b> in the company they work for,taxation,False,False
+6718,restrictions on <b>fees</b> charged to tenants by <b>letting agents</b>,misc,False,False
+6719,limits on success <b>fees</b> paid to lawyers in <b>no-win no fee cases</b>,misc,False,False
+6720,a statutory <b>register of lobbyists</b>,misc,False,False
+6721,requiring the mass <b>retention of information about communications</b>,home,False,False
+6731,more restrictive <b>regulation of trade union activity</b>,taxation,False,False
+6732,allowing <b>terminally ill people</b> to be given <b>assistance to end their life</b>,social,False,True
+6732,allowing <b>terminally ill people</b> to be given <b>assistance to end their life</b>,health,False,True
+6733,higher <b>taxes on banks</b>,taxation,False,False
+6734,stronger <b>enforcement of immigration rules</b>,home,False,False
+6736,"<b>a veto for MPs</b> from England, Wales and Northern Ireland <b>over laws specifically impacting their part of the UK</b>",reform,False,False
+6741,greater regulation of <b>hydraulic fracturing (fracking)</b> to extract shale gas,environment,False,False
+6743,charging a <b>market rent to high earners renting a council home</b>,housing,False,False
+6744,phasing out <b>secure tenancies for life</b>,housing,False,False
+6746,a <b>publicly owned railway system</b>,transport,False,False
+6747,greater public control of <b>bus services</b>,transport,False,False
+6751,<b>mass surveillance</b> of people&rsquo;s communications and activities,home,False,False
+6753,new <b>high speed rail</b> infrastructure,environment,False,True
+6753,new <b>high speed rail</b> infrastructure,business,False,True
+6754,reducing <b>capital gains tax</b>,taxation,False,False
+6757,"<b>military action against <a href=""https://en.wikipedia.org/wiki/Islamic_State_of_Iraq_and_the_Levant"">ISIL (Daesh)</a></b>",foreignpolicy,False,False
+6758,<b>merging police and fire services</b> under Police and Crime Commissioners,home,False,False
+6761,<b>UK membership of the EU</b>,foreignpolicy,False,False
+6764,a <b>right to remain for EU nationals</b> already in living in the UK,foreignpolicy,False,False

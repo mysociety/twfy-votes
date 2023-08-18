@@ -1,0 +1,50 @@
+id: 6758
+name: merging police and fire services under Police and Crime Commissioners
+chamber_id: commons
+context_description: <b>merging police and fire services</b> under Police and Crime
+  Commissioners
+policy_description: Police and Crime Cmmrs should have their role expanded to cover
+  the Fire and Rescue service.
+notes: ''
+status: active
+group_ids:
+- home
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2016-04-26
+    division_number: 251
+    key: commons-2016-04-26-251
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-04-26-251
+- division:
+    chamber_slug: commons
+    date: 2016-04-26
+    division_number: 252
+    key: commons-2016-04-26-252
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-04-26-252
+- division:
+    chamber_slug: commons
+    date: 2016-04-26
+    division_number: 253
+    key: commons-2016-04-26-253
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-04-26-253

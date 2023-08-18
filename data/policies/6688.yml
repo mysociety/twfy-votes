@@ -1,0 +1,192 @@
+id: 6688
+name: use of UK military forces in combat operations overseas
+chamber_id: commons
+context_description: use of <b>UK military forces</b> in combat operations overseas
+policy_description: 'UK military forces ought be engaged in combat operations abroad. '
+notes: ''
+status: active
+group_ids:
+- foreignpolicy
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2001-11-01
+    division_number: 48
+    key: commons-2001-11-01-48
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-01-48
+- division:
+    chamber_slug: commons
+    date: 2002-09-24
+    division_number: 319
+    key: commons-2002-09-24-319
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2002-09-24-319
+- division:
+    chamber_slug: commons
+    date: 2002-11-25
+    division_number: 6
+    key: commons-2002-11-25-6
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2002-11-25-6
+- division:
+    chamber_slug: commons
+    date: 2003-02-26
+    division_number: 96
+    key: commons-2003-02-26-96
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2003-02-26-96
+- division:
+    chamber_slug: commons
+    date: 2003-02-26
+    division_number: 97
+    key: commons-2003-02-26-97
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2003-02-26-97
+- division:
+    chamber_slug: commons
+    date: 2003-03-18
+    division_number: 117
+    key: commons-2003-03-18-117
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2003-03-18-117
+- division:
+    chamber_slug: commons
+    date: 2003-03-18
+    division_number: 118
+    key: commons-2003-03-18-118
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2003-03-18-118
+- division:
+    chamber_slug: commons
+    date: 2010-09-09
+    division_number: 59
+    key: commons-2010-09-09-59
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-09-09-59
+- division:
+    chamber_slug: commons
+    date: 2010-09-09
+    division_number: 60
+    key: commons-2010-09-09-60
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-09-09-60
+- division:
+    chamber_slug: commons
+    date: 2011-03-21
+    division_number: 235
+    key: commons-2011-03-21-235
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-03-21-235
+- division:
+    chamber_slug: commons
+    date: 2013-08-29
+    division_number: 69
+    key: commons-2013-08-29-69
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-08-29-69
+- division:
+    chamber_slug: commons
+    date: 2013-08-29
+    division_number: 70
+    key: commons-2013-08-29-70
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-08-29-70
+- division:
+    chamber_slug: commons
+    date: 2014-09-26
+    division_number: 53
+    key: commons-2014-09-26-53
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-09-26-53
+- division:
+    chamber_slug: commons
+    date: 2015-12-02
+    division_number: 138
+    key: commons-2015-12-02-138
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-12-02-138
+- division:
+    chamber_slug: commons
+    date: 2015-12-02
+    division_number: 139
+    key: commons-2015-12-02-139
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-12-02-139

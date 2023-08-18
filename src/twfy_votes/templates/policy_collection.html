@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{{ settings.site_name }}{% endblock %}
+
+{% block content %}
+
+<h1>Policies</h1>
+
+<p>Policies are collections of votes linked thematically.</p>
+<p>The same policy might be in multiple groups.</p>
+
+<h1>{{ policy_collection.name }}</h1>
+
+
+{% for group_name, group_policies in policy_collection.grouped_policies().items() %}
+
+<h2>{{ group_name }}</h2>
+
+<ul>
+    {% for policy in group_policies %}
+    <li><a href="{{ policy.url(request) }}">{{ policy.id }} - {{ policy.name }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endfor %}
+
+{% endblock content %}

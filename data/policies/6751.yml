@@ -1,0 +1,51 @@
+id: 6751
+name: mass surveillance of people&rsquo;s communications and activities
+chamber_id: commons
+context_description: <b>mass surveillance</b> of people&rsquo;s communications and
+  activities
+policy_description: "the UK state should, subject to safeguards, be allowed to obtain,
+  retain and look at personal and private information from the population en-mass
+  eg. people's communications, health records, travel data etc. "
+notes: ''
+status: active
+group_ids:
+- home
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2016-03-15
+    division_number: 220
+    key: commons-2016-03-15-220
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-03-15-220
+- division:
+    chamber_slug: commons
+    date: 2016-06-07
+    division_number: 12
+    key: commons-2016-06-07-12
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-06-07-12
+- division:
+    chamber_slug: commons
+    date: 2016-06-07
+    division_number: 13
+    key: commons-2016-06-07-13
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-06-07-13

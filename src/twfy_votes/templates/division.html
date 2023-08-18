@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+
+<h1>{{ item.details.house.name }} - {{ item.details.date }} - {{ item.details.division_number }}</h1>
+
+<p>{{ item.details.division_name|safe }}</p>
+
+<h2>Voting breakdown</h2>
+
+{{ item.gov_breakdown_df()|safe }}
+
+
+<h2>Party voting breakdown</h2>
+
+{{ item.party_breakdown_df()|safe }}
+
+
+<h2>Voting list</h2>
+
+{{ item.votes_df()|safe }}
+
+
+{% endblock content %}

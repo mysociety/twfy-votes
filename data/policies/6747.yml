@@ -1,0 +1,49 @@
+id: 6747
+name: greater public control of bus services
+chamber_id: commons
+context_description: greater public control of <b>bus services</b>
+policy_description: The state should regulate bus services (in the future this might
+  include subsidising bus services)
+notes: ''
+status: active
+group_ids:
+- transport
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2014-11-05
+    division_number: 74
+    key: commons-2014-11-05-74
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-11-05-74
+- division:
+    chamber_slug: commons
+    date: 2016-01-19
+    division_number: 167
+    key: commons-2016-01-19-167
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-01-19-167
+- division:
+    chamber_slug: commons
+    date: 2016-06-15
+    division_number: 20
+    key: commons-2016-06-15-20
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-06-15-20

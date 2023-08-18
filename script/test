@@ -1,0 +1,6 @@
+#!/bin/bash
+
+
+poetry run pytest .
+poetry run black .
+poetry run ruff .

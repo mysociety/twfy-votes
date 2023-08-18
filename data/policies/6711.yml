@@ -1,0 +1,63 @@
+id: 6711
+name: an annual tax on the value of expensive homes (popularly known as a mansion
+  tax)
+chamber_id: commons
+context_description: an annual tax on the value of expensive homes (popularly known
+  as a <b>mansion tax</b>)
+policy_description: There ought be an annual tax on the value of properties worth
+  over a certain amount. The proposed tax is popularly known as the mansion tax.
+notes: ''
+status: active
+group_ids:
+- taxation
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2013-03-12
+    division_number: 179
+    key: commons-2013-03-12-179
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-03-12-179
+- division:
+    chamber_slug: commons
+    date: 2013-04-17
+    division_number: 211
+    key: commons-2013-04-17-211
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-04-17-211
+- division:
+    chamber_slug: commons
+    date: 2013-07-01
+    division_number: 38
+    key: commons-2013-07-01-38
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-07-01-38
+- division:
+    chamber_slug: commons
+    date: 2013-09-04
+    division_number: 74
+    key: commons-2013-09-04-74
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-04-74

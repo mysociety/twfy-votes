@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ settings.site_name }}{% endblock %}
+
+{% block content %}
+
+<h1> {{ settings.site_name }} </h1>
+
+<p>This is an experimental vote calculator to replace the Public Whip in feeding data into TheyWorkForYou.</p>
+<p>Currently it works off the database dump of raw Public Whip data - but creating new calculated tables.
+</p>
+<p>There are two main views:</p>
+
+<ul>
+    <li><a class="page-scroll" href="{{ url_for('decisions') }}">Decisions</a> - Votes taken in various Parliaments.
+    </li>
+    <li><a class="page-scroll" href="{{ url_for('policies') }}">Policies</a> - Grouping of divisions into related
+        policies. </li>
+</ul>
+
+
+{% endblock content %}

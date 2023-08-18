@@ -1,0 +1,1000 @@
+id: 1053
+name: Labour's anti-terrorism laws
+chamber_id: commons
+context_description: Labour's <b title="Including voting to maintain them">anti-terrorism
+  laws</b>
+policy_description: the crime known as "Terrorism" is different from murder and conspiracy
+  to murder, and should have it's own special category for which the normal rights
+  not to be detained without charge or trial can be summarily suspended at the whim
+  of the Government
+notes: ''
+status: active
+group_ids:
+- misc
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2001-11-19
+    division_number: 65
+    key: commons-2001-11-19-65
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-19-65
+- division:
+    chamber_slug: commons
+    date: 2001-11-19
+    division_number: 66
+    key: commons-2001-11-19-66
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-19-66
+- division:
+    chamber_slug: commons
+    date: 2001-11-21
+    division_number: 71
+    key: commons-2001-11-21-71
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-21-71
+- division:
+    chamber_slug: commons
+    date: 2001-11-21
+    division_number: 72
+    key: commons-2001-11-21-72
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-21-72
+- division:
+    chamber_slug: commons
+    date: 2001-11-21
+    division_number: 73
+    key: commons-2001-11-21-73
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-21-73
+- division:
+    chamber_slug: commons
+    date: 2001-11-21
+    division_number: 74
+    key: commons-2001-11-21-74
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-21-74
+- division:
+    chamber_slug: commons
+    date: 2001-11-21
+    division_number: 75
+    key: commons-2001-11-21-75
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-21-75
+- division:
+    chamber_slug: commons
+    date: 2001-11-21
+    division_number: 76
+    key: commons-2001-11-21-76
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-21-76
+- division:
+    chamber_slug: commons
+    date: 2001-11-21
+    division_number: 77
+    key: commons-2001-11-21-77
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-21-77
+- division:
+    chamber_slug: commons
+    date: 2001-11-21
+    division_number: 78
+    key: commons-2001-11-21-78
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-21-78
+- division:
+    chamber_slug: commons
+    date: 2001-11-21
+    division_number: 79
+    key: commons-2001-11-21-79
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-21-79
+- division:
+    chamber_slug: commons
+    date: 2001-11-26
+    division_number: 80
+    key: commons-2001-11-26-80
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-26-80
+- division:
+    chamber_slug: commons
+    date: 2001-11-26
+    division_number: 81
+    key: commons-2001-11-26-81
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-26-81
+- division:
+    chamber_slug: commons
+    date: 2001-11-26
+    division_number: 82
+    key: commons-2001-11-26-82
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-26-82
+- division:
+    chamber_slug: commons
+    date: 2001-11-26
+    division_number: 83
+    key: commons-2001-11-26-83
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-26-83
+- division:
+    chamber_slug: commons
+    date: 2001-11-26
+    division_number: 84
+    key: commons-2001-11-26-84
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-26-84
+- division:
+    chamber_slug: commons
+    date: 2001-11-26
+    division_number: 85
+    key: commons-2001-11-26-85
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-26-85
+- division:
+    chamber_slug: commons
+    date: 2001-11-26
+    division_number: 86
+    key: commons-2001-11-26-86
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-11-26-86
+- division:
+    chamber_slug: commons
+    date: 2001-12-12
+    division_number: 106
+    key: commons-2001-12-12-106
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-12-12-106
+- division:
+    chamber_slug: commons
+    date: 2001-12-12
+    division_number: 107
+    key: commons-2001-12-12-107
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-12-12-107
+- division:
+    chamber_slug: commons
+    date: 2001-12-12
+    division_number: 108
+    key: commons-2001-12-12-108
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-12-12-108
+- division:
+    chamber_slug: commons
+    date: 2001-12-12
+    division_number: 109
+    key: commons-2001-12-12-109
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-12-12-109
+- division:
+    chamber_slug: commons
+    date: 2001-12-12
+    division_number: 110
+    key: commons-2001-12-12-110
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-12-12-110
+- division:
+    chamber_slug: commons
+    date: 2001-12-13
+    division_number: 114
+    key: commons-2001-12-13-114
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2001-12-13-114
+- division:
+    chamber_slug: commons
+    date: 2004-02-25
+    division_number: 59
+    key: commons-2004-02-25-59
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2004-02-25-59
+- division:
+    chamber_slug: commons
+    date: 2004-03-03
+    division_number: 71
+    key: commons-2004-03-03-71
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2004-03-03-71
+- division:
+    chamber_slug: commons
+    date: 2005-02-23
+    division_number: 93
+    key: commons-2005-02-23-93
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-02-23-93
+- division:
+    chamber_slug: commons
+    date: 2005-02-23
+    division_number: 94
+    key: commons-2005-02-23-94
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-02-23-94
+- division:
+    chamber_slug: commons
+    date: 2005-02-23
+    division_number: 95
+    key: commons-2005-02-23-95
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-02-23-95
+- division:
+    chamber_slug: commons
+    date: 2005-02-28
+    division_number: 100
+    key: commons-2005-02-28-100
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-02-28-100
+- division:
+    chamber_slug: commons
+    date: 2005-02-28
+    division_number: 101
+    key: commons-2005-02-28-101
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-02-28-101
+- division:
+    chamber_slug: commons
+    date: 2005-02-28
+    division_number: 102
+    key: commons-2005-02-28-102
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-02-28-102
+- division:
+    chamber_slug: commons
+    date: 2005-02-28
+    division_number: 103
+    key: commons-2005-02-28-103
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-02-28-103
+- division:
+    chamber_slug: commons
+    date: 2005-02-28
+    division_number: 104
+    key: commons-2005-02-28-104
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-02-28-104
+- division:
+    chamber_slug: commons
+    date: 2005-03-09
+    division_number: 121
+    key: commons-2005-03-09-121
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-09-121
+- division:
+    chamber_slug: commons
+    date: 2005-03-09
+    division_number: 122
+    key: commons-2005-03-09-122
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-09-122
+- division:
+    chamber_slug: commons
+    date: 2005-03-09
+    division_number: 123
+    key: commons-2005-03-09-123
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-09-123
+- division:
+    chamber_slug: commons
+    date: 2005-03-09
+    division_number: 124
+    key: commons-2005-03-09-124
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-09-124
+- division:
+    chamber_slug: commons
+    date: 2005-03-09
+    division_number: 125
+    key: commons-2005-03-09-125
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-09-125
+- division:
+    chamber_slug: commons
+    date: 2005-03-09
+    division_number: 126
+    key: commons-2005-03-09-126
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-09-126
+- division:
+    chamber_slug: commons
+    date: 2005-03-09
+    division_number: 127
+    key: commons-2005-03-09-127
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-09-127
+- division:
+    chamber_slug: commons
+    date: 2005-03-09
+    division_number: 128
+    key: commons-2005-03-09-128
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-09-128
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 131
+    key: commons-2005-03-10-131
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-131
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 132
+    key: commons-2005-03-10-132
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-132
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 133
+    key: commons-2005-03-10-133
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-133
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 134
+    key: commons-2005-03-10-134
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-134
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 135
+    key: commons-2005-03-10-135
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-135
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 136
+    key: commons-2005-03-10-136
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-136
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 137
+    key: commons-2005-03-10-137
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-137
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 138
+    key: commons-2005-03-10-138
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-138
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 139
+    key: commons-2005-03-10-139
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-139
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 140
+    key: commons-2005-03-10-140
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-140
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 141
+    key: commons-2005-03-10-141
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-141
+- division:
+    chamber_slug: commons
+    date: 2005-03-10
+    division_number: 142
+    key: commons-2005-03-10-142
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-03-10-142
+- division:
+    chamber_slug: commons
+    date: 2005-10-26
+    division_number: 70
+    key: commons-2005-10-26-70
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-10-26-70
+- division:
+    chamber_slug: commons
+    date: 2005-10-26
+    division_number: 71
+    key: commons-2005-10-26-71
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-10-26-71
+- division:
+    chamber_slug: commons
+    date: 2005-11-02
+    division_number: 73
+    key: commons-2005-11-02-73
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-02-73
+- division:
+    chamber_slug: commons
+    date: 2005-11-02
+    division_number: 74
+    key: commons-2005-11-02-74
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-02-74
+- division:
+    chamber_slug: commons
+    date: 2005-11-02
+    division_number: 75
+    key: commons-2005-11-02-75
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-02-75
+- division:
+    chamber_slug: commons
+    date: 2005-11-03
+    division_number: 76
+    key: commons-2005-11-03-76
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-03-76
+- division:
+    chamber_slug: commons
+    date: 2005-11-03
+    division_number: 77
+    key: commons-2005-11-03-77
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-03-77
+- division:
+    chamber_slug: commons
+    date: 2005-11-03
+    division_number: 78
+    key: commons-2005-11-03-78
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-03-78
+- division:
+    chamber_slug: commons
+    date: 2005-11-09
+    division_number: 83
+    key: commons-2005-11-09-83
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-09-83
+- division:
+    chamber_slug: commons
+    date: 2005-11-09
+    division_number: 84
+    key: commons-2005-11-09-84
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-09-84
+- division:
+    chamber_slug: commons
+    date: 2005-11-09
+    division_number: 85
+    key: commons-2005-11-09-85
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-09-85
+- division:
+    chamber_slug: commons
+    date: 2005-11-09
+    division_number: 86
+    key: commons-2005-11-09-86
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-09-86
+- division:
+    chamber_slug: commons
+    date: 2005-11-09
+    division_number: 87
+    key: commons-2005-11-09-87
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2005-11-09-87
+- division:
+    chamber_slug: commons
+    date: 2006-02-15
+    division_number: 168
+    key: commons-2006-02-15-168
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2006-02-15-168
+- division:
+    chamber_slug: commons
+    date: 2006-02-15
+    division_number: 169
+    key: commons-2006-02-15-169
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2006-02-15-169
+- division:
+    chamber_slug: commons
+    date: 2006-02-15
+    division_number: 170
+    key: commons-2006-02-15-170
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2006-02-15-170
+- division:
+    chamber_slug: commons
+    date: 2006-03-16
+    division_number: 195
+    key: commons-2006-03-16-195
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2006-03-16-195
+- division:
+    chamber_slug: commons
+    date: 2006-03-16
+    division_number: 196
+    key: commons-2006-03-16-196
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2006-03-16-196
+- division:
+    chamber_slug: commons
+    date: 2007-02-22
+    division_number: 53
+    key: commons-2007-02-22-53
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-02-22-53
+- division:
+    chamber_slug: commons
+    date: 2008-02-21
+    division_number: 90
+    key: commons-2008-02-21-90
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2008-02-21-90
+- division:
+    chamber_slug: commons
+    date: 2009-07-09
+    division_number: 196
+    key: commons-2009-07-09-196
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2009-07-09-196
+- division:
+    chamber_slug: commons
+    date: 2009-11-09
+    division_number: 244
+    key: commons-2009-11-09-244
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2009-11-09-244
+- division:
+    chamber_slug: commons
+    date: 2010-02-08
+    division_number: 72
+    key: commons-2010-02-08-72
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-02-08-72
+- division:
+    chamber_slug: commons
+    date: 2010-02-08
+    division_number: 73
+    key: commons-2010-02-08-73
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-02-08-73
+- division:
+    chamber_slug: commons
+    date: 2010-02-08
+    division_number: 74
+    key: commons-2010-02-08-74
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-02-08-74
+- division:
+    chamber_slug: commons
+    date: 2010-02-08
+    division_number: 75
+    key: commons-2010-02-08-75
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-02-08-75
+- division:
+    chamber_slug: commons
+    date: 2010-07-14
+    division_number: 24
+    key: commons-2010-07-14-24
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-07-14-24
+- division:
+    chamber_slug: lords
+    date: 2007-03-05
+    division_number: 1
+    key: lords-2007-03-05-1
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: lords-2007-03-05-1

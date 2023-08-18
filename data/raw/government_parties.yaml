@@ -1,0 +1,48 @@
+- label: New Labour
+  chamber:
+    - commons
+    - lords
+  start_date: 1997-05-01
+  end_date: 2010-05-01
+  party:
+    - Labour
+- label: Con-Lib Coalition
+  chamber:
+    - commons
+    - lords
+  start_date: 2010-05-01
+  end_date: 2015-05-01
+  party:
+    - Conservative
+    - Liberal Democrat
+- label: Conservative Gov (various)
+  chamber:
+     - commons
+     - lords
+  start_date: 2015-05-01
+  end_date: 2025-01-01
+  party:
+    - Conservative
+- label: Scottish Labour/LibDem Coalition
+  chamber:
+    - scotland
+  party:
+    - Labour
+    - Liberal Democrat
+  start_date: 1999-05-06
+  end_date: 2007-05-02
+- label: SNP Governments
+  chamber:
+    - scotland
+  start_date: 2007-05-03
+  end_date: 2021-05-05
+  party:
+    - SNP
+- label: SNP-Green Coalition
+  chamber:
+    - scotland
+  start_date: 2021-05-06
+  end_date: 2026-01-01
+  party:
+    - Scottish National Party
+    - Green Party

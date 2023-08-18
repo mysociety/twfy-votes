@@ -1,0 +1,217 @@
+id: 6707
+name: restricting the scope of legal aid
+chamber_id: commons
+context_description: restricting the scope of <b>legal aid</b>
+policy_description: The provision of legal aid ought be restricted; the scope of cases
+  and circumstances in which legal aid may be provided should be reduced.
+notes: ''
+status: active
+group_ids:
+- misc
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2011-06-29
+    division_number: 310
+    key: commons-2011-06-29-310
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-06-29-310
+- division:
+    chamber_slug: commons
+    date: 2011-10-31
+    division_number: 380
+    key: commons-2011-10-31-380
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-10-31-380
+- division:
+    chamber_slug: commons
+    date: 2011-10-31
+    division_number: 382
+    key: commons-2011-10-31-382
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-10-31-382
+- division:
+    chamber_slug: commons
+    date: 2011-11-02
+    division_number: 387
+    key: commons-2011-11-02-387
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-11-02-387
+- division:
+    chamber_slug: commons
+    date: 2011-11-02
+    division_number: 388
+    key: commons-2011-11-02-388
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-11-02-388
+- division:
+    chamber_slug: commons
+    date: 2011-11-02
+    division_number: 391
+    key: commons-2011-11-02-391
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-11-02-391
+- division:
+    chamber_slug: commons
+    date: 2012-04-17
+    division_number: 510
+    key: commons-2012-04-17-510
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-04-17-510
+- division:
+    chamber_slug: commons
+    date: 2012-04-17
+    division_number: 511
+    key: commons-2012-04-17-511
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-04-17-511
+- division:
+    chamber_slug: commons
+    date: 2012-04-17
+    division_number: 512
+    key: commons-2012-04-17-512
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-04-17-512
+- division:
+    chamber_slug: commons
+    date: 2012-04-17
+    division_number: 513
+    key: commons-2012-04-17-513
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-04-17-513
+- division:
+    chamber_slug: commons
+    date: 2012-04-17
+    division_number: 514
+    key: commons-2012-04-17-514
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-04-17-514
+- division:
+    chamber_slug: commons
+    date: 2012-12-05
+    division_number: 116
+    key: commons-2012-12-05-116
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-12-05-116
+- division:
+    chamber_slug: commons
+    date: 2012-12-05
+    division_number: 117
+    key: commons-2012-12-05-117
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-12-05-117
+- division:
+    chamber_slug: commons
+    date: 2014-01-22
+    division_number: 186
+    key: commons-2014-01-22-186
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-01-22-186
+- division:
+    chamber_slug: commons
+    date: 2014-07-09
+    division_number: 33
+    key: commons-2014-07-09-33
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-07-09-33
+- division:
+    chamber_slug: commons
+    date: 2022-01-25
+    division_number: 169
+    key: commons-2022-01-25-169
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2022-01-25-169
+- division:
+    chamber_slug: commons
+    date: 2022-04-26
+    division_number: 264
+    key: commons-2022-04-26-264
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2022-04-26-264

@@ -1,0 +1,72 @@
+id: 6705
+name: requiring pub companies to offer pub landlords rent-only leases
+chamber_id: commons
+context_description: requiring pub companies to offer <b>pub landlords rent-only leases</b>
+policy_description: pub companies ought be required to offer rent only leases
+notes: ''
+status: active
+group_ids:
+- misc
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2013-01-09
+    division_number: 131
+    key: commons-2013-01-09-131
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-01-09-131
+- division:
+    chamber_slug: commons
+    date: 2014-01-21
+    division_number: 183
+    key: commons-2014-01-21-183
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-01-21-183
+- division:
+    chamber_slug: commons
+    date: 2014-01-21
+    division_number: 184
+    key: commons-2014-01-21-184
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-01-21-184
+- division:
+    chamber_slug: commons
+    date: 2014-11-18
+    division_number: 82
+    key: commons-2014-11-18-82
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-11-18-82
+- division:
+    chamber_slug: commons
+    date: 2016-02-02
+    division_number: 181
+    key: commons-2016-02-02-181
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-02-02-181

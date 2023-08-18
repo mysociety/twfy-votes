@@ -3,13 +3,21 @@
 	"build": {
 		"dockerfile": "../Dockerfile"
 	},
-	"extensions": [	
-		"ms-vscode.test-adapter-converter",
-		"bungcip.better-toml",
-		"ms-python.python",
-		"ms-python.vscode-pylance",
-		"ms-azuretools.vscode-docker",
-		"valentjn.vscode-ltex",
-		"mhutchie.git-graph"
-	]
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.test-adapter-converter",
+				"samuelcolvin.jinjahtml",
+				"ms-python.black-formatter",
+				"tamasfe.even-better-toml",
+				"ms-toolsai.jupyter-keymap",
+				"charliermarsh.ruff",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-azuretools.vscode-docker",
+				"valentjn.vscode-ltex",
+				"mhutchie.git-graph"
+			]
+		}
+	}
 }

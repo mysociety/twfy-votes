@@ -1,0 +1,133 @@
+id: 6753
+name: new high speed rail infrastructure
+chamber_id: commons
+context_description: new <b>high speed rail</b> infrastructure
+policy_description: the HS2 rail link ought be built between London and Birmingham
+notes: ''
+status: active
+group_ids:
+- environment
+- business
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2013-06-26
+    division_number: 35
+    key: commons-2013-06-26-35
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-06-26-35
+- division:
+    chamber_slug: commons
+    date: 2013-06-26
+    division_number: 36
+    key: commons-2013-06-26-36
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-06-26-36
+- division:
+    chamber_slug: commons
+    date: 2013-10-31
+    division_number: 117
+    key: commons-2013-10-31-117
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-10-31-117
+- division:
+    chamber_slug: commons
+    date: 2014-04-28
+    division_number: 254
+    key: commons-2014-04-28-254
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-04-28-254
+- division:
+    chamber_slug: commons
+    date: 2014-04-28
+    division_number: 255
+    key: commons-2014-04-28-255
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-04-28-255
+- division:
+    chamber_slug: commons
+    date: 2016-03-23
+    division_number: 231
+    key: commons-2016-03-23-231
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-03-23-231
+- division:
+    chamber_slug: commons
+    date: 2017-06-29
+    division_number: 4
+    key: commons-2017-06-29-4
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2017-06-29-4
+- division:
+    chamber_slug: commons
+    date: 2018-01-30
+    division_number: 109
+    key: commons-2018-01-30-109
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2018-01-30-109
+- division:
+    chamber_slug: commons
+    date: 2019-07-15
+    division_number: 435
+    key: commons-2019-07-15-435
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2019-07-15-435
+- division:
+    chamber_slug: commons
+    date: 2021-12-08
+    division_number: 144
+    key: commons-2021-12-08-144
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2021-12-08-144

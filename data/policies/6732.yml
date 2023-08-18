@@ -1,0 +1,87 @@
+id: 6732
+name: allowing terminally ill people to be given assistance to end their life
+chamber_id: commons
+context_description: allowing <b>terminally ill people</b> to be given <b>assistance
+  to end their life</b>
+policy_description: it should be legal to assist a terminally ill individual who wishes
+  to die, to die.
+notes: ''
+status: active
+group_ids:
+- social
+- health
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 1997-12-10
+    division_number: 111
+    key: commons-1997-12-10-111
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-1997-12-10-111
+- division:
+    chamber_slug: commons
+    date: 2000-01-28
+    division_number: 54
+    key: commons-2000-01-28-54
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2000-01-28-54
+- division:
+    chamber_slug: commons
+    date: 2000-04-14
+    division_number: 168
+    key: commons-2000-04-14-168
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2000-04-14-168
+- division:
+    chamber_slug: commons
+    date: 2015-09-11
+    division_number: 69
+    key: commons-2015-09-11-69
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-09-11-69
+- division:
+    chamber_slug: lords
+    date: 2006-05-12
+    division_number: 1
+    key: lords-2006-05-12-1
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: lords-2006-05-12-1
+- division:
+    chamber_slug: lords
+    date: 2009-07-07
+    division_number: 1
+    key: lords-2009-07-07-1
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: lords-2009-07-07-1

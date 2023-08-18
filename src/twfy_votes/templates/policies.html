@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ settings.site_name }}{% endblock %}
+
+{% block content %}
+
+<h1>Policies</h1>
+
+{% for chamber in all_chambers %}
+
+<h2>{{ chamber.name }}</h2>
+
+<ul>
+    {% for p in all_statuses %}
+    <li><a href="{{ url_for('policy_collection', chamber_slug=chamber.slug, status=p, group_slug='all') }}">{{ p.name
+            }}</a></li>
+    {% endfor %}
+</ul>
+{% endfor %}
+
+{% endblock content %}

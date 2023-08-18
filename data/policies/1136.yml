@@ -1,0 +1,169 @@
+id: 1136
+name: fewer MPs in the House of Commons
+chamber_id: commons
+context_description: <b>fewer MPs</b> in the House of Commons
+policy_description: the number of constituencies represented in Parliament should
+  be reduced, and that therefore should be fewer MPs
+notes: ''
+status: active
+group_ids:
+- reform
+strength_meaning: classic
+highlightable: true
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2010-09-06
+    division_number: 51
+    key: commons-2010-09-06-51
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-09-06-51
+- division:
+    chamber_slug: commons
+    date: 2010-09-06
+    division_number: 53
+    key: commons-2010-09-06-53
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-09-06-53
+- division:
+    chamber_slug: commons
+    date: 2010-10-20
+    division_number: 86
+    key: commons-2010-10-20-86
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-10-20-86
+- division:
+    chamber_slug: commons
+    date: 2010-10-20
+    division_number: 91
+    key: commons-2010-10-20-91
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-10-20-91
+- division:
+    chamber_slug: commons
+    date: 2010-11-01
+    division_number: 104
+    key: commons-2010-11-01-104
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-11-01-104
+- division:
+    chamber_slug: commons
+    date: 2010-11-01
+    division_number: 105
+    key: commons-2010-11-01-105
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-11-01-105
+- division:
+    chamber_slug: commons
+    date: 2013-01-29
+    division_number: 146
+    key: commons-2013-01-29-146
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-01-29-146
+- division:
+    chamber_slug: commons
+    date: 2016-10-19
+    division_number: 70
+    key: commons-2016-10-19-70
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-10-19-70
+- division:
+    chamber_slug: commons
+    date: 2016-11-18
+    division_number: 86
+    key: commons-2016-11-18-86
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-11-18-86
+- division:
+    chamber_slug: commons
+    date: 2020-06-02
+    division_number: 53
+    key: commons-2020-06-02-53
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2020-06-02-53
+- division:
+    chamber_slug: lords
+    date: 2011-01-26
+    division_number: 1
+    key: lords-2011-01-26-1
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: lords-2011-01-26-1
+- division:
+    chamber_slug: lords
+    date: 2011-02-09
+    division_number: 3
+    key: lords-2011-02-09-3
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: lords-2011-02-09-3
+- division:
+    chamber_slug: lords
+    date: 2011-02-09
+    division_number: 5
+    key: lords-2011-02-09-5
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: lords-2011-02-09-5

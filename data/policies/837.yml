@@ -1,0 +1,180 @@
+id: 837
+name: a wholly elected House of Lords
+chamber_id: commons
+context_description: a <strong>wholly elected</strong> House of Lords
+policy_description: 'the House of Lords should be wholly elected '
+notes: ''
+status: active
+group_ids:
+- reform
+strength_meaning: classic
+highlightable: true
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2003-02-04
+    division_number: 75
+    key: commons-2003-02-04-75
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2003-02-04-75
+- division:
+    chamber_slug: commons
+    date: 2003-02-04
+    division_number: 76
+    key: commons-2003-02-04-76
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2003-02-04-76
+- division:
+    chamber_slug: commons
+    date: 2003-02-04
+    division_number: 77
+    key: commons-2003-02-04-77
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2003-02-04-77
+- division:
+    chamber_slug: commons
+    date: 2003-02-04
+    division_number: 78
+    key: commons-2003-02-04-78
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2003-02-04-78
+- division:
+    chamber_slug: commons
+    date: 2003-02-04
+    division_number: 79
+    key: commons-2003-02-04-79
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2003-02-04-79
+- division:
+    chamber_slug: commons
+    date: 2007-03-07
+    division_number: 65
+    key: commons-2007-03-07-65
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-03-07-65
+- division:
+    chamber_slug: commons
+    date: 2007-03-07
+    division_number: 66
+    key: commons-2007-03-07-66
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-03-07-66
+- division:
+    chamber_slug: commons
+    date: 2007-03-07
+    division_number: 67
+    key: commons-2007-03-07-67
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-03-07-67
+- division:
+    chamber_slug: commons
+    date: 2007-03-07
+    division_number: 68
+    key: commons-2007-03-07-68
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-03-07-68
+- division:
+    chamber_slug: commons
+    date: 2007-03-07
+    division_number: 69
+    key: commons-2007-03-07-69
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-03-07-69
+- division:
+    chamber_slug: commons
+    date: 2007-03-07
+    division_number: 70
+    key: commons-2007-03-07-70
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-03-07-70
+- division:
+    chamber_slug: commons
+    date: 2011-06-23
+    division_number: 306
+    key: commons-2011-06-23-306
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-06-23-306
+- division:
+    chamber_slug: commons
+    date: 2012-07-10
+    division_number: 47
+    key: commons-2012-07-10-47
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-07-10-47
+- division:
+    chamber_slug: commons
+    date: 2016-10-19
+    division_number: 70
+    key: commons-2016-10-19-70
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-10-19-70

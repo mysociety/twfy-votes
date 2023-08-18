@@ -1,0 +1,86 @@
+id: 1071
+name: allowing ministers to intervene in inquests
+chamber_id: commons
+context_description: allowing ministers to <b>intervene in inquests</b>
+policy_description: "ministers should be able to legally intervene in a coroner's
+  inquest and either order it to take place without a jury or suspend it and impose
+  an inquiry in its place.  \r\n\r\n"
+notes: ''
+status: active
+group_ids:
+- home
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2008-06-10
+    division_number: 217
+    key: commons-2008-06-10-217
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2008-06-10-217
+- division:
+    chamber_slug: commons
+    date: 2008-06-10
+    division_number: 218
+    key: commons-2008-06-10-218
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2008-06-10-218
+- division:
+    chamber_slug: commons
+    date: 2009-01-26
+    division_number: 21
+    key: commons-2009-01-26-21
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2009-01-26-21
+- division:
+    chamber_slug: commons
+    date: 2009-11-09
+    division_number: 241
+    key: commons-2009-11-09-241
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2009-11-09-241
+- division:
+    chamber_slug: commons
+    date: 2009-11-12
+    division_number: 248
+    key: commons-2009-11-12-248
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2009-11-12-248
+- division:
+    chamber_slug: lords
+    date: 2009-11-11
+    division_number: 1
+    key: lords-2009-11-11-1
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: lords-2009-11-11-1

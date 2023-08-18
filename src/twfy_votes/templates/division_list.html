@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<h1>Decisions in {{ search.chamber.name }}</h1>
+
+<p>{{ search.divisions|length }} decisions from {{ search.start_date}} to {{ search.end_date }}</p>
+
+{% for month, divisions in search.grouped_divisions() %}
+
+    <h2>{{ month }}</h2>
+    
+
+    <ul>
+    {% for division in divisions %}
+    
+    <li>{{ division.date }} - <a href="{{ division.url(request) }}">{{ division.division_name|safe }}</a></li>
+    {% endfor %}
+    </ul>
+
+{% endfor %}
+
+{% endblock content %}

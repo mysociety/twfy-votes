@@ -1,0 +1,146 @@
+id: 996
+name: a transparent Parliament
+chamber_id: commons
+context_description: a <b>transparent Parliament</b>
+policy_description: the Freedom of Information Act should not be changed to exclude
+  Parliament or all correspondence between MPs and any part of government, and that
+  expenses, the Register of Members' Interests &c. should be more public
+notes: ''
+status: active
+group_ids:
+- reform
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2007-04-20
+    division_number: 94
+    key: commons-2007-04-20-94
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-04-20-94
+- division:
+    chamber_slug: commons
+    date: 2007-04-20
+    division_number: 95
+    key: commons-2007-04-20-95
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-04-20-95
+- division:
+    chamber_slug: commons
+    date: 2007-05-18
+    division_number: 118
+    key: commons-2007-05-18-118
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-05-18-118
+- division:
+    chamber_slug: commons
+    date: 2007-05-18
+    division_number: 119
+    key: commons-2007-05-18-119
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-05-18-119
+- division:
+    chamber_slug: commons
+    date: 2007-05-18
+    division_number: 120
+    key: commons-2007-05-18-120
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-05-18-120
+- division:
+    chamber_slug: commons
+    date: 2007-05-18
+    division_number: 121
+    key: commons-2007-05-18-121
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-05-18-121
+- division:
+    chamber_slug: commons
+    date: 2007-05-18
+    division_number: 122
+    key: commons-2007-05-18-122
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-05-18-122
+- division:
+    chamber_slug: commons
+    date: 2007-05-18
+    division_number: 123
+    key: commons-2007-05-18-123
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-05-18-123
+- division:
+    chamber_slug: commons
+    date: 2008-07-03
+    division_number: 253
+    key: commons-2008-07-03-253
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2008-07-03-253
+- division:
+    chamber_slug: commons
+    date: 2009-04-30
+    division_number: 106
+    key: commons-2009-04-30-106
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2009-04-30-106
+- division:
+    chamber_slug: commons
+    date: 2009-04-30
+    division_number: 109
+    key: commons-2009-04-30-109
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2009-04-30-109

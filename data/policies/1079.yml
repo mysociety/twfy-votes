@@ -1,0 +1,168 @@
+id: 1079
+name: removing hereditary peers from the House of Lords
+chamber_id: commons
+context_description: removing <b>hereditary peers</b> from the House of Lords
+policy_description: the hereditary peers should be removed from the House of Lords
+notes: ''
+status: active
+group_ids:
+- reform
+strength_meaning: classic
+highlightable: true
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 1999-02-02
+    division_number: 52
+    key: commons-1999-02-02-52
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-1999-02-02-52
+- division:
+    chamber_slug: commons
+    date: 1999-02-02
+    division_number: 53
+    key: commons-1999-02-02-53
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-1999-02-02-53
+- division:
+    chamber_slug: commons
+    date: 1999-02-15
+    division_number: 67
+    key: commons-1999-02-15-67
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-1999-02-15-67
+- division:
+    chamber_slug: commons
+    date: 1999-02-16
+    division_number: 68
+    key: commons-1999-02-16-68
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-1999-02-16-68
+- division:
+    chamber_slug: commons
+    date: 1999-03-16
+    division_number: 107
+    key: commons-1999-03-16-107
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-1999-03-16-107
+- division:
+    chamber_slug: commons
+    date: 1999-11-10
+    division_number: 318
+    key: commons-1999-11-10-318
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-1999-11-10-318
+- division:
+    chamber_slug: commons
+    date: 2003-07-08
+    division_number: 278
+    key: commons-2003-07-08-278
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2003-07-08-278
+- division:
+    chamber_slug: commons
+    date: 2007-03-07
+    division_number: 71
+    key: commons-2007-03-07-71
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-03-07-71
+- division:
+    chamber_slug: commons
+    date: 2007-03-07
+    division_number: 72
+    key: commons-2007-03-07-72
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2007-03-07-72
+- division:
+    chamber_slug: commons
+    date: 2011-06-23
+    division_number: 306
+    key: commons-2011-06-23-306
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2011-06-23-306
+- division:
+    chamber_slug: commons
+    date: 2012-07-10
+    division_number: 47
+    key: commons-2012-07-10-47
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2012-07-10-47
+- division:
+    chamber_slug: commons
+    date: 2013-10-18
+    division_number: 105
+    key: commons-2013-10-18-105
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-10-18-105
+- division:
+    chamber_slug: commons
+    date: 2016-10-19
+    division_number: 70
+    key: commons-2016-10-19-70
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-10-19-70

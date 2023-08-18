@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ settings.site_name }}{% endblock %}
+
+
+
+{% block content %}
+
+<h1>Decisions</h1>
+
+<p>Decisions includes:
+<p>
+
+<ul>
+    <li>Divisions - where representatives record differences of opinion.</li>
+    <li>Agreements - when a decision is made without a vote being forced (and so there is no division list).</li>
+</ul>
+
+<p>Currently this page just covers divisions. Agreements may be included in policies at a future data as informative
+    information.</p>
+
+{% for c in chambers %}
+
+<h2> {{ c.chamber.name }}</h2>
+
+<ul>
+    {% for year in c.year_range() %}
+    <li><a href="{{ url_for('divisions_list', chamber_slug=c.chamber.slug, year=year) }}">{{ year }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endfor %}
+
+{% endblock content %}

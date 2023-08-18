@@ -1,0 +1,193 @@
+id: 6731
+name: more restrictive regulation of trade union activity
+chamber_id: commons
+context_description: more restrictive <b>regulation of trade union activity</b>
+policy_description: Trade unions, and strikes, should be more heavily regulated, taxed,
+  and resticted
+notes: ''
+status: active
+group_ids:
+- taxation
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2008-01-09
+    division_number: 39
+    key: commons-2008-01-09-39
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2008-01-09-39
+- division:
+    chamber_slug: commons
+    date: 2010-10-22
+    division_number: 95
+    key: commons-2010-10-22-95
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-10-22-95
+- division:
+    chamber_slug: commons
+    date: 2015-09-14
+    division_number: 70
+    key: commons-2015-09-14-70
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-09-14-70
+- division:
+    chamber_slug: commons
+    date: 2015-11-10
+    division_number: 117
+    key: commons-2015-11-10-117
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-11-10-117
+- division:
+    chamber_slug: commons
+    date: 2015-11-10
+    division_number: 118
+    key: commons-2015-11-10-118
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-11-10-118
+- division:
+    chamber_slug: commons
+    date: 2015-11-10
+    division_number: 121
+    key: commons-2015-11-10-121
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-11-10-121
+- division:
+    chamber_slug: commons
+    date: 2017-01-24
+    division_number: 128
+    key: commons-2017-01-24-128
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2017-01-24-128
+- division:
+    chamber_slug: commons
+    date: 2017-02-08
+    division_number: 145
+    key: commons-2017-02-08-145
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2017-02-08-145
+- division:
+    chamber_slug: commons
+    date: 2017-02-08
+    division_number: 146
+    key: commons-2017-02-08-146
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2017-02-08-146
+- division:
+    chamber_slug: commons
+    date: 2017-02-08
+    division_number: 147
+    key: commons-2017-02-08-147
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2017-02-08-147
+- division:
+    chamber_slug: commons
+    date: 2017-02-08
+    division_number: 148
+    key: commons-2017-02-08-148
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2017-02-08-148
+- division:
+    chamber_slug: commons
+    date: 2017-02-08
+    division_number: 149
+    key: commons-2017-02-08-149
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2017-02-08-149
+- division:
+    chamber_slug: commons
+    date: 2021-04-19
+    division_number: 264
+    key: commons-2021-04-19-264
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2021-04-19-264
+- division:
+    chamber_slug: commons
+    date: 2022-01-26
+    division_number: 176
+    key: commons-2022-01-26-176
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2022-01-26-176
+- division:
+    chamber_slug: commons
+    date: 2022-01-26
+    division_number: 177
+    key: commons-2022-01-26-177
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2022-01-26-177

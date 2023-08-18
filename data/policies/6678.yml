@@ -1,0 +1,195 @@
+id: 6678
+name: greater restrictions on campaigning by third parties, such as charities, during
+  elections
+chamber_id: commons
+context_description: greater restrictions on <b>campaigning by third parties</b>,
+  such as charities, during elections
+policy_description: 'there should be more restrictions what those who are not themselves
+  standing can do during elections '
+notes: ''
+status: active
+group_ids:
+- reform
+strength_meaning: classic
+highlightable: true
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2013-09-03
+    division_number: 71
+    key: commons-2013-09-03-71
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-03-71
+- division:
+    chamber_slug: commons
+    date: 2013-09-03
+    division_number: 72
+    key: commons-2013-09-03-72
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-03-72
+- division:
+    chamber_slug: commons
+    date: 2013-09-03
+    division_number: 73
+    key: commons-2013-09-03-73
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-03-73
+- division:
+    chamber_slug: commons
+    date: 2013-09-10
+    division_number: 80
+    key: commons-2013-09-10-80
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-10-80
+- division:
+    chamber_slug: commons
+    date: 2013-09-10
+    division_number: 81
+    key: commons-2013-09-10-81
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-10-81
+- division:
+    chamber_slug: commons
+    date: 2013-09-10
+    division_number: 82
+    key: commons-2013-09-10-82
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-10-82
+- division:
+    chamber_slug: commons
+    date: 2013-09-10
+    division_number: 83
+    key: commons-2013-09-10-83
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-10-83
+- division:
+    chamber_slug: commons
+    date: 2013-10-08
+    division_number: 91
+    key: commons-2013-10-08-91
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-10-08-91
+- division:
+    chamber_slug: commons
+    date: 2013-10-09
+    division_number: 93
+    key: commons-2013-10-09-93
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-10-09-93
+- division:
+    chamber_slug: commons
+    date: 2013-10-09
+    division_number: 94
+    key: commons-2013-10-09-94
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-10-09-94
+- division:
+    chamber_slug: commons
+    date: 2013-10-09
+    division_number: 95
+    key: commons-2013-10-09-95
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-10-09-95
+- division:
+    chamber_slug: commons
+    date: 2014-01-22
+    division_number: 188
+    key: commons-2014-01-22-188
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-01-22-188
+- division:
+    chamber_slug: commons
+    date: 2014-01-22
+    division_number: 189
+    key: commons-2014-01-22-189
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2014-01-22-189
+- division:
+    chamber_slug: commons
+    date: 2016-01-26
+    division_number: 175
+    key: commons-2016-01-26-175
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2016-01-26-175
+- division:
+    chamber_slug: commons
+    date: 2022-01-17
+    division_number: 163
+    key: commons-2022-01-17-163
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2022-01-17-163

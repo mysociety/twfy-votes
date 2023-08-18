@@ -1,0 +1,76 @@
+id: 6736
+name: a veto for MPs from England, Wales and Northern Ireland over laws specifically
+  impacting their part of the UK
+chamber_id: commons
+context_description: <b>a veto for MPs</b> from England, Wales and Northern Ireland
+  <b>over laws specifically impacting their part of the UK</b>
+policy_description: 'English MPs should have a veto over laws only affecting England
+  (and English and Welsh MPs should have a veto over laws only affecting England and
+  Wales etc.). '
+notes: ''
+status: active
+group_ids:
+- reform
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2015-07-07
+    division_number: 41
+    key: commons-2015-07-07-41
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-07-07-41
+- division:
+    chamber_slug: commons
+    date: 2015-10-22
+    division_number: 84
+    key: commons-2015-10-22-84
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-10-22-84
+- division:
+    chamber_slug: commons
+    date: 2015-10-22
+    division_number: 85
+    key: commons-2015-10-22-85
+  agreement:
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-10-22-85
+- division:
+    chamber_slug: commons
+    date: 2015-10-22
+    division_number: 86
+    key: commons-2015-10-22-86
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-10-22-86
+- division:
+    chamber_slug: commons
+    date: 2015-10-22
+    division_number: 87
+    key: commons-2015-10-22-87
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2015-10-22-87

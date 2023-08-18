@@ -1,0 +1,38 @@
+id: 1132
+name: raising England&rsquo;s undergraduate tuition fee cap to &pound;9,000 per year
+chamber_id: commons
+context_description: raising England&rsquo;s <b>undergraduate tuition fee</b> cap
+  to &pound;9,000 per year
+policy_description: raising the cap on university tuition fees to Â£9000/year - was
+  the right approach to take
+notes: ''
+status: active
+group_ids:
+- education
+strength_meaning: classic
+highlightable: true
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2010-12-09
+    division_number: 150
+    key: commons-2010-12-09-150
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2010-12-09-150
+- division:
+    chamber_slug: lords
+    date: 2010-12-14
+    division_number: 3
+    key: lords-2010-12-14-3
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: lords-2010-12-14-3

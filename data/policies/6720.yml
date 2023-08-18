@@ -1,0 +1,84 @@
+id: 6720
+name: a statutory register of lobbyists
+chamber_id: commons
+context_description: a statutory <b>register of lobbyists</b>
+policy_description: there should be a register of those who professionally lobby MPs
+notes: ''
+status: active
+group_ids:
+- misc
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2013-06-25
+    division_number: 32
+    key: commons-2013-06-25-32
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-06-25-32
+- division:
+    chamber_slug: commons
+    date: 2013-06-25
+    division_number: 33
+    key: commons-2013-06-25-33
+  agreement:
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-06-25-33
+- division:
+    chamber_slug: commons
+    date: 2013-09-03
+    division_number: 71
+    key: commons-2013-09-03-71
+  agreement:
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-03-71
+- division:
+    chamber_slug: commons
+    date: 2013-09-03
+    division_number: 72
+    key: commons-2013-09-03-72
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-03-72
+- division:
+    chamber_slug: commons
+    date: 2013-09-09
+    division_number: 78
+    key: commons-2013-09-09-78
+  agreement:
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-09-09-78
+- division:
+    chamber_slug: commons
+    date: 2013-10-09
+    division_number: 95
+    key: commons-2013-10-09-95
+  agreement:
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+  decision_key: commons-2013-10-09-95
