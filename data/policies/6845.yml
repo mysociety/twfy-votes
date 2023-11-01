@@ -1,0 +1,96 @@
+id: 6845
+name: Support for Marriage and Civil Partnerships
+chamber_id: commons
+context_description: supporting <b>marriage and civil partnerships</b>
+policy_description: There have been votes in Parliament on support for marriage and
+  civil partnerships. The votes primarily relate to support via the tax system, but
+  also cover equalities law and funding counselling for those applying to end a marriage
+  or civil partnership.
+notes: ''
+status: draft
+group_ids:
+- social
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2011-06-28
+    division_number: 307
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2011-07-13
+    division_number: 323
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2011-10-11
+    division_number: 362
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2012-07-03
+    division_number: 41
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2013-01-29
+    division_number: 145
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2014-04-01
+    division_number: 241
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2014-04-09
+    division_number: 249
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2014-04-09
+    division_number: 250
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-06-17
+    division_number: 57
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division

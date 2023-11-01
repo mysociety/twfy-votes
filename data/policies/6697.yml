@@ -14,23 +14,17 @@ decision_links_refs:
     chamber_slug: commons
     date: 2011-02-02
     division_number: 188
-    key: commons-2011-02-02-188
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2011-02-02-188
 - division:
     chamber_slug: commons
     date: 2011-02-02
     division_number: 189
-    key: commons-2011-02-02-189
-  agreement:
   alignment: agree
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2011-02-02-189

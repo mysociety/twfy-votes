@@ -17,35 +17,26 @@ decision_links_refs:
     chamber_slug: commons
     date: 2016-03-15
     division_number: 220
-    key: commons-2016-03-15-220
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2016-03-15-220
 - division:
     chamber_slug: commons
     date: 2016-06-07
     division_number: 12
-    key: commons-2016-06-07-12
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2016-06-07-12
 - division:
     chamber_slug: commons
     date: 2016-06-07
     division_number: 13
-    key: commons-2016-06-07-13
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2016-06-07-13

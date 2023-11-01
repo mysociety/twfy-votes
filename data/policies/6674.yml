@@ -14,95 +14,71 @@ decision_links_refs:
     chamber_slug: commons
     date: 2013-01-08
     division_number: 128
-    key: commons-2013-01-08-128
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-01-08-128
 - division:
     chamber_slug: commons
     date: 2013-01-08
     division_number: 129
-    key: commons-2013-01-08-129
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-01-08-129
 - division:
     chamber_slug: commons
     date: 2013-01-08
     division_number: 130
-    key: commons-2013-01-08-130
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-01-08-130
 - division:
     chamber_slug: commons
     date: 2013-01-21
     division_number: 136
-    key: commons-2013-01-21-136
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-01-21-136
 - division:
     chamber_slug: commons
     date: 2013-01-21
     division_number: 137
-    key: commons-2013-01-21-137
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-01-21-137
 - division:
     chamber_slug: commons
     date: 2013-01-21
     division_number: 138
-    key: commons-2013-01-21-138
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-01-21-138
 - division:
     chamber_slug: commons
     date: 2022-02-07
     division_number: 185
-    key: commons-2022-02-07-185
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2022-02-07-185
 - division:
     chamber_slug: commons
     date: 2022-03-02
     division_number: 205
-    key: commons-2022-03-02-205
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2022-03-02-205

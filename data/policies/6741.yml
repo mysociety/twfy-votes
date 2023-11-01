@@ -15,47 +15,35 @@ decision_links_refs:
     chamber_slug: commons
     date: 2015-01-26
     division_number: 137
-    key: commons-2015-01-26-137
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2015-01-26-137
 - division:
     chamber_slug: commons
     date: 2015-01-26
     division_number: 139
-    key: commons-2015-01-26-139
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2015-01-26-139
 - division:
     chamber_slug: commons
     date: 2015-02-11
     division_number: 156
-    key: commons-2015-02-11-156
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2015-02-11-156
 - division:
     chamber_slug: commons
     date: 2015-12-16
     division_number: 151
-    key: commons-2015-12-16-151
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2015-12-16-151

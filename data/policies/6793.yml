@@ -1,0 +1,85 @@
+id: 6793
+name: Voter Identification
+chamber_id: commons
+context_description: <b>photographic voter identification at polling stations</b>
+policy_description: There have been votes in Parliament on introducing a requirement
+  for photographic identification to vote at polling stations.
+notes: ''
+status: draft
+group_ids:
+- reform
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2017-12-20
+    division_number: 79
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2017-12-20
+    division_number: 80
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2021-05-19
+    division_number: 3
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2021-09-07
+    division_number: 60
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2021-09-07
+    division_number: 61
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-01-17
+    division_number: 162
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-01-17
+    division_number: 164
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-04-27
+    division_number: 270
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division

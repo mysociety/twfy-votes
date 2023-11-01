@@ -16,131 +16,98 @@ decision_links_refs:
     chamber_slug: commons
     date: 2011-07-05
     division_number: 316
-    key: commons-2011-07-05-316
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2011-07-05-316
 - division:
     chamber_slug: commons
     date: 2011-09-14
     division_number: 351
-    key: commons-2011-09-14-351
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2011-09-14-351
 - division:
     chamber_slug: commons
     date: 2011-11-23
     division_number: 400
-    key: commons-2011-11-23-400
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2011-11-23-400
 - division:
     chamber_slug: commons
     date: 2011-11-23
     division_number: 401
-    key: commons-2011-11-23-401
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2011-11-23-401
 - division:
     chamber_slug: commons
     date: 2012-12-19
     division_number: 127
-    key: commons-2012-12-19-127
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2012-12-19-127
 - division:
     chamber_slug: commons
     date: 2013-01-16
     division_number: 135
-    key: commons-2013-01-16-135
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-01-16-135
 - division:
     chamber_slug: commons
     date: 2013-06-03
     division_number: 14
-    key: commons-2013-06-03-14
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-06-03-14
 - division:
     chamber_slug: commons
     date: 2013-06-04
     division_number: 19
-    key: commons-2013-06-04-19
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-06-04-19
 - division:
     chamber_slug: commons
     date: 2013-06-04
     division_number: 20
-    key: commons-2013-06-04-20
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-06-04-20
 - division:
     chamber_slug: commons
     date: 2013-12-04
     division_number: 151
-    key: commons-2013-12-04-151
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-12-04-151
 - division:
     chamber_slug: commons
     date: 2018-07-11
     division_number: 206
-    key: commons-2018-07-11-206
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2018-07-11-206

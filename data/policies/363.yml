@@ -14,107 +14,80 @@ decision_links_refs:
     chamber_slug: commons
     date: 2003-01-08
     division_number: 42
-    key: commons-2003-01-08-42
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-01-08-42
 - division:
     chamber_slug: commons
     date: 2003-01-08
     division_number: 43
-    key: commons-2003-01-08-43
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-01-08-43
 - division:
     chamber_slug: commons
     date: 2003-05-07
     division_number: 177
-    key: commons-2003-05-07-177
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-05-07-177
 - division:
     chamber_slug: commons
     date: 2003-05-07
     division_number: 178
-    key: commons-2003-05-07-178
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-05-07-178
 - division:
     chamber_slug: commons
     date: 2003-07-08
     division_number: 280
-    key: commons-2003-07-08-280
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-07-08-280
 - division:
     chamber_slug: commons
     date: 2003-07-08
     division_number: 281
-    key: commons-2003-07-08-281
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-07-08-281
 - division:
     chamber_slug: commons
     date: 2003-07-08
     division_number: 282
-    key: commons-2003-07-08-282
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-07-08-282
 - division:
     chamber_slug: commons
     date: 2003-11-19
     division_number: 381
-    key: commons-2003-11-19-381
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-11-19-381
 - division:
     chamber_slug: commons
     date: 2003-11-19
     division_number: 388
-    key: commons-2003-11-19-388
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-11-19-388

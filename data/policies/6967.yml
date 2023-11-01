@@ -1,0 +1,140 @@
+id: 6967
+name: Access to Abortion
+chamber_id: commons
+context_description: easier <b>access to abortion</b>
+policy_description: There have been votes in Parliament on the circumstances in which
+  abortion should be legal, on restricting protests outside abortion clinics, on controlling
+  access to abortion and on access to abortion in Northern Ireland.
+notes: ''
+status: candidate
+group_ids:
+- health
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2007-03-14
+    division_number: 76
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2008-05-20
+    division_number: 199
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2008-05-20
+    division_number: 200
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2008-05-20
+    division_number: 201
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2008-05-20
+    division_number: 202
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2008-05-20
+    division_number: 203
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2017-03-13
+    division_number: 176
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2018-10-23
+    division_number: 244
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2019-07-09
+    division_number: 428
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2019-07-18
+    division_number: 438
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-06-17
+    division_number: 56
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-06-24
+    division_number: 59
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2021-04-27
+    division_number: 280
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-03-30
+    division_number: 237
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division

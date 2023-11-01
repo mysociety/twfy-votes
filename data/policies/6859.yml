@@ -1,0 +1,186 @@
+id: 6859
+name: International Treaty Obligations
+chamber_id: commons
+context_description: fulfilling <b>international treaty obligations</b>
+policy_description: There have been votes in Parliament on the fulfilment of international
+  treaty obligations. Specific votes have covered compliance with the agreement between
+  the European Union and the United Kingdom on the United Kingdom's withdrawal from
+  the union, and the treatment of those seeking asylum.
+notes: ''
+status: candidate
+group_ids:
+- foreignpolicy
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2018-07-17
+    division_number: 224
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-09-14
+    division_number: 93
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-09-14
+    division_number: 94
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-09-14
+    division_number: 95
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-09-21
+    division_number: 103
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-09-29
+    division_number: 113
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-09-29
+    division_number: 116
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-09-29
+    division_number: 117
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-09-29
+    division_number: 118
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-11-03
+    division_number: 157
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-11-03
+    division_number: 158
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-12-07
+    division_number: 178
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-12-08
+    division_number: 180
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-03-22
+    division_number: 219
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-03-22
+    division_number: 228
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-04-20
+    division_number: 247
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-04-20
+    division_number: 248
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-04-26
+    division_number: 265
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-04-26
+    division_number: 266
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division

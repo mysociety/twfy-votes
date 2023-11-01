@@ -15,155 +15,116 @@ decision_links_refs:
     chamber_slug: commons
     date: 2002-03-18
     division_number: 197
-    key: commons-2002-03-18-197
-  agreement:
   alignment: against
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2002-03-18-197
 - division:
     chamber_slug: commons
     date: 2002-03-18
     division_number: 198
-    key: commons-2002-03-18-198
-  agreement:
   alignment: against
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2002-03-18-198
 - division:
     chamber_slug: commons
     date: 2002-03-18
     division_number: 199
-    key: commons-2002-03-18-199
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2002-03-18-199
 - division:
     chamber_slug: commons
     date: 2003-06-30
     division_number: 259
-    key: commons-2003-06-30-259
-  agreement:
   alignment: against
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-06-30-259
 - division:
     chamber_slug: commons
     date: 2003-06-30
     division_number: 260
-    key: commons-2003-06-30-260
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-06-30-260
 - division:
     chamber_slug: commons
     date: 2003-06-30
     division_number: 261
-    key: commons-2003-06-30-261
-  agreement:
   alignment: agree
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2003-06-30-261
 - division:
     chamber_slug: commons
     date: 2004-09-15
     division_number: 250
-    key: commons-2004-09-15-250
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2004-09-15-250
 - division:
     chamber_slug: lords
     date: 2002-03-19
     division_number: 1
-    key: lords-2002-03-19-1
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: lords-2002-03-19-1
 - division:
     chamber_slug: lords
     date: 2002-03-19
     division_number: 3
-    key: lords-2002-03-19-3
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: lords-2002-03-19-3
 - division:
     chamber_slug: lords
     date: 2003-10-21
     division_number: 2
-    key: lords-2003-10-21-2
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: lords-2003-10-21-2
 - division:
     chamber_slug: lords
     date: 2003-10-28
     division_number: 3
-    key: lords-2003-10-28-3
-  agreement:
   alignment: against
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: lords-2003-10-28-3
 - division:
     chamber_slug: lords
     date: 2004-10-26
     division_number: 1
-    key: lords-2004-10-26-1
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: lords-2004-10-26-1
 - division:
     chamber_slug: lords
     date: 2004-11-11
     division_number: 1
-    key: lords-2004-11-11-1
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: lords-2004-11-11-1

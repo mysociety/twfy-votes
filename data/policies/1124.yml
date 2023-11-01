@@ -15,35 +15,26 @@ decision_links_refs:
     chamber_slug: commons
     date: 2010-03-08
     division_number: 103
-    key: commons-2010-03-08-103
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2010-03-08-103
 - division:
     chamber_slug: commons
     date: 2010-06-28
     division_number: 11
-    key: commons-2010-06-28-11
-  agreement:
   alignment: agree
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2010-06-28-11
 - division:
     chamber_slug: commons
     date: 2011-06-20
     division_number: 299
-    key: commons-2011-06-20-299
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2011-06-20-299

@@ -17,95 +17,71 @@ decision_links_refs:
     chamber_slug: commons
     date: 2012-12-18
     division_number: 125
-    key: commons-2012-12-18-125
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2012-12-18-125
 - division:
     chamber_slug: commons
     date: 2013-03-04
     division_number: 169
-    key: commons-2013-03-04-169
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-03-04-169
 - division:
     chamber_slug: commons
     date: 2013-03-04
     division_number: 170
-    key: commons-2013-03-04-170
-  agreement:
   alignment: against
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-03-04-170
 - division:
     chamber_slug: commons
     date: 2013-03-04
     division_number: 171
-    key: commons-2013-03-04-171
-  agreement:
   alignment: neutral
   strength: weak
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-03-04-171
 - division:
     chamber_slug: commons
     date: 2013-03-04
     division_number: 172
-    key: commons-2013-03-04-172
-  agreement:
   alignment: against
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-03-04-172
 - division:
     chamber_slug: commons
     date: 2013-03-07
     division_number: 177
-    key: commons-2013-03-07-177
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-03-07-177
 - division:
     chamber_slug: commons
     date: 2013-07-17
     division_number: 64
-    key: commons-2013-07-17-64
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-07-17-64
 - division:
     chamber_slug: commons
     date: 2013-07-17
     division_number: 65
-    key: commons-2013-07-17-65
-  agreement:
   alignment: agree
   strength: strong
   status: active
   notes: ''
   decision_type: division
-  decision_key: commons-2013-07-17-65

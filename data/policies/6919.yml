@@ -1,0 +1,33 @@
+id: 6919
+name: Trials of Military Personnel in Civilian Courts in Serious Cases
+chamber_id: commons
+context_description: <b>putting military personnel on trial in civilian courts</b>
+  in serious cases
+policy_description: There have been votes in Parliament on if to require allegations
+  of murder, manslaughter, domestic violence, child abuse and rape by members of the
+  armed services to generally be considered by civilian courts.
+notes: ''
+status: draft
+group_ids:
+- misc
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2021-07-13
+    division_number: 51
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2021-12-06
+    division_number: 132
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division

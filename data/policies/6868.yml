@@ -1,0 +1,106 @@
+id: 6868
+name: Authorised Criminal Conduct by Undercover Sources
+chamber_id: commons
+context_description: authorising <b>criminal conduct by undercover officers and covert
+  sources</b>
+policy_description: There have been votes in Parliament on procedures for enabling
+  the authorisation of criminal conduct by undercover police officers, other public
+  officials working undercover, and members of the public recruited by public bodies
+  as covert sources.
+notes: ''
+status: candidate
+group_ids:
+- home
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2020-10-05
+    division_number: 125
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-10-15
+    division_number: 138
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-10-15
+    division_number: 139
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-10-15
+    division_number: 140
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-10-15
+    division_number: 141
+  alignment: against
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-10-15
+    division_number: 142
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2021-01-27
+    division_number: 219
+  alignment: agree
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2021-01-27
+    division_number: 220
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2021-01-27
+    division_number: 222
+  alignment: neutral
+  strength: weak
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2021-01-27
+    division_number: 223
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division

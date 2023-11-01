@@ -1,0 +1,60 @@
+id: 6963
+name: Individual Contributions to Social Care Costs
+chamber_id: commons
+context_description: <b>reducing</b> the maximum amount an individual may be required
+  to contribute to their <b>social care costs</b>
+policy_description: There have been votes in Parliament both on the principle of preventing
+  an individual from having to contribute towards their social care costs after a
+  certain point, and on the details of the operation of that cap.
+notes: ''
+status: candidate
+group_ids:
+- health
+strength_meaning: classic
+highlightable: false
+decision_links_refs:
+- division:
+    chamber_slug: commons
+    date: 2013-12-16
+    division_number: 160
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2020-02-25
+    division_number: 36
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2021-11-22
+    division_number: 115
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-03-30
+    division_number: 240
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- division:
+    chamber_slug: commons
+    date: 2022-04-25
+    division_number: 261
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
