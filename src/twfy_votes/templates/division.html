@@ -12,6 +12,29 @@
 
 <p><a href="{{ item.details.twfy_link }}">View vote in TheyWorkForYou</a></p>
 
+<h2>Analysis</h2>
+
+<h3>Result</h3>
+
+{% if item.overall_breakdown.motion_result_int == 1 %}
+<p> Motion passed.</p>
+{% else %}
+<p> Motion failed.</p>
+{% endif %}
+
+<p>Vote had {{ item.overall_breakdown.vote_participant_count }} participants.</p>
+
+<h3>Use of parliamentary powers</h3>
+
+{% with powers = item.details.motion_uses_powers() %}
+{% if powers == "uses_powers" %}
+<p>Yes. Automated analysis suggests this decision relates to Parliamentary powers.</p>
+{% elif powers == "does_not_use_powers" %}
+<p>No. Automated analysis suggests this decision does not relate to Parliamentary powers.</p>
+{% elif powers == "insufficent_info" %}
+<p>Insufficent information based on motion avaliable.</p>
+{% endif %}
+{% endwith %}
 
 <h2>Motion</h2>
 
@@ -24,11 +47,28 @@
         are included.</p>
 </div>
 
+
+
+
 {% with twfy_link = item.details.motion_twfy_link() %}
 {% if twfy_link %}
 <p><a href="{{ twfy_link }}">View motion in TheyWorkForYou</a></p>
 {% endif %}
 {% endwith %}
+
+
+{% if item.details.manual_motion %}
+
+<h2>Manual motion description</h2>
+
+<p style="font-style: italic;">This manual description was extracted from the PublicWhip description. When present, it
+    is used in combination with the motion text to evaluate if a motion was substantive.</p>
+
+
+{{ item.details.manual_motion }}
+
+{% endif %}
+
 
 <h2>Voting breakdown</h2>
 

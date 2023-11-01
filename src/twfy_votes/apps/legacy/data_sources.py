@@ -20,3 +20,8 @@ class pw_dyn_dreamvote:
 @duck.as_table
 class pw_dyn_dreammp:
     source = public_whip / "pw_dyn_dreammp.parquet"
+
+
+@duck.as_table
+class pw_dyn_wiki_motion:
+    source = public_whip / "pw_dyn_wiki_motion.parquet"

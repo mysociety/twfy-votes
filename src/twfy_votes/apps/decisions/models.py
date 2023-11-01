@@ -16,6 +16,7 @@ from ...helpers.data.models import StrEnum
 from ...helpers.data.style import UrlColumn, style_df
 from ...internal.common import absolute_url_for
 from ...internal.db import duck_core
+from .analysis import is_nonaction_vote
 from .queries import (
     ChamberDivisionsQuery,
     DivisionBreakDownQuery,
@@ -48,6 +49,13 @@ class VotePosition(StrEnum):
 
 def aliases(*args: str) -> Any:
     return Field(..., validation_alias=AliasChoices(*args))
+
+
+class ManualMotion(BaseModel):
+    chamber: AllowedChambers
+    division_date: datetime.date
+    division_number: int
+    manual_motion: str
 
 
 class GovernmentParties(BaseModel):
@@ -240,11 +248,20 @@ class AgreementInfo(BaseModel):
     def url(self, request: Request):
         return ""
 
+    def motion_uses_powers(self):
+        return PowersAnalysis.INSUFFICENT_INFO
+
     @classmethod
     async def from_partials(
         cls, partials: list[PartialAgreement]
     ) -> list[AgreementInfo]:
         return []
+
+
+class PowersAnalysis(StrEnum):
+    USES_POWERS = "uses_powers"
+    DOES_NOT_USE_POWERS = "does_not_use_powers"
+    INSUFFICENT_INFO = "insufficent_info"
 
 
 class DivisionInfo(BaseModel):
@@ -256,6 +273,7 @@ class DivisionInfo(BaseModel):
     division_name: str
     source_url: str
     motion: str
+    manual_motion: str
     debate_url: str
     source_gid: str
     debate_gid: str
@@ -266,6 +284,48 @@ class DivisionInfo(BaseModel):
     def twfy_link(self) -> str:
         gid = self.source_gid.split("/")[-1]
         return self.chamber.twfy_debate_link(gid)
+
+    def motion_uses_powers(self) -> PowersAnalysis:
+        """
+        Flip the non action analysis to match public language around powers.
+        Given the default is USES_POWERS, add a filter there to test for low quality motions.
+
+        """
+
+        if self.is_nonaction_vote():
+            return PowersAnalysis.DOES_NOT_USE_POWERS
+        else:
+            if self.poor_quality_motion_text():
+                return PowersAnalysis.INSUFFICENT_INFO
+            return PowersAnalysis.USES_POWERS
+
+    def poor_quality_motion_text(self) -> bool:
+        """
+        Track based on motion size if we have good info in the database
+        """
+        text = self.motion_text_only()
+        num_of_words = len(text.split(" "))
+        if num_of_words < 20:
+            return True
+        return False
+
+    def is_nonaction_vote(self) -> bool:
+        """
+        If either the motion or the manual motion triggers the non-action vote criteria.
+        """
+        motion_based_analysis = is_nonaction_vote(self.motion)
+        manual_motion_based_analysis = is_nonaction_vote(self.manual_motion)
+
+        poor_quality_motion = self.poor_quality_motion_text()
+
+        if poor_quality_motion:
+            return manual_motion_based_analysis
+        else:
+            return motion_based_analysis | manual_motion_based_analysis
+
+    def motion_text_only(self) -> str:
+        soup = BeautifulSoup(self.motion, "html.parser")
+        return soup.get_text()
 
     def safe_motion(self) -> str:
         return self.motion
@@ -285,6 +345,7 @@ class DivisionInfo(BaseModel):
         pid = pid.split("/")[0]
         # insert a . between the first two characters
         pid = pid[:1] + "." + pid[1:]
+        pid = pid.replace("..", ".")  # resolve inconsistent formats
         gid = self.date.isoformat() + pid
         return self.chamber.twfy_debate_link(gid)
 
@@ -429,7 +490,7 @@ class DivisionAndVotes(BaseModel):
 
         # calculate the overall breakdown of how people voted and the result
         overall_breakdown = await DivisionBreakDownQuery(
-            division_id=division.division_id
+            division_ids=[division.division_id]
         ).to_model_single(
             duck=duck,
             model=DivisionBreakdown,
@@ -473,7 +534,7 @@ class DivisionAndVotes(BaseModel):
         return style_df(df, percentage_columns=["motion majority ratio"])
 
     def gov_breakdown_df(self) -> str:
-        self.overall_breakdown.grouping = "All MPs"
+        self.overall_breakdown.grouping = "All Participants"
 
         all_breakdowns = [self.overall_breakdown]
         all_breakdowns += self.gov_breakdowns

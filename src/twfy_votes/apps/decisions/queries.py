@@ -105,9 +105,9 @@ class DivisionBreakDownQuery(BaseQuery):
     FROM
         pw_divisions_with_counts
     WHERE
-        division_id = {{ division_id }}
+        division_id in {{ division_ids | inclause }}
     """
-    division_id: int
+    division_ids: list[int]
 
 
 class ChamberDivisionsQuery(BaseQuery):

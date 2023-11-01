@@ -6,7 +6,7 @@ the duckdb database from various sources.
 from pathlib import Path
 
 from ...helpers.duck import DuckQuery, DuckUrl, YamlData
-from .models import GovernmentParties
+from .models import GovernmentParties, ManualMotion
 
 duck = DuckQuery()
 
@@ -90,6 +90,12 @@ class pw_vote:
     """
 
 
+@duck.as_python_source
+class pw_manual_motions(YamlData[ManualMotion]):
+    yaml_source = Path("data", "divisions", "manual_motions.yaml")
+    validation_model = ManualMotion
+
+
 @duck.as_source
 class source_pw_division:
     source = public_whip / "pw_division.parquet"
@@ -99,10 +105,16 @@ class source_pw_division:
 class pw_division:
     query = """
     SELECT
-        *,
-        concat(house, '-', division_date, '-', division_number) as division_key
+        source_pw_division.*,
+        CASE WHEN manual_motion is NULL THEN '' ELSE manual_motion END AS manual_motion,
+        concat(house, '-', source_pw_division.division_date, '-', source_pw_division.division_number) as division_key 
     FROM
         source_pw_division
+    LEFT JOIN pw_manual_motions on
+        (source_pw_division.house = pw_manual_motions.chamber
+         and source_pw_division.division_date = pw_manual_motions.division_date
+         and source_pw_division.division_number = pw_manual_motions.division_number
+         )
     """
 
 

@@ -14,10 +14,12 @@ from ..decisions.models import (
     AgreementInfo,
     AllowedChambers,
     Chamber,
+    DivisionBreakdown,
     DivisionInfo,
     PartialAgreement,
     PartialDivision,
 )
+from ..decisions.queries import DivisionBreakDownQuery
 from .queries import (
     AllPolicyQuery,
     GroupStatusPolicyQuery,
@@ -323,15 +325,34 @@ class Policy(PartialPolicy):
         full = await cls.from_partials(partials=[partial])
         return full[0]
 
-    def decision_df(self, request: Request):
+    async def decision_df(self, request: Request):
+        duck = await duck_core.child_query()
         all_decisions = [x.model_dump() for x in self.decision_links]
+        decision_infos = [
+            x.decision.division_id
+            for x in self.decision_links
+            if isinstance(x.decision, DivisionInfo)
+        ]
+        decision_breakdowns = await DivisionBreakDownQuery(
+            division_ids=decision_infos
+        ).to_model_list(
+            duck=duck,
+            model=DivisionBreakdown,
+        )
+
         df = pd.DataFrame(data=all_decisions)
         df["decision"] = [
             UrlColumn(url=x.decision.url(request), text=x.decision.division_name)
             for x in self.decision_links
         ]
+        df["uses_powers"] = [
+            x.decision.motion_uses_powers() for x in self.decision_links
+        ]
+        df["participant_count"] = [
+            x.vote_participant_count for x in decision_breakdowns
+        ]
 
-        banned_columns = []
+        banned_columns = ["decision_type", "notes"]
         df = df.drop(columns=banned_columns)  # type: ignore
         return style_df(df=df)
 

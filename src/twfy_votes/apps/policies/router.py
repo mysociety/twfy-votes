@@ -45,6 +45,7 @@ async def api_policy_collection(policies: GetPolicyCollection):
 @router.use_template("policy.html")
 async def policy(context: GetContext, policy: GetPolicy):
     context["policy"] = policy
+    context["decision_df"] = await policy.decision_df(context["request"])
     return context
 
 
