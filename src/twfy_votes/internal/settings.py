@@ -2,14 +2,13 @@ import os
 from pathlib import Path
 from typing import Annotated
 
-from pydantic import ValidationError
 from pydantic.functional_validators import AfterValidator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 def is_existing_path(p: Path) -> Path:
     if not p.exists():
-        raise ValidationError(f"{p} does not exist")
+        raise ValueError(f"{p} does not exist")
     return p
 
 
@@ -35,7 +34,7 @@ class Settings(BaseSettings):
     site_name: str = "TheyWorkForYou Votes"
     template_dir: RealPath = src_path / "templates"
     static_dir: RealPath = top_level / "static"
-    render_dir: RealPath = top_level / "_site"
+    render_dir: Path = top_level / "_site"
     base_url: str = base_url
 
 
