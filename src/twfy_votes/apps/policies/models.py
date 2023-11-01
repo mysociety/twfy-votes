@@ -7,6 +7,7 @@ from typing_extensions import Self
 
 from ...helpers.data.models import ProjectBaseModel as BaseModel
 from ...helpers.data.models import StrEnum
+from ...helpers.data.style import UrlColumn, style_df
 from ...internal.common import absolute_url_for
 from ...internal.db import duck_core
 from ..decisions.models import (
@@ -325,23 +326,14 @@ class Policy(PartialPolicy):
     def decision_df(self, request: Request):
         all_decisions = [x.model_dump() for x in self.decision_links]
         df = pd.DataFrame(data=all_decisions)
-        url_template = "<a href=" "{url}" ">{text}</a>"
         df["decision"] = [
-            url_template.format(
-                url=x.decision.url(request), text=x.decision.division_name
-            )
+            UrlColumn(url=x.decision.url(request), text=x.decision.division_name)
             for x in self.decision_links
         ]
 
         banned_columns = []
         df = df.drop(columns=banned_columns)  # type: ignore
-        df = df.rename(columns=nice_headers)  # type: ignore
-
-        styled_df = df.style.hide(axis="index").format(  # type: ignore
-            formatter={}  # type: ignore
-        )  # type: ignore
-
-        return styled_df.to_html()  # type: ignore
+        return style_df(df=df)
 
     def url(self, request: Request):
         return absolute_url_for(

@@ -20,7 +20,7 @@ def style_df(df: pd.DataFrame, percentage_columns: list[str] | None = None) -> s
 
 
 class UrlColumn(BaseModel, arbitrary_types_allowed=True):
-    url: URL
+    url: URL | str
     text: str
 
     def __str__(self) -> str:
