@@ -14,7 +14,7 @@ from .models import PolicyStatus
 router = StaticAPIRouter(template_directory=settings.template_dir)
 
 
-@router.get_html("/policies/")
+@router.get_html("/policies")
 @router.use_template("policies.html")
 async def policies(context: GetContext, all_chambers: AllChambers):
     context["all_chambers"] = all_chambers

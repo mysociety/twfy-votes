@@ -4,9 +4,11 @@ from ...helpers.static_fastapi.static import StaticAPIRouter
 from ...internal.settings import settings
 from ..core.dependencies import GetContext
 from .dependencies import (
+    GetAllPeople,
     GetChambersWithYearRange,
     GetDivisionAndVotes,
     GetDivisionListing,
+    GetPersonAndVotes,
 )
 
 router = StaticAPIRouter(template_directory=settings.template_dir)
@@ -18,7 +20,31 @@ async def home(context: GetContext):
     return context
 
 
-@router.get_html("/decisions/")
+@router.get_html("/people")
+@router.use_template("people.html")
+async def people(context: GetContext, people: GetAllPeople):
+    context["people"] = people
+    return context
+
+
+@router.get("/people.json")
+async def api_people(people: GetAllPeople):
+    return people
+
+
+@router.get_html("/person/{person_id}/votes")
+@router.use_template("person_votes.html")
+async def person_votes(context: GetContext, person_and_votes: GetPersonAndVotes):
+    context["item"] = person_and_votes
+    return context
+
+
+@router.get("/person/{person_id}/votes.json")
+async def api_person(person_and_votes: GetPersonAndVotes):
+    return person_and_votes
+
+
+@router.get_html("/decisions")
 @router.use_template("decisions.html")
 async def decisions(
     context: GetContext, chambers_with_year_range: GetChambersWithYearRange
@@ -49,7 +75,7 @@ async def api_divisions_list(division_list: GetDivisionListing):
     return division_list
 
 
-@router.get_html("/decisions/divisions/{chamber_slug}/{year}/")
+@router.get_html("/decisions/divisions/{chamber_slug}/{year}")
 @router.use_template("division_list.html")
 async def divisions_list(context: GetContext, division_list: GetDivisionListing):
     context["search"] = division_list

@@ -9,9 +9,11 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from fastapi import Request
 from pydantic import AliasChoices, Field, computed_field
+from starlette.datastructures import URL
 
 from ...helpers.data.models import ProjectBaseModel as BaseModel
 from ...helpers.data.models import StrEnum
+from ...helpers.data.style import UrlColumn, style_df
 from ...internal.common import absolute_url_for
 from ...internal.db import duck_core
 from .queries import (
@@ -19,14 +21,12 @@ from .queries import (
     DivisionBreakDownQuery,
     DivisionQueryKeys,
     DivisionVotesQuery,
+    GetAllPersonsQuery,
+    GetPersonQuery,
     GovDivisionBreakDownQuery,
     PartyDivisionBreakDownQuery,
+    PersonVotesQuery,
 )
-
-
-def nice_headers(s: str) -> str:
-    s = s.replace("_", " ")
-    return s
 
 
 class AllowedChambers(StrEnum):
@@ -124,20 +124,38 @@ class ChamberWithYearRange(BaseModel):
 
 class Person(BaseModel):
     person_id: int
-    first_name: str
+    first_name: str = aliases("first_name", "given_name")
     last_name: str
     nice_name: str
-    party: str
+    party: str | None = None
+
+    def votes_url(self, request: Request) -> URL:
+        return absolute_url_for(request, "person_votes", person_id=self.person_id)
 
     @computed_field
     @property
     def name(self) -> str:
-        return f"{self.first_name} {self.last_name} ({self.party})"
+        if self.party:
+            return f"{self.first_name} {self.last_name} ({self.party})"
+        return f"{self.first_name} {self.last_name}"
+
+    @classmethod
+    async def from_id(cls, person_id: int) -> Person:
+        duck = await duck_core.child_query()
+        return await GetPersonQuery(person_id=person_id).to_model_single(
+            model=Person, duck=duck
+        )
+
+    @classmethod
+    async def fetch_all(cls) -> list[Person]:
+        duck = await duck_core.child_query()
+        return await GetAllPersonsQuery().to_model_list(model=Person, duck=duck)
 
 
 class Vote(BaseModel):
     person: Person
     membership_id: int
+    division: DivisionInfo | None = None
     vote: VotePosition
     diff_from_party_average: float
 
@@ -241,7 +259,7 @@ class DivisionInfo(BaseModel):
     debate_url: str
     source_gid: str
     debate_gid: str
-    clock_time: str
+    clock_time: str | None = None
 
     @computed_field
     @property
@@ -351,6 +369,41 @@ class DivisionBreakdown(BaseModel):
     motion_result_int: int
 
 
+class PersonAndVotes(BaseModel):
+    person: Person
+    votes: list[Vote]
+
+    @classmethod
+    async def from_person(cls, person: Person) -> PersonAndVotes:
+        duck = await duck_core.child_query()
+        votes = await PersonVotesQuery(
+            person_id=person.person_id,
+        ).to_model_list(
+            duck=duck, model=Vote, validate=DivisionVotesQuery.validate.NOT_ZERO
+        )
+
+        return PersonAndVotes(person=person, votes=votes)
+
+    def votes_df(self, request: Request) -> str:
+        data = [
+            {
+                "Date": v.division.date,
+                "Division": UrlColumn(
+                    url=v.division.url(request), text=v.division.division_name
+                ),
+                "Vote": v.vote_desc,
+                "Party alignment": 1 - v.diff_from_party_average,
+            }
+            for v in self.votes
+            if v.division is not None
+        ]
+
+        if len(data) != len(self.votes):
+            raise ValueError("Some votes have no division associated with them")
+        df = pd.DataFrame(data=data)
+        return style_df(df, percentage_columns=["Party alignment"])
+
+
 class DivisionAndVotes(BaseModel):
     house: Chamber
     date: datetime.date = aliases("date", "division_date")
@@ -416,16 +469,8 @@ class DivisionAndVotes(BaseModel):
         df = pd.DataFrame(data=all_breakdowns)
         banned_columns = ["signed_votes", "motion_majority", "motion_result_int"]
         df = df.drop(columns=banned_columns)  # type: ignore
-        df = df.rename(columns=nice_headers)
 
-        def format_percentage(value: float):
-            return "{:.2%}".format(value)
-
-        styled_df = df.style.hide(axis="index").format(  # type: ignore
-            formatter={"motion majority ratio": format_percentage}  # type: ignore
-        )  # type: ignore
-
-        return styled_df.to_html()  # type: ignore
+        return style_df(df, percentage_columns=["motion majority ratio"])
 
     def gov_breakdown_df(self) -> str:
         self.overall_breakdown.grouping = "All MPs"
@@ -437,21 +482,15 @@ class DivisionAndVotes(BaseModel):
         df = pd.DataFrame(data=all_breakdowns)
         banned_columns = ["signed_votes", "motion_majority", "motion_result_int"]
         df = df.drop(columns=banned_columns)  # type: ignore
-        df = df.rename(columns=nice_headers)
 
-        def format_percentage(value: float):
-            return "{:.2%}".format(value)
+        return style_df(df, percentage_columns=["motion majority ratio"])
 
-        styled_df = df.style.hide().format(  # type: ignore
-            formatter={"motion majority ratio": format_percentage}  # type: ignore
-        )  # type: ignore
-
-        return styled_df.to_html(index=False)  # type: ignore
-
-    def votes_df(self) -> str:
+    def votes_df(self, request: Request) -> str:
         data = [
             {
-                "Person": v.person.nice_name,
+                "Person": UrlColumn(
+                    url=v.person.votes_url(request), text=v.person.nice_name
+                ),
                 "Party": v.person.party,
                 "Vote": v.vote_desc,
                 "Party alignment": 1 - v.diff_from_party_average,
@@ -460,12 +499,4 @@ class DivisionAndVotes(BaseModel):
         ]
 
         df = pd.DataFrame(data=data)
-
-        def format_percentage(value: float):
-            return "{:.2%}".format(value)
-
-        styled_df = df.style.hide(axis="index").format(  # type: ignore
-            formatter={"Party alignment": format_percentage}  # type: ignore
-        )
-
-        return styled_df.to_html()  # type: ignore
+        return style_df(df, percentage_columns=["Party alignment"])

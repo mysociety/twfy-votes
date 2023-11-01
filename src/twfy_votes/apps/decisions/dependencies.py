@@ -18,6 +18,8 @@ from .models import (
     DivisionInfo,
     DivisionListing,
     PartialDivision,
+    Person,
+    PersonAndVotes,
 )
 
 
@@ -71,3 +73,27 @@ async def GetChambersWithYearRange():
     Get a list of chambers with the years they have divisions for
     """
     return await ChamberWithYearRange.fetch_all()
+
+
+@dependency_alias_for(Person)
+async def GetPerson(person_id: int) -> Person:
+    """
+    Get a person object from a person_id
+    """
+    return await Person.from_id(person_id)
+
+
+@dependency_alias_for(PersonAndVotes)
+async def GetPersonAndVotes(person: GetPerson) -> PersonAndVotes:
+    """
+    Fetch the full votes from a division object
+    """
+    return await PersonAndVotes.from_person(person)
+
+
+@dependency_alias_for(list[Person])
+async def GetAllPeople() -> list[Person]:
+    """
+    Get a list of all people
+    """
+    return await Person.fetch_all()

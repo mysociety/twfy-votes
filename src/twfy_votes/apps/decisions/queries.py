@@ -68,6 +68,36 @@ class DivisionVotesQuery(BaseQuery):
     chamber_slug: str
 
 
+class PersonVotesQuery(BaseQuery):
+    query_template = """
+    SELECT
+        given_name as person__first_name,
+        last_name as person__last_name,
+        nice_name as person__nice_name,
+        party_name as person__party,
+        pw_votes_with_party_difference.mp_id as membership_id,
+        person_id as person__person_id,
+        pw_votes_with_party_difference.* exclude (division_id, mp_id, __index_level_0__),
+        division_key as division__division_key,
+        house as division__chamber__slug,
+        division_id as division__division_id,
+        division_date as division__division_date,
+        division_number as division__division_number,
+        division_name as division__division_name,
+        source_url as division__source_url,
+        motion as division__motion,
+        debate_url as division__debate_url,
+        source_gid as division__source_gid,
+        debate_gid as division__debate_gid,
+    FROM
+        pw_division
+    JOIN pw_votes_with_party_difference using (division_id)
+    WHERE
+        person_id = {{ person_id }}
+    """
+    person_id: int
+
+
 class DivisionBreakDownQuery(BaseQuery):
     query_template = """
     SELECT
@@ -122,3 +152,27 @@ class GovDivisionBreakDownQuery(BaseQuery):
         division_id = {{ division_id }}
     """
     division_id: int
+
+
+class GetPersonQuery(BaseQuery):
+    query_template = """
+    SELECT
+        *
+    FROM
+        pd_people
+    WHERE
+        person_id = {{ person_id }}
+    """
+    person_id: int
+
+
+class GetAllPersonsQuery(BaseQuery):
+    query_template = """
+    SELECT
+        *
+    FROM
+        pd_people
+    ORDER BY
+        person_id
+
+    """

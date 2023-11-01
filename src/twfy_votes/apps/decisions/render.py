@@ -9,7 +9,7 @@ router = StaticAPIRouter(template_directory=settings.template_dir)
 
 
 @router.render_for_path("/")
-@router.render_for_path("/decisions/")
+@router.render_for_path("/decisions")
 @router.render_for_path("/decisions.json")
 async def no_args() -> AsyncIterator[dict[Any, Any]]:
     yield {}
@@ -35,7 +35,7 @@ async def decision_parameters():
         yield record
 
 
-@router.render_for_path("/decisions/divisions/{chamber_slug}/{year}/")
+@router.render_for_path("/decisions/divisions/{chamber_slug}/{year}")
 @router.render_for_path("/decisions/divisions/{chamber_slug}/{year}.json")
 async def chamber_parameters():
     duck = await duck_core.child_query()
