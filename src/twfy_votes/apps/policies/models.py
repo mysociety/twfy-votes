@@ -162,17 +162,6 @@ class PartialPolicyDecisionLink(BaseModel):
         else:
             return self
 
-    def model_dump(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
-        """
-        Tidy up YAML representation a bit
-        """
-        di = super().model_dump(*args, **kwargs)
-        if self.agreement is None:
-            del di["agreement"]
-        if self.division is None:
-            del di["division"]
-        return di
-
 
 class PolicyDecisionLink(BaseModel):
     decision: DivisionInfo | AgreementInfo
@@ -246,6 +235,22 @@ class PartialPolicy(BaseModel):
         description="Policy can be drawn out as a highlight on page if no calculcated 'interesting' votes"
     )
     decision_links_refs: list[PartialPolicyDecisionLink]
+
+    def model_dump_reduced(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        """
+        Tidy up YAML representation a bit
+        """
+        di = self.model_dump(*args, **kwargs)
+
+        for ref in di["decision_links_refs"]:
+            if ref["agreement"] is None:
+                del ref["agreement"]
+            if ref["division"] is None:
+                del ref["division"]
+            if ref["division"]:
+                del ref["division"]["key"]
+            del ref["decision_key"]
+        return di
 
 
 class Policy(PartialPolicy):

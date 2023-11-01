@@ -76,8 +76,9 @@ def json_to_data(path: Path) -> dict[str, Any]:
 
 
 class StashableBase(BaseModel):
-    def to_path(self, path: Path):
-        data = self.model_dump()
+    def to_path(self, path: Path, data: dict[str, Any] | None = None):
+        if not data:
+            data = self.model_dump()
         match path.suffix:
             case ".json":
                 data_to_json(data, path)
