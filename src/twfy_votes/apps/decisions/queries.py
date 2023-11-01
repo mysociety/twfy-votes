@@ -21,11 +21,11 @@ class DivisionQuery(BaseQuery):
         WHERE
             division_date = {{ division_date }} and
             division_number = {{ division_number }} and
-            house = {{ house }}
+            house = {{ chamber_slug }}
         """
     division_date: datetime.date
     division_number: int
-    house: str
+    chamber_slug: str
 
 
 class DivisionQueryKeys(BaseQuery):
@@ -36,7 +36,7 @@ class DivisionQueryKeys(BaseQuery):
             WHEN clock_time IS NULL THEN 'No recorded time'
             ELSE CAST(clock_time AS VARCHAR)
         END AS clock_time,
-        house as house__slug
+        house as chamber__slug
         FROM
             pw_division
         WHERE
@@ -61,11 +61,11 @@ class DivisionVotesQuery(BaseQuery):
     WHERE
         pw_division.division_date = {{ division_date }} and
         pw_division.division_number = {{ division_number }} and
-        pw_division.house = {{ house }}
+        pw_division.house = {{ chamber_slug }}
     """
     division_date: datetime.date
     division_number: int
-    house: str
+    chamber_slug: str
 
 
 class DivisionBreakDownQuery(BaseQuery):
@@ -84,7 +84,7 @@ class ChamberDivisionsQuery(BaseQuery):
     query_template = """
     SELECT
         * exclude (house, clock_time),
-        house as house__slug,
+        house as chamber__slug,
         CASE 
             WHEN clock_time IS NULL THEN 'No recorded time'
             ELSE CAST(clock_time AS VARCHAR)

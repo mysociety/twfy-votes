@@ -214,7 +214,7 @@ class AgreementInfo(BaseModel):
 
 class DivisionInfo(BaseModel):
     key: str = aliases("key", "division_key")
-    house: Chamber
+    chamber: Chamber
     date: datetime.date = aliases("date", "division_date")
     division_id: int
     division_number: int
@@ -230,7 +230,7 @@ class DivisionInfo(BaseModel):
         return absolute_url_for(
             request,
             "division",
-            chamber_slug=self.house.slug,
+            chamber_slug=self.chamber.slug,
             date=self.date,
             division_number=self.division_number,
         )
@@ -325,7 +325,7 @@ class DivisionAndVotes(BaseModel):
         votes = await DivisionVotesQuery(
             division_date=division.date,
             division_number=division.division_number,
-            house=division.house.slug,
+            chamber_slug=division.chamber.slug,
         ).to_model_list(
             duck=duck, model=Vote, validate=DivisionVotesQuery.validate.NOT_ZERO
         )
@@ -357,7 +357,7 @@ class DivisionAndVotes(BaseModel):
         )
 
         return DivisionAndVotes(
-            house=division.house,
+            house=division.chamber,
             date=division.date,
             division_number=division.division_number,
             details=division,
