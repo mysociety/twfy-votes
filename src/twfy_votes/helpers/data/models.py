@@ -67,7 +67,7 @@ def yaml_to_data(path: Path) -> dict[str, Any]:
 
 
 def data_to_json(data: dict[str, Any], path: Path) -> None:
-    with open(path, "w") as f:
+    with path.open("w") as f:
         json.dump(data, f, indent=4)
 
 
