@@ -7,7 +7,28 @@
 
 <h1>{{ item.details.chamber.name }} - {{ item.details.date }} - {{ item.details.division_number }}</h1>
 
-<p>{{ item.details.division_name|safe }}</p>
+
+<h2>{{ item.details.division_name|safe }}</h2>
+
+<p><a href="{{ item.details.twfy_link }}">View vote in TheyWorkForYou</a></p>
+
+
+<h2>Motion</h2>
+
+<div class="motion">
+
+
+    {{ item.details.safe_motion() | safe }}
+    <p style="font-style: italic;">Note: The motion scraper currently pulls out all block quotes - explaining the
+        sometimes random paragraphs that
+        are included.</p>
+</div>
+
+{% with twfy_link = item.details.motion_twfy_link() %}
+{% if twfy_link %}
+<p><a href="{{ twfy_link }}">View motion in TheyWorkForYou</a></p>
+{% endif %}
+{% endwith %}
 
 <h2>Voting breakdown</h2>
 

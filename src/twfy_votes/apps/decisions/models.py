@@ -6,6 +6,7 @@ from itertools import groupby
 from typing import Any, Literal
 
 import pandas as pd
+from bs4 import BeautifulSoup
 from fastapi import Request
 from pydantic import AliasChoices, Field, computed_field
 
@@ -73,6 +74,22 @@ class Chamber(BaseModel):
                 return "Senedd"
             case "ni":
                 return "Northern Ireland Assembly"
+            case _:
+                raise ValueError(f"Invalid house slug {self.slug}")
+
+    def twfy_debate_link(self, gid: str) -> str:
+        link_format = "https://www.theyworkforyou.com/{debate_slug}/?id={gid}"
+        match self.slug:
+            case "commons":
+                return link_format.format(debate_slug="debates", gid=gid)
+            case "lords":
+                return link_format.format(debate_slug="lords", gid=gid)
+            case "scotland":
+                return link_format.format(debate_slug="sp", gid=gid)
+            case "wales":
+                return link_format.format(debate_slug="senedd", gid=gid)
+            case "ni":
+                return link_format.format(debate_slug="ni", gid=gid)
             case _:
                 raise ValueError(f"Invalid house slug {self.slug}")
 
@@ -225,6 +242,33 @@ class DivisionInfo(BaseModel):
     source_gid: str
     debate_gid: str
     clock_time: str
+
+    @computed_field
+    @property
+    def twfy_link(self) -> str:
+        gid = self.source_gid.split("/")[-1]
+        return self.chamber.twfy_debate_link(gid)
+
+    def safe_motion(self) -> str:
+        return self.motion
+
+    def motion_twfy_link(self) -> str | None:
+        soup = BeautifulSoup(self.motion, "html.parser")
+        pid = None
+        for p in soup.find_all("p"):
+            # get the gid property from the ptag
+
+            pid = p.get("pid", None)
+            if pid:
+                continue
+        if not pid:
+            return None
+
+        pid = pid.split("/")[0]
+        # insert a . between the first two characters
+        pid = pid[:1] + "." + pid[1:]
+        gid = self.date.isoformat() + pid
+        return self.chamber.twfy_debate_link(gid)
 
     def url(self, request: Request):
         return absolute_url_for(
