@@ -9,10 +9,3 @@ RUN curl -sSL https://install.python-poetry.org | python - && \
     poetry self add poetry-bumpversion && \
     poetry install && \
     echo "/workspaces/twfy-votes/src/" > /usr/local/lib/python3.10/site-packages/twfy_votes.pth
-
-COPY . /workspaces/twfy-votes
-WORKDIR /workspaces/twfy-votes
-ENV SERVER_PRODUCTION=true
-ENV PORT=8080
-ENV PATH="/root/.local/bin:${PATH}"
-CMD exec script/server

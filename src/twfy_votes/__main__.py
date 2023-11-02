@@ -1,4 +1,5 @@
 import asyncio
+import os
 from functools import wraps
 from pathlib import Path
 from typing import Awaitable, Callable, ParamSpec, TypeVar
@@ -12,6 +13,7 @@ app = typer.Typer(help="")
 
 two_levels_above = Path(__file__).parent.parent
 
+PORT = int(os.environ.get("PORT", 8000))
 
 # Create a type variable for the return type.
 TReturn = TypeVar("TReturn")
@@ -65,7 +67,7 @@ def run_fastapi_server():
     uvicorn.run(  # type: ignore
         "twfy_votes.main:app",
         host="0.0.0.0",
-        port=8000,
+        port=PORT,
         reload=True,
         reload_dirs=[str(two_levels_above)],
         reload_delay=2,
