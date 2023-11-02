@@ -10,6 +10,8 @@ from .models import GovernmentParties, ManualMotion
 
 duck = DuckQuery()
 
+processed_data = Path("data", "processed")
+
 public_whip = DuckUrl(
     "https://pages.mysociety.org/publicwhip-data/data/public_whip_data/latest"
 )
@@ -101,13 +103,19 @@ class source_pw_division:
     source = public_whip / "pw_division.parquet"
 
 
+@duck.as_source
+class pw_division_cluster:
+    source = processed_data / "voting_clusters.parquet"
+
+
 @duck.as_table
 class pw_division:
     query = """
     SELECT
         source_pw_division.*,
         CASE WHEN manual_motion is NULL THEN '' ELSE manual_motion END AS manual_motion,
-        concat(house, '-', source_pw_division.division_date, '-', source_pw_division.division_number) as division_key 
+        CASE WHEN cluster is NULL THEN '' ELSE cluster END AS voting_cluster,
+        concat(house, '-', source_pw_division.division_date, '-', source_pw_division.division_number) as division_key
     FROM
         source_pw_division
     LEFT JOIN pw_manual_motions on
@@ -115,6 +123,8 @@ class pw_division:
          and source_pw_division.division_date = pw_manual_motions.division_date
          and source_pw_division.division_number = pw_manual_motions.division_number
          )
+    LEFT JOIN pw_division_cluster on (source_pw_division.division_id = pw_division_cluster.division_id)
+
     """
 
 

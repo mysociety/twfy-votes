@@ -52,6 +52,15 @@ def run_server(static: bool = False):
         run_fastapi_server()
 
 
+@app.command()
+@coro
+@load_db
+async def update():
+    from .apps.decisions.data_update import create_commons_cluster
+
+    await create_commons_cluster()
+
+
 def run_fastapi_server():
     uvicorn.run(  # type: ignore
         "twfy_votes.main:app",

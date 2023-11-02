@@ -340,6 +340,20 @@ class Policy(PartialPolicy):
             model=DivisionBreakdown,
         )
 
+        # need to rearrange to match the right order in DivisionBreakdown
+        breakdown_lookup: dict[int, DivisionBreakdown] = {
+            x.division_id: x for x in decision_breakdowns
+        }
+
+        breakdown_in_order = [
+            breakdown_lookup[x.decision.division_id]
+            if isinstance(x.decision, DivisionInfo)
+            else None
+            for x in self.decision_links
+        ]
+
+        # need to make participant count line up
+
         df = pd.DataFrame(data=all_decisions)
         df["decision"] = [
             UrlColumn(url=x.decision.url(request), text=x.decision.division_name)
@@ -349,8 +363,9 @@ class Policy(PartialPolicy):
             x.decision.motion_uses_powers() for x in self.decision_links
         ]
         df["participant_count"] = [
-            x.vote_participant_count for x in decision_breakdowns
+            x.vote_participant_count if x else 0 for x in breakdown_in_order
         ]
+        df["voting_cluster"] = [x.decision.voting_cluster for x in self.decision_links]
 
         banned_columns = ["decision_type", "notes"]
         df = df.drop(columns=banned_columns)  # type: ignore

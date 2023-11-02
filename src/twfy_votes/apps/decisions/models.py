@@ -262,6 +262,7 @@ class AgreementInfo(BaseModel):
     decision_ref: str
     division_name: str
     motion: str
+    voting_cluster: str = ""
 
     def url(self, request: Request):
         return ""
@@ -296,6 +297,7 @@ class DivisionInfo(BaseModel):
     source_gid: str
     debate_gid: str
     clock_time: str | None = None
+    voting_cluster: str | None = None
 
     @computed_field
     @property
@@ -438,6 +440,7 @@ class DivisionListing(BaseModel):
 
 
 class DivisionBreakdown(BaseModel):
+    division_id: int
     grouping: str | None = None
     vote_participant_count: int
     for_motion: int
