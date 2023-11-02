@@ -9,11 +9,9 @@ duck_core = AsyncDuckDBManager()
 
 def get_db_lifespan(queries: list[DuckQuery]):
     @asynccontextmanager
-    async def lifespan(app: FastAPI):
+    async def lifespan(app: FastAPI | None = None):
         # Load the ML model
-        core = await duck_core.get_core()
-        for query in queries:
-            await core.compile(query).run_on_self()
+        await duck_core.get_loaded_core(queries)
         yield
         # Clean up the ML models and release the resources
         await duck_core.close()

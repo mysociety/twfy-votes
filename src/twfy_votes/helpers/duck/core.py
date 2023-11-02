@@ -302,6 +302,12 @@ class AsyncDuckDBManager:
         self._core = await DuckQuery.async_create()
         return self._core
 
+    async def get_loaded_core(self, queries: list[DuckQuery]):
+        core = await self.get_core()
+        for query in queries:
+            await core.compile(query).run_on_self()
+        return core
+
     async def child_query(self, namespace: str | None = None):
         core = await self.get_core()
         return core.child_query(namespace)

@@ -1,11 +1,40 @@
+import asyncio
+from functools import wraps
 from pathlib import Path
+from typing import Awaitable, Callable, ParamSpec, TypeVar
 
 import typer
 import uvicorn
 
+from .apps.core.db import db_lifespan
+
 app = typer.Typer(help="")
 
 two_levels_above = Path(__file__).parent.parent
+
+
+# Create a type variable for the return type.
+TReturn = TypeVar("TReturn")
+
+# Create a ParamSpec variable for capturing argument types.
+P = ParamSpec("P")
+
+
+def coro(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, TReturn]:
+    @wraps(f)
+    def wrapper(*args: P.args, **kwargs: P.kwargs) -> TReturn:
+        return asyncio.run(f(*args, **kwargs))  # type: ignore
+
+    return wrapper
+
+
+def load_db(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, Awaitable[TReturn]]:
+    @wraps(f)
+    async def wrapper(*args: P.args, **kwargs: P.kwargs) -> TReturn:
+        async with db_lifespan():
+            return await f(*args, **kwargs)
+
+    return wrapper
 
 
 @app.command()
