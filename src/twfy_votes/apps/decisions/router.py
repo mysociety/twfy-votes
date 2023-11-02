@@ -70,6 +70,7 @@ async def division(context: GetContext, division: GetDivisionAndVotes):
     return context
 
 
+@router.get("/decisions/divisions/{chamber_slug}/{year}/{month}.json")
 @router.get("/decisions/divisions/{chamber_slug}/{year}.json")
 async def api_divisions_list(division_list: GetDivisionListing):
     return division_list
@@ -78,5 +79,12 @@ async def api_divisions_list(division_list: GetDivisionListing):
 @router.get_html("/decisions/divisions/{chamber_slug}/{year}")
 @router.use_template("division_list.html")
 async def divisions_list(context: GetContext, division_list: GetDivisionListing):
+    context["search"] = division_list
+    return context
+
+
+@router.get_html("/decisions/divisions/{chamber_slug}/{year}/{month}")
+@router.use_template("division_list_month.html")
+async def divisions_list_month(context: GetContext, division_list: GetDivisionListing):
     context["search"] = division_list
     return context

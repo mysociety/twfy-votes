@@ -411,10 +411,36 @@ class DivisionListing(BaseModel):
         for month_id, divs in groupby(divisions, lambda x: x.date.month):
             yield month_name[month_id], list(divs)
 
+    def division_df(self, request: Request):
+        data = [
+            {
+                "Date": d.date,
+                "Division": UrlColumn(url=d.url(request), text=d.division_name),
+                "Powers": d.motion_uses_powers(),
+                "voting_cluster": d.voting_cluster,
+            }
+            for d in self.divisions
+        ]
+
+        df = pd.DataFrame(data=data)
+        return style_df(df)
+
     @classmethod
     async def from_chamber_year(cls, chamber: Chamber, year: int) -> DivisionListing:
         start_date = datetime.date(year, 1, 1)
         end_date = datetime.date(year, 12, 31)
+        return await cls.from_chamber(chamber, start_date, end_date)
+
+    @classmethod
+    async def from_chamber_year_month(
+        cls, chamber: Chamber, year: int, month: int
+    ) -> DivisionListing:
+        start_date = datetime.date(year, month, 1)
+        next_month = month + 1
+        if next_month > 12:
+            next_month = 1
+            year += 1
+        end_date = datetime.date(year, next_month, 1) - datetime.timedelta(days=1)
         return await cls.from_chamber(chamber, start_date, end_date)
 
     @classmethod

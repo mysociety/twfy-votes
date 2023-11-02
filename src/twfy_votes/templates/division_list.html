@@ -10,15 +10,20 @@
 
 {% for month, divisions in search.grouped_divisions() %}
 
-    <h2>{{ month }}</h2>
-    
+<h2>{{ month }}</h2>
 
-    <ul>
+<p><a
+        href="{{ url_for('divisions_list_month', chamber_slug=search.chamber.slug, year=divisions[0].date.year, month=divisions[0].date.month) }}">View
+        as
+        table</a></p>
+
+
+<ul>
     {% for division in divisions %}
-    
+
     <li>{{ division.date }} - <a href="{{ division.url(request) }}">{{ division.division_name|safe }}</a></li>
     {% endfor %}
-    </ul>
+</ul>
 
 {% endfor %}
 

@@ -60,11 +60,16 @@ async def GetDivisionAndVotes(division: GetDivision) -> DivisionAndVotes:
 
 
 @dependency_alias_for(DivisionListing)
-async def GetDivisionListing(chamber: GetChamber, year: int) -> DivisionListing:
+async def GetDivisionListing(
+    chamber: GetChamber, year: int, month: int | None = None
+) -> DivisionListing:
     """
     Get a list of divisions for a chamber and year
     """
-    return await DivisionListing.from_chamber_year(chamber, year)
+    if month:
+        return await DivisionListing.from_chamber_year_month(chamber, year, month)
+    else:
+        return await DivisionListing.from_chamber_year(chamber, year)
 
 
 @dependency_alias_for(list[ChamberWithYearRange])

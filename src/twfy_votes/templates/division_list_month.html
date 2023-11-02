@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<h1>Decisions in {{ search.chamber.name }}</h1>
+
+<p>{{ search.divisions|length }} decisions from {{ search.start_date}} to {{ search.end_date }} (table)</p>
+
+{{ search.division_df(request) | safe }}
+
+{% endblock content %}
