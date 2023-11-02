@@ -86,6 +86,7 @@ class PersonVotesQuery(BaseQuery):
         division_name as division__division_name,
         source_url as division__source_url,
         motion as division__motion,
+        manual_motion as division__manual_motion,
         debate_url as division__debate_url,
         source_gid as division__source_gid,
         debate_gid as division__debate_gid,

@@ -70,6 +70,23 @@ class Chamber(BaseModel):
 
     @computed_field
     @property
+    def member_name(self) -> str:
+        match self.slug:
+            case "commons":
+                return "MPs"
+            case "lords":
+                return "Lords"
+            case "scotland":
+                return "MSPs"
+            case "wales":
+                return "MSs"
+            case "ni":
+                return "AMs"
+            case _:
+                raise ValueError(f"Invalid house slug {self.slug}")
+
+    @computed_field
+    @property
     def name(self) -> str:
         match self.slug:
             case "commons":
@@ -150,9 +167,10 @@ class Person(BaseModel):
     @classmethod
     async def from_id(cls, person_id: int) -> Person:
         duck = await duck_core.child_query()
-        return await GetPersonQuery(person_id=person_id).to_model_single(
-            model=Person, duck=duck
+        person_objects = await GetPersonQuery(person_id=person_id).to_model_list(
+            model=cls, validate=GetPersonQuery.validate.NOT_ZERO, duck=duck
         )
+        return person_objects[0]
 
     @classmethod
     async def fetch_all(cls) -> list[Person]:
@@ -285,20 +303,6 @@ class DivisionInfo(BaseModel):
         gid = self.source_gid.split("/")[-1]
         return self.chamber.twfy_debate_link(gid)
 
-    def motion_uses_powers(self) -> PowersAnalysis:
-        """
-        Flip the non action analysis to match public language around powers.
-        Given the default is USES_POWERS, add a filter there to test for low quality motions.
-
-        """
-
-        if self.is_nonaction_vote():
-            return PowersAnalysis.DOES_NOT_USE_POWERS
-        else:
-            if self.poor_quality_motion_text():
-                return PowersAnalysis.INSUFFICENT_INFO
-            return PowersAnalysis.USES_POWERS
-
     def poor_quality_motion_text(self) -> bool:
         """
         Track based on motion size if we have good info in the database
@@ -309,19 +313,34 @@ class DivisionInfo(BaseModel):
             return True
         return False
 
-    def is_nonaction_vote(self) -> bool:
+    def motion_uses_powers(self) -> PowersAnalysis:
         """
         If either the motion or the manual motion triggers the non-action vote criteria.
         """
-        motion_based_analysis = is_nonaction_vote(self.motion)
-        manual_motion_based_analysis = is_nonaction_vote(self.manual_motion)
+        motion_based_nonaction = is_nonaction_vote(self.motion)
+        manual_motion_based_nonaction = is_nonaction_vote(self.manual_motion)
 
         poor_quality_motion = self.poor_quality_motion_text()
 
-        if poor_quality_motion:
-            return manual_motion_based_analysis
+        if poor_quality_motion and self.manual_motion:
+            # if we have a poor quality motion and we have a manual motion, use that alone
+            if manual_motion_based_nonaction:
+                return PowersAnalysis.DOES_NOT_USE_POWERS
+            else:
+                return PowersAnalysis.USES_POWERS
+        elif poor_quality_motion and not self.manual_motion:
+            # if we have a poor quality motion and no manual motion, we assume a negative response (has powers)
+            # is false and return insufficent info
+            if motion_based_nonaction:
+                return PowersAnalysis.DOES_NOT_USE_POWERS
+            else:
+                return PowersAnalysis.INSUFFICENT_INFO
         else:
-            return motion_based_analysis | manual_motion_based_analysis
+            # we have both a good quality motion and a manual motion, if either one says non action, trust that
+            if motion_based_nonaction | manual_motion_based_nonaction:
+                return PowersAnalysis.DOES_NOT_USE_POWERS
+            else:
+                return PowersAnalysis.USES_POWERS
 
     def motion_text_only(self) -> str:
         soup = BeautifulSoup(self.motion, "html.parser")
@@ -466,7 +485,7 @@ class PersonAndVotes(BaseModel):
 
 
 class DivisionAndVotes(BaseModel):
-    house: Chamber
+    chamber: Chamber
     date: datetime.date = aliases("date", "division_date")
     division_number: int
     details: DivisionInfo
@@ -515,7 +534,7 @@ class DivisionAndVotes(BaseModel):
         )
 
         return DivisionAndVotes(
-            house=division.chamber,
+            chamber=division.chamber,
             date=division.date,
             division_number=division.division_number,
             details=division,
@@ -534,7 +553,7 @@ class DivisionAndVotes(BaseModel):
         return style_df(df, percentage_columns=["motion majority ratio"])
 
     def gov_breakdown_df(self) -> str:
-        self.overall_breakdown.grouping = "All Participants"
+        self.overall_breakdown.grouping = f"All {self.chamber.member_name}"
 
         all_breakdowns = [self.overall_breakdown]
         all_breakdowns += self.gov_breakdowns

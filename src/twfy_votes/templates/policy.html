@@ -6,11 +6,16 @@
 
 <h1>{{ policy.name.title() }}</h1>
 
+<h2>Policy Details</h2>
 <p>Status: {{ policy.status.title() }}</p>
 
 <p>Groups: {% for group in policy.groups %}{{group.name}}{% if not loop.last %},{% endif %} {% endfor %}</p>
 {% if policy.highlightable %}
 <p>Policy may be highlighted in absence of interested votes.</p>
+{% endif %}
+
+{% if policy.strength_meaning == "classic" %}
+<p>This policy needs adapting to the new style strong/weak meanings. </p>
 {% endif %}
 
 <h2>Description</h2>
