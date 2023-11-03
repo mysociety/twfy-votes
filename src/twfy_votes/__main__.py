@@ -47,11 +47,15 @@ def render():
 
 
 @app.command()
-def run_server(static: bool = False):
+def run_server(static: bool = False, live: bool = False):
     if static:
         run_static_server()
     else:
-        run_fastapi_server()
+        if live:
+            print("Running in production mode")
+            run_fastapi_prod_server()
+        else:
+            run_fastapi_server()
 
 
 @app.command()
@@ -65,6 +69,16 @@ async def update():
 
     await process_cached_tables()
     await create_commons_cluster()
+
+
+def run_fastapi_prod_server():
+    uvicorn.run(  # type: ignore
+        "twfy_votes.main:app",
+        host="0.0.0.0",
+        port=PORT,
+        proxy_headers=True,
+        forwarded_allow_ips="*",
+    )
 
 
 def run_fastapi_server():

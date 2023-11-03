@@ -15,4 +15,4 @@ WORKDIR /workspaces/twfy-votes
 ENV SERVER_PRODUCTION=true
 ENV PORT=8080
 ENV PATH="/root/.local/bin:${PATH}"
-CMD ["python", "-m", "twfy_votes" ,"run-server"]
+CMD ["python", "-m", "twfy_votes" ,"run-server", "--live"]
