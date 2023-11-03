@@ -24,6 +24,10 @@
 
 <p>Vote had {{ item.overall_breakdown.vote_participant_count }} participants.</p>
 
+<h3>Voting cluster</h3>
+
+<p>{{ item.details.cluster_desc() }}</p>
+
 <h3>Use of parliamentary powers</h3>
 
 {% with powers = item.details.motion_uses_powers() %}

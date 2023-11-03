@@ -305,6 +305,27 @@ class DivisionInfo(BaseModel):
         gid = self.source_gid.split("/")[-1]
         return self.chamber.twfy_debate_link(gid)
 
+    def cluster_desc(self):
+        match self.voting_cluster:
+            case "Gov rejects, strong opp (M)":
+                return "Government rejects, strong opposition (Fuzzy)"
+            case "Gov proposes, strong opp":
+                return "Government proposes, strong opposition"
+            case "Opp proposes, low participation":
+                return "Opposition proposes, low participation"
+            case "Gov rejects, weak opp":
+                return "Government rejects, weak opposition"
+            case "Gov proposes, weak opp":
+                return "Government proposes, weak opposition"
+            case "Low participation":
+                return "Low participation"
+            case "Gov rejects, strong opp (H)":
+                return "Government rejects, strong opposition (Clear)"
+            case "Bipartisan support":
+                return "Bipartisan support"
+            case _:
+                return self.voting_cluster
+
     def poor_quality_motion_text(self) -> bool:
         """
         Track based on motion size if we have good info in the database
