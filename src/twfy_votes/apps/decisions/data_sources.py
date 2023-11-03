@@ -8,9 +8,11 @@ from pathlib import Path
 from ...helpers.duck import DuckQuery, DuckUrl, YamlData
 from .models import GovernmentParties, ManualMotion
 
-duck = DuckQuery()
-
 processed_data = Path("data", "processed")
+
+
+duck = DuckQuery(cached_dir=processed_data)
+
 
 public_whip = DuckUrl(
     "https://pages.mysociety.org/publicwhip-data/data/public_whip_data/latest"
@@ -260,7 +262,7 @@ class cm_votes_with_people:
     """
 
 
-@duck.as_table
+@duck.as_cached_table
 class pw_divisions_with_counts:
     """
     Get the counts for and against in a division
@@ -289,7 +291,7 @@ class pw_divisions_with_counts:
     """
 
 
-@duck.as_table
+@duck.as_cached_table
 class pw_divisions_party_with_counts:
     """
     Get the counts for and against in a division (within a party)
@@ -318,7 +320,7 @@ class pw_divisions_party_with_counts:
     """
 
 
-@duck.as_table
+@duck.as_cached_table
 class pw_divisions_gov_with_counts:
     """
     Get the counts for and against in a division (by government and 'other' reps)
@@ -347,7 +349,7 @@ class pw_divisions_gov_with_counts:
     """
 
 
-@duck.as_table
+@duck.as_cached_table
 class pw_votes_with_party_difference:
     """
     Update the votes table to include difference from the party average for each vote.

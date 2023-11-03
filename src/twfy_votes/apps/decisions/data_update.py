@@ -10,6 +10,10 @@ from ..core.db import duck_core
 from .analysis import get_commons_clusters  # type: ignore
 
 
+async def process_cached_tables():
+    await duck_core.create_cached_queries()
+
+
 async def create_commons_cluster():
     rich.print("[green]Creating Commons Votes clusters[/green]")
 

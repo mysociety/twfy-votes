@@ -31,6 +31,11 @@ class CompiledJinjaSQL(NamedTuple):
     bind_params: tuple[Any, ...]
 
 
+class QueryToCache(NamedTuple):
+    dest: Path
+    query: str
+
+
 class PyArrowLike(Protocol):
     """
     Standin for pyarrow.Table which doesn't have good typing

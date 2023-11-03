@@ -23,6 +23,7 @@ from typing import (
 
 import aioduckdb
 import duckdb
+import rich
 from typing_extensions import Self
 
 from .funcs import get_name
@@ -45,6 +46,7 @@ from .types import (
     DuckViewType,
     PythonDataSource,
     PythonDataSourceCallableProtocol,
+    QueryToCache,
     SourceViewType,
 )
 from .url import DuckUrl
@@ -56,6 +58,7 @@ class DuckQuery:
     def __init__(
         self,
         namespace: str | None = "",
+        cached_dir: Path | None = None,
     ):
         self.queries: list[str] = []
         if namespace is None:
@@ -64,6 +67,8 @@ class DuckQuery:
             self.namespace = namespace
         self.source_lookup: list[str] = []
         self.data_sources: list[DataSourceValue] = []
+        self.cached_dir = cached_dir
+        self.queries_to_cache: list[QueryToCache] = []
 
     @classmethod
     async def _async_create_connection(cls):
@@ -221,6 +226,32 @@ class DuckQuery:
             return self.as_view(item, as_table=True)
         return self.as_source(item, to_table=True)
 
+    def as_cached_table(self, item: DuckView):
+        """
+        Decorator to highlight a query should be cached by the update function
+
+        If anticipated file is not there - will just load the table manually.
+        """
+
+        name = get_name(item)
+
+        if not self.cached_dir:
+            raise ValueError("Must set cached_dir to use as_cached_table")
+
+        cache_path = self.cached_dir / f"{name}.parquet"
+        cached_record = QueryToCache(query=item.query, dest=cache_path)
+        self.queries_to_cache.append(cached_record)
+        if cache_path.exists():
+
+            class CacheSource:
+                source = cache_path
+
+            CacheSource.__name__ = name
+            self.as_source(CacheSource, to_table=True)
+            return item
+        else:
+            return self.as_view(item, as_table=True)
+
 
 class ConnectedDuckQuery(DuckQuery, Generic[ResponseType]):
     def __init__(
@@ -257,6 +288,7 @@ class ConnectedDuckQuery(DuckQuery, Generic[ResponseType]):
         elif isinstance(query, DuckQuery):
             _query = query.construct_query(variables)
             self.data_sources += query.data_sources
+            self.queries_to_cache += query.queries_to_cache
         elif isinstance(query, str):
             _query = query
             if variables:
@@ -307,6 +339,20 @@ class AsyncDuckDBManager:
         for query in queries:
             await core.compile(query).run_on_self()
         return core
+
+    async def create_cached_queries(self):
+        query_template = """
+        COPY
+            ({query})
+        TO
+        '{dest}' (FORMAT 'parquet')
+        """
+
+        core = await self.get_core()
+        for query in core.queries_to_cache:
+            rich.print(f"[green]Creating cached query {query.dest.name}[/green]")
+            parquet_query = query_template.format(query=query.query, dest=query.dest)
+            await core.compile(parquet_query).run_on_self()
 
     async def child_query(self, namespace: str | None = None):
         core = await self.get_core()

@@ -27,7 +27,7 @@ def coro(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, TReturn]:
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> TReturn:
         return asyncio.run(f(*args, **kwargs))  # type: ignore
 
-    return wrapper
+    return wrapper  # type: ignore
 
 
 def load_db(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, Awaitable[TReturn]]:
@@ -58,8 +58,12 @@ def run_server(static: bool = False):
 @coro
 @load_db
 async def update():
-    from .apps.decisions.data_update import create_commons_cluster
+    from .apps.decisions.data_update import (
+        create_commons_cluster,
+        process_cached_tables,
+    )
 
+    await process_cached_tables()
     await create_commons_cluster()
 
 
