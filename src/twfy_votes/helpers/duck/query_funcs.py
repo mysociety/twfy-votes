@@ -22,7 +22,7 @@ def source_to_query(source: FileSourceType | str) -> SQLQuery:
         # if csv
         if source.suffix == ".csv":
             return SQLQuery(
-                "SELECT * FROM read_csv('{str(source)}', HEADER=True, AUTO_DETECT=True)"
+                f"SELECT * FROM read_csv('{str(source)}', HEADER=True, AUTO_DETECT=True)"
             )
         else:
             return SQLQuery(f"SELECT * FROM '{str(source)}'")
