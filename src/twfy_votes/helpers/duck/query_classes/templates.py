@@ -3,6 +3,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Any, Callable, Type, TypeVar, get_type_hints
 
+import jinja2
 from typing_extensions import dataclass_transform
 
 from ..core import AsyncDuckResponse, ConnectedDuckQuery
@@ -142,3 +143,15 @@ class BaseQuery:
             model=model, duck=duck, validate=self.__class__.validate.ONLY_ONE
         )
         return records[0]
+
+
+class RawJinjaQuery(BaseQuery):
+    """
+    This version will render the jinja2 at this point.
+    Useful for queries that can't be prepared - but generally better to
+    instead prepare macros and then call from a normal query.
+    """
+
+    def __init__(self, **kwargs: Any):
+        super().__init__(**kwargs)
+        self.query = jinja2.Template(self.query_template).render(**self.params)
