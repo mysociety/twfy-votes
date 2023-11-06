@@ -9,7 +9,7 @@ from ...helpers.duck import DuckQuery, DuckUrl, YamlData
 from .models import GovernmentParties, ManualMotion
 
 processed_data = Path("data", "processed")
-
+raw_data = Path("data", "raw")
 
 duck = DuckQuery(cached_dir=processed_data)
 
@@ -61,9 +61,28 @@ class government_parties:
     """
 
 
+@duck.as_source
+class party_lookup:
+    source = raw_data / "party_lookup.csv"
+
+
+@duck.as_source
+class source_pw_mp:
+    source = public_whip / "pw_mp.parquet"
+
+
 @duck.as_table
 class pw_mp:
-    source = public_whip / "pw_mp.parquet"
+    query = """
+    select
+    source_pw_mp.* exclude(party),
+    case when twfy_party_slug is null then party else twfy_party_slug end as party,
+     from 
+        source_pw_mp
+    left join party_lookup on (
+        source_pw_mp.party = party_lookup.pw_party_slug
+    )
+"""
 
 
 @duck.as_source
