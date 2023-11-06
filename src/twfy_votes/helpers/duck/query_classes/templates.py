@@ -72,6 +72,12 @@ class BaseQuery:
         self.query = self.query_template
         self.params = kwargs
 
+    async def run(self, duck: ConnectedDuckQuery[AsyncDuckResponse]):
+        return await duck.compile(self, variables=self.params).run()
+
+    def compile(self, duck: ConnectedDuckQuery[AsyncDuckResponse]) -> AsyncDuckResponse:
+        return duck.compile(self, variables=self.params)
+
     async def pipe_records_to(
         self,
         duck: ConnectedDuckQuery[AsyncDuckResponse],
