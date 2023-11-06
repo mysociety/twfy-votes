@@ -363,6 +363,8 @@ class AsyncDuckDBManager:
         core = await self.get_core()
         for query in core.queries_to_cache:
             rich.print(f"[green]Creating cached query {query.dest.name}[/green]")
+            # ensure dest parent folder exists
+            query.dest.parent.mkdir(parents=True, exist_ok=True)
             parquet_query = query_template.format(query=query.query, dest=query.dest)
             await core.compile(parquet_query).run_on_self()
 

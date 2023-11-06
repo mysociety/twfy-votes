@@ -42,4 +42,4 @@ async def create_commons_cluster():
     df = await duck.compile(query).df()
     df["cluster"] = get_commons_clusters(df, quiet=False)
     df = df[["division_id", "cluster"]]
-    df.to_parquet(Path("data", "processed", "voting_clusters.parquet"))
+    df.to_parquet(Path("data", "cached", "voting_clusters.parquet"))

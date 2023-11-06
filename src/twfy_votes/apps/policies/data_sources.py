@@ -9,7 +9,7 @@ from typing import Any
 from ...helpers.duck import DuckQuery, YamlData
 from .models import PartialPolicy
 
-duck = DuckQuery()
+duck = DuckQuery(cached_dir=Path("data", "cached"))
 
 
 @duck.as_python_source

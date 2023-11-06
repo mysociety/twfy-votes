@@ -8,7 +8,7 @@ from pathlib import Path
 from ...helpers.duck import DuckQuery, DuckUrl, YamlData
 from .models import GovernmentParties, ManualMotion
 
-processed_data = Path("data", "processed")
+processed_data = Path("data", "cached")
 raw_data = Path("data", "raw")
 
 duck = DuckQuery(cached_dir=processed_data)
@@ -145,9 +145,23 @@ class source_pw_division:
     source = public_whip / "pw_division.parquet"
 
 
-@duck.as_source
-class pw_division_cluster:
-    source = processed_data / "voting_clusters.parquet"
+if (processed_data / "voting_clusters.parquet").exists():
+    # need a quick back up here because cluster table is used in the division table
+    # which is loaded when trying to run the update script that will create it in the first place
+    @duck.as_source
+    class pw_division_cluster:  # type: ignore
+        source = processed_data / "voting_clusters.parquet"
+else:
+
+    @duck.as_view
+    class pw_division_cluster:
+        query = """
+            SELECT
+            NULL AS division_id,
+            NULL AS cluster
+            WHERE
+            1 = 0;
+            """
 
 
 @duck.as_table
