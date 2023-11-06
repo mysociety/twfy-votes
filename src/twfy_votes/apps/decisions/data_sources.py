@@ -91,6 +91,12 @@ class source_pw_vote:
 
 
 @duck.as_macro
+class unique_rows:
+    args = ["a"]
+    macro = "ROW_NUMBER() OVER (PARTITION BY a)"
+
+
+@duck.as_macro
 class get_clean_vote:
     """
     Remove 'both' entries from the vote column.
@@ -103,6 +109,21 @@ class get_clean_vote:
             when vote = 'both' then 'abstention'
             else vote
         end
+    """
+
+
+@duck.as_macro
+class null_to_zero:
+    """
+    Simplify that null should be zero
+    """
+
+    args = ["val"]
+    macro = """
+    case 
+        when val is NULL then 0
+        else val
+    end       
     """
 
 
@@ -190,6 +211,11 @@ class pd_memberships:
 @duck.as_table
 class pd_orgs:
     source = politician_data / "organizations.parquet"
+
+
+@duck.as_table
+class pd_posts:
+    source = politician_data / "posts.parquet"
 
 
 @duck.as_macro
