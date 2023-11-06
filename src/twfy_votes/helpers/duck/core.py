@@ -24,6 +24,7 @@ from typing import (
 import aioduckdb
 import duckdb
 import rich
+from jinja2 import Template
 from typing_extensions import Self
 
 from .funcs import get_name
@@ -121,7 +122,13 @@ class DuckQuery:
 
         return complex_query
 
-    def as_macro(self, item: DuckMacro):
+    def as_table_macro(self, item: DuckMacro):
+        """
+        Decorator to store a macro as part of a longer running query
+        """
+        return self.as_macro(item, table=True)
+
+    def as_macro(self, item: DuckMacro, table: bool = False) -> DuckMacro:
         name = get_name(item)
 
         args = getattr(item, "args", None)
@@ -134,7 +141,12 @@ class DuckQuery:
         if macro is None:
             raise ValueError("Macro must have a macro method")
 
-        query = query_to_macro(name, args, macro)
+        # this is a very boring substitution
+        # but makes it more obvious in the template where the variables are
+        # not strictly needed to function
+        macro = Template(macro).render({x: x for x in args})
+
+        query = query_to_macro(name, args, macro, table=table)
         self.queries.append(query)
 
         return item

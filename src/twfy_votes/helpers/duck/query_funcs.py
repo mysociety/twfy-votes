@@ -34,7 +34,11 @@ def source_to_query(source: FileSourceType | str) -> SQLQuery:
         return SQLQuery(f"SELECT * FROM '{str(source)}'")
 
 
-def query_to_macro(name: str, args: list[str], macro: str) -> MacroQuery:
+def query_to_macro(
+    name: str, args: list[str], macro: str, table: bool = False
+) -> MacroQuery:
+    if table:
+        macro = f"table {macro}"
     return MacroQuery(
         f"""
     CREATE OR REPLACE MACRO {name}({", ".join(args)}) AS
