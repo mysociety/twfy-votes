@@ -436,3 +436,44 @@ class PolicyCollection(BaseModel):
     @classmethod
     async def fetch_all(cls) -> list[Self]:
         return [await cls.fetch_from_slug(slug) for slug in PolicyGroupSlug]
+
+
+class VoteDistribution(BaseModel):
+    """
+    Store the breakdown of votes associated with a policy
+    and either a person or a comparison.
+    """
+
+    num_votes_same: float = 0.0
+    num_strong_votes_same: float = 0.0
+    num_votes_different: float = 0.0
+    num_strong_votes_different: float = 0.0
+    num_votes_absent: float = 0.0
+    num_strong_votes_absent: float = 0.0
+    num_votes_abstain: float = 0.0
+    num_strong_votes_abstain: float = 0.0
+
+    @computed_field
+    @property
+    def total_votes(self) -> float:
+        return (
+            self.num_votes_same
+            + self.num_votes_different
+            + self.num_votes_absent
+            + self.num_strong_votes_same
+            + self.num_strong_votes_different
+            + self.num_strong_votes_absent
+            + self.num_votes_abstain
+            + self.num_strong_votes_abstain
+        )
+
+
+class PersonPolicyLink(BaseModel):
+    """
+    Storage object to connect person_id and policy_id
+    """
+
+    person_id: int
+    policy_id: int
+    own_distribution: VoteDistribution
+    other_distribution: VoteDistribution

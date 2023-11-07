@@ -177,3 +177,15 @@ class GetAllPersonsQuery(BaseQuery):
         person_id
 
     """
+
+
+class GetLastParty(BaseQuery):
+    query_template = """
+    SELECT
+        *
+    FROM
+        pw_last_party_vote_based
+    where
+        person_id == {{ person_id }}
+    """
+    person_id: int

@@ -2,7 +2,7 @@ import asyncio
 import os
 from functools import wraps
 from pathlib import Path
-from typing import Awaitable, Callable, ParamSpec, TypeVar
+from typing import Awaitable, Callable, Optional, ParamSpec, TypeVar
 
 import typer
 import uvicorn
@@ -22,7 +22,7 @@ TReturn = TypeVar("TReturn")
 P = ParamSpec("P")
 
 
-def coro(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, TReturn]:
+def coroutine(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, TReturn]:
     @wraps(f)
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> TReturn:
         return asyncio.run(f(*args, **kwargs))  # type: ignore
@@ -41,6 +41,9 @@ def load_db(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, Awaitable[TReturn
 
 @app.command()
 def render():
+    """
+    Render views configured with static site parameters
+    """
     from .main import app as fastapi_app
 
     fastapi_app.render()
@@ -48,6 +51,10 @@ def render():
 
 @app.command()
 def run_server(static: bool = False, live: bool = False):
+    """
+    Run the main fastapi server - or a static server on the
+    _site directory if '--static' is passed.
+    """
     if static:
         run_static_server()
     else:
@@ -59,9 +66,14 @@ def run_server(static: bool = False, live: bool = False):
 
 
 @app.command()
-@coro
+@coroutine
 @load_db
 async def update():
+    """
+    Create the cached tables that are used in views
+    and are a bit too expensive to run on the fly.
+    Roughly needs to be run each time the data is updated.
+    """
     from .apps.decisions.data_update import (
         create_commons_cluster,
         process_cached_tables,
@@ -69,6 +81,40 @@ async def update():
 
     await process_cached_tables()
     await create_commons_cluster()
+
+
+@app.command()
+@coroutine
+@load_db
+async def create_voting_records(
+    policy_id: Optional[int] = None, person_id: Optional[int] = None
+):
+    """
+    Generate the big voting file.
+    File can also be partially updated by specify as person_id or policy_id.
+    Although the policy_id is smaller - it's not quick - because the generation is per person.
+    This will limit to just the people who are affected by the policy.
+    """
+    from .apps.decisions.models import AllowedChambers
+    from .apps.policies.vr_generator import (
+        generate_voting_records_for_chamber,
+    )
+
+    await generate_voting_records_for_chamber(
+        chamber=AllowedChambers.COMMONS, policy_id=policy_id, person_id=person_id
+    )
+
+
+@app.command()
+@coroutine
+@load_db
+async def validate_voting_records(sample_size: int = 10):
+    """
+    Run a validation on a random sample of voting records.
+    """
+    from .apps.policies.vr_validator import test_policy_sample
+
+    await test_policy_sample(sample_size)
 
 
 def run_fastapi_prod_server():

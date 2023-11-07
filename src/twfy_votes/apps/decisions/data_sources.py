@@ -242,8 +242,7 @@ class get_effective_party:
     args = ["party"]
     macro = """
         case
-            when party = 'Labour/Co-operative' then 'Labour'
-            when party = 'Social Democratic and Labour Party' then 'SDLP'
+            when party = 'labourco-operative' then 'labour'
             else party
         end
     """
@@ -446,4 +445,52 @@ class pw_chamber_division_span:
         SUBSTRING(min(division_date),1,4) as earliest_year,
     from pw_division
     group by all
+    """
+
+
+@duck.as_view
+class pw_last_party:
+    query = """
+        select
+            split(person_id, '/')[-1] as person_id,
+            last(on_behalf_of_id) as party
+        from (
+            select * from (
+                select 
+                    on_behalf_of_id as party,
+                    pd_memberships.* exclude (organization_id),
+                    case when pd_memberships.organization_id is NULL then pd_posts.organization_id else pd_memberships.organization_id end as organization_id
+                from pd_memberships
+                left join pd_posts on pd_posts.id = pd_memberships.post_id
+                )
+            where organization_id = 'house-of-commons'
+            order by start_date asc
+            )
+        group by 
+            person_id
+"""
+
+
+@duck.as_view
+class pw_last_party_vote_based:
+    """
+    This just replies on the public whip table for parties rather than people.json
+    Using for moment so party references are simplified.
+    """
+
+    query = """
+        select
+            person_id,
+            last(membership_party) as party
+            from (
+            select
+                mp_id as membership_id,
+                party as membership_party,
+                person as person_id,
+                * exclude (mp_id, person, party)
+            from
+                pw_mp
+            order by mp_id
+            )
+        group by person_id
     """
