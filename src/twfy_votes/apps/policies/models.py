@@ -25,6 +25,8 @@ from ..decisions.queries import DivisionBreakDownQuery
 from .queries import (
     AllPolicyQuery,
     GroupStatusPolicyQuery,
+    PolicyDistributionPersonQuery,
+    PolicyDistributionQuery,
     PolicyIdQuery,
 )
 
@@ -474,6 +476,10 @@ class VoteDistribution(BaseModel):
     num_strong_votes_absent: float = 0.0
     num_votes_abstain: float = 0.0
     num_strong_votes_abstain: float = 0.0
+    start_year: int
+    end_year: int
+    distance_score: float = 0.0
+    similarity_score: float = 0.0
 
     @computed_field
     @property
@@ -489,6 +495,59 @@ class VoteDistribution(BaseModel):
             + self.num_strong_votes_abstain
         )
 
+    @computed_field
+    @property
+    def verbose_score(self) -> str:
+        match self.distance_score:
+            case s if 0 <= s <= 0.05:
+                return "Consistently voted for"
+            case s if 0.05 < s <= 0.15:
+                return "Almost always voted for"
+            case s if 0.15 < s <= 0.4:
+                return "Generally voted for"
+            case s if 0.4 < s <= 0.6:
+                return "Voted a mixture of for and against"
+            case s if 0.6 < s <= 0.85:
+                return "Generally voted against"
+            case s if 0.85 < s <= 0.95:
+                return "Almost always voted against"
+            case s if 0.95 < s <= 1:
+                return "Consistently voted against"
+            case _:
+                raise ValueError("Score must be between 0 and 1")
+
+    def score_classic(self):
+        """
+        Just run the classic public whip score calculation
+        """
+        from .analysis import public_whip_score_difference
+
+        score = public_whip_score_difference(
+            num_votes_same=self.num_votes_same,
+            num_strong_votes_same=self.num_strong_votes_same,
+            num_votes_different=self.num_votes_different,
+            num_strong_votes_different=self.num_strong_votes_different,
+            num_votes_absent=self.num_votes_absent,
+            num_strong_votes_absent=self.num_strong_votes_absent,
+            num_strong_votes_abstain=self.num_strong_votes_abstain,
+            num_votes_abstain=self.num_votes_abstain,
+        )
+
+        self.distance_score = score
+        self.similarity_score = 1 - score
+
+    def score_v2(self):
+        raise NotImplementedError("Not yet implemented")
+
+    def score(self, strength_meaning: StrengthMeaning):
+        match StrengthMeaning(strength_meaning):
+            case StrengthMeaning.CLASSIC:
+                self.score_classic()
+            case StrengthMeaning.V2:
+                self.score_v2()
+
+        return self
+
 
 class PersonPolicyLink(BaseModel):
     """
@@ -497,5 +556,136 @@ class PersonPolicyLink(BaseModel):
 
     person_id: int
     policy_id: int
+    comparison_party: str
+    chamber: AllowedChambers
     own_distribution: VoteDistribution
     other_distribution: VoteDistribution
+    no_party_comparison: bool = False
+    comparison_score_difference: float = 0.0
+
+    def xml_dict(self) -> dict[str, str]:
+        """
+        Calculate the information to be added to the XML for this person.
+
+        For unclear historical reasons 'both_voted' means any 'non-abstain' vote.
+        """
+
+        person_id = f"uk.org.publicwhip/person/{self.person_id}"
+        dbase = f"public_whip_dreammp{self.policy_id}_"
+
+        absent = (
+            self.own_distribution.num_votes_absent
+            + self.own_distribution.num_strong_votes_absent
+        )
+
+        both_voted = (
+            self.own_distribution.total_votes
+            - self.own_distribution.num_votes_abstain
+            - self.own_distribution.num_strong_votes_abstain
+            - absent
+        )
+
+        def str_4dp(f: float) -> str:
+            return f"{f:.4f}"
+
+        di: dict[str, str] = {}
+        di["id"] = person_id
+        di[f"{dbase}distance"] = str_4dp(self.own_distribution.distance_score)
+        di[f"{dbase}both_voted"] = str(int(both_voted))
+        di[f"{dbase}absent"] = str(int(absent))
+
+        di[f"{dbase}comparison_distance"] = str_4dp(
+            self.other_distribution.distance_score
+        )
+        di[f"{dbase}comparison_score_diff"] = str_4dp(self.comparison_score_difference)
+        di[f"{dbase}comparison_significant"] = str(int(self.significant_difference))
+        di[f"{dbase}comparison_party"] = self.comparison_party
+        di[f"{dbase}no_party_comparison"] = str(int(self.no_party_comparison))
+
+        di[f"{dbase}start_year"] = str(int(self.own_distribution.start_year))
+        di[f"{dbase}end_year"] = str(int(self.own_distribution.end_year))
+
+        return di
+
+    def score(self):
+        self.comparison_score_difference = abs(
+            self.own_distribution.distance_score - self.comparison_score_difference
+        )
+        return self
+
+    @computed_field
+    @property
+    def significant_difference(self) -> bool:
+        """
+        The rules here:
+        If own score is below 0.4 or above 0.6
+        and the other score is below 0.4 or above 0.6 the other way
+        then it's significant
+        """
+        own_score = self.own_distribution.distance_score
+        other_score = self.other_distribution.distance_score
+        if own_score < 0.4 and other_score > 0.6:
+            return True
+        if own_score > 0.6 and other_score < 0.4:
+            return True
+        return False
+
+    @classmethod
+    async def from_person_id(cls, person_id: int) -> list[Self]:
+        duck = await duck_core.child_query()
+        df = (
+            await PolicyDistributionPersonQuery(person_id=person_id)
+            .compile(duck=duck)
+            .df()
+        )
+        return cls.from_df(df=df)
+
+    @classmethod
+    async def from_policy_id(
+        cls, policy_id: int, single_comparisons: bool = False
+    ) -> list[Self]:
+        duck = await duck_core.child_query()
+        df = (
+            await PolicyDistributionQuery(
+                policy_id=policy_id, single_comparisons=single_comparisons
+            )
+            .compile(duck=duck)
+            .df()
+        )
+
+        return cls.from_df(df=df)
+
+    @classmethod
+    def from_df(cls, df: pd.DataFrame) -> list[Self]:
+        """
+        Create a list of PersonPolicyLinks from a dataframe
+        """
+        items: list[Self] = []
+        for grouper, gdf in df.groupby(  # type: ignore
+            ["policy_id", "person_id", "chamber", "comparison_party"]
+        ):
+            grouper: tuple[int, int, AllowedChambers, str]
+            strength_meaning = StrengthMeaning(gdf["strength_meaning"].iloc[0])
+            policy_id, person_id, chamber, comparison_party = grouper
+
+            gdf = gdf.set_index("is_target").to_dict("index")
+            target_values = VoteDistribution.model_validate(gdf[1]).score(
+                strength_meaning
+            )
+            # if no comparison, then there are no compariable mps (rare) of the same party, so just use self.
+            comparison_values = VoteDistribution.model_validate(
+                gdf.get(0, gdf[1])
+            ).score(strength_meaning)
+
+            items.append(
+                cls(
+                    person_id=person_id,
+                    policy_id=policy_id,
+                    comparison_party=comparison_party,
+                    chamber=chamber,
+                    own_distribution=target_values,
+                    other_distribution=comparison_values,
+                    no_party_comparison=0 not in gdf,
+                ).score()
+            )
+        return items

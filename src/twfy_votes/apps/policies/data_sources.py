@@ -206,3 +206,25 @@ class policy_distributions:
     """
 
     source = Path("data", "processed", "person_policies.parquet")
+
+
+@duck.as_view
+class pw_comparison_party:
+    """
+    Get a list of a single comparison party
+    """
+
+    query = """
+        select
+        house as chamber,
+        person as person_id,
+        CASE
+        WHEN person_id IN (10172, 14031, 25873) THEN
+            get_effective_party(last(party order by entered_house))
+        ELSE
+        get_effective_party(first(party order by entered_house))
+        END 
+        as comparison_party
+        from pw_mp
+        group by person_id, house    
+    """

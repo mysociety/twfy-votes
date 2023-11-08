@@ -142,3 +142,54 @@ class GetPersonParties(BaseQuery):
         "independent-labour",
         "independent-ulster-unionist",
     ]
+
+
+class PolicyDistributionQuery(BaseQuery):
+    """
+    Here we're joining with the comparison party table to limit to just the
+    'official' single comparisons used in TWFY.
+
+    Here in this app, we can store and display multiple comparisons.
+    """
+
+    query_template = """
+    select
+        policy_distributions.*,
+        policies.strength_meaning as strength_meaning
+    from 
+        policy_distributions
+    join
+        policies on (policy_distributions.policy_id = policies.id)
+    {% if single_comparisons %}
+    join
+        pw_comparison_party using (person_id, chamber, comparison_party)
+    {% endif %}
+    where
+        policy_id = {{ policy_id }}
+    """
+    policy_id: int
+    single_comparisons: bool = False
+
+
+class PolicyDistributionPersonQuery(BaseQuery):
+    """
+    Get the policy distribution calculation associated with a person.
+    """
+
+    query_template = """
+    select
+        policy_distributions.*,
+        policies.strength_meaning as strength_meaning
+    from
+        policy_distributions
+    join
+        policies on (policy_distributions.policy_id = policies.id)
+    {% if single_comparisons %}
+    join
+        pw_comparison_party using (person_id, chamber, comparison_party)
+    {% endif %}
+    where
+        policy_id = {{ policy_id }}
+    """
+    person_id: int
+    single_comparisons: bool = False
