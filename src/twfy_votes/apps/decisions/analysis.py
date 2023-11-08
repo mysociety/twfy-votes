@@ -2,7 +2,7 @@ import pandas as pd
 from tqdm import tqdm
 
 
-def get_commons_clusters(df: pd.DataFrame, quiet: bool = True) -> pd.Series:  # type: ignore
+def get_commons_clusters(df: pd.DataFrame, quiet: bool = True) -> "pd.Series[str]":
     """
     Cluster analysis in a box - expects the following columns to be present:
     opp_aye	opp_no gov_aye gov_no other
@@ -69,21 +69,21 @@ def get_commons_clusters(df: pd.DataFrame, quiet: bool = True) -> pd.Series:  # 
                 "other": 140.43137254901967,
             },
         }
-    ).transpose()  # type: ignore
+    ).transpose()
 
     clusters: list[str] = []
 
     required_columns = list(center_df.columns)
     if len([x for x in df.columns if x in required_columns]) < 5:
         raise ValueError("Dataframe missnig all required columns")
-    tdf = list(df[required_columns].transpose().items())  # type: ignore
-    for _, series in tqdm(tdf, total=len(tdf), disable=quiet):  # type: ignore
+    tdf = list(df[required_columns].transpose().items())
+    for _, series in tqdm(tdf, total=len(tdf), disable=quiet):
         value: str = (
             (center_df - series).pow(2).sum(axis=1).pow(1.0 / 2).sort_values().index[0]  # type: ignore
         )
-        clusters.append(value)  # type: ignore
+        clusters.append(value)
 
-    return pd.Series(clusters, index=df.index)  # type: ignore
+    return pd.Series(clusters, index=df.index)
 
 
 def is_nonaction_vote(motion_text: str, quiet: bool = True) -> bool:

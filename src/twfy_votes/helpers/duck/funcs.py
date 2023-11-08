@@ -14,7 +14,7 @@ def defaultdict_to_normal(di: dict[str, Any]) -> dict[str, Any]:
     out: dict[str, Any] = {}
     for k, v in di.items():
         if isinstance(v, defaultdict):
-            out[k] = defaultdict_to_normal(v)  # type: ignore
+            out[k] = defaultdict_to_normal(v)
         else:
             out[k] = v
     return out

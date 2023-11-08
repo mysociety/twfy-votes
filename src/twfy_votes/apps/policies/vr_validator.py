@@ -143,7 +143,7 @@ async def get_party_members(party_slug: str):
     """
 
     df = await duck.compile(query, {"party": party_slug}).df()
-    df["end_date"] = df["end_date"].fillna("9999-12-31")  # type: ignore
+    df["end_date"] = df["end_date"].fillna("9999-12-31")
     return df
 
 
@@ -172,7 +172,7 @@ async def get_party_members_or_person(party_slug: str, person_id: int):
     """
 
     df = await duck.compile(query, {"party": party_slug, "person_id": person_id}).df()
-    df["end_date"] = df["end_date"].fillna("9999-12-31")  # type: ignore
+    df["end_date"] = df["end_date"].fillna("9999-12-31")
     return df
 
 
@@ -197,7 +197,7 @@ async def get_mp_dates(person_id: int):
     """
 
     df = await duck.compile(query, {"person_id": person_id}).df()
-    df["end_date"] = df["end_date"].fillna("9999-12-31")  # type: ignore
+    df["end_date"] = df["end_date"].fillna("9999-12-31")
     return df
 
 
@@ -241,7 +241,7 @@ async def get_scores_slow(
 
     def is_valid_date(date: str) -> bool:
         mask = (mp_dates["start_date"] <= date) & (mp_dates["end_date"] >= date)
-        return mask.any()  # type: ignore
+        return mask.any()
 
     # iterate through all divisions
     for decision_link in policy.decision_links:
@@ -266,16 +266,16 @@ async def get_scores_slow(
         rel_party_members = party_members[party_mask]
         other_this_vote_score = Score()
 
-        person_ids = rel_party_members["person_id"].astype(int).tolist()  # type: ignore
+        person_ids = rel_party_members["person_id"].astype(int).tolist()
 
         if not is_valid_date(date):
             # this person was not a member on this date
             continue
 
         # iterate through members in votes
-        for _, member_series in rel_party_members.iterrows():  # type: ignore
-            member_id: int = int(member_series["member_id"])  # type: ignore
-            is_target = person_id == int(member_series["person_id"])  # type: ignore
+        for _, member_series in rel_party_members.iterrows():
+            member_id: int = int(member_series["member_id"])
+            is_target = person_id == int(member_series["person_id"])
             vote = vote_lookup.get(member_id, None)
             if vote is None:
                 # this member did not vote
@@ -365,7 +365,7 @@ async def validate_approach(
     )
     df = df[df["policy_id"] == policy_id]
 
-    di = df.set_index("is_target").to_dict("index")  # type: ignore
+    di = df.set_index("is_target").to_dict("index")
     fast_approach = PolicyComparison(
         target_distribution=Score.model_validate(di[1]),
         other_distribution=Score.model_validate(di[0]),
@@ -405,10 +405,10 @@ async def test_policy_sample(sample: int = 50) -> bool:
 
     has_errors = False
     if run_random_check:
-        for _, row in tqdm(df.iterrows(), total=len(df)):  # type: ignore
-            policy_id = int(row["policy_id"])  # type: ignore
-            person_id = int(row["person_id"])  # type: ignore
-            party_id = str(row["comparison_party"])  # type: ignore
+        for _, row in tqdm(df.iterrows(), total=len(df)):
+            policy_id = int(row["policy_id"])
+            person_id = int(row["person_id"])
+            party_id = str(row["comparison_party"])
 
             result = await validate_approach(
                 person_id=person_id,

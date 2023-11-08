@@ -49,7 +49,7 @@ class YamlData(Generic[T]):
             yaml = YAML(typ="safe")
             yaml_data = yaml.load(file)
             if isinstance(yaml_data, list):
-                data.extend(yaml_data)  # type: ignore
+                data.extend(yaml_data)
             else:
                 data.append(yaml_data)
         return data

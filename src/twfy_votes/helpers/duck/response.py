@@ -37,10 +37,10 @@ class DuckResponse:
         return self._connection.execute(self._query, self._params)
 
     def __iter__(self) -> Any:
-        return iter(self.response.fetchall())  # type: ignore
+        return iter(self.response.fetchall())
 
     def df(self) -> pd.DataFrame:
-        return self.response.df()  # type: ignore
+        return self.response.df()
 
     def fetchone(self) -> Any:
         return self.response.fetchone()[0]  # type: ignore
@@ -133,12 +133,12 @@ class AsyncDuckResponse:
 
     async def fetchone(self) -> Any:
         cursor = await self.get_response()
-        result = await cursor.fetchone()  # type: ignore
+        result = await cursor.fetchone()
         await cursor.close()
         return result[0]  # type: ignore
 
     async def fetch_df(self) -> pd.DataFrame:
-        return await self.df()  # type: ignore
+        return await self.df()
 
     async def fetch_int(self) -> int:
         return int(await self.fetchone())

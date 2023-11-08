@@ -368,7 +368,7 @@ class Policy(PartialPolicy):
         df["voting_cluster"] = [x.decision.voting_cluster for x in self.decision_links]
 
         banned_columns = ["decision_type", "notes"]
-        df = df.drop(columns=banned_columns)  # type: ignore
+        df = df.drop(columns=banned_columns)
         return style_df(df=df)
 
     def url(self, request: Request):

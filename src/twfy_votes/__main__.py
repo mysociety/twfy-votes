@@ -27,7 +27,7 @@ def coroutine(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, TReturn]:
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> TReturn:
         return asyncio.run(f(*args, **kwargs))  # type: ignore
 
-    return wrapper  # type: ignore
+    return wrapper
 
 
 def load_db(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, Awaitable[TReturn]]:
@@ -118,7 +118,7 @@ async def validate_voting_records(sample_size: int = 10):
 
 
 def run_fastapi_prod_server():
-    uvicorn.run(  # type: ignore
+    uvicorn.run(
         "twfy_votes.main:app",
         host="0.0.0.0",
         port=PORT,
@@ -128,7 +128,7 @@ def run_fastapi_prod_server():
 
 
 def run_fastapi_server():
-    uvicorn.run(  # type: ignore
+    uvicorn.run(
         "twfy_votes.main:app",
         host="0.0.0.0",
         port=PORT,

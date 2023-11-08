@@ -41,7 +41,7 @@ async def get_pivot_df(
     df["person_id"] = person_id
     df["comparison_party"] = party_id
     df["chamber"] = chamber_slug
-    return df.fillna(0.0)  # type: ignore
+    return df.fillna(0.0)
 
 
 async def get_relevant_people(
@@ -86,14 +86,14 @@ async def generate_voting_records_for_chamber(
             )
             dfs.append(df)
 
-    new_df: pd.DataFrame = pd.concat(dfs).drop(columns=["num_comparators"])  # type: ignore
+    new_df: pd.DataFrame = pd.concat(dfs).drop(columns=["num_comparators"])
 
     if person_id or policy_id:
         # just regenerate some data, so need to get the old data and add the new data in
         old_df = pd.read_parquet(Path("data", "processed", "person_policies.parquet"))
 
         # join the old and new data
-        df = pd.concat([old_df, new_df])  # type: ignore
+        df = pd.concat([old_df, new_df])
 
         # drop duplicates, preferring later entries
         df = df.drop_duplicates(

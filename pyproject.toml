@@ -17,6 +17,13 @@ extend-include = ["*.ipynb"]
 select = ["E", "F", "PTH"]
 ignore = ["E501"]
 
+[tool.pyright]
+include = ["src"]
+reportUnknownArgumentType = "none"
+reportUnknownVariableType = "none"
+reportUnknownMemberType = "none"
+reportUnknownParameterType = "none"
+reportUnnecessaryTypeIgnoreComment = "warning"
 
 [tool.poetry.dependencies]
 python = "^3.8"

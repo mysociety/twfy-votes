@@ -106,7 +106,7 @@ class StaticRenderMixin:
     def template_response(
         self, name: str, context: dict[str, Any]
     ) -> _TemplateResponse:
-        return self.templates.TemplateResponse(name, context)  # type: ignore
+        return self.templates.TemplateResponse(name, context)
 
     def render_parameters_for(self, func: AsyncTemplateFunction):
         """
@@ -115,9 +115,9 @@ class StaticRenderMixin:
 
         """
         api_paths: dict[Callable[..., Any], str] = {
-            x.endpoint: x.path  # type: ignore
+            x.endpoint: x.path
             for x in self.router.routes  # type: ignore
-            if hasattr(x, "endpoint")  # type: ignore
+            if hasattr(x, "endpoint")
         }
         path = api_paths[func]
         return self.render_parameters_for_path(path)
@@ -205,7 +205,7 @@ class StaticFastApi(StaticRenderMixin, FastAPI):
         """
         Activate the context to load databases for rendering
         """
-        async with self.router.lifespan_context(self):  # type: ignore
+        async with self.router.lifespan_context(self):
             return await self._async_render()
 
     async def _async_render(self) -> None:
@@ -219,7 +219,7 @@ class StaticFastApi(StaticRenderMixin, FastAPI):
         api_path_formats: dict[str, str] = {
             x.path: x.path_format  # type: ignore
             for x in self.router.routes
-            if hasattr(x, "endpoint")  # type: ignore
+            if hasattr(x, "endpoint")
         }
 
         endpoint_tasks: list[asyncio.Task[Any]] = []
@@ -228,7 +228,7 @@ class StaticFastApi(StaticRenderMixin, FastAPI):
             path_format: str, parameters: dict[str, Any]
         ):
             path_with_parms = path_format.format(**parameters)
-            result: httpx.Response = await client.get(path_with_parms)  # type: ignore
+            result: httpx.Response = await client.get(path_with_parms)
             return result, parameters
 
         # chunk_size manages the number of currently queued tasks

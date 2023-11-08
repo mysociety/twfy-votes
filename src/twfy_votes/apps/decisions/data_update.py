@@ -7,7 +7,7 @@ from pathlib import Path
 import rich
 
 from ..core.db import duck_core
-from .analysis import get_commons_clusters  # type: ignore
+from .analysis import get_commons_clusters
 
 
 async def process_cached_tables():

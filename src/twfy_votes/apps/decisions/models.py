@@ -598,7 +598,7 @@ class DivisionAndVotes(BaseModel):
         all_breakdowns = [dict(x) for x in self.party_breakdowns]
         df = pd.DataFrame(data=all_breakdowns)
         banned_columns = ["signed_votes", "motion_majority", "motion_result_int"]
-        df = df.drop(columns=banned_columns)  # type: ignore
+        df = df.drop(columns=banned_columns)
 
         return style_df(df, percentage_columns=["motion majority ratio"])
 
@@ -611,7 +611,7 @@ class DivisionAndVotes(BaseModel):
         all_breakdowns = [dict(x) for x in all_breakdowns]
         df = pd.DataFrame(data=all_breakdowns)
         banned_columns = ["signed_votes", "motion_majority", "motion_result_int"]
-        df = df.drop(columns=banned_columns)  # type: ignore
+        df = df.drop(columns=banned_columns)
 
         return style_df(df, percentage_columns=["motion majority ratio"])
 

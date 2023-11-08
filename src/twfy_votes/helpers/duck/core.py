@@ -92,7 +92,7 @@ class DuckQuery:
         cls, namespace: str = "", connection: ConnectionType | None = NotImplemented
     ) -> ConnectedDuckQuery[DuckResponse]:
         if not connection:
-            connection = duckdb.connect(":memory:")  # type: ignore
+            connection = duckdb.connect(":memory:")
 
         return ConnectedDuckQuery[DuckResponse](
             namespace=namespace, connection=connection, response_type=DuckResponse

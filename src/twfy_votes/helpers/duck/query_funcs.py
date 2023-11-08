@@ -59,7 +59,7 @@ def query_to_table(query: SQLQuery, name: str, namespace: str = "") -> TableQuer
 
 class TypedJinjaSql(JinjaSql):
     def get_compiled_query(self, source: str, data: dict[str, Any]) -> CompiledJinjaSQL:
-        query, bind_params = self.prepare_query(source, data)  # type: ignore
+        query, bind_params = self.prepare_query(source, data)
         return CompiledJinjaSQL(query=query, bind_params=bind_params)  # type: ignore
 
 
