@@ -1,16 +1,16 @@
 id: 6697
 name: selling England&rsquo;s state owned forests
-chamber_id: commons
 context_description: selling England&rsquo;s state owned <b>forests</b>
 policy_description: England's public forests should be sold
 notes: ''
 status: active
-group_ids:
-- environment
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- environment
+division_links:
+- decision:
     chamber_slug: commons
     date: 2011-02-02
     division_number: 188
@@ -19,7 +19,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-02-02
     division_number: 189
@@ -28,3 +28,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

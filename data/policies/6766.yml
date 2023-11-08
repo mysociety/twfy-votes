@@ -1,18 +1,18 @@
 id: 6766
 name: Preservation of Environmental Protections on Withdrawal from the European Union
-chamber_id: commons
 context_description: the explicit <b>preservation of environmental protections</b>
   on withdrawal from the EU
 policy_description: There have been votes in Parliament on the retention of environmental
   protections on the United Kingdom's withdrawal from the European Union.
 notes: ''
 status: candidate
-group_ids:
-- environment
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- environment
+division_links:
+- decision:
     chamber_slug: commons
     date: 2016-07-12
     division_number: 42
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-11-15
     division_number: 38
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-11-15
     division_number: 41
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-11-15
     division_number: 42
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-12-12
     division_number: 63
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-01-17
     division_number: 99
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-06-13
     division_number: 185
@@ -75,7 +75,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-09-04
     division_number: 441
@@ -84,7 +84,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-02-09
     division_number: 229
@@ -93,3 +93,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

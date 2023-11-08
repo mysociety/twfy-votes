@@ -1,6 +1,5 @@
 id: 6965
 name: Deprivation of Citizenship
-chamber_id: commons
 context_description: making it easier to <b>remove someone's British citizenship</b>
 policy_description: Certain individuals may be have their British citizenship removed
   by the Government doing so is deemed to be in the public interest, or in cases of
@@ -9,12 +8,13 @@ policy_description: Certain individuals may be have their British citizenship re
   of citizenship should be permitted if it would leave a person stateless.
 notes: ''
 status: candidate
-group_ids:
-- home
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- home
+division_links:
+- decision:
     chamber_slug: commons
     date: 2014-01-30
     division_number: 198
@@ -23,7 +23,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-05-07
     division_number: 266
@@ -32,7 +32,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-07-20
     division_number: 57
@@ -41,7 +41,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-07-20
     division_number: 58
@@ -50,7 +50,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-12-08
     division_number: 143
@@ -59,7 +59,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-03-22
     division_number: 218
@@ -68,7 +68,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-04-20
     division_number: 246
@@ -77,3 +77,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

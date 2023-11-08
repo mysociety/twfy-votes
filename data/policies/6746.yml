@@ -1,16 +1,16 @@
 id: 6746
 name: a publicly owned railway system
-chamber_id: commons
 context_description: a <b>publicly owned railway system</b>
 policy_description: Railways should be state owned and run
 notes: ''
 status: active
-group_ids:
-- transport
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- transport
+division_links:
+- decision:
     chamber_slug: commons
     date: 2014-10-29
     division_number: 65
@@ -19,7 +19,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-01-19
     division_number: 167
@@ -28,7 +28,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-03-23
     division_number: 228
@@ -37,7 +37,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-09-12
     division_number: 63
@@ -46,3 +46,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

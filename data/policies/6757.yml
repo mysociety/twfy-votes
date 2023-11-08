@@ -1,17 +1,17 @@
 id: 6757
 name: military action against ISIL (Daesh)
-chamber_id: commons
 context_description: <b>military action against <a href="https://en.wikipedia.org/wiki/Islamic_State_of_Iraq_and_the_Levant">ISIL
   (Daesh)</a></b>
 policy_description: The actions of Daesh / ISIL need to be tackled by military action
 notes: ''
 status: active
-group_ids:
-- foreignpolicy
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- foreignpolicy
+division_links:
+- decision:
     chamber_slug: commons
     date: 2014-09-26
     division_number: 53
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-12-02
     division_number: 138
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-12-02
     division_number: 139
@@ -38,3 +38,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

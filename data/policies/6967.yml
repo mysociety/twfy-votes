@@ -1,18 +1,18 @@
 id: 6967
 name: Access to Abortion
-chamber_id: commons
 context_description: easier <b>access to abortion</b>
 policy_description: There have been votes in Parliament on the circumstances in which
   abortion should be legal, on restricting protests outside abortion clinics, on controlling
   access to abortion and on access to abortion in Northern Ireland.
 notes: ''
 status: candidate
-group_ids:
-- health
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- health
+division_links:
+- decision:
     chamber_slug: commons
     date: 2007-03-14
     division_number: 76
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-05-20
     division_number: 199
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-05-20
     division_number: 200
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-05-20
     division_number: 201
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-05-20
     division_number: 202
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-05-20
     division_number: 203
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-03-13
     division_number: 176
@@ -75,7 +75,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-10-23
     division_number: 244
@@ -84,7 +84,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-07-09
     division_number: 428
@@ -93,7 +93,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-07-18
     division_number: 438
@@ -102,7 +102,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-06-17
     division_number: 56
@@ -111,7 +111,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-06-24
     division_number: 59
@@ -120,7 +120,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-04-27
     division_number: 280
@@ -129,7 +129,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-03-30
     division_number: 237
@@ -138,3 +138,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

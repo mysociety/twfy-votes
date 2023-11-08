@@ -1,18 +1,18 @@
 id: 6677
 name: restricting the provision of services to private patients by the NHS
-chamber_id: commons
 context_description: restricting the provision of services to <b>private patients</b>
   by the NHS
 policy_description: the ability of NHS Foundation Trusts to make money from private
   patients ought be restricted and reduced
 notes: ''
 status: active
-group_ids:
-- health
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- health
+division_links:
+- decision:
     chamber_slug: commons
     date: 2011-03-16
     division_number: 233
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-09-06
     division_number: 338
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-09-07
     division_number: 342
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-10-26
     division_number: 377
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-01-16
     division_number: 423
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-03-13
     division_number: 488
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-03-13
     division_number: 489
@@ -75,3 +75,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

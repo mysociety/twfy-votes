@@ -1,18 +1,18 @@
 id: 6676
 name: reforming the NHS so GPs buy services on behalf of their patients
-chamber_id: commons
 context_description: reforming the <b>NHS</b> so GPs buy services on behalf of their
   patients
 policy_description: 'GPs should buy services such as out of hours care, ambulance
   services and hospital care on behalf of their patients. '
 notes: ''
 status: active
-group_ids:
-- health
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- health
+division_links:
+- decision:
     chamber_slug: commons
     date: 2010-11-17
     division_number: 120
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-01-31
     division_number: 185
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-03-16
     division_number: 233
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-05-09
     division_number: 268
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-06-21
     division_number: 301
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-09-07
     division_number: 342
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-10-26
     division_number: 377
@@ -75,7 +75,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-03-13
     division_number: 488
@@ -84,7 +84,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-03-13
     division_number: 489
@@ -93,7 +93,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-10-23
     division_number: 9
@@ -102,3 +102,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

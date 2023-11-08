@@ -1,19 +1,19 @@
 id: 6673
 name: paying higher benefits over longer periods for those unable to work due to illness
   or disability
-chamber_id: commons
 context_description: paying higher benefits over longer periods for those unable to
   work due to <b>illness or disability</b>
 policy_description: the Government should pay higher benefits over a longer period
   of time to those unable to work due to illness or disability
 notes: ''
 status: active
-group_ids:
-- welfare
 strength_meaning: classic
 highlightable: true
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- welfare
+division_links:
+- decision:
     chamber_slug: commons
     date: 2011-03-09
     division_number: 219
@@ -22,7 +22,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-03-09
     division_number: 220
@@ -31,7 +31,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-06-15
     division_number: 297
@@ -40,7 +40,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-02-01
     division_number: 454
@@ -49,7 +49,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-02-01
     division_number: 455
@@ -58,7 +58,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-02-01
     division_number: 456
@@ -67,7 +67,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-02-01
     division_number: 458
@@ -76,7 +76,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-06-20
     division_number: 20
@@ -85,7 +85,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-07-10
     division_number: 55
@@ -94,7 +94,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-07-10
     division_number: 56
@@ -103,7 +103,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-07-20
     division_number: 51
@@ -112,7 +112,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-10-27
     division_number: 96
@@ -121,7 +121,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-10-27
     division_number: 97
@@ -130,7 +130,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-10-27
     division_number: 98
@@ -139,7 +139,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-03-02
     division_number: 203
@@ -148,7 +148,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-03-02
     division_number: 204
@@ -157,7 +157,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-06-08
     division_number: 15
@@ -166,7 +166,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-07-20
     division_number: 51
@@ -175,7 +175,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-01-18
     division_number: 197
@@ -184,7 +184,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-09-15
     division_number: 74
@@ -193,7 +193,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-09-21
     division_number: 81
@@ -202,7 +202,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-01-24
     division_number: 167
@@ -211,7 +211,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-02-07
     division_number: 185
@@ -220,7 +220,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-05-18
     division_number: 4
@@ -229,3 +229,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

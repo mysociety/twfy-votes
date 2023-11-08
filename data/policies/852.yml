@@ -1,18 +1,18 @@
 id: 852
 name: Nuclear Power
-chamber_id: commons
 context_description: <b>nuclear power</b>
 policy_description: There have been votes in Parliament on if to support new civil
   nuclear power plants to generate electricity. There have also been votes on how
   to fund nuclear power generation.
 notes: ''
 status: candidate
-group_ids:
-- environment
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- environment
+division_links:
+- decision:
     chamber_slug: commons
     date: 2002-03-05
     division_number: 182
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2002-03-05
     division_number: 183
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2002-10-22
     division_number: 326
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2002-10-22
     division_number: 327
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2006-01-17
     division_number: 126
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2006-01-17
     division_number: 127
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-11-24
     division_number: 128
@@ -75,7 +75,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-11-03
     division_number: 101
@@ -84,7 +84,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-01-10
     division_number: 155
@@ -93,3 +93,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

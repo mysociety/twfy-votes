@@ -1,16 +1,16 @@
 id: 6761
 name: UK membership of the EU
-chamber_id: commons
 context_description: <b>UK membership of the EU</b>
 policy_description: The UK should remain a member of the EU
 notes: ''
 status: active
-group_ids:
-- foreignpolicy
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- foreignpolicy
+division_links:
+- decision:
     chamber_slug: commons
     date: 2016-06-15
     division_number: 21
@@ -19,7 +19,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-09-14
     division_number: 65
@@ -28,7 +28,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-12-07
     division_number: 102
@@ -37,7 +37,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-12-07
     division_number: 103
@@ -46,7 +46,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-01
     division_number: 134
@@ -55,7 +55,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-01
     division_number: 135
@@ -64,7 +64,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-06
     division_number: 139
@@ -73,7 +73,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-07
     division_number: 142
@@ -82,7 +82,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-07
     division_number: 144
@@ -91,7 +91,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-08
     division_number: 152
@@ -100,7 +100,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-08
     division_number: 158
@@ -109,7 +109,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-08
     division_number: 160
@@ -118,7 +118,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-08
     division_number: 161
@@ -127,7 +127,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-09-11
     division_number: 13
@@ -136,7 +136,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-09-11
     division_number: 14
@@ -145,7 +145,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-01-17
     division_number: 104
@@ -154,7 +154,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-01-17
     division_number: 105
@@ -163,7 +163,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-06-13
     division_number: 179
@@ -172,7 +172,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-06-13
     division_number: 181
@@ -181,7 +181,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-01-29
     division_number: 308
@@ -190,7 +190,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-01-29
     division_number: 310
@@ -199,7 +199,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-01-29
     division_number: 311
@@ -208,7 +208,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-03-27
     division_number: 386
@@ -217,7 +217,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-03-29
     division_number: 395
@@ -226,7 +226,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-04-03
     division_number: 407
@@ -235,7 +235,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-04-08
     division_number: 411
@@ -244,7 +244,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-04-09
     division_number: 413
@@ -253,7 +253,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-09-03
     division_number: 439
@@ -262,7 +262,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-09-04
     division_number: 440
@@ -271,3 +271,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

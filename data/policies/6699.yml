@@ -1,18 +1,18 @@
 id: 6699
 name: higher taxes on plane tickets
-chamber_id: commons
 context_description: higher <b>taxes on plane tickets</b>
 policy_description: Air Passenger Duty should be increased
 notes: ''
 status: active
-group_ids:
+strength_meaning: classic
+highlightable: false
+chamber: commons
+groups:
 - taxation
 - environment
 - transport
-strength_meaning: classic
-highlightable: false
-decision_links_refs:
-- division:
+division_links:
+- decision:
     chamber_slug: commons
     date: 2012-03-26
     division_number: 505
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-04-16
     division_number: 507
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-04-16
     division_number: 508
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-04-18
     division_number: 524
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-07-03
     division_number: 41
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-03-25
     division_number: 199
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-04-15
     division_number: 201
@@ -75,7 +75,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-04-18
     division_number: 219
@@ -84,7 +84,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-04-18
     division_number: 220
@@ -93,7 +93,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-07-02
     division_number: 43
@@ -102,7 +102,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-03-25
     division_number: 238
@@ -111,7 +111,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-04-01
     division_number: 241
@@ -120,7 +120,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-04-01
     division_number: 242
@@ -129,7 +129,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-04-01
     division_number: 243
@@ -138,7 +138,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-07-02
     division_number: 32
@@ -147,7 +147,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-09-12
     division_number: 16
@@ -156,7 +156,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-10-31
     division_number: 31
@@ -165,3 +165,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

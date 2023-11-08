@@ -1,16 +1,16 @@
 id: 6754
 name: reducing capital gains tax
-chamber_id: commons
 context_description: reducing <b>capital gains tax</b>
 policy_description: 'Capital gains taxes should be reduced. '
 notes: ''
 status: active
-group_ids:
-- taxation
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- taxation
+division_links:
+- decision:
     chamber_slug: commons
     date: 2010-07-06
     division_number: 14
@@ -19,7 +19,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-03-25
     division_number: 198
@@ -28,7 +28,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-03-22
     division_number: 221
@@ -37,7 +37,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-03-22
     division_number: 223
@@ -46,7 +46,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-03-22
     division_number: 225
@@ -55,7 +55,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-04-11
     division_number: 233
@@ -64,7 +64,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-06-28
     division_number: 28
@@ -73,7 +73,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-09-06
     division_number: 58
@@ -82,7 +82,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-09-06
     division_number: 61
@@ -91,3 +91,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

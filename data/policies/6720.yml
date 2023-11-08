@@ -1,16 +1,16 @@
 id: 6720
 name: a statutory register of lobbyists
-chamber_id: commons
 context_description: a statutory <b>register of lobbyists</b>
 policy_description: there should be a register of those who professionally lobby MPs
 notes: ''
 status: active
-group_ids:
-- misc
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- misc
+division_links:
+- decision:
     chamber_slug: commons
     date: 2013-06-25
     division_number: 32
@@ -19,7 +19,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-06-25
     division_number: 33
@@ -28,7 +28,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-09-03
     division_number: 71
@@ -37,7 +37,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-09-03
     division_number: 72
@@ -46,7 +46,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-09-09
     division_number: 78
@@ -55,7 +55,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-10-09
     division_number: 95
@@ -64,3 +64,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

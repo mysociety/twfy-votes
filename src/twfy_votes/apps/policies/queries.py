@@ -29,7 +29,7 @@ class GroupStatusPolicyQuery(BaseQuery):
                 {% if chamber %} and {% endif %}
             {% endif %}
             {% if chamber %}
-                chamber_id = {{ chamber }}
+                chamber = {{ chamber }}
             {% endif %}
         order by id
     """
@@ -105,7 +105,7 @@ class PolicyAffectedPeople(BaseQuery):
         pw_vote using (division_id)
     join
         pw_mp using (mp_id)
-    where chamber = {{ chamber_slug }}
+    where policies.chamber = {{ chamber_slug }}
     {% if policy_ids %}
     and policy_id in {{ policy_ids| inclause }}
     {% endif %}

@@ -1,16 +1,16 @@
 id: 1105
 name: the privatisation of Royal Mail
-chamber_id: commons
 context_description: the privatisation of <b>Royal Mail</b>
 policy_description: 'The Royal Mail should be privatised. '
 notes: ''
 status: active
-group_ids:
-- misc
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- misc
+division_links:
+- decision:
     chamber_slug: commons
     date: 2008-03-19
     division_number: 131
@@ -19,7 +19,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-02-11
     division_number: 36
@@ -28,7 +28,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-02-11
     division_number: 37
@@ -37,7 +37,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-10-27
     division_number: 102
@@ -46,7 +46,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-01-12
     division_number: 163
@@ -55,7 +55,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-01-12
     division_number: 166
@@ -64,3 +64,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

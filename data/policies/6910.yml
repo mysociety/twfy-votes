@@ -1,17 +1,17 @@
 id: 6910
 name: Court Delays
-chamber_id: commons
 context_description: <b>reducing court delays</b>
 policy_description: There have been votes in Parliament on measures intended to streamline
   and modernise elements of the justice system.
 notes: ''
 status: draft
-group_ids:
-- justice
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- justice
+division_links:
+- decision:
     chamber_slug: commons
     date: 2021-06-09
     division_number: 24
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-10-26
     division_number: 96
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-01-25
     division_number: 171
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-01-25
     division_number: 172
@@ -47,7 +47,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-01-25
     division_number: 173
@@ -56,7 +56,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-01-25
     division_number: 175
@@ -65,7 +65,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-04-26
     division_number: 263
@@ -74,3 +74,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

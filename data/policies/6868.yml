@@ -1,6 +1,5 @@
 id: 6868
 name: Authorised Criminal Conduct by Undercover Sources
-chamber_id: commons
 context_description: authorising <b>criminal conduct by undercover officers and covert
   sources</b>
 policy_description: There have been votes in Parliament on procedures for enabling
@@ -9,12 +8,13 @@ policy_description: There have been votes in Parliament on procedures for enabli
   as covert sources.
 notes: ''
 status: candidate
-group_ids:
-- home
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- home
+division_links:
+- decision:
     chamber_slug: commons
     date: 2020-10-05
     division_number: 125
@@ -23,7 +23,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-10-15
     division_number: 138
@@ -32,7 +32,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-10-15
     division_number: 139
@@ -41,7 +41,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-10-15
     division_number: 140
@@ -50,7 +50,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-10-15
     division_number: 141
@@ -59,7 +59,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-10-15
     division_number: 142
@@ -68,7 +68,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-01-27
     division_number: 219
@@ -77,7 +77,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-01-27
     division_number: 220
@@ -86,7 +86,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-01-27
     division_number: 222
@@ -95,7 +95,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-01-27
     division_number: 223
@@ -104,3 +104,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

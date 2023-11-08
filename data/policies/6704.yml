@@ -1,18 +1,18 @@
 id: 6704
 name: financial incentives for low carbon emission electricity generation methods
-chamber_id: commons
 context_description: financial incentives for <b>low carbon</b> emission <b>electricity
   generation</b> methods
 policy_description: The government ought provide financial incentives to encourage
   electricity generation with low carbon emissions.
 notes: ''
 status: active
-group_ids:
-- environment
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- environment
+division_links:
+- decision:
     chamber_slug: commons
     date: 2011-07-05
     division_number: 316
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-09-14
     division_number: 351
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-11-23
     division_number: 400
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-11-23
     division_number: 401
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-12-19
     division_number: 127
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-01-16
     division_number: 135
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-06-03
     division_number: 14
@@ -75,7 +75,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-06-04
     division_number: 19
@@ -84,7 +84,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-06-04
     division_number: 20
@@ -93,7 +93,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-12-04
     division_number: 151
@@ -102,7 +102,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-07-11
     division_number: 206
@@ -111,3 +111,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

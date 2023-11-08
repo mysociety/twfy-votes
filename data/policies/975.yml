@@ -1,6 +1,5 @@
 id: 975
 name: investigations into the Iraq war
-chamber_id: commons
 context_description: <strong>investigations</strong> into the Iraq war
 policy_description: the handling of the US led invasion of Iraq in 2003, including
   the failure of the intelligence about Weapons of Mass Destruction, must be investigated;
@@ -8,12 +7,13 @@ policy_description: the handling of the US led invasion of Iraq in 2003, includi
   far have been satisfactory
 notes: ''
 status: active
-group_ids:
-- foreignpolicy
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- foreignpolicy
+division_links:
+- decision:
     chamber_slug: commons
     date: 2003-06-04
     division_number: 217
@@ -22,7 +22,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-07-16
     division_number: 294
@@ -31,7 +31,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-09-10
     division_number: 307
@@ -40,7 +40,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-10-22
     division_number: 335
@@ -49,7 +49,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-10-22
     division_number: 336
@@ -58,7 +58,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2004-01-13
     division_number: 27
@@ -67,7 +67,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2004-03-09
     division_number: 80
@@ -76,7 +76,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2004-05-17
     division_number: 176
@@ -85,7 +85,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2004-07-20
     division_number: 234
@@ -94,7 +94,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2006-10-31
     division_number: 330
@@ -103,7 +103,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2006-10-31
     division_number: 331
@@ -112,7 +112,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-06-11
     division_number: 135
@@ -121,7 +121,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-06-11
     division_number: 136
@@ -130,7 +130,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-03-25
     division_number: 133
@@ -139,7 +139,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-03-25
     division_number: 134
@@ -148,7 +148,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-03-25
     division_number: 88
@@ -157,7 +157,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-03-25
     division_number: 89
@@ -166,7 +166,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-06-24
     division_number: 155
@@ -175,7 +175,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-06-24
     division_number: 156
@@ -184,7 +184,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-11-30
     division_number: 99
@@ -193,3 +193,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

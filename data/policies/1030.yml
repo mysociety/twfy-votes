@@ -1,17 +1,17 @@
 id: 1030
 name: measures to prevent climate change
-chamber_id: commons
 context_description: measures to <b>prevent climate change</b>
 policy_description: the laws which enforce Climate Change policy should be as strong
   as possible
 notes: ''
 status: active
-group_ids:
-- environment
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- environment
+division_links:
+- decision:
     chamber_slug: commons
     date: 2000-03-10
     division_number: 101
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2000-03-27
     division_number: 124
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2002-05-15
     division_number: 242
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2002-12-12
     division_number: 23
@@ -47,7 +47,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2004-02-10
     division_number: 50
@@ -56,7 +56,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2004-10-25
     division_number: 276
@@ -65,7 +65,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2004-11-08
     division_number: 311
@@ -74,7 +74,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2005-06-29
     division_number: 24
@@ -83,7 +83,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2005-10-12
     division_number: 54
@@ -92,7 +92,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2005-11-22
     division_number: 105
@@ -101,7 +101,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2006-03-10
     division_number: 185
@@ -110,7 +110,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2006-03-17
     division_number: 197
@@ -119,7 +119,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-05-08
     division_number: 107
@@ -128,7 +128,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-04-30
     division_number: 165
@@ -137,7 +137,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-06-02
     division_number: 206
@@ -146,7 +146,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-06-09
     division_number: 212
@@ -155,7 +155,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-06-09
     division_number: 213
@@ -164,7 +164,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-10-28
     division_number: 295
@@ -173,7 +173,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-10-28
     division_number: 296
@@ -182,7 +182,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-10-28
     division_number: 297
@@ -191,7 +191,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-10-28
     division_number: 298
@@ -200,7 +200,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-10-21
     division_number: 229
@@ -209,7 +209,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-09-14
     division_number: 351
@@ -218,7 +218,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-09-14
     division_number: 352
@@ -227,7 +227,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-09-14
     division_number: 353
@@ -236,7 +236,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-06-11
     division_number: 13
@@ -245,7 +245,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-10-17
     division_number: 78
@@ -254,7 +254,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-10-17
     division_number: 82
@@ -263,7 +263,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-12-19
     division_number: 127
@@ -272,7 +272,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-06-03
     division_number: 14
@@ -281,7 +281,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-06-04
     division_number: 18
@@ -290,7 +290,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-06-04
     division_number: 19
@@ -299,7 +299,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-06-04
     division_number: 20
@@ -308,7 +308,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-12-04
     division_number: 151
@@ -317,7 +317,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-07-14
     division_number: 44
@@ -326,7 +326,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-07-14
     division_number: 47
@@ -335,7 +335,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-09-08
     division_number: 63
@@ -344,7 +344,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-10-26
     division_number: 89
@@ -353,7 +353,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-03-14
     division_number: 216
@@ -362,7 +362,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-03-14
     division_number: 217
@@ -371,7 +371,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-05-03
     division_number: 261
@@ -380,7 +380,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-05-09
     division_number: 267
@@ -389,7 +389,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-05-26
     division_number: 4
@@ -398,7 +398,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-07-20
     division_number: 49
@@ -407,7 +407,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-09-06
     division_number: 60
@@ -416,7 +416,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-06-25
     division_number: 424
@@ -425,7 +425,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-10-24
     division_number: 10
@@ -434,7 +434,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-02-05
     division_number: 32
@@ -443,7 +443,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-29
     division_number: 114
@@ -452,7 +452,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-10-12
     division_number: 130
@@ -461,7 +461,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-11-16
     division_number: 171
@@ -470,7 +470,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-11-17
     division_number: 172
@@ -479,7 +479,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-12-08
     division_number: 181
@@ -488,7 +488,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-01-13
     division_number: 196
@@ -497,7 +497,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-01-26
     division_number: 213
@@ -506,7 +506,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-05-26
     division_number: 18
@@ -515,7 +515,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-06-07
     division_number: 20
@@ -524,7 +524,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-06-16
     division_number: 27
@@ -533,7 +533,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-07-14
     division_number: 55
@@ -542,7 +542,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-07-14
     division_number: 56
@@ -551,7 +551,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-10-20
     division_number: 88
@@ -560,7 +560,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-11-03
     division_number: 101
@@ -569,7 +569,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-11-23
     division_number: 122
@@ -578,7 +578,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-12-13
     division_number: 148
@@ -587,7 +587,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-01-10
     division_number: 155
@@ -596,7 +596,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-05-18
     division_number: 4
@@ -605,7 +605,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2004-11-03
     division_number: 4
@@ -614,7 +614,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-01-14
     division_number: 1
@@ -623,7 +623,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-02-25
     division_number: 1
@@ -632,7 +632,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-02-25
     division_number: 2
@@ -641,7 +641,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-02-25
     division_number: 3
@@ -650,7 +650,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-03-04
     division_number: 1
@@ -659,7 +659,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-03-04
     division_number: 2
@@ -668,7 +668,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-03-04
     division_number: 3
@@ -677,7 +677,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-03-11
     division_number: 1
@@ -686,7 +686,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-03-11
     division_number: 2
@@ -695,7 +695,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-03-18
     division_number: 1
@@ -704,7 +704,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-03-31
     division_number: 2
@@ -713,7 +713,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2008-11-06
     division_number: 2
@@ -722,3 +722,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

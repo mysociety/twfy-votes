@@ -1,19 +1,19 @@
 id: 6678
 name: greater restrictions on campaigning by third parties, such as charities, during
   elections
-chamber_id: commons
 context_description: greater restrictions on <b>campaigning by third parties</b>,
   such as charities, during elections
 policy_description: 'there should be more restrictions what those who are not themselves
   standing can do during elections '
 notes: ''
 status: active
-group_ids:
-- reform
 strength_meaning: classic
 highlightable: true
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- reform
+division_links:
+- decision:
     chamber_slug: commons
     date: 2013-09-03
     division_number: 71
@@ -22,7 +22,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-09-03
     division_number: 72
@@ -31,7 +31,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-09-03
     division_number: 73
@@ -40,7 +40,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-09-10
     division_number: 80
@@ -49,7 +49,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-09-10
     division_number: 81
@@ -58,7 +58,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-09-10
     division_number: 82
@@ -67,7 +67,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-09-10
     division_number: 83
@@ -76,7 +76,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-10-08
     division_number: 91
@@ -85,7 +85,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-10-09
     division_number: 93
@@ -94,7 +94,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-10-09
     division_number: 94
@@ -103,7 +103,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-10-09
     division_number: 95
@@ -112,7 +112,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-01-22
     division_number: 188
@@ -121,7 +121,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-01-22
     division_number: 189
@@ -130,7 +130,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-01-26
     division_number: 175
@@ -139,7 +139,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-01-17
     division_number: 163
@@ -148,3 +148,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

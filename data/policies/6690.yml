@@ -1,16 +1,16 @@
 id: 6690
 name: measures to reduce tax avoidance
-chamber_id: commons
 context_description: measures to reduce <b>tax avoidance</b>
 policy_description: 'we should have more measures to reduce tax avoidance. '
 notes: ''
 status: active
-group_ids:
-- business
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- business
+division_links:
+- decision:
     chamber_slug: commons
     date: 2013-03-25
     division_number: 196
@@ -19,7 +19,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-04-15
     division_number: 201
@@ -28,7 +28,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-04-17
     division_number: 214
@@ -37,7 +37,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-07-01
     division_number: 39
@@ -46,7 +46,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-07-02
     division_number: 43
@@ -55,7 +55,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-02-11
     division_number: 154
@@ -64,7 +64,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-04-13
     division_number: 235
@@ -73,7 +73,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-04-19
     division_number: 239
@@ -82,7 +82,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-06-28
     division_number: 25
@@ -91,7 +91,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-04-18
     division_number: 194
@@ -100,7 +100,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-04-18
     division_number: 195
@@ -109,7 +109,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-11-12
     division_number: 255
@@ -118,7 +118,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-11-12
     division_number: 256
@@ -127,7 +127,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-01-20
     division_number: 16
@@ -136,7 +136,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-02-25
     division_number: 35
@@ -145,7 +145,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-07-01
     division_number: 71
@@ -154,3 +154,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

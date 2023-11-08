@@ -1,18 +1,18 @@
 id: 1109
 name: encouraging occupational pensions
-chamber_id: commons
 context_description: encouraging <b>occupational pensions</b>
 policy_description: 'The Government ought promote workplace pension schemes for example
   by making them tax efficient and easy for employers to run and for employees to
   understand. '
 notes: ''
 status: active
-group_ids:
-- taxation
 strength_meaning: classic
 highlightable: true
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- taxation
+division_links:
+- decision:
     chamber_slug: commons
     date: 2003-01-20
     division_number: 56
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2004-03-02
     division_number: 68
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-04-17
     division_number: 89
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-04-17
     division_number: 90
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-03-08
     division_number: 103
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-06-28
     division_number: 11
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-06-20
     division_number: 299
@@ -75,7 +75,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-10-18
     division_number: 368
@@ -84,3 +84,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

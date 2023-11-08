@@ -1,8 +1,10 @@
-from typing import Any, ClassVar
+from __future__ import annotations
+
+from typing import Any, ClassVar, Generic, TypeVar, overload
 
 import pandas as pd
 from fastapi import Request
-from pydantic import Field, computed_field, model_validator
+from pydantic import Field, computed_field
 from typing_extensions import Self
 
 from ...helpers.data.models import ProjectBaseModel as BaseModel
@@ -25,6 +27,9 @@ from .queries import (
     GroupStatusPolicyQuery,
     PolicyIdQuery,
 )
+
+PartialDecisionType = TypeVar("PartialDecisionType", PartialAgreement, PartialDivision)
+InfoType = TypeVar("InfoType", AgreementInfo, DivisionInfo)
 
 
 def nice_headers(s: str) -> str:
@@ -119,14 +124,13 @@ class LinkStatus(StrEnum):
     DRAFT = "draft"
 
 
-class DivisionType(StrEnum):
+class DecisionType(StrEnum):
     DIVISION = "division"
     AGREEMENT = "agreement"
 
 
-class PartialPolicyDecisionLink(BaseModel):
-    division: PartialDivision | None = None
-    agreement: PartialAgreement | None = None
+class PartialPolicyDecisionLink(BaseModel, Generic[PartialDecisionType]):
+    decision: PartialDecisionType
     alignment: PolicyDirection
     strength: PolicyStrength = PolicyStrength.WEAK
     status: LinkStatus = LinkStatus.ACTIVE
@@ -135,39 +139,22 @@ class PartialPolicyDecisionLink(BaseModel):
     @computed_field
     @property
     def decision_type(self) -> str:
-        if self.division:
-            return DivisionType.DIVISION
-        elif self.agreement:
-            return DivisionType.AGREEMENT
-        else:
-            raise ValueError("Must have agreement or division")
+        match self.decision:
+            case PartialDivision():
+                return DecisionType.DIVISION
+            case PartialAgreement():
+                return DecisionType.AGREEMENT
+            case _:  # type: ignore
+                raise ValueError("Must have agreement or division")
 
     @computed_field
     @property
     def decision_key(self) -> str:
-        if self.division:
-            return self.division.key
-        elif self.agreement:
-            return self.agreement.key
-        else:
-            raise ValueError("Must have agreement or division")
-
-    @model_validator(mode="after")
-    def check_decision_type(self):
-        """
-        A decision link might go to either a division or agreement.
-        But must be either or, not none or both.
-        """
-        if self.agreement is None and self.division is None:
-            raise ValueError("Must have agreement or division")
-        elif self.agreement and self.division:
-            raise ValueError("Must have agreement or division, not both")
-        else:
-            return self
+        return self.decision.key
 
 
-class PolicyDecisionLink(BaseModel):
-    decision: DivisionInfo | AgreementInfo
+class PolicyDecisionLink(BaseModel, Generic[InfoType]):
+    decision: InfoType
     alignment: PolicyDirection
     strength: PolicyStrength = PolicyStrength.WEAK
     status: LinkStatus = LinkStatus.ACTIVE
@@ -178,45 +165,74 @@ class PolicyDecisionLink(BaseModel):
     def decision_type(self) -> str:
         match self.decision:
             case DivisionInfo():
-                return DivisionType.DIVISION
+                return DecisionType.DIVISION
             case AgreementInfo():
-                return DivisionType.AGREEMENT
+                return DecisionType.AGREEMENT
             case _:  # type: ignore
                 raise ValueError("Must have agreement or division")
 
+    @overload
     @classmethod
     async def from_partials(
-        cls, partials: list[PartialPolicyDecisionLink]
-    ) -> list[Self]:
-        divisions = [x.division for x in partials if x.division]
-        divisions = await DivisionInfo.from_partials(partials=divisions)
+        cls, partials: list[PartialPolicyDecisionLink[PartialAgreement]]
+    ) -> list[PolicyDecisionLink[AgreementInfo]]:
+        ...
 
-        agreements = [x.agreement for x in partials if x.agreement]
-        agreements = await AgreementInfo.from_partials(partials=agreements)
+    @overload
+    @classmethod
+    async def from_partials(
+        cls, partials: list[PartialPolicyDecisionLink[PartialDivision]]
+    ) -> list[PolicyDecisionLink[DivisionInfo]]:
+        ...
 
-        all_options = divisions + agreements
-        lookup: dict[str, AgreementInfo | DivisionInfo] = {
-            x.key: x for x in all_options
-        }
-        all_decisions: list[AgreementInfo | DivisionInfo] = []
-        for decision in partials:
-            all_decisions.append(lookup[decision.decision_key])
+    @classmethod
+    async def from_partials(
+        cls, partials: list[PartialPolicyDecisionLink[Any]]
+    ) -> list[PolicyDecisionLink[Any]]:
+        if len(partials) == 0:
+            return []
 
-        full_links: list[PolicyDecisionLink] = []
-        for decision, partial in zip(all_decisions, partials):
-            full_links.append(
-                PolicyDecisionLink(
-                    decision=decision,
-                    alignment=partial.alignment,
-                    strength=partial.strength,
-                    status=partial.status,
-                    notes=partial.notes,
-                )
-            )
+        # get first type of decision
+        decisions = [x.decision for x in partials]
+
+        decision_types = [x.decision_type for x in partials]
+        decision_type = DecisionType(decision_types[0])
+
+        if len(set(decision_types)) != 1:
+            raise ValueError("All decisions must be the same type to use partials")
+
+        full_links: list[PolicyDecisionLink[Any]] = []
+        match decision_type:
+            case DecisionType.DIVISION:
+                decisions = await DivisionInfo.from_partials(partials=decisions)
+
+                for decision, partial in zip(decisions, partials):
+                    full_links.append(
+                        PolicyDecisionLink[DivisionInfo](
+                            decision=decision,
+                            alignment=partial.alignment,
+                            strength=partial.strength,
+                            status=partial.status,
+                            notes=partial.notes,
+                        )
+                    )
+            case DecisionType.AGREEMENT:
+                decisions = await AgreementInfo.from_partials(partials=decisions)
+                for decision, partial in zip(decisions, partials):
+                    full_links.append(
+                        PolicyDecisionLink[AgreementInfo](
+                            decision=decision,
+                            alignment=partial.alignment,
+                            strength=partial.strength,
+                            status=partial.status,
+                            notes=partial.notes,
+                        )
+                    )
+
         return full_links
 
 
-class PartialPolicy(BaseModel):
+class PolicyBase(BaseModel):
     """
     Version of policy object for reading and writing from basic storage.
     Doesn't store full details of related decisions etc.
@@ -227,17 +243,26 @@ class PartialPolicy(BaseModel):
     )
 
     name: str
-    chamber_id: AllowedChambers
     context_description: str
     policy_description: str
     notes: str = ""
     status: PolicyStatus
-    group_ids: list[PolicyGroupSlug]
     strength_meaning: StrengthMeaning = StrengthMeaning.V2
     highlightable: bool = Field(
         description="Policy can be drawn out as a highlight on page if no calculcated 'interesting' votes"
     )
-    decision_links_refs: list[PartialPolicyDecisionLink]
+
+
+class PartialPolicy(PolicyBase):
+    """
+    Version of policy object for reading and writing from basic storage.
+    Doesn't store full details of related decisions etc.
+    """
+
+    chamber: AllowedChambers
+    groups: list[PolicyGroupSlug]
+    division_links: list[PartialPolicyDecisionLink[PartialDivision]]
+    agreement_links: list[PartialPolicyDecisionLink[PartialAgreement]]
 
     def model_dump_reduced(self, *args: Any, **kwargs: Any) -> dict[str, Any]:
         """
@@ -245,51 +270,55 @@ class PartialPolicy(BaseModel):
         """
         di = self.model_dump(*args, **kwargs)
 
-        for ref in di["decision_links_refs"]:
-            if ref["agreement"] is None:
-                del ref["agreement"]
-            if ref["division"] is None:
-                del ref["division"]
-            if ref["division"]:
-                del ref["division"]["key"]
+        for ref in di["division_links"]:
+            if ref["decision"]:
+                del ref["decision"]["key"]
             del ref["decision_key"]
         return di
 
 
-class Policy(PartialPolicy):
+class Policy(PolicyBase):
+    chamber_id: AllowedChambers
     chamber: Chamber
     groups: list[PolicyGroup]
-    decision_links: list[PolicyDecisionLink]
+    division_links: list[PolicyDecisionLink[DivisionInfo]]
+    agreement_links: list[PolicyDecisionLink[AgreementInfo]]
 
     @classmethod
     async def from_partials(cls, partials: list[PartialPolicy]) -> list[Self]:
         # get all links in a single list
 
-        decisions = [x.decision_links_refs for x in partials]
-        decisions = [x for y in decisions for x in y]
-        full_decisions = await PolicyDecisionLink.from_partials(partials=decisions)
-
+        # get divisions
+        divisions = [x.division_links for x in partials]
+        divisions = [x for y in divisions for x in y]
+        full_decisions = await PolicyDecisionLink.from_partials(partials=divisions)
         # create a lookup from a PartialPolicyDecisionLink to a PolicyDecisionLink
-        lookup: dict[str, PolicyDecisionLink] = {
-            x.decision_key: y for x, y in zip(decisions, full_decisions)
-        }
-
+        division_lookup = {x.decision.key: x for x in full_decisions}
+        # get agreements
+        agreements = [x.agreement_links for x in partials]
+        agreements = [x for y in agreements for x in y]
+        full_agreements = await PolicyDecisionLink.from_partials(partials=agreements)
+        # create a lookup from a PartialPolicyDecisionLink to a PolicyDecisionLink
+        agreement_lookup = {x.decision.key: x for x in full_agreements}
         return [
             cls(
                 name=x.name,
                 id=x.id,
-                chamber_id=x.chamber_id,
-                chamber=Chamber(slug=x.chamber_id),
+                chamber_id=x.chamber,
+                chamber=Chamber(slug=x.chamber),
                 context_description=x.context_description,
                 policy_description=x.policy_description,
                 notes=x.notes,
                 status=x.status,
-                groups=[PolicyGroup(slug=y) for y in x.group_ids],
-                group_ids=x.group_ids,
+                groups=[PolicyGroup(slug=y) for y in x.groups],
                 strength_meaning=x.strength_meaning,
                 highlightable=x.highlightable,
-                decision_links=[lookup[y.decision_key] for y in x.decision_links_refs],
-                decision_links_refs=x.decision_links_refs,
+                division_links=[
+                    division_lookup[y.decision_key] for y in x.division_links
+                ],
+                agreement_links=[
+                    agreement_lookup[y.decision_key] for y in x.agreement_links
+                ],
             )
             for x in partials
         ]
@@ -325,14 +354,10 @@ class Policy(PartialPolicy):
         full = await cls.from_partials(partials=[partial])
         return full[0]
 
-    async def decision_df(self, request: Request):
+    async def division_df(self, request: Request):
         duck = await duck_core.child_query()
-        all_decisions = [x.model_dump() for x in self.decision_links]
-        decision_infos = [
-            x.decision.division_id
-            for x in self.decision_links
-            if isinstance(x.decision, DivisionInfo)
-        ]
+        all_decisions = [x.model_dump() for x in self.division_links]
+        decision_infos = [x.decision.division_id for x in self.division_links]
         decision_breakdowns = await DivisionBreakDownQuery(
             division_ids=decision_infos
         ).to_model_list(
@@ -346,10 +371,7 @@ class Policy(PartialPolicy):
         }
 
         breakdown_in_order = [
-            breakdown_lookup[x.decision.division_id]
-            if isinstance(x.decision, DivisionInfo)
-            else None
-            for x in self.decision_links
+            breakdown_lookup[x.decision.division_id] for x in self.division_links
         ]
 
         # need to make participant count line up
@@ -357,15 +379,15 @@ class Policy(PartialPolicy):
         df = pd.DataFrame(data=all_decisions)
         df["decision"] = [
             UrlColumn(url=x.decision.url(request), text=x.decision.division_name)
-            for x in self.decision_links
+            for x in self.division_links
         ]
         df["uses_powers"] = [
-            x.decision.motion_uses_powers() for x in self.decision_links
+            x.decision.motion_uses_powers() for x in self.division_links
         ]
         df["participant_count"] = [
             x.vote_participant_count if x else 0 for x in breakdown_in_order
         ]
-        df["voting_cluster"] = [x.decision.voting_cluster for x in self.decision_links]
+        df["voting_cluster"] = [x.decision.voting_cluster for x in self.division_links]
 
         banned_columns = ["decision_type", "notes"]
         df = df.drop(columns=banned_columns)

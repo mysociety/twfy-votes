@@ -1,17 +1,17 @@
 id: 1124
 name: automatic enrolment in occupational pensions
-chamber_id: commons
 context_description: automatic enrolment in <b>occupational pensions</b>
 policy_description: low-to-mid income earners should be enrolled into pension schemes
   automatically
 notes: ''
 status: active
-group_ids:
-- taxation
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- taxation
+division_links:
+- decision:
     chamber_slug: commons
     date: 2010-03-08
     division_number: 103
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-06-28
     division_number: 11
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-06-20
     division_number: 299
@@ -38,3 +38,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

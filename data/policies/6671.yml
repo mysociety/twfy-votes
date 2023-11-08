@@ -1,16 +1,16 @@
 id: 6671
 name: reducing central government funding of local government
-chamber_id: commons
 context_description: reducing central government <b>funding of local government</b>
 policy_description: ' central government should provide less money to local government'
 notes: ''
 status: active
-group_ids:
-- reform
 strength_meaning: classic
 highlightable: true
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- reform
+division_links:
+- decision:
     chamber_slug: commons
     date: 2010-06-29
     division_number: 12
@@ -19,7 +19,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-06-29
     division_number: 13
@@ -28,7 +28,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-02-09
     division_number: 198
@@ -37,7 +37,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-01-10
     division_number: 414
@@ -46,7 +46,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-01-10
     division_number: 415
@@ -55,7 +55,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-02-08
     division_number: 470
@@ -64,7 +64,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-02-13
     division_number: 163
@@ -73,7 +73,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-02-10
     division_number: 151
@@ -82,7 +82,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-02-10
     division_number: 192
@@ -91,7 +91,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-22
     division_number: 166
@@ -100,7 +100,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-02-07
     division_number: 117
@@ -109,7 +109,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-03-28
     division_number: 134
@@ -118,7 +118,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-02-05
     division_number: 322
@@ -127,7 +127,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-01-25
     division_number: 211
@@ -136,7 +136,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-02-23
     division_number: 231
@@ -145,3 +145,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

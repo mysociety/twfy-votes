@@ -1,18 +1,18 @@
 id: 6718
 name: restrictions on fees charged to tenants by letting agents
-chamber_id: commons
 context_description: restrictions on <b>fees</b> charged to tenants by <b>letting
   agents</b>
 policy_description: letting agent fees, charged to tenants, ought be more strongly
   regulated or even banned
 notes: ''
 status: active
-group_ids:
-- misc
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- misc
+division_links:
+- decision:
     chamber_slug: commons
     date: 2013-05-14
     division_number: 1
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-05-13
     division_number: 279
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-06-16
     division_number: 4
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-06-25
     division_number: 21
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-09-05
     division_number: 233
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-09-05
     division_number: 234
@@ -66,3 +66,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

@@ -1,6 +1,5 @@
 id: 6958
 name: The Republic of Ireland - Northern Ireland Border
-chamber_id: commons
 context_description: <b>avoiding physical infrastructure at the border between the
   Republic of Ireland and Northern Ireland</b>
 policy_description: There have been votes in Parliament which would impact if a "hard
@@ -8,12 +7,13 @@ policy_description: There have been votes in Parliament which would impact if a 
   between Northern Ireland and the Republic of Ireland was required.
 notes: ''
 status: draft
-group_ids:
-- misc
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- misc
+division_links:
+- decision:
     chamber_slug: commons
     date: 2022-03-22
     division_number: 230
@@ -22,3 +22,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

@@ -1,6 +1,5 @@
 id: 6903
 name: Digital Services Tax
-chamber_id: commons
 context_description: <b>higher taxes</b> on the providers of major <b>social media,
   search engine and online marketplace services</b>
 policy_description: There have been votes in Parliament on introducing a tax on revenues
@@ -8,12 +7,13 @@ policy_description: There have been votes in Parliament on introducing a tax on 
   marketplace providers.
 notes: ''
 status: draft
-group_ids:
-- business
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- business
+division_links:
+- decision:
     chamber_slug: commons
     date: 2020-07-01
     division_number: 67
@@ -22,7 +22,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-04-19
     division_number: 264
@@ -31,7 +31,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-05-24
     division_number: 7
@@ -40,3 +40,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

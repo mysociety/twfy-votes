@@ -1,18 +1,18 @@
 id: 984
 name: replacing Trident with a new nuclear weapons system
-chamber_id: commons
 context_description: replacing <b>Trident</b> with a new nuclear weapons system
 policy_description: the Trident submarine nuclear weapons system should be replaced
   by a new nuclear weapons system of at least the same capability by the time it is
   decommissioned
 notes: ''
 status: active
-group_ids:
-- foreignpolicy
 strength_meaning: classic
 highlightable: true
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- foreignpolicy
+division_links:
+- decision:
     chamber_slug: commons
     date: 2000-06-07
     division_number: 220
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-03-14
     division_number: 77
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-03-14
     division_number: 78
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-06-08
     division_number: 3
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-01-20
     division_number: 133
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-06-04
     division_number: 3
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-11-24
     division_number: 131
@@ -75,7 +75,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-05-26
     division_number: 3
@@ -84,7 +84,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-05-26
     division_number: 4
@@ -93,7 +93,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-07-18
     division_number: 46
@@ -102,7 +102,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-04-10
     division_number: 414
@@ -111,3 +111,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

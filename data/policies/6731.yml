@@ -1,17 +1,17 @@
 id: 6731
 name: more restrictive regulation of trade union activity
-chamber_id: commons
 context_description: more restrictive <b>regulation of trade union activity</b>
 policy_description: Trade unions, and strikes, should be more heavily regulated, taxed,
   and resticted
 notes: ''
 status: active
-group_ids:
-- taxation
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- taxation
+division_links:
+- decision:
     chamber_slug: commons
     date: 2008-01-09
     division_number: 39
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-10-22
     division_number: 95
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-09-14
     division_number: 70
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-11-10
     division_number: 117
@@ -47,7 +47,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-11-10
     division_number: 118
@@ -56,7 +56,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-11-10
     division_number: 121
@@ -65,7 +65,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-01-24
     division_number: 128
@@ -74,7 +74,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-08
     division_number: 145
@@ -83,7 +83,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-08
     division_number: 146
@@ -92,7 +92,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-08
     division_number: 147
@@ -101,7 +101,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-08
     division_number: 148
@@ -110,7 +110,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-02-08
     division_number: 149
@@ -119,7 +119,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-04-19
     division_number: 264
@@ -128,7 +128,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-01-26
     division_number: 176
@@ -137,7 +137,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-01-26
     division_number: 177
@@ -146,3 +146,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

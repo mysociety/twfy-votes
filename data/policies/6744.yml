@@ -1,17 +1,17 @@
 id: 6744
 name: phasing out secure tenancies for life
-chamber_id: commons
 context_description: phasing out <b>secure tenancies for life</b>
 policy_description: 'Tenancies for Life should be phased out and new tenancies for
   life should not be commenced. '
 notes: ''
 status: active
-group_ids:
-- housing
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- housing
+division_links:
+- decision:
     chamber_slug: commons
     date: 2015-11-02
     division_number: 104
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-11-02
     division_number: 105
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-11-02
     division_number: 106
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-01-12
     division_number: 160
@@ -47,7 +47,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-01-12
     division_number: 163
@@ -56,3 +56,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

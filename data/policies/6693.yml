@@ -1,18 +1,18 @@
 id: 6693
 name: lower taxes on fuel for motor vehicles
-chamber_id: commons
 context_description: lower taxes on <b>fuel for motor vehicles</b>
 policy_description: Taxes on petrol and diesel for vehicles ought be lower
 notes: ''
 status: active
-group_ids:
+strength_meaning: classic
+highlightable: false
+chamber: commons
+groups:
 - transport
 - taxation
 - environment
-strength_meaning: classic
-highlightable: false
-decision_links_refs:
-- division:
+division_links:
+- decision:
     chamber_slug: commons
     date: 2010-07-13
     division_number: 17
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-07-13
     division_number: 22
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-02-07
     division_number: 191
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-02-07
     division_number: 192
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-03-16
     division_number: 231
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-03-16
     division_number: 232
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-03-29
     division_number: 237
@@ -75,7 +75,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-04-26
     division_number: 256
@@ -84,7 +84,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-04-26
     division_number: 257
@@ -93,7 +93,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-05-03
     division_number: 262
@@ -102,7 +102,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-06-22
     division_number: 304
@@ -111,7 +111,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-06-22
     division_number: 305
@@ -120,7 +120,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-06-28
     division_number: 308
@@ -129,7 +129,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-07-05
     division_number: 317
@@ -138,7 +138,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-05-16
     division_number: 1
@@ -147,7 +147,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-07-03
     division_number: 38
@@ -156,7 +156,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-07-03
     division_number: 41
@@ -165,7 +165,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-11-12
     division_number: 100
@@ -174,7 +174,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-11-12
     division_number: 101
@@ -183,7 +183,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-03-25
     division_number: 196
@@ -192,7 +192,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-04-18
     division_number: 216
@@ -201,7 +201,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-09-21
     division_number: 81
@@ -210,3 +210,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

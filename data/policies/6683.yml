@@ -1,19 +1,19 @@
 id: 6683
 name: local councils keeping money raised from taxes on business premises in their
   areas
-chamber_id: commons
 context_description: local councils keeping money raised from <b>taxes on business
   premises</b> in their areas
 policy_description: "Local Government should retain more of their area's business
   rates. "
 notes: ''
 status: active
-group_ids:
-- reform
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- reform
+division_links:
+- decision:
     chamber_slug: commons
     date: 2012-01-10
     division_number: 414
@@ -22,7 +22,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-01-11
     division_number: 418
@@ -31,7 +31,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-01-18
     division_number: 424
@@ -40,7 +40,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-05-21
     division_number: 6
@@ -49,7 +49,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-05-21
     division_number: 7
@@ -58,7 +58,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-02-13
     division_number: 163
@@ -67,7 +67,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-03-20
     division_number: 371
@@ -76,3 +76,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

@@ -1,17 +1,17 @@
 id: 6804
 name: More Anti-Terrorism Laws
-chamber_id: commons
 context_description: <b>more anti-terrorism laws</b>
 policy_description: There have been votes in Parliament on new and strengthened laws
   intended to tackle terrorism.
 notes: ''
 status: draft
-group_ids:
-- misc
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- misc
+division_links:
+- decision:
     chamber_slug: commons
     date: 2018-09-11
     division_number: 235
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-09-11
     division_number: 238
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-07-21
     division_number: 83
@@ -38,3 +38,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

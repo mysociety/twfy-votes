@@ -1,17 +1,17 @@
 id: 6753
 name: new high speed rail infrastructure
-chamber_id: commons
 context_description: new <b>high speed rail</b> infrastructure
 policy_description: the HS2 rail link ought be built between London and Birmingham
 notes: ''
 status: active
-group_ids:
-- environment
-- business
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- environment
+- business
+division_links:
+- decision:
     chamber_slug: commons
     date: 2013-06-26
     division_number: 35
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-06-26
     division_number: 36
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-10-31
     division_number: 117
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-04-28
     division_number: 254
@@ -47,7 +47,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-04-28
     division_number: 255
@@ -56,7 +56,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-03-23
     division_number: 231
@@ -65,7 +65,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2017-06-29
     division_number: 4
@@ -74,7 +74,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-01-30
     division_number: 109
@@ -83,7 +83,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2019-07-15
     division_number: 435
@@ -92,7 +92,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-12-08
     division_number: 144
@@ -101,3 +101,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

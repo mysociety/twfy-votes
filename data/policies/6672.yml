@@ -1,19 +1,19 @@
 id: 6672
 name: reducing housing benefit for social tenants deemed to have excess bedrooms (which
   Labour describe as the "bedroom tax")
-chamber_id: commons
 context_description: reducing <b>housing benefit</b> for social tenants deemed to
   have excess bedrooms (which Labour describe as the "bedroom tax")
 policy_description: housing related benefits should be reduced for social housing
   tenants who are deemed to have excess bedrooms.
 notes: ''
 status: active
-group_ids:
-- welfare
 strength_meaning: classic
 highlightable: true
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- welfare
+division_links:
+- decision:
     chamber_slug: commons
     date: 2011-03-09
     division_number: 219
@@ -22,7 +22,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-03-09
     division_number: 220
@@ -31,7 +31,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-06-15
     division_number: 297
@@ -40,7 +40,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-02-01
     division_number: 459
@@ -49,7 +49,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-02-21
     division_number: 472
@@ -58,7 +58,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-10-24
     division_number: 84
@@ -67,7 +67,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-02-27
     division_number: 167
@@ -76,7 +76,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-11-12
     division_number: 126
@@ -85,7 +85,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-11-12
     division_number: 127
@@ -94,7 +94,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2013-12-18
     division_number: 164
@@ -103,7 +103,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-02-12
     division_number: 211
@@ -112,7 +112,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-02-26
     division_number: 214
@@ -121,7 +121,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-09-05
     division_number: 47
@@ -130,7 +130,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-10-14
     division_number: 55
@@ -139,7 +139,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-11-26
     division_number: 97
@@ -148,7 +148,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-12-17
     division_number: 120
@@ -157,7 +157,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-12-17
     division_number: 121
@@ -166,7 +166,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2018-05-08
     division_number: 149
@@ -175,3 +175,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

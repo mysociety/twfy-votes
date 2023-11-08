@@ -1,17 +1,17 @@
 id: 6696
 name: the introduction of elected Police and Crime Commissioners
-chamber_id: commons
 context_description: the introduction of elected <b>Police and Crime Commissioners</b>
 policy_description: Elected Police and Crime Commissioners ought be responsible for
   local policing and crime strategy.
 notes: ''
 status: active
-group_ids:
-- home
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- home
+division_links:
+- decision:
     chamber_slug: commons
     date: 2010-09-08
     division_number: 57
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-12-13
     division_number: 152
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-12-13
     division_number: 154
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-03-30
     division_number: 242
@@ -47,7 +47,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-03-31
     division_number: 249
@@ -56,7 +56,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-05-23
     division_number: 285
@@ -65,7 +65,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-09-12
     division_number: 345
@@ -74,7 +74,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-07-04
     division_number: 42
@@ -83,7 +83,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2012-10-24
     division_number: 86
@@ -92,3 +92,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

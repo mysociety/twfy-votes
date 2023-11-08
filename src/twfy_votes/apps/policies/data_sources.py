@@ -32,14 +32,14 @@ class policy_votes(YamlData[PartialPolicy]):
         data: list[dict[str, Any]] = []
 
         for policy in models:
-            for decision in policy.decision_links_refs:
-                if decision.division:
+            for decision in policy.division_links:
+                if decision.decision:
                     data.append(
                         {
                             "policy_id": policy.id,
-                            "division_date": decision.division.date,
-                            "chamber": decision.division.chamber_slug,
-                            "division_number": decision.division.division_number,
+                            "division_date": decision.decision.date,
+                            "chamber": decision.decision.chamber_slug,
+                            "division_number": decision.decision.division_number,
                             "strength": decision.strength,
                             "strong_int": 1
                             if decision.strength == PolicyStrength.STRONG
@@ -159,7 +159,7 @@ class policy_alignment:
         pw_mp using (mp_id)
     where
         policy_votes.alignment != 'neutral'
-        and chamber = {{ _chamber_slug }}
+        and policies.chamber = {{ _chamber_slug }}
         and ( -- here we want either the persons own divisions, or the divisions of the party they are in.
             pw_mp.person = {{ _person_id }}
             or

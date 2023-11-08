@@ -1,18 +1,18 @@
 id: 996
 name: a transparent Parliament
-chamber_id: commons
 context_description: a <b>transparent Parliament</b>
 policy_description: the Freedom of Information Act should not be changed to exclude
   Parliament or all correspondence between MPs and any part of government, and that
   expenses, the Register of Members' Interests &c. should be more public
 notes: ''
 status: active
-group_ids:
-- reform
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- reform
+division_links:
+- decision:
     chamber_slug: commons
     date: 2007-04-20
     division_number: 94
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-04-20
     division_number: 95
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-05-18
     division_number: 118
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-05-18
     division_number: 119
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-05-18
     division_number: 120
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-05-18
     division_number: 121
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-05-18
     division_number: 122
@@ -75,7 +75,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2007-05-18
     division_number: 123
@@ -84,7 +84,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-07-03
     division_number: 253
@@ -93,7 +93,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-04-30
     division_number: 106
@@ -102,7 +102,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-04-30
     division_number: 109
@@ -111,3 +111,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

@@ -1,17 +1,17 @@
 id: 6741
 name: greater regulation of hydraulic fracturing (fracking) to extract shale gas
-chamber_id: commons
 context_description: greater regulation of <b>hydraulic fracturing (fracking)</b>
   to extract shale gas
 policy_description: there should be greater regulation of shale gas extraction.
 notes: ''
 status: active
-group_ids:
-- environment
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- environment
+division_links:
+- decision:
     chamber_slug: commons
     date: 2015-01-26
     division_number: 137
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-01-26
     division_number: 139
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-02-11
     division_number: 156
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-12-16
     division_number: 151
@@ -47,3 +47,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

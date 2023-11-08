@@ -1,17 +1,17 @@
 id: 811
 name: smoking bans
-chamber_id: commons
 context_description: <b>smoking bans</b>
 policy_description: all smoking should be banned
 notes: ''
 status: active
-group_ids:
-- social
-- health
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- social
+- health
+division_links:
+- decision:
     chamber_slug: commons
     date: 1999-05-04
     division_number: 164
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-04-14
     division_number: 162
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2005-03-18
     division_number: 148
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2006-02-14
     division_number: 163
@@ -47,7 +47,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2006-02-14
     division_number: 164
@@ -56,7 +56,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2006-02-14
     division_number: 165
@@ -65,7 +65,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2006-02-14
     division_number: 166
@@ -74,7 +74,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2010-10-13
     division_number: 70
@@ -83,7 +83,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-06-22
     division_number: 303
@@ -92,7 +92,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2014-02-10
     division_number: 207
@@ -101,7 +101,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-02-11
     division_number: 152
@@ -110,7 +110,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2006-06-19
     division_number: 1
@@ -119,7 +119,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: scotland
     date: 2005-06-30
     division_number: 10
@@ -128,3 +128,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

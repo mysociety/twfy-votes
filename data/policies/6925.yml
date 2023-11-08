@@ -1,18 +1,18 @@
 id: 6925
 name: Higher Taxes Specifically to Fund Health and Care
-chamber_id: commons
 context_description: <b>higher taxes specifically to fund health and care</b>
 policy_description: There have been votes in Parliament on a "Health and Social Care
   Levy", additional taxes ring-fenced for spending only on Health and Care
 notes: ''
 status: candidate
-group_ids:
-- taxation
-- health
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- taxation
+- health
+division_links:
+- decision:
     chamber_slug: commons
     date: 2021-09-08
     division_number: 63
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-09-14
     division_number: 68
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-09-14
     division_number: 69
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-09-14
     division_number: 73
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-03-29
     division_number: 235
@@ -57,3 +57,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

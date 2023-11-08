@@ -1,16 +1,16 @@
 id: 6743
 name: charging a market rent to high earners renting a council home
-chamber_id: commons
 context_description: charging a <b>market rent to high earners renting a council home</b>
 policy_description: Higher Earners should pay market rates for council homes
 notes: ''
 status: active
-group_ids:
-- housing
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- housing
+division_links:
+- decision:
     chamber_slug: commons
     date: 2015-11-02
     division_number: 104
@@ -19,7 +19,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-11-02
     division_number: 105
@@ -28,7 +28,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2015-11-02
     division_number: 106
@@ -37,7 +37,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-01-12
     division_number: 163
@@ -46,7 +46,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-05-03
     division_number: 260
@@ -55,3 +55,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

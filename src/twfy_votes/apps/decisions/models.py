@@ -403,11 +403,14 @@ class DivisionInfo(BaseModel):
     @classmethod
     async def from_partials(cls, partials: list[PartialDivision]) -> list[DivisionInfo]:
         duck = await duck_core.child_query()
-        if not partials:
-            return []
-        return await DivisionQueryKeys(keys=[x.key for x in partials]).to_model_list(
-            model=DivisionInfo, duck=duck
-        )
+        if len(partials) == 0:
+            items = []
+        else:
+            items = await DivisionQueryKeys(
+                keys=[x.key for x in partials]
+            ).to_model_list(model=DivisionInfo, duck=duck)
+
+        return items
 
     @classmethod
     async def from_partial(cls, partial: PartialDivision) -> DivisionInfo:

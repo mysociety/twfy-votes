@@ -1,17 +1,17 @@
 id: 6897
 name: State Pension Age
-chamber_id: commons
 context_description: <b>increasing the state pension age</b>
 policy_description: There have been votes in Parliament on increasing the state pension
   age
 notes: ''
 status: candidate
-group_ids:
-- welfare
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- welfare
+division_links:
+- decision:
     chamber_slug: commons
     date: 2011-06-08
     division_number: 287
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-06-20
     division_number: 299
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-10-18
     division_number: 367
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2011-10-18
     division_number: 368
@@ -47,7 +47,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-12-01
     division_number: 101
@@ -56,7 +56,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-11-16
     division_number: 109
@@ -65,7 +65,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-11-16
     division_number: 110
@@ -74,7 +74,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-02-02
     division_number: 183
@@ -83,3 +83,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

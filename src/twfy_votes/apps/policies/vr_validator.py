@@ -201,11 +201,11 @@ async def get_mp_dates(person_id: int):
     return df
 
 
-async def votes_from_decision_link(decision_link: PolicyDecisionLink) -> list[Vote]:
+async def votes_from_decision_link(
+    decision_link: PolicyDecisionLink[DivisionInfo]
+) -> list[Vote]:
     duck = await duck_core.child_query()
 
-    if not isinstance(decision_link.decision, DivisionInfo):
-        raise ValueError("Decision link must be a division")
     votes = await DivisionVotesQuery(
         division_date=decision_link.decision.date,
         division_number=decision_link.decision.division_number,
@@ -244,12 +244,10 @@ async def get_scores_slow(
         return mask.any()
 
     # iterate through all divisions
-    for decision_link in policy.decision_links:
+    for decision_link in policy.division_links:
         # ignore neutral policies
         if decision_link.alignment == PolicyDirection.NEUTRAL:
             continue
-        if not isinstance(decision_link.decision, DivisionInfo):
-            raise ValueError("Decision link must be a division")
         if decision_link.decision.chamber.slug != chamber:
             continue
 

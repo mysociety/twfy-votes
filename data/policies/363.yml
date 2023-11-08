@@ -1,16 +1,16 @@
 id: 363
 name: introducing foundation hospitals
-chamber_id: commons
 context_description: introducing <b>foundation hospitals</b>
 policy_description: foundation hospitals should be introduced
 notes: ''
 status: active
-group_ids:
-- health
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- health
+division_links:
+- decision:
     chamber_slug: commons
     date: 2003-01-08
     division_number: 42
@@ -19,7 +19,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-01-08
     division_number: 43
@@ -28,7 +28,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-05-07
     division_number: 177
@@ -37,7 +37,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-05-07
     division_number: 178
@@ -46,7 +46,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-07-08
     division_number: 280
@@ -55,7 +55,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-07-08
     division_number: 281
@@ -64,7 +64,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-07-08
     division_number: 282
@@ -73,7 +73,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-11-19
     division_number: 381
@@ -82,7 +82,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-11-19
     division_number: 388
@@ -91,3 +91,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

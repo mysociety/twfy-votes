@@ -1,17 +1,17 @@
 id: 6862
 name: Planning Law
-chamber_id: commons
 context_description: more <b>restrictive planning laws</b>
 policy_description: There have been votes in Parliament on if planning laws should
   be relaxed on strengthened.
 notes: ''
 status: candidate
-group_ids:
-- housing
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- housing
+division_links:
+- decision:
     chamber_slug: commons
     date: 2020-09-30
     division_number: 122
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-30
     division_number: 123
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-30
     division_number: 124
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-05-26
     division_number: 16
@@ -47,7 +47,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-06-21
     division_number: 30
@@ -56,7 +56,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-07-14
     division_number: 54
@@ -65,3 +65,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

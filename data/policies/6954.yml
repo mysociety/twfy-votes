@@ -1,6 +1,5 @@
 id: 6954
 name: Crimes Motivated by Hostility Towards Sex or Gender of the Victim
-chamber_id: commons
 context_description: <b>treating crimes motivated by hostility towards the sex or
   gender of the victim more seriously</b>
 policy_description: There have been votes in Parliament on if to treat the fact a
@@ -9,12 +8,13 @@ policy_description: There have been votes in Parliament on if to treat the fact 
   on such crimes.
 notes: ''
 status: draft
-group_ids:
-- home
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- home
+division_links:
+- decision:
     chamber_slug: commons
     date: 2022-02-28
     division_number: 194
@@ -23,7 +23,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-03-28
     division_number: 232
@@ -32,3 +32,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

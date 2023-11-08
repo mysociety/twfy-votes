@@ -1,18 +1,18 @@
 id: 1071
 name: allowing ministers to intervene in inquests
-chamber_id: commons
 context_description: allowing ministers to <b>intervene in inquests</b>
 policy_description: "ministers should be able to legally intervene in a coroner's
   inquest and either order it to take place without a jury or suspend it and impose
   an inquiry in its place.  \r\n\r\n"
 notes: ''
 status: active
-group_ids:
-- home
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- home
+division_links:
+- decision:
     chamber_slug: commons
     date: 2008-06-10
     division_number: 217
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2008-06-10
     division_number: 218
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-01-26
     division_number: 21
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-11-09
     division_number: 241
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2009-11-12
     division_number: 248
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2009-11-11
     division_number: 1
@@ -66,3 +66,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

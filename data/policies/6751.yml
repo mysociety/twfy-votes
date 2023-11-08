@@ -1,6 +1,5 @@
 id: 6751
 name: mass surveillance of people&rsquo;s communications and activities
-chamber_id: commons
 context_description: <b>mass surveillance</b> of people&rsquo;s communications and
   activities
 policy_description: "the UK state should, subject to safeguards, be allowed to obtain,
@@ -8,12 +7,13 @@ policy_description: "the UK state should, subject to safeguards, be allowed to o
   eg. people's communications, health records, travel data etc. "
 notes: ''
 status: active
-group_ids:
-- home
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- home
+division_links:
+- decision:
     chamber_slug: commons
     date: 2016-03-15
     division_number: 220
@@ -22,7 +22,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-06-07
     division_number: 12
@@ -31,7 +31,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2016-06-07
     division_number: 13
@@ -40,3 +40,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

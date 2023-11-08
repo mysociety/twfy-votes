@@ -1,6 +1,5 @@
 id: 6859
 name: International Treaty Obligations
-chamber_id: commons
 context_description: fulfilling <b>international treaty obligations</b>
 policy_description: There have been votes in Parliament on the fulfilment of international
   treaty obligations. Specific votes have covered compliance with the agreement between
@@ -8,12 +7,13 @@ policy_description: There have been votes in Parliament on the fulfilment of int
   the union, and the treatment of those seeking asylum.
 notes: ''
 status: candidate
-group_ids:
-- foreignpolicy
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- foreignpolicy
+division_links:
+- decision:
     chamber_slug: commons
     date: 2018-07-17
     division_number: 224
@@ -22,7 +22,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-14
     division_number: 93
@@ -31,7 +31,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-14
     division_number: 94
@@ -40,7 +40,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-14
     division_number: 95
@@ -49,7 +49,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-21
     division_number: 103
@@ -58,7 +58,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-29
     division_number: 113
@@ -67,7 +67,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-29
     division_number: 116
@@ -76,7 +76,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-29
     division_number: 117
@@ -85,7 +85,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-09-29
     division_number: 118
@@ -94,7 +94,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-11-03
     division_number: 157
@@ -103,7 +103,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-11-03
     division_number: 158
@@ -112,7 +112,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-12-07
     division_number: 178
@@ -121,7 +121,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2020-12-08
     division_number: 180
@@ -130,7 +130,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-03-22
     division_number: 219
@@ -139,7 +139,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-03-22
     division_number: 228
@@ -148,7 +148,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-04-20
     division_number: 247
@@ -157,7 +157,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-04-20
     division_number: 248
@@ -166,7 +166,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-04-26
     division_number: 265
@@ -175,7 +175,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-04-26
     division_number: 266
@@ -184,3 +184,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

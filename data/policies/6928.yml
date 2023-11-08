@@ -1,18 +1,18 @@
 id: 6928
 name: Environmental Water Quality
-chamber_id: commons
 context_description: improving <b>environmental water quality</b>
 policy_description: There have been votes in Parliament on reducing the harm caused
   by untreated sewage discharges and on other matters impacting water quality in locations
   such as rivers, lakes and the sea.
 notes: ''
 status: candidate
-group_ids:
-- environment
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- environment
+division_links:
+- decision:
     chamber_slug: commons
     date: 2012-10-17
     division_number: 75
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-01-26
     division_number: 213
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-10-20
     division_number: 87
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-10-20
     division_number: 88
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-10-20
     division_number: 91
@@ -57,7 +57,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-11-08
     division_number: 104
@@ -66,7 +66,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2022-03-14
     division_number: 215
@@ -75,3 +75,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

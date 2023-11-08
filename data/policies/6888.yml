@@ -1,18 +1,18 @@
 id: 6888
 name: Air Quality
-chamber_id: commons
 context_description: improving <b>air quality</b>
 policy_description: There have been votes in Parliament on the weight given to environmental
   policies and principles when taking decisions, and in particular on targets for
   the levels of particulate matter in the air.
 notes: ''
 status: candidate
-group_ids:
-- environment
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- environment
+division_links:
+- decision:
     chamber_slug: commons
     date: 2021-01-26
     division_number: 213
@@ -21,7 +21,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-01-26
     division_number: 215
@@ -30,7 +30,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-10-20
     division_number: 86
@@ -39,7 +39,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-10-20
     division_number: 87
@@ -48,7 +48,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2021-10-20
     division_number: 88
@@ -57,3 +57,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []

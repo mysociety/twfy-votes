@@ -1,17 +1,17 @@
 id: 1050
 name: the hunting ban
-chamber_id: commons
 context_description: the <b>hunting ban</b>
 policy_description: people should not be allowed to hunt wild animals (primarily foxes)
   with hounds
 notes: ''
 status: active
-group_ids:
-- social
 strength_meaning: classic
 highlightable: false
-decision_links_refs:
-- division:
+chamber: commons
+groups:
+- social
+division_links:
+- decision:
     chamber_slug: commons
     date: 2002-03-18
     division_number: 197
@@ -20,7 +20,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2002-03-18
     division_number: 198
@@ -29,7 +29,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2002-03-18
     division_number: 199
@@ -38,7 +38,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-06-30
     division_number: 259
@@ -47,7 +47,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-06-30
     division_number: 260
@@ -56,7 +56,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2003-06-30
     division_number: 261
@@ -65,7 +65,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: commons
     date: 2004-09-15
     division_number: 250
@@ -74,7 +74,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2002-03-19
     division_number: 1
@@ -83,7 +83,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2002-03-19
     division_number: 3
@@ -92,7 +92,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2003-10-21
     division_number: 2
@@ -101,7 +101,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2003-10-28
     division_number: 3
@@ -110,7 +110,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2004-10-26
     division_number: 1
@@ -119,7 +119,7 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
-- division:
+- decision:
     chamber_slug: lords
     date: 2004-11-11
     division_number: 1
@@ -128,3 +128,4 @@ decision_links_refs:
   status: active
   notes: ''
   decision_type: division
+agreement_links: []
