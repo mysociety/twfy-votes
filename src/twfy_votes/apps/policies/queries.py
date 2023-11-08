@@ -72,7 +72,9 @@ class PolicyPivotTable(BaseQuery):
         sum(num_divisions_absent) filter (where strong_int = 1) as num_strong_votes_absent,
         sum(num_divisions_abstained) filter (where strong_int = 0) as num_votes_abstained,
         sum(num_divisions_abstained) filter (where strong_int = 1) as num_strong_votes_abstained,
-        list(num_comparators) as num_comparators
+        list(num_comparators) as num_comparators,
+        min(division_year) as start_year,
+        max(division_year) as end_year
         from comparisons_by_policy_vote({{ person_id }}, {{ chamber_slug }}, {{ party_slug }})
         group by is_target, policy_id
     """
