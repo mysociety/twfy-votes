@@ -9,6 +9,7 @@ from twfy_votes.apps.policies.models import PersonPolicyLink
 from ...helpers.static_fastapi.static import StaticAPIRouter
 from ...internal.settings import settings
 from ..core.dependencies import GetContext
+from .dependencies import GetPopoloPolicy
 
 router = StaticAPIRouter(template_directory=settings.template_dir)
 
@@ -29,3 +30,11 @@ async def twfy_compatible_xml_policy(context: GetContext, policy_id: int):
     pretty = minidom.parseString(str_xml).toprettyxml(indent="  ")
 
     return Response(content=pretty, media_type="application/xml")
+
+
+@router.get("/twfy-compatible/popolo/{policy_id}.json")
+async def twfy_compatible_popolo_policy(policy: GetPopoloPolicy):
+    """
+    Generate a TheyWorkForYou compatible JSON file for a policy
+    """
+    return policy
