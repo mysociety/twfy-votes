@@ -72,27 +72,30 @@ class DuckQuery:
         self.queries_to_cache: list[QueryToCache] = []
 
     @classmethod
-    async def _async_create_connection(cls):
-        connection = await aioduckdb.connect(":memory:")
+    async def _async_create_connection(cls, database: str):
+        connection = await aioduckdb.connect(database)
         await connection.execute("INSTALL httpfs")
         return connection
 
     @classmethod
     async def async_create(
-        cls, connection: Any = None, namespace: str = ""
+        cls, connection: Any = None, namespace: str = "", database: str = ":memory:"
     ) -> ConnectedDuckQuery[AsyncDuckResponse]:
         if not connection:
-            connection = await cls._async_create_connection()
+            connection = await cls._async_create_connection(database)
         return ConnectedDuckQuery[AsyncDuckResponse](
             namespace=namespace, connection=connection, response_type=AsyncDuckResponse
         )
 
     @classmethod
     def connect(
-        cls, namespace: str = "", connection: ConnectionType | None = NotImplemented
+        cls,
+        namespace: str = "",
+        connection: ConnectionType | None = NotImplemented,
+        database: str = ":memory:",
     ) -> ConnectedDuckQuery[DuckResponse]:
         if not connection:
-            connection = duckdb.connect(":memory:")
+            connection = duckdb.connect(database)
 
         return ConnectedDuckQuery[DuckResponse](
             namespace=namespace, connection=connection, response_type=DuckResponse
@@ -328,7 +331,11 @@ class AsyncDuckDBManager:
     Should be initalised only once in a project.
     """
 
-    def __init__(self):
+    def __init__(
+        self, *, database: str | Path = ":memory:", destroy_existing: bool = False
+    ):
+        self.database = database
+        self.destroy_existing = destroy_existing
         self._core: ConnectedDuckQuery[AsyncDuckResponse] | None = None
 
     async def close(self):
@@ -343,8 +350,16 @@ class AsyncDuckDBManager:
         if self._core:
             return self._core
 
-        self._core = await DuckQuery.async_create()
+        if self.destroy_existing:
+            self.delete_database()
+
+        self._core = await DuckQuery.async_create(database=str(self.database))
         return self._core
+
+    def delete_database(self):
+        if isinstance(self.database, Path) or self.database.endswith(".duckdb"):
+            if (p := Path(self.database)).exists():
+                p.unlink(missing_ok=True)
 
     async def get_loaded_core(self, queries: list[DuckQuery]):
         core = await self.get_core()

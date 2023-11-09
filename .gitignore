@@ -16,3 +16,5 @@ dist
 _site
 .env
 data/cached
+*.duckdb
+*.duckdb.wal
