@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}{{ settings.site_name }}{% endblock %}
+
+
+{% block content %}
+
+<h1>{{ item.person.name }}</h1>
+
+
+<h2>Options</h2>
+
+<ul>
+    <li>
+        <a href="{{ url_for('person_votes', person_id=item.person.person_id) }}">All recorded votes.</a>
+    </li>
+    {% for record in item.records %}
+
+    <li>
+        <a
+            href="{{ url_for('person_policy', person_id=item.person.person_id, chamber_slug=record.chamber.slug, party_id=record.party ) }}">Voting
+            record comparison with {{ record.party }}</a>
+
+    </li>
+    {% endfor %}
+</ul>
+
+
+
+
+{% endblock content %}

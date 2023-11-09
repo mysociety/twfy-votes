@@ -6,6 +6,7 @@ from ..core.dependencies import GetContext
 from ..decisions.dependencies import AllChambers
 from .dependencies import (
     GetGroupsAndPolicies,
+    GetPersonPolicy,
     GetPolicy,
     GetPolicyCollection,
 )
@@ -52,3 +53,15 @@ async def policy(context: GetContext, policy: GetPolicy):
 @router.get("/policy/{policy_id}.json")
 async def api_policy(policy: GetPolicy):
     return policy
+
+
+@router.get_html("/person/{person_id}/records/{chamber_slug}/{party_id}")
+@router.use_template("person_policies.html")
+async def person_policy(context: GetContext, person_policy: GetPersonPolicy):
+    context["item"] = person_policy
+    return context
+
+
+@router.get("/person/{person_id}/records/{chamber_slug}/{party_id}.json")
+async def api_person_policy(person_policy: GetPersonPolicy):
+    return person_policy

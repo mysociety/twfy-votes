@@ -16,6 +16,7 @@ from ...helpers.data.models import StrEnum
 from ...helpers.data.style import UrlColumn, style_df
 from ...internal.common import absolute_url_for
 from ...internal.db import duck_core
+from ..policies.queries import GetPersonParties
 from .analysis import is_nonaction_vote
 from .queries import (
     ChamberDivisionsQuery,
@@ -175,7 +176,10 @@ class Person(BaseModel):
     @classmethod
     async def fetch_all(cls) -> list[Person]:
         duck = await duck_core.child_query()
-        return await GetAllPersonsQuery().to_model_list(model=Person, duck=duck)
+        models = await GetAllPersonsQuery().to_model_list(model=Person, duck=duck)
+        # make unique on person_id
+        unique_models = {x.person_id: x for x in models}
+        return list(unique_models.values())
 
 
 class Vote(BaseModel):
@@ -633,3 +637,40 @@ class DivisionAndVotes(BaseModel):
 
         df = pd.DataFrame(data=data)
         return style_df(df, percentage_columns=["Party alignment"])
+
+
+class VotingRecordLink(BaseModel):
+    chamber: Chamber
+    party: str
+
+
+class PersonAndRecords(BaseModel):
+    person: Person
+    records: list[VotingRecordLink]
+
+    @classmethod
+    async def from_person(cls, person: Person):
+        """
+        Given a person ID get a list of the possible comparison party and chambers
+        """
+
+        duck = await duck_core.child_query()
+
+        # broaden for any chambers that the person has been a member of if we add more voting records
+        # using this version of the app
+        allowed_chambers = [AllowedChambers.COMMONS]
+        parties = []
+        voting_record_links = []
+        for a in allowed_chambers:
+            party_df = (
+                await GetPersonParties(chamber_slug=a, person_id=person.person_id)
+                .compile(duck)
+                .df()
+            )
+            parties = party_df["party"].tolist()
+            for p in parties:
+                voting_record_links.append(
+                    VotingRecordLink(chamber=Chamber(slug=a), party=p)
+                )
+
+        return PersonAndRecords(person=person, records=voting_record_links)

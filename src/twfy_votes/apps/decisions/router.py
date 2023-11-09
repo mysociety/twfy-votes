@@ -8,6 +8,7 @@ from .dependencies import (
     GetChambersWithYearRange,
     GetDivisionAndVotes,
     GetDivisionListing,
+    GetPersonAndRecords,
     GetPersonAndVotes,
 )
 
@@ -40,7 +41,7 @@ async def person_votes(context: GetContext, person_and_votes: GetPersonAndVotes)
 
 
 @router.get("/person/{person_id}/votes.json")
-async def api_person(person_and_votes: GetPersonAndVotes):
+async def api_person_votes(person_and_votes: GetPersonAndVotes):
     return person_and_votes
 
 
@@ -88,3 +89,15 @@ async def divisions_list(context: GetContext, division_list: GetDivisionListing)
 async def divisions_list_month(context: GetContext, division_list: GetDivisionListing):
     context["search"] = division_list
     return context
+
+
+@router.get_html("/person/{person_id}/")
+@router.use_template("person.html")
+async def person(context: GetContext, person_and_parties: GetPersonAndRecords):
+    context["item"] = person_and_parties
+    return context
+
+
+@router.get("/person/{person_id}.json")
+async def api_person(person_and_parties: GetPersonAndRecords):
+    return person_and_parties

@@ -20,6 +20,7 @@ from ..decisions.models import (
     DivisionInfo,
     PartialAgreement,
     PartialDivision,
+    Person,
 )
 from ..decisions.queries import DivisionBreakDownQuery
 from .queries import (
@@ -534,7 +535,7 @@ class VoteDistribution(BaseModel):
         )
 
         self.distance_score = score
-        self.similarity_score = 1 - score
+        self.similarity_score = 1.0 - score
 
     def score_v2(self):
         raise NotImplementedError("Not yet implemented")
@@ -609,7 +610,8 @@ class PersonPolicyLink(BaseModel):
 
     def score(self):
         self.comparison_score_difference = abs(
-            self.own_distribution.distance_score - self.comparison_score_difference
+            self.own_distribution.distance_score
+            - self.other_distribution.distance_score
         )
         return self
 
@@ -689,3 +691,102 @@ class PersonPolicyLink(BaseModel):
                 ).score()
             )
         return items
+
+
+class ConnectedPolicyLink(BaseModel):
+    policy: Policy
+    link: PersonPolicyLink
+
+
+class PolicyLinkDisplayGroup(BaseModel):
+    name: str
+    links: list[ConnectedPolicyLink]
+
+    def as_df(self, request: Request) -> str:
+        class GroupTableItem(BaseModel):
+            policy_name: str
+            policy_status: str
+            person_score: float
+            person_score_verbose: str
+            comparison_score: float
+            diff: float
+            sig_diff: bool
+
+        items: list[GroupTableItem] = []
+        for link in self.links:
+            item = GroupTableItem(
+                policy_name=str(
+                    UrlColumn(
+                        url=link.policy.url(request=request), text=link.policy.name
+                    )
+                ),
+                policy_status=link.policy.status,
+                person_score=link.link.own_distribution.distance_score,
+                person_score_verbose=link.link.own_distribution.verbose_score,
+                comparison_score=link.link.other_distribution.distance_score,
+                diff=link.link.comparison_score_difference,
+                sig_diff=link.link.significant_difference,
+            )
+            items.append(item)
+
+        df = pd.DataFrame(data=[x.model_dump() for x in items])
+
+        return style_df(df, percentage_columns=["person_score", "comparison_score"])
+
+
+class PersonPolicyDisplay(BaseModel):
+    person: Person
+    comparison_party: str
+    chamber: Chamber
+    links: list[ConnectedPolicyLink]
+
+    @classmethod
+    async def from_person_and_party(
+        cls, person_id: int, chamber_slug: AllowedChambers, comparison_party: str
+    ):
+        all_policies = await Policy.for_collection(chamber=chamber_slug)
+
+        allowed_status = [PolicyStatus.ACTIVE, PolicyStatus.CANDIDATE]
+
+        policy_lookup = {x.id: x for x in all_policies if x.status in allowed_status}
+
+        links = await PersonPolicyLink.from_person_id(person_id=person_id)
+        # narrow down to just ones for right party
+        links = [x for x in links if x.comparison_party == comparison_party]
+
+        connected_links: list[ConnectedPolicyLink] = []
+        for link in links:
+            policy = policy_lookup.get(link.policy_id, None)
+            if not policy:
+                # filter out drafts
+                continue
+            connected_links.append(ConnectedPolicyLink(policy=policy, link=link))
+
+        person = await Person.from_id(person_id=person_id)
+        chamber = Chamber(slug=chamber_slug)
+
+        return cls(
+            person=person,
+            comparison_party=comparison_party,
+            chamber=chamber,
+            links=connected_links,
+        )
+
+    def display_groups(self) -> list[PolicyLinkDisplayGroup]:
+        return [self.significant_policy_group()] + self.policies_by_group()
+
+    def significant_policy_group(self) -> PolicyLinkDisplayGroup:
+        links = [x for x in self.links if x.link.significant_difference]
+        return PolicyLinkDisplayGroup(name="Significant policies", links=links)
+
+    def policies_by_group(self) -> list[PolicyLinkDisplayGroup]:
+        """
+        Return a list of groups to display
+        """
+        groups = []
+        for group_slug in PolicyGroupSlug:
+            group = PolicyGroup(slug=group_slug)
+            links = [x for x in self.links if group in x.policy.groups]
+            groups.append(PolicyLinkDisplayGroup(name=group.name, links=links))
+
+        return groups

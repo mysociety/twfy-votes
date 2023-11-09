@@ -12,7 +12,8 @@
 
 <ul>
     {% for person in people %}
-    <li>{{ person.person_id }} - {{ person.name }}</li>
+    <li><a href="{{ url_for('person', person_id=person.person_id) }}">{{ person.person_id }} - {{ person.name }}</a>
+    </li>
     {% endfor %}
 </ul>
 

@@ -189,7 +189,7 @@ class PolicyDistributionPersonQuery(BaseQuery):
         pw_comparison_party using (person_id, chamber, comparison_party)
     {% endif %}
     where
-        policy_id = {{ policy_id }}
+        person_id = {{ person_id }}
     """
     person_id: int
     single_comparisons: bool = False

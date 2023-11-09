@@ -20,6 +20,7 @@ from .models import (
     PartialDivision,
     Person,
     PersonAndVotes,
+    PersonAndRecords,
 )
 
 
@@ -102,3 +103,11 @@ async def GetAllPeople() -> list[Person]:
     Get a list of all people
     """
     return await Person.fetch_all()
+
+
+@dependency_alias_for(PersonAndRecords)
+async def GetPersonAndRecords(person: GetPerson) -> PersonAndRecords:
+    """
+    Fetch the full votes from a division object
+    """
+    return await PersonAndRecords.from_person(person)

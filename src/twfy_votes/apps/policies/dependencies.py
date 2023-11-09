@@ -12,6 +12,7 @@ from typing import Literal
 from ...helpers.static_fastapi.dependencies import dependency_alias_for
 from .models import (
     AllowedChambers,
+    PersonPolicyDisplay,
     Policy,
     PolicyCollection,
     PolicyGroupSlug,
@@ -48,3 +49,12 @@ async def GetGroupsAndPolicies():
 @dependency_alias_for(Policy)
 async def GetPolicy(policy_id: int):
     return await Policy.from_id(id=policy_id)
+
+
+@dependency_alias_for(PersonPolicyDisplay)
+async def GetPersonPolicy(person_id: int, chamber_slug: AllowedChambers, party_id: str):
+    return await PersonPolicyDisplay.from_person_and_party(
+        person_id=person_id,
+        comparison_party=party_id,
+        chamber_slug=chamber_slug,
+    )

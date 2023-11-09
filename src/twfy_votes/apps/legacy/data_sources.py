@@ -1,5 +1,6 @@
 """
-This module loads legacy data from public whip to populate data here
+This module loads legacy data from public whip to populate initial data here.
+Isn't used in a running app.
 """
 
 
