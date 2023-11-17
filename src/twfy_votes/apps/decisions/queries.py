@@ -179,6 +179,20 @@ class GetAllPersonsQuery(BaseQuery):
     """
 
 
+class GetCurrentPeopleQuery(BaseQuery):
+    query_template = """
+    SELECT
+        pd_people.*,
+        pd_memberships.end_date
+    FROM
+        pd_people
+    JOIN pd_memberships using (person_id)
+    where pd_memberships.end_date is null
+    ORDER BY
+        person_id
+    """
+
+
 class GetLastParty(BaseQuery):
     query_template = """
     SELECT

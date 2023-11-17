@@ -217,9 +217,19 @@ class pd_people:
     """
 
 
+@duck.as_source
+class source_pd_memberships:
+    source = politician_data / "memberships.parquet"
+
+
 @duck.as_table
 class pd_memberships:
-    source = politician_data / "memberships.parquet"
+    query = """
+    select
+        * exclude (person_id),
+        split(person_id, '/')[-1] as person_id,
+    from source_pd_memberships
+    """
 
 
 @duck.as_table

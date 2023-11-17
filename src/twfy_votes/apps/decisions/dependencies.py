@@ -8,7 +8,7 @@ simple and declarative.
 from __future__ import annotations
 
 import datetime
-
+from typing import Literal
 from ...helpers.static_fastapi.dependencies import dependency_alias_for
 from .models import (
     AllowedChambers,
@@ -98,11 +98,11 @@ async def GetPersonAndVotes(person: GetPerson) -> PersonAndVotes:
 
 
 @dependency_alias_for(list[Person])
-async def GetAllPeople() -> list[Person]:
+async def GetPeopleList(people_option: Literal["current", "all"]) -> list[Person]:
     """
     Get a list of all people
     """
-    return await Person.fetch_all()
+    return await Person.fetch_group(people_option)
 
 
 @dependency_alias_for(PersonAndRecords)

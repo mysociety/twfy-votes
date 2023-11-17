@@ -24,6 +24,7 @@ from .queries import (
     DivisionQueryKeys,
     DivisionVotesQuery,
     GetAllPersonsQuery,
+    GetCurrentPeopleQuery,
     GetPersonQuery,
     GovDivisionBreakDownQuery,
     PartyDivisionBreakDownQuery,
@@ -172,6 +173,21 @@ class Person(BaseModel):
             model=cls, validate=GetPersonQuery.validate.NOT_ZERO, duck=duck
         )
         return person_objects[0]
+
+    @classmethod
+    async def fetch_group(cls, option: Literal["all", "current"]) -> list[Person]:
+        duck = await duck_core.child_query()
+        if option == "all":
+            models = await GetAllPersonsQuery().to_model_list(model=Person, duck=duck)
+        elif option == "current":
+            models = await GetCurrentPeopleQuery().to_model_list(
+                model=Person, duck=duck
+            )
+        else:
+            raise ValueError(f"Invalid option {option}")
+        # make unique on person_id
+        unique_models = {x.person_id: x for x in models}
+        return list(unique_models.values())
 
     @classmethod
     async def fetch_all(cls) -> list[Person]:
