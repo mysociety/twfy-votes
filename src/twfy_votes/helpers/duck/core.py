@@ -27,6 +27,7 @@ import rich
 from jinja2 import Template
 from typing_extensions import Self
 
+from ..data.models import data_to_yaml
 from .funcs import get_name
 from .query_funcs import (
     get_compiled_query,
@@ -365,7 +366,36 @@ class AsyncDuckDBManager:
         core = await self.get_core()
         for query in queries:
             await core.compile(query).run_on_self()
+        await self.create_schema_yaml()
         return core
+
+    async def create_schema_yaml(self):
+        """
+        Create a schema yaml to reflect changes in database sources
+        """
+        duck = await self.get_core()
+
+        df = await duck.compile("show tables").df()
+
+        tables_list = df["name"].tolist()
+
+        async def get_records_dict(table: str):
+            df = await duck.compile(
+                "describe {{table | sqlsafe}}", {"table": table}
+            ).df()
+            df = df.loc[~df["column_name"].str.contains("__index_level_0__")]
+            df = df.drop_duplicates(subset=["column_name"])
+            return df.set_index("column_name")["column_type"].to_dict()
+
+        items = {t: await get_records_dict(t) for t in tables_list}
+
+        schema_path = Path("databases", "schema.yaml")
+        data_to_yaml(items, schema_path)
+        txt = (
+            "# This is an automatically generated file on database load to reflect changes in tables\n"
+            + schema_path.read_text()
+        )
+        schema_path.write_text(txt)
 
     async def create_cached_queries(self):
         query_template = """
