@@ -4,10 +4,10 @@ from ...helpers.static_fastapi.static import StaticAPIRouter
 from ...internal.settings import settings
 from ..core.dependencies import GetContext
 from .dependencies import (
-    GetPeopleList,
     GetChambersWithYearRange,
     GetDivisionAndVotes,
     GetDivisionListing,
+    GetPeopleList,
     GetPersonAndRecords,
     GetPersonAndVotes,
 )
@@ -21,16 +21,16 @@ async def home(context: GetContext):
     return context
 
 
+@router.get("/people/{people_option}.json")
+async def api_people(people: GetPeopleList):
+    return people
+
+
 @router.get_html("/people/{people_option}")
 @router.use_template("people.html")
 async def people(context: GetContext, people: GetPeopleList):
     context["people"] = people
     return context
-
-
-@router.get("/people.json")
-async def api_people(people: GetPeopleList):
-    return people
 
 
 @router.get_html("/person/{person_id}/votes")

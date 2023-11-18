@@ -21,7 +21,7 @@ class GroupStatusPolicyQuery(BaseQuery):
     query_template = """
         select * from policies where
             {% if group %}
-                list_has(group_ids, {{ group }})
+                list_has(groups, {{ group }})
                 {% if status or chamber %} and {% endif %}
             {% endif %}
             {% if status %}
