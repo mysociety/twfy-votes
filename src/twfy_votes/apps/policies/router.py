@@ -28,7 +28,12 @@ async def api_policies(groups_and_policies: GetGroupsAndPolicies):
     return groups_and_policies
 
 
-@router.get_html("/policies/{chamber_slug}/{status}/{group_slug}/")
+@router.get("/policies/{chamber_slug}/{status}/{group_slug}.json")
+async def api_policy_collection(policies: GetPolicyCollection):
+    return policies
+
+
+@router.get_html("/policies/{chamber_slug}/{status}/{group_slug}")
 @router.use_template("policy_collection.html")
 async def policy_collection(
     context: GetContext, policy_collection: GetPolicyCollection
@@ -37,9 +42,9 @@ async def policy_collection(
     return context
 
 
-@router.get("/policies/{chamber_slug}/{status}/{group_slug}.json")
-async def api_policy_collection(policies: GetPolicyCollection):
-    return policies
+@router.get("/policy/{policy_id}.json")
+async def api_policy(policy: GetPolicy):
+    return policy
 
 
 @router.get_html("/policy/{policy_id}")
@@ -50,9 +55,9 @@ async def policy(context: GetContext, policy: GetPolicy):
     return context
 
 
-@router.get("/policy/{policy_id}.json")
-async def api_policy(policy: GetPolicy):
-    return policy
+@router.get("/person/{person_id}/records/{chamber_slug}/{party_id}.json")
+async def api_person_policy(person_policy: GetPersonPolicy):
+    return person_policy
 
 
 @router.get_html("/person/{person_id}/records/{chamber_slug}/{party_id}")
@@ -60,8 +65,3 @@ async def api_policy(policy: GetPolicy):
 async def person_policy(context: GetContext, person_policy: GetPersonPolicy):
     context["item"] = person_policy
     return context
-
-
-@router.get("/person/{person_id}/records/{chamber_slug}/{party_id}.json")
-async def api_person_policy(person_policy: GetPersonPolicy):
-    return person_policy
