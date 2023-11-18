@@ -2,4 +2,5 @@
 
 
 poetry run pytest .
-poetry run ruff check .
+poetry run ruff check src
+poetry run ruff format src --check
