@@ -6,18 +6,19 @@ from pathlib import Path
 
 import rich
 
+from ...helpers.duck.core import AsyncDuckDBManager
 from ..core.db import duck_core
 from .analysis import get_commons_clusters
 
 
-async def process_cached_tables():
-    await duck_core.create_cached_queries()
+async def process_cached_tables(duck_manager: AsyncDuckDBManager = duck_core):
+    await duck_manager.create_cached_queries()
 
 
-async def create_commons_cluster():
+async def create_commons_cluster(duck_manager: AsyncDuckDBManager = duck_core):
     rich.print("[green]Creating Commons Votes clusters[/green]")
 
-    duck = await duck_core.child_query()
+    duck = await duck_manager.child_query()
 
     query = """
     select
