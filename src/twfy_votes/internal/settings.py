@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from typing import Annotated
 
+from pydantic import Field
 from pydantic.functional_validators import AfterValidator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -36,6 +37,7 @@ class Settings(BaseSettings):
     static_dir: RealPath = top_level / "static"
     render_dir: Path = top_level / "_site"
     base_url: str = base_url
+    server_production: bool = Field(default=False, alias="SERVER_PRODUCTION")
 
 
 settings = Settings()
