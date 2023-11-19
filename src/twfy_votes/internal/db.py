@@ -1,31 +1,24 @@
-import os
-import random
-import string
 from contextlib import asynccontextmanager
-from pathlib import Path
 
 from fastapi import FastAPI
 
 from ..helpers.duck.core import AsyncDuckDBManager, DuckQuery
-
-# make random database name
-
-SERVER_PRODUCTION = bool(os.environ.get("SERVER_PRODUCTION", False))
-
-# create random five character string
+from .settings import Settings
 
 
-if SERVER_PRODUCTION:
-    # Random string because this app is not *meant* to share a database
-    # Using a file is to reduce memory requirements in production
-    random_string = "".join(random.choices(string.ascii_lowercase + string.digits, k=5))
-    duck_core = AsyncDuckDBManager(
-        database=Path("databases", f"duck_{random_string}.duckdb"),
-        destroy_existing=True,
+def get_core():
+    settings = Settings()
+    if settings.server_production:
+        option = AsyncDuckDBManager.ConnectionOptions.FILE_DISPOSABLE
+    else:
+        option = AsyncDuckDBManager.ConnectionOptions.MEMORY
+
+    return AsyncDuckDBManager(
+        connection_option=option,
     )
-else:
-    # pure memory approach
-    duck_core = AsyncDuckDBManager()
+
+
+duck_core = get_core()
 
 
 def get_db_lifespan(queries: list[DuckQuery]):
