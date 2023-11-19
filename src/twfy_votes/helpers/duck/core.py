@@ -12,7 +12,9 @@ and DuckQuery.async_create() will create a new async connection.
 
 from __future__ import annotations
 
+import datetime
 import random
+import string
 from pathlib import Path
 from typing import (
     Any,
@@ -27,6 +29,7 @@ import rich
 from jinja2 import Template
 from typing_extensions import Self
 
+from ...helpers.data.models import StrEnum
 from ..data.models import data_to_yaml
 from .funcs import get_name
 from .query_funcs import (
@@ -323,6 +326,19 @@ class ConnectedDuckQuery(DuckQuery, Generic[ResponseType]):
         return self.response_type(self.connection, _query, self.data_sources)  # type: ignore
 
 
+class ConnectionOptions(StrEnum):
+    MEMORY = "memory"
+    FILE_PERSISTANT = "file_persistant"
+    FILE_DISPOSABLE = "file_disposable"
+
+
+class LoadingStatus(StrEnum):
+    EMPTY = "empty"
+    CREATING_CACHE = "creating_cache"
+    LOADING = "loading"
+    LOADED = "loaded"
+
+
 class AsyncDuckDBManager:
 
     """
@@ -330,17 +346,40 @@ class AsyncDuckDBManager:
     Should be initalised only once in a project.
     """
 
+    ConnectionOptions = ConnectionOptions
+    LoadingStatus = LoadingStatus
+
     def __init__(
-        self, *, database: str | Path = ":memory:", destroy_existing: bool = False
+        self,
+        *,
+        connection_option: ConnectionOptions = ConnectionOptions.MEMORY,
     ):
-        self.database = database
-        self.destroy_existing = destroy_existing
+        self.connection_option = connection_option
+
+        match connection_option:
+            case self.ConnectionOptions.MEMORY:
+                self.database = ":memory:"
+                self.destroy_existing = False
+            case self.ConnectionOptions.FILE_PERSISTANT:
+                self.database = Path("databases", "duck.db")
+                self.destroy_existing = False
+            case self.ConnectionOptions.FILE_DISPOSABLE:
+                random_string = "".join(
+                    random.choices(string.ascii_lowercase + string.digits, k=5)
+                )
+                self.database = Path("databases", f"duck_{random_string}.duckdb")
+                self.destroy_existing = True
+
         self._core: ConnectedDuckQuery[AsyncDuckResponse] | None = None
+        self.loaded_time: None | datetime.datetime = None
+        self.loading_status: LoadingStatus = LoadingStatus.EMPTY
 
     async def close(self):
         if isinstance(self._core, DuckQuery):
             if isinstance(self._core.connection, aioduckdb.Connection):
-                return await self._core.connection.close()
+                await self._core.connection.close()
+                self._core = None
+                return True
         raise ValueError("Trying to close database connection that doesn't exist")
 
     async def get_core(self):
@@ -362,9 +401,12 @@ class AsyncDuckDBManager:
 
     async def get_loaded_core(self, queries: list[DuckQuery]):
         core = await self.get_core()
+        self.loading_status = self.LoadingStatus.LOADING
         for query in queries:
             await core.compile(query).run_on_self()
         await self.create_schema_yaml()
+        self.loaded_time = datetime.datetime.now()
+        self.loading_status = self.LoadingStatus.LOADED
         return core
 
     async def create_schema_yaml(self):
