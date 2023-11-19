@@ -165,9 +165,7 @@ class DuckQuery:
             DataSourceValue(name="_source_" + table_name, item=source)
         )
 
-        table_query = (
-            f"CREATE TABLE {table_name} AS (SELECT * FROM _source_{table_name})"
-        )
+        table_query = f"CREATE OR REPLACE TABLE {table_name} AS (SELECT * FROM _source_{table_name})"
 
         self.queries.append(table_query)
 
