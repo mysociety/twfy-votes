@@ -1,3 +1,4 @@
+from .apps.core import router as core_router
 from .apps.core.db import db_lifespan
 from .apps.decisions import render as decisions_render
 from .apps.decisions import router as decisions_router
@@ -25,3 +26,4 @@ app.include_router(decisions_router.router)
 app.include_router(policies_router.router)
 app.include_router(policies_render.router)
 app.include_router(twfy_compatible_router.router)
+app.include_router(core_router.router)
