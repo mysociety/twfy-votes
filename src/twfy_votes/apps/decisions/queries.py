@@ -45,6 +45,51 @@ class DivisionQueryKeys(BaseQuery):
     keys: list[str]
 
 
+class DivisionIDsQuery(BaseQuery):
+    """
+    Fetch a set of divisons at once
+    """
+
+    query_template = """
+        SELECT
+            * exclude (house, clock_time),
+        CASE 
+            WHEN clock_time IS NULL THEN 'No recorded time'
+            ELSE CAST(clock_time AS VARCHAR)
+        END AS clock_time,
+        house as chamber__slug
+        FROM
+            pw_division
+        WHERE
+            division_id in {{ division_ids | inclause }}
+        """
+    division_ids: list[int]
+
+
+class DivisionIdsVotesQuery(BaseQuery):
+    """
+    Fetch all votes associated with a set of divisions at once
+    """
+
+    query_template = """
+    SELECT
+        pw_division.division_id,
+        given_name as person__first_name,
+        last_name as person__last_name,
+        nice_name as person__nice_name,
+        party_name as person__party,
+        pw_votes_with_party_difference.mp_id as membership_id,
+        person_id as person__person_id,
+        pw_votes_with_party_difference.* exclude (division_id, mp_id, __index_level_0__)
+    FROM
+        pw_division
+    JOIN pw_votes_with_party_difference using (division_id)
+    WHERE
+        pw_division.division_id in {{ division_ids | inclause }}
+    """
+    division_ids: list[int]
+
+
 class DivisionVotesQuery(BaseQuery):
     query_template = """
     SELECT
@@ -138,9 +183,9 @@ class PartyDivisionBreakDownQuery(BaseQuery):
     FROM
         pw_divisions_party_with_counts
     WHERE
-        division_id = {{ division_id }}
+        division_id in {{ division_ids | inclause }}
     """
-    division_id: int
+    division_ids: list[int]
 
 
 class GovDivisionBreakDownQuery(BaseQuery):
@@ -150,9 +195,9 @@ class GovDivisionBreakDownQuery(BaseQuery):
     FROM
         pw_divisions_gov_with_counts
     WHERE
-        division_id = {{ division_id }}
+        division_id in {{ division_ids | inclause }}
     """
-    division_id: int
+    division_ids: list[int]
 
 
 class GetPersonQuery(BaseQuery):
