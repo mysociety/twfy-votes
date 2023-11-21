@@ -102,6 +102,13 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
     # just refer back to public whip for moment as we're not public
     url = f"https://www.publicwhip.org.uk/policy.php?id={policy_id}"
 
+    divisions = [d.decision for d in policy.division_links]
+
+    div_and_votes_collection: list[
+        DivisionAndVotes
+    ] = await DivisionAndVotes.from_divisions(divisions)
+    div_and_votes_lookup = {x.details.division_id: x for x in div_and_votes_collection}
+
     aspects = []
     for link in policy.division_links:
         # for the moment, we only care about the commons
@@ -110,7 +117,7 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
         division = link.decision
         strength = link.strength
         id = f"pw-{division.date}-{division.chamber.slug}"
-        div_and_votes = await DivisionAndVotes.from_division(division)
+        div_and_votes = div_and_votes_lookup[division.division_id]
         motion_result = div_and_votes.overall_breakdown.motion_result_int
         motion_desc = pw_style_motion_description(
             motion_result, link.alignment, strength

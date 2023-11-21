@@ -21,6 +21,7 @@ from .analysis import is_nonaction_vote
 from .queries import (
     ChamberDivisionsQuery,
     DivisionBreakDownQuery,
+    DivisionIdsVotesQuery,
     DivisionQueryKeys,
     DivisionVotesQuery,
     GetAllPersonsQuery,
@@ -247,6 +248,15 @@ class Vote(BaseModel):
         if self.value == -1 and result == "rejected":
             return "Majority"
         return "N/A"
+
+
+class VoteWithDivisionID(Vote):
+    """
+    Small helper object when fetch votes
+    associated with multiple divisions
+    """
+
+    division_id: int
 
 
 class PartialAgreement(BaseModel):
@@ -568,29 +578,35 @@ class DivisionAndVotes(BaseModel):
     votes: list[Vote]
 
     @classmethod
-    async def from_division(cls, division: DivisionInfo) -> DivisionAndVotes:
+    async def from_divisions(
+        cls, divisions: list[DivisionInfo]
+    ) -> list[DivisionAndVotes]:
+        """
+        Fetch multiple connected sets of divisions, votes, and breakdowns
+        """
         duck = await duck_core.child_query()
 
-        # Get people's votes associated with this division
-        votes = await DivisionVotesQuery(
-            division_date=division.date,
-            division_number=division.division_number,
-            chamber_slug=division.chamber.slug,
-        ).to_model_list(
-            duck=duck, model=Vote, validate=DivisionVotesQuery.validate.NOT_ZERO
+        # get the division_ids
+        division_ids = [d.division_id for d in divisions]
+
+        votes = await DivisionIdsVotesQuery(division_ids=division_ids).to_model_list(
+            model=VoteWithDivisionID,
+            duck=duck,
+            validate=DivisionIdsVotesQuery.validate.NOT_ZERO,
         )
 
         # calculate the overall breakdown of how people voted and the result
-        overall_breakdown = await DivisionBreakDownQuery(
-            division_ids=[division.division_id]
-        ).to_model_single(
+        overall_breakdowns = await DivisionBreakDownQuery(
+            division_ids=division_ids
+        ).to_model_list(
             duck=duck,
             model=DivisionBreakdown,
+            validate=DivisionBreakDownQuery.validate.NOT_ZERO,
         )
 
         # do the same by party
         party_breakdowns = await PartyDivisionBreakDownQuery(
-            division_id=division.division_id
+            division_ids=division_ids
         ).to_model_list(
             duck=duck,
             model=DivisionBreakdown,
@@ -599,23 +615,51 @@ class DivisionAndVotes(BaseModel):
 
         # get breakdown by gov/other
         gov_breakdowns = await GovDivisionBreakDownQuery(
-            division_id=division.division_id
+            division_ids=division_ids
         ).to_model_list(
             duck=duck,
             model=DivisionBreakdown,
             validate=PartyDivisionBreakDownQuery.validate.NOT_ZERO,
         )
 
-        return DivisionAndVotes(
-            chamber=division.chamber,
-            date=division.date,
-            division_number=division.division_number,
-            details=division,
-            votes=votes,
-            overall_breakdown=overall_breakdown,
-            party_breakdowns=party_breakdowns,
-            gov_breakdowns=gov_breakdowns,
-        )
+        # Assembly a list of DivisionAndVotes objects based on the division_ids in all the above objects
+
+        division_and_votes = []
+
+        for division in divisions:
+            div_votes = [v for v in votes if v.division_id == division.division_id]
+            div_breakdown = [
+                b for b in overall_breakdowns if b.division_id == division.division_id
+            ][0]
+            div_party_breakdown = [
+                b for b in party_breakdowns if b.division_id == division.division_id
+            ]
+            div_gov_breakdown = [
+                b for b in gov_breakdowns if b.division_id == division.division_id
+            ]
+
+            division_and_votes.append(
+                DivisionAndVotes(
+                    chamber=division.chamber,
+                    date=division.date,
+                    division_number=division.division_number,
+                    details=division,
+                    votes=[Vote.model_validate(v.model_dump()) for v in div_votes],
+                    overall_breakdown=div_breakdown,
+                    party_breakdowns=div_party_breakdown,
+                    gov_breakdowns=div_gov_breakdown,
+                )
+            )
+
+        return division_and_votes
+
+    @classmethod
+    async def from_division(cls, division: DivisionInfo) -> DivisionAndVotes:
+        divisions = await cls.from_divisions([division])
+        if len(divisions) != 1:
+            raise ValueError("Expected one division to be returned")
+
+        return divisions[0]
 
     def party_breakdown_df(self) -> str:
         all_breakdowns = [dict(x) for x in self.party_breakdowns]
