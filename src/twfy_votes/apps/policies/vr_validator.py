@@ -5,6 +5,7 @@ It is used to validate the 'fast' approach in vr_generator.py.
 
 from math import isclose
 from pathlib import Path
+from typing import Any
 
 import rich
 from pydantic import BaseModel, Field, computed_field
@@ -12,7 +13,7 @@ from tqdm import tqdm
 from typing_extensions import Self
 
 from ...apps.core.db import duck_core
-from ..decisions.models import DivisionInfo, Vote, VotePosition
+from ..decisions.models import DivisionInfo, VotePosition, VoteWithDivisionID
 from ..decisions.queries import DivisionVotesQuery
 from .models import (
     Policy,
@@ -203,7 +204,7 @@ async def get_mp_dates(person_id: int):
 
 async def votes_from_decision_link(
     decision_link: PolicyDecisionLink[DivisionInfo]
-) -> list[Vote]:
+) -> list[VoteWithDivisionID]:
     duck = await duck_core.child_query()
 
     votes = await DivisionVotesQuery(
@@ -211,16 +212,15 @@ async def votes_from_decision_link(
         division_number=decision_link.decision.division_number,
         chamber_slug=decision_link.decision.chamber.slug,
     ).to_model_list(
-        duck=duck, model=Vote, validate=DivisionVotesQuery.validate.NOT_ZERO
+        duck=duck,
+        model=VoteWithDivisionID,
+        validate=DivisionVotesQuery.validate.NOT_ZERO,
     )
     return votes
 
 
 async def get_scores_slow(
-    *,
-    person_id: int,
-    policy_id: int,
-    party: str,
+    *, person_id: int, policy_id: int, party: str, debug: bool = False
 ) -> PolicyComparison:
     """
     This calculates the score a much slower way than the SQL method.
@@ -233,6 +233,10 @@ async def get_scores_slow(
 
     member_score = Score()
     other_score = Score()
+
+    def debug_print(*args: Any, **kwargs: Any):
+        if debug:
+            print(*args, **kwargs)
 
     party_members = await get_party_members_or_person(
         party_slug=party, person_id=person_id
@@ -247,13 +251,19 @@ async def get_scores_slow(
     for decision_link in policy.division_links:
         # ignore neutral policies
         if decision_link.alignment == PolicyDirection.NEUTRAL:
+            debug_print(
+                f"policy neutral {decision_link.decision.division_id} - discarded"
+            )
             continue
         if decision_link.decision.chamber.slug != chamber:
+            debug_print("policy out of chamber - discarded")
             continue
 
-        # get associated votes for this policy
+        # get associated votes for this divisio
         votes = await votes_from_decision_link(decision_link)
-        vote_lookup = {v.membership_id: v for v in votes}
+        if votes[0].division_id != decision_link.decision.division_id:
+            raise ValueError("votes and division_id do not match")
+        vote_lookup = {v.person.person_id: v for v in votes}
         date = decision_link.decision.date.isoformat()
 
         # get all possible members on this date
@@ -267,14 +277,21 @@ async def get_scores_slow(
         person_ids = rel_party_members["person_id"].astype(int).tolist()
 
         if not is_valid_date(date):
+            debug_print("person not a member of this date")
             # this person was not a member on this date
             continue
 
+        debug_print(is_strong, decision_link.strength, decision_link.alignment)
+
         # iterate through members in votes
         for _, member_series in rel_party_members.iterrows():
-            member_id: int = int(member_series["member_id"])
-            is_target = person_id == int(member_series["person_id"])
-            vote = vote_lookup.get(member_id, None)
+            loop_person_id = int(member_series["person_id"])
+            is_target = person_id == loop_person_id
+            vote = vote_lookup.get(loop_person_id, None)
+
+            if is_target:
+                debug_print("this member is the target")
+                debug_print(vote)
             if vote is None:
                 # this member did not vote
                 if is_strong:
@@ -336,6 +353,8 @@ async def get_scores_slow(
         # for this vote, reduce the score to a fraction - so 'all other mps' cast '1' vote in total.
         if other_this_vote_score.total_votes > 0:
             other_score += other_this_vote_score.reduce()
+        debug_print("Appending vote score")
+        debug_print(len(other_score.num_comparators))
         other_score.num_comparators.append(len(person_ids) - 1)
         member_score.num_comparators.append(1)
     return PolicyComparison(
@@ -350,7 +369,11 @@ class ValidationResult(BaseModel):
 
 
 async def validate_approach(
-    person_id: int, policy_id: int, party_id: str, chamber_slug: str
+    person_id: int,
+    policy_id: int,
+    party_id: str,
+    chamber_slug: str,
+    debug: bool = False,
 ) -> ValidationResult:
     """
     This function validates that the fast SQL approach reaches the same conclusions as the easier to follow
@@ -371,7 +394,7 @@ async def validate_approach(
 
     # get slow approach
     slow_approach = await get_scores_slow(
-        person_id=person_id, policy_id=policy_id, party=party_id
+        person_id=person_id, policy_id=policy_id, party=party_id, debug=debug
     )
 
     # validate if they're reaching the same conclusion

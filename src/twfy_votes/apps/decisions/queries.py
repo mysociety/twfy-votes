@@ -93,6 +93,7 @@ class DivisionIdsVotesQuery(BaseQuery):
 class DivisionVotesQuery(BaseQuery):
     query_template = """
     SELECT
+        division_id,
         given_name as person__first_name,
         last_name as person__last_name,
         nice_name as person__nice_name,
