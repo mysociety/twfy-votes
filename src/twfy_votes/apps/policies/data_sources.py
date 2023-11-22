@@ -160,6 +160,7 @@ class policy_alignment:
         pw_mp using (mp_id)
     where
         policy_votes.alignment != 'neutral'
+        and policy_votes.chamber = {{ _chamber_slug }}
         and policies.chamber = {{ _chamber_slug }}
         and ( -- here we want either the persons own divisions, or the divisions of the party they are in.
             pw_mp.person = {{ _person_id }}
