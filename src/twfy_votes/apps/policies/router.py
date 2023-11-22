@@ -24,12 +24,14 @@ async def policies(context: GetContext, all_chambers: AllChambers):
 
 
 @router.get("/policies.json")
-async def api_policies(groups_and_policies: GetGroupsAndPolicies):
+async def api_policies(
+    groups_and_policies: GetGroupsAndPolicies
+) -> GetGroupsAndPolicies:
     return groups_and_policies
 
 
 @router.get("/policies/{chamber_slug}/{status}/{group_slug}.json")
-async def api_policy_collection(policies: GetPolicyCollection):
+async def api_policy_collection(policies: GetPolicyCollection) -> GetPolicyCollection:
     return policies
 
 
@@ -43,7 +45,7 @@ async def policy_collection(
 
 
 @router.get("/policy/{policy_id}.json")
-async def api_policy(policy: GetPolicy):
+async def api_policy(policy: GetPolicy) -> GetPolicy:
     return policy
 
 
@@ -56,7 +58,7 @@ async def policy(context: GetContext, policy: GetPolicy):
 
 
 @router.get("/person/{person_id}/records/{chamber_slug}/{party_id}.json")
-async def api_person_policy(person_policy: GetPersonPolicy):
+async def api_person_policy(person_policy: GetPersonPolicy) -> GetPersonPolicy:
     return person_policy
 
 
