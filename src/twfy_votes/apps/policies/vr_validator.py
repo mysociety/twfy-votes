@@ -184,15 +184,15 @@ async def get_mp_dates(person_id: int):
                     select 
                         get_effective_party(on_behalf_of_id) as party,
                         split(pd_memberships.id, '/')[3] as member_id,
-                        split(pd_memberships.person_id, '/')[3] as person_id,
+                        pd_memberships.person_id as person_id,
                         pd_memberships.* exclude (organization_id, id, person_id),
                         case when pd_memberships.end_date is null then '9999-12-31' else pd_memberships.end_date end as end_date,
-                        case when pd_memberships.organization_id is NULL then pd_posts.organization_id else pd_memberships.organization_id end as organization_id
+                        case when pd_memberships.organization_id is NULL then pd_posts.organization_id else pd_memberships.organization_id end as joined_organization_id
                     from pd_memberships
                     left join pd_posts on pd_posts.id = pd_memberships.post_id
                     )
-                where organization_id = 'house-of-commons'
-                and person_id = {{ person_id }}
+                    where joined_organization_id = 'house-of-commons'
+                    and person_id = {{ person_id }}
                 order by start_date asc
     """
 
