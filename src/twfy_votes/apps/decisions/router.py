@@ -22,7 +22,7 @@ async def home(context: GetContext):
 
 
 @router.get("/people/{people_option}.json")
-async def api_people(people: GetPeopleList):
+async def api_people(people: GetPeopleList) -> GetPeopleList:
     return people
 
 
@@ -41,7 +41,7 @@ async def person_votes(context: GetContext, person_and_votes: GetPersonAndVotes)
 
 
 @router.get("/person/{person_id}/votes.json")
-async def api_person_votes(person_and_votes: GetPersonAndVotes):
+async def api_person_votes(person_and_votes: GetPersonAndVotes) -> GetPersonAndVotes:
     return person_and_votes
 
 
@@ -55,7 +55,9 @@ async def decisions(
 
 
 @router.get("/decisions.json")
-async def api_decisions(chambers_with_year_range: GetChambersWithYearRange):
+async def api_decisions(
+    chambers_with_year_range: GetChambersWithYearRange
+) -> GetChambersWithYearRange:
     return chambers_with_year_range
 
 
@@ -73,7 +75,7 @@ async def division(context: GetContext, division: GetDivisionAndVotes):
 
 @router.get("/decisions/divisions/{chamber_slug}/{year}/{month}.json")
 @router.get("/decisions/divisions/{chamber_slug}/{year}.json")
-async def api_divisions_list(division_list: GetDivisionListing):
+async def api_divisions_list(division_list: GetDivisionListing) -> GetDivisionListing:
     return division_list
 
 
@@ -99,5 +101,5 @@ async def person(context: GetContext, person_and_parties: GetPersonAndRecords):
 
 
 @router.get("/person/{person_id}.json")
-async def api_person(person_and_parties: GetPersonAndRecords):
+async def api_person(person_and_parties: GetPersonAndRecords) -> GetPersonAndRecords:
     return person_and_parties
