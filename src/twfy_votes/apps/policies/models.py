@@ -209,6 +209,10 @@ class PolicyDecisionLink(BaseModel, Generic[InfoType]):
             case DecisionType.DIVISION:
                 decisions = await DivisionInfo.from_partials(partials=decisions)
 
+                # need to rearrange decisions so it's in the correct order as partials
+                decision_lookup = {x.key: x for x in decisions}
+                decisions = [decision_lookup[x.decision_key] for x in partials]
+
                 for decision, partial in zip(decisions, partials):
                     full_links.append(
                         PolicyDecisionLink[DivisionInfo](
