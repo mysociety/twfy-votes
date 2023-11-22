@@ -550,6 +550,52 @@ class VoteDistribution(BaseModel):
         return self
 
 
+class ReducedPersonPolicyLink(BaseModel):
+    person_id: str
+    policy_id: int
+    comparison_party: str
+    chamber: AllowedChambers
+    person_distance_from_policy: float
+    comparison_distance_from_policy: float
+    comparison_score_diff: float
+    count_present: int
+    count_absent: int
+    start_year: int
+    end_year: int
+    no_party_comparison: bool
+
+    @classmethod
+    def from_person_policy_link(cls, link: PersonPolicyLink) -> Self:
+        person_id = f"uk.org.publicwhip/person/{link.person_id}"
+
+        absent = (
+            link.own_distribution.num_votes_absent
+            + link.own_distribution.num_strong_votes_absent
+        )
+
+        both_voted = (
+            link.own_distribution.total_votes
+            - link.own_distribution.num_votes_abstain
+            - link.own_distribution.num_strong_votes_abstain
+            - absent
+        )
+
+        return cls(
+            person_id=person_id,
+            policy_id=link.policy_id,
+            comparison_party=link.comparison_party,
+            chamber=link.chamber,
+            count_present=int(both_voted),
+            count_absent=int(absent),
+            start_year=int(link.own_distribution.start_year),
+            end_year=int(link.own_distribution.end_year),
+            no_party_comparison=link.no_party_comparison,
+            person_distance_from_policy=link.own_distribution.distance_score,
+            comparison_distance_from_policy=link.other_distribution.distance_score,
+            comparison_score_diff=link.comparison_score_difference,
+        )
+
+
 class PersonPolicyLink(BaseModel):
     """
     Storage object to connect person_id and policy_id

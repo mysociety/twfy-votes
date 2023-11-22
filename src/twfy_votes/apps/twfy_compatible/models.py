@@ -2,6 +2,7 @@ from datetime import date
 
 from pydantic import BaseModel
 from twfy_votes.apps.decisions.models import Vote, VotePosition
+from twfy_votes.apps.policies.models import ReducedPersonPolicyLink
 
 # from ...helpers.data.models import StrEnum
 from twfy_votes.helpers.data.models import StrEnum
@@ -92,3 +93,5 @@ class PopoloPolicy(BaseModel):
     text: str
     sources: PopoloSource
     aspects: list[PopoloAspect]
+    # alignments isn't in original, but brings in the XML data
+    alignments: list[ReducedPersonPolicyLink]

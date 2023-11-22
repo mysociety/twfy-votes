@@ -33,7 +33,7 @@ async def twfy_compatible_xml_policy(context: GetContext, policy_id: int):
 
 
 @router.get("/twfy-compatible/popolo/{policy_id}.json")
-async def twfy_compatible_popolo_policy(policy: GetPopoloPolicy):
+async def twfy_compatible_popolo_policy(policy: GetPopoloPolicy) -> GetPopoloPolicy:
     """
     Generate a TheyWorkForYou compatible JSON file for a policy
     """

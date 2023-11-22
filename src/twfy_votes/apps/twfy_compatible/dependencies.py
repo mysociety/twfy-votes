@@ -10,7 +10,13 @@ from ..decisions.models import (
     DivisionBreakdown,
     DivisionInfo,
 )
-from ..policies.models import Policy, PolicyDirection, PolicyStrength
+from ..policies.models import (
+    PersonPolicyLink,
+    Policy,
+    PolicyDirection,
+    PolicyStrength,
+    ReducedPersonPolicyLink,
+)
 from . import models as m
 
 
@@ -139,10 +145,17 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
         )
         aspects.append(aspect)
 
+    alignments = await PersonPolicyLink.from_policy_id(policy_id)
+
+    reduced_alignments = [
+        ReducedPersonPolicyLink.from_person_policy_link(x) for x in alignments
+    ]
+
     policy = m.PopoloPolicy(
         title=policy.name,
         text=policy.policy_description,
         sources=m.PopoloSource(url=url),
         aspects=aspects,
+        alignments=reduced_alignments,
     )
     return policy
