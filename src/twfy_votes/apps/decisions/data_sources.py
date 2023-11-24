@@ -190,7 +190,7 @@ class pd_people_source:
 
 
 @duck.as_view
-class pd_people:
+class pd_people_non_unique:
     """
     Reconstruct the people table to tidy up where
     names are stored in different columns for lords.
@@ -210,10 +210,23 @@ class pd_people:
         else
             concat(given_name, ' ', last_name, ' (', honorific_prefix, ')')
         end as nice_name,
+        ROW_NUMBER() OVER (PARTITION BY person_id) as row_number
     FROM
         pd_people_source
     WHERE
         note = 'Main'
+    """
+
+
+@duck.as_view
+class pd_people:
+    query = """
+    SELECT
+    *
+    FROM
+        pd_people_non_unique
+    WHERE
+        row_number = 1
     """
 
 
@@ -312,7 +325,6 @@ class cm_votes_with_people:
         last_name,
         nice_name,
         CASE WHEN government_parties.is_gov is NULL THEN 'Other' ELSE 'Government' END AS is_gov  
-    
     FROM
         pw_vote
     JOIN
