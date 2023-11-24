@@ -102,7 +102,6 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
     view
     """
 
-    policy_id = 810
     policy = await Policy.from_id(policy_id)
 
     # just refer back to public whip for moment as we're not public
