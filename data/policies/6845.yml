@@ -70,15 +70,6 @@ division_links:
 - decision:
     chamber_slug: commons
     date: 2014-04-09
-    division_number: 249
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2014-04-09
     division_number: 250
   alignment: agree
   strength: strong

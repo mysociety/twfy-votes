@@ -14,36 +14,9 @@ groups:
 division_links:
 - decision:
     chamber_slug: commons
-    date: 2003-01-20
-    division_number: 56
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2004-03-02
     division_number: 68
   alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2007-04-17
-    division_number: 89
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2007-04-17
-    division_number: 90
-  alignment: neutral
   strength: weak
   status: active
   notes: ''

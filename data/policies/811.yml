@@ -110,22 +110,4 @@ division_links:
   status: active
   notes: ''
   decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2006-06-19
-    division_number: 1
-  alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: scotland
-    date: 2005-06-30
-    division_number: 10
-  alignment: agree
-  strength: strong
-  status: active
-  notes: ''
-  decision_type: division
 agreement_links: []

@@ -166,42 +166,6 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2014-04-01
-    division_number: 241
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2014-04-01
-    division_number: 242
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2014-04-01
-    division_number: 243
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2014-07-02
-    division_number: 32
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2015-03-23
     division_number: 179
   alignment: against

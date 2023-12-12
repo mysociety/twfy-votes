@@ -60,15 +60,6 @@ division_links:
 - decision:
     chamber_slug: commons
     date: 2006-01-19
-    division_number: 129
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2006-01-19
     division_number: 132
   alignment: against
   strength: strong
@@ -152,15 +143,6 @@ division_links:
     date: 2014-01-08
     division_number: 173
   alignment: against
-  strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2007-03-28
-    division_number: 1
-  alignment: agree
   strength: strong
   status: active
   notes: ''

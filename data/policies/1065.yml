@@ -49,15 +49,6 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2007-11-29
-    division_number: 14
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2007-12-12
     division_number: 30
   alignment: agree
@@ -274,15 +265,6 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2008-02-26
-    division_number: 100
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2008-02-27
     division_number: 102
   alignment: against
@@ -295,15 +277,6 @@ division_links:
     date: 2008-02-27
     division_number: 103
   alignment: agree
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2008-02-27
-    division_number: 104
-  alignment: neutral
   strength: weak
   status: active
   notes: ''
@@ -338,35 +311,8 @@ division_links:
 - decision:
     chamber_slug: commons
     date: 2008-03-04
-    division_number: 112
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2008-03-04
-    division_number: 113
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2008-03-04
     division_number: 114
   alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2008-03-04
-    division_number: 115
-  alignment: neutral
   strength: weak
   status: active
   notes: ''
@@ -377,15 +323,6 @@ division_links:
     division_number: 116
   alignment: agree
   strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2008-03-05
-    division_number: 117
-  alignment: neutral
-  strength: weak
   status: active
   notes: ''
   decision_type: division
@@ -427,15 +364,6 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2008-10-08
-    division_number: 271
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2009-03-10
     division_number: 57
   alignment: agree
@@ -472,27 +400,9 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2010-10-13
-    division_number: 75
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2010-11-10
     division_number: 115
   alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2010-12-07
-    division_number: 145
-  alignment: neutral
   strength: weak
   status: active
   notes: ''
@@ -508,64 +418,10 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2011-01-11
-    division_number: 161
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2011-01-11
-    division_number: 162
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2011-01-24
-    division_number: 179
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2011-01-24
-    division_number: 180
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2011-01-25
-    division_number: 181
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2011-01-25
     division_number: 182
   alignment: against
   strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2011-01-26
-    division_number: 183
-  alignment: neutral
-  strength: weak
   status: active
   notes: ''
   decision_type: division
@@ -580,15 +436,6 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2011-03-18
-    division_number: 234
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2011-03-23
     division_number: 236
   alignment: agree
@@ -598,36 +445,9 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2011-05-04
-    division_number: 265
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2011-05-24
     division_number: 286
   alignment: agree
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2011-07-11
-    division_number: 318
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2011-07-11
-    division_number: 319
-  alignment: neutral
   strength: weak
   status: active
   notes: ''
@@ -665,51 +485,6 @@ division_links:
     division_number: 538
   alignment: agree
   strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2012-06-27
-    division_number: 30
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2012-07-12
-    division_number: 52
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2012-09-10
-    division_number: 60
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2012-09-10
-    division_number: 61
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2012-10-17
-    division_number: 75
-  alignment: neutral
-  strength: weak
   status: active
   notes: ''
   decision_type: division
@@ -1048,27 +823,9 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2017-03-13
-    division_number: 179
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2017-04-19
     division_number: 198
   alignment: agree
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2017-06-29
-    division_number: 4
-  alignment: neutral
   strength: weak
   status: active
   notes: ''
@@ -1348,15 +1105,6 @@ division_links:
     date: 2018-09-11
     division_number: 237
   alignment: agree
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2018-09-12
-    division_number: 239
-  alignment: neutral
   strength: weak
   status: active
   notes: ''
@@ -1682,204 +1430,6 @@ division_links:
     division_number: 4
   alignment: agree
   strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2006-07-10
-    division_number: 1
-  alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-05-06
-    division_number: 1
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-05-12
-    division_number: 1
-  alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-05-19
-    division_number: 2
-  alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-05-20
-    division_number: 1
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-05-20
-    division_number: 2
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-06-04
-    division_number: 1
-  alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-06-04
-    division_number: 2
-  alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-06-04
-    division_number: 3
-  alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-06-09
-    division_number: 1
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-06-09
-    division_number: 2
-  alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-06-09
-    division_number: 3
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-06-11
-    division_number: 1
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-06-18
-    division_number: 1
-  alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2008-06-18
-    division_number: 2
-  alignment: against
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2011-06-08
-    division_number: 1
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2011-06-08
-    division_number: 2
-  alignment: agree
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2011-06-13
-    division_number: 1
-  alignment: agree
-  strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2011-06-13
-    division_number: 2
-  alignment: against
-  strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2011-06-15
-    division_number: 2
-  alignment: agree
-  strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2011-07-13
-    division_number: 1
-  alignment: agree
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2011-07-13
-    division_number: 2
-  alignment: agree
-  strength: weak
   status: active
   notes: ''
   decision_type: division

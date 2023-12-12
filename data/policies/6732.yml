@@ -24,44 +24,8 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2000-01-28
-    division_number: 54
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2000-04-14
-    division_number: 168
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2015-09-11
     division_number: 69
-  alignment: agree
-  strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2006-05-12
-    division_number: 1
-  alignment: against
-  strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: lords
-    date: 2009-07-07
-    division_number: 1
   alignment: agree
   strength: strong
   status: active

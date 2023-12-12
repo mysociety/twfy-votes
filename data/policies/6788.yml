@@ -68,15 +68,6 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2016-12-01
-    division_number: 101
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2017-11-29
     division_number: 50
   alignment: agree
