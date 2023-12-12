@@ -165,13 +165,19 @@ else:
 
 
 @duck.as_table
+class pd_member_counts:
+    source = politician_data / "membership_counts.parquet"
+
+
+@duck.as_table
 class pw_division:
     query = """
     SELECT
         source_pw_division.*,
         CASE WHEN manual_motion is NULL THEN '' ELSE manual_motion END AS manual_motion,
         CASE WHEN cluster is NULL THEN '' ELSE cluster END AS voting_cluster,
-        concat(house, '-', source_pw_division.division_date, '-', source_pw_division.division_number) as division_key
+        concat(house, '-', source_pw_division.division_date, '-', source_pw_division.division_number) as division_key,
+        pd_member_counts.members_count as total_possible_members
     FROM
         source_pw_division
     LEFT JOIN pw_manual_motions on
@@ -180,7 +186,10 @@ class pw_division:
          and source_pw_division.division_number = pw_manual_motions.division_number
          )
     LEFT JOIN pw_division_cluster on (source_pw_division.division_id = pw_division_cluster.division_id)
-
+    LEFT JOIN pd_member_counts on
+        (source_pw_division.division_date between pd_member_counts.start_date and
+        pd_member_counts.end_date and
+        source_pw_division.house = pd_member_counts.chamber)
     """
 
 
@@ -324,7 +333,8 @@ class cm_votes_with_people:
         given_name,
         last_name,
         nice_name,
-        CASE WHEN government_parties.is_gov is NULL THEN 'Other' ELSE 'Government' END AS is_gov  
+        CASE WHEN government_parties.is_gov is NULL THEN 'Other' ELSE 'Government' END AS is_gov,
+        total_possible_members
     FROM
         pw_vote
     JOIN
@@ -352,6 +362,7 @@ class pw_divisions_with_counts:
     select
         division_id,
         count(*) as vote_participant_count,
+        any_value(total_possible_members) as total_possible_members,
         sum(case when effective_vote = 'aye' then 1 else 0 end) as for_motion,
         sum(case when effective_vote = 'no' then 1 else 0 end) as against_motion,
         sum(case when effective_vote = 'both' then 1 else 0 end) as neutral_motion,
@@ -382,6 +393,7 @@ class pw_divisions_party_with_counts:
         division_id,
         party_name_reduced as grouping,
         count(*) as vote_participant_count,
+        any_value(total_possible_members) as total_possible_members,
         sum(case when effective_vote = 'aye' then 1 else 0 end) as for_motion,
         sum(case when effective_vote = 'no' then 1 else 0 end) as against_motion,
         sum(case when effective_vote = 'abstention' then 1 else 0 end) as neutral_motion,
@@ -411,6 +423,7 @@ class pw_divisions_gov_with_counts:
         division_id,
         is_gov as grouping,
         count(*) as vote_participant_count,
+        any_value(total_possible_members) as total_possible_members,
         sum(case when effective_vote = 'aye' then 1 else 0 end) as for_motion,
         sum(case when effective_vote = 'no' then 1 else 0 end) as against_motion,
         sum(case when effective_vote = 'both' then 1 else 0 end) as neutral_motion,

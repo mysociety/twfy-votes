@@ -105,3 +105,23 @@ def test_vote_popolo(client: TestClient):
     response = client.get("/twfy-compatible/popolo/6679.json")
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
+
+
+def test_vote_participants_2005(client: TestClient):
+    response = client.get("/decisions/division/commons/2005-11-22/105.json")
+    assert response.status_code == 200
+    assert response.headers["Content-Type"] == "application/json"
+
+    data = response.json()
+
+    data["overall_breakdown"]["total_possible_members"] = 646
+
+
+def test_vote_participants_2015(client: TestClient):
+    response = client.get("/decisions/division/commons/2015-12-08/145.json")
+    assert response.status_code == 200
+    assert response.headers["Content-Type"] == "application/json"
+
+    data = response.json()
+
+    data["overall_breakdown"]["total_possible_members"] = 650

@@ -11,6 +11,7 @@ cm_votes_with_people:
   last_name: VARCHAR
   nice_name: VARCHAR
   is_gov: VARCHAR
+  total_possible_members: BIGINT
 government_parties:
   start_date: DATE
   end_date: DATE
@@ -31,6 +32,11 @@ government_parties_unnest_parties:
 party_lookup:
   pw_party_slug: VARCHAR
   twfy_party_slug: VARCHAR
+pd_member_counts:
+  start_date: VARCHAR
+  end_date: VARCHAR
+  members_count: BIGINT
+  chamber: VARCHAR
 pd_members_and_orgs:
   organization_id: VARCHAR
   on_behalf_of_id: VARCHAR
@@ -86,6 +92,29 @@ pd_people:
   last_name: VARCHAR
   person_id: VARCHAR
   nice_name: VARCHAR
+  row_number: BIGINT
+pd_people_non_unique:
+  family_name: VARCHAR
+  given_name: VARCHAR
+  note: VARCHAR
+  end_date: VARCHAR
+  honorific_prefix: VARCHAR
+  start_date: VARCHAR
+  additional_name: VARCHAR
+  county: VARCHAR
+  lordname: VARCHAR
+  lordofname: VARCHAR
+  name: VARCHAR
+  lordofname_full: VARCHAR
+  surname: VARCHAR
+  organization_id: VARCHAR
+  honorific_suffix: VARCHAR
+  additional_names: VARCHAR
+  additional__name: VARCHAR
+  last_name: VARCHAR
+  person_id: VARCHAR
+  nice_name: VARCHAR
+  row_number: BIGINT
 pd_people_source:
   person_id: VARCHAR
   family_name: VARCHAR
@@ -188,6 +217,7 @@ pw_division:
   manual_motion: VARCHAR
   voting_cluster: VARCHAR
   division_key: VARCHAR
+  total_possible_members: BIGINT
 pw_division_cluster:
   division_id: BIGINT
   cluster: VARCHAR
@@ -195,6 +225,7 @@ pw_divisions_gov_with_counts:
   division_id: BIGINT
   grouping: VARCHAR
   vote_participant_count: BIGINT
+  total_possible_members: BIGINT
   for_motion: DOUBLE
   against_motion: DOUBLE
   neutral_motion: DOUBLE
@@ -206,6 +237,7 @@ pw_divisions_party_with_counts:
   division_id: BIGINT
   grouping: VARCHAR
   vote_participant_count: BIGINT
+  total_possible_members: BIGINT
   for_motion: DOUBLE
   against_motion: DOUBLE
   neutral_motion: DOUBLE
@@ -216,6 +248,7 @@ pw_divisions_party_with_counts:
 pw_divisions_with_counts:
   division_id: BIGINT
   vote_participant_count: BIGINT
+  total_possible_members: BIGINT
   for_motion: DOUBLE
   against_motion: DOUBLE
   neutral_motion: DOUBLE
@@ -268,6 +301,7 @@ pw_votes_with_party_difference:
   last_name: VARCHAR
   nice_name: VARCHAR
   is_gov: VARCHAR
+  total_possible_members: BIGINT
   motion_majority_ratio: DOUBLE
   effective_vote_int: DECIMAL(11,1)
   diff_from_party_average: DOUBLE
