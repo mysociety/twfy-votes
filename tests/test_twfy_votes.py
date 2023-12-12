@@ -114,7 +114,7 @@ def test_vote_participants_2005(client: TestClient):
 
     data = response.json()
 
-    data["overall_breakdown"]["total_possible_members"] = 646
+    assert data["overall_breakdown"]["total_possible_members"] == 646
 
 
 def test_vote_participants_2015(client: TestClient):
@@ -124,4 +124,4 @@ def test_vote_participants_2015(client: TestClient):
 
     data = response.json()
 
-    data["overall_breakdown"]["total_possible_members"] = 650
+    assert data["overall_breakdown"]["total_possible_members"] == 650
