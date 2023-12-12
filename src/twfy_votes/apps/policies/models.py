@@ -58,7 +58,7 @@ class StrengthMeaning(StrEnum):
     """
 
     CLASSIC = "classic"  # complex calculation of strong and weak votes
-    V2 = "v2"  # Only strong votes count for big stats, weak votes are informative
+    SIMPLIFIED = "simplified"  # Only strong votes count for big stats, weak votes are informative
 
 
 class PolicyDirection(StrEnum):
@@ -254,7 +254,7 @@ class PolicyBase(BaseModel):
     policy_description: str
     notes: str = ""
     status: PolicyStatus
-    strength_meaning: StrengthMeaning = StrengthMeaning.V2
+    strength_meaning: StrengthMeaning = StrengthMeaning.SIMPLIFIED
     highlightable: bool = Field(
         description="Policy can be drawn out as a highlight on page if no calculcated 'interesting' votes"
     )
@@ -541,15 +541,29 @@ class VoteDistribution(BaseModel):
         self.distance_score = score
         self.similarity_score = 1.0 - score
 
-    def score_v2(self):
-        raise NotImplementedError("Not yet implemented")
+    def score_simplifed(self):
+        from .analysis import simplified_score_difference
+
+        score = simplified_score_difference(
+            num_votes_same=self.num_votes_same,
+            num_strong_votes_same=self.num_strong_votes_same,
+            num_votes_different=self.num_votes_different,
+            num_strong_votes_different=self.num_strong_votes_different,
+            num_votes_absent=self.num_votes_absent,
+            num_strong_votes_absent=self.num_strong_votes_absent,
+            num_strong_votes_abstain=self.num_strong_votes_abstain,
+            num_votes_abstain=self.num_votes_abstain,
+        )
+
+        self.distance_score = score
+        self.similarity_score = 1.0 - score
 
     def score(self, strength_meaning: StrengthMeaning):
         match StrengthMeaning(strength_meaning):
             case StrengthMeaning.CLASSIC:
                 self.score_classic()
-            case StrengthMeaning.V2:
-                self.score_v2()
+            case StrengthMeaning.SIMPLIFIED:
+                self.score_simplifed()
 
         return self
 

@@ -67,3 +67,54 @@ def public_whip_score_difference(
     )
 
     return points / avaliable_points
+
+
+def simplified_score_difference(
+    *,
+    num_votes_same: float,
+    num_strong_votes_same: float,
+    num_votes_different: float,
+    num_strong_votes_different: float,
+    num_votes_absent: float,
+    num_strong_votes_absent: float,
+    num_strong_votes_abstain: float,
+    num_votes_abstain: float,
+) -> float:
+    """
+    This is a simplified version of the public whip scoring system.
+    Normal weight votes are 'informative' only, and have no score.
+    neither has an absence weight.
+    Abstensions are recorded as present - but half the value of a normal vote.
+
+    """
+
+    normal_weight = 0.0  # worth no points
+    strong_weight = 10.0
+    abstain_weight = normal_weight / 2  # half marks
+    strong_abstain_weight = strong_weight / 2  # half marks
+    absence_weight = 0.0  # absences are no points
+    absence_total_weight = 0.0  # out of no points
+    strong_absence_weight = 0.0  # absences are no points
+    strong_absence_total_weight = 0.0  # out of no points
+
+    points = (
+        normal_weight * num_votes_different
+        + strong_weight * num_strong_votes_different
+        + absence_weight * num_votes_absent
+        + strong_absence_weight * num_strong_votes_absent
+        + abstain_weight * num_votes_abstain
+        + strong_abstain_weight * num_strong_votes_abstain
+    )
+
+    avaliable_points = (
+        normal_weight * num_votes_same
+        + normal_weight * num_votes_different
+        + strong_weight * num_strong_votes_same
+        + strong_weight * num_strong_votes_different
+        + absence_total_weight * num_votes_absent
+        + strong_absence_total_weight * num_strong_votes_absent
+        + abstain_weight * num_votes_abstain
+        + strong_abstain_weight * num_strong_votes_abstain
+    )
+
+    return points / avaliable_points
