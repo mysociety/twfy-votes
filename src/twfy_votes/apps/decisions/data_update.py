@@ -12,6 +12,7 @@ from .analysis import get_commons_clusters
 
 
 async def process_cached_tables(duck_manager: AsyncDuckDBManager = duck_core):
+    print("creating cached tables")
     await duck_manager.create_cached_queries()
 
 

@@ -81,7 +81,8 @@ def breakdown_to_vote_count(
         ),
         m.PopoloVoteCount(
             option=m.PopoloVoteOption.ABSENT,
-            value=650 - overall_breakdown.vote_participant_count,
+            value=overall_breakdown.total_possible_members
+            - overall_breakdown.vote_participant_count,
         ),
     ]
 

@@ -530,6 +530,7 @@ class DivisionBreakdown(BaseModel):
     motion_majority: int
     motion_majority_ratio: float
     motion_result_int: int
+    total_possible_members: int
 
 
 class PersonAndVotes(BaseModel):
@@ -664,7 +665,12 @@ class DivisionAndVotes(BaseModel):
     def party_breakdown_df(self) -> str:
         all_breakdowns = [dict(x) for x in self.party_breakdowns]
         df = pd.DataFrame(data=all_breakdowns)
-        banned_columns = ["signed_votes", "motion_majority", "motion_result_int"]
+        banned_columns = [
+            "signed_votes",
+            "motion_majority",
+            "motion_result_int",
+            "total_possible_members",
+        ]
         df = df.drop(columns=banned_columns)
 
         return style_df(df, percentage_columns=["motion majority ratio"])
@@ -677,7 +683,12 @@ class DivisionAndVotes(BaseModel):
 
         all_breakdowns = [dict(x) for x in all_breakdowns]
         df = pd.DataFrame(data=all_breakdowns)
-        banned_columns = ["signed_votes", "motion_majority", "motion_result_int"]
+        banned_columns = [
+            "signed_votes",
+            "motion_majority",
+            "motion_result_int",
+            "total_possible_members",
+        ]
         df = df.drop(columns=banned_columns)
 
         return style_df(df, percentage_columns=["motion majority ratio"])
