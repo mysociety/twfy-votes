@@ -24,15 +24,6 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 1999-12-07
-    division_number: 13
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2000-04-04
     division_number: 142
   alignment: agree
@@ -55,15 +46,6 @@ division_links:
     division_number: 144
   alignment: agree
   strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2000-04-05
-    division_number: 145
-  alignment: neutral
-  strength: weak
   status: active
   notes: ''
   decision_type: division
@@ -124,15 +106,6 @@ division_links:
 - decision:
     chamber_slug: commons
     date: 2000-11-27
-    division_number: 354
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2000-11-27
     division_number: 355
   alignment: agree
   strength: weak
@@ -169,15 +142,6 @@ division_links:
 - decision:
     chamber_slug: commons
     date: 2007-05-18
-    division_number: 119
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2007-05-18
     division_number: 120
   alignment: agree
   strength: strong
@@ -190,15 +154,6 @@ division_links:
     division_number: 121
   alignment: agree
   strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2007-05-18
-    division_number: 122
-  alignment: neutral
-  strength: weak
   status: active
   notes: ''
   decision_type: division
@@ -279,15 +234,6 @@ division_links:
     date: 2012-04-25
     division_number: 541
   alignment: agree
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2013-07-01
-    division_number: 39
-  alignment: neutral
   strength: weak
   status: active
   notes: ''

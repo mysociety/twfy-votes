@@ -50,15 +50,6 @@ division_links:
 - decision:
     chamber_slug: commons
     date: 2011-11-02
-    division_number: 388
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2011-11-02
     division_number: 391
   alignment: agree
   strength: strong
@@ -71,24 +62,6 @@ division_links:
     division_number: 510
   alignment: agree
   strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2012-04-17
-    division_number: 511
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2012-04-17
-    division_number: 512
-  alignment: neutral
-  strength: weak
   status: active
   notes: ''
   decision_type: division

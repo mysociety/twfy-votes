@@ -121,15 +121,6 @@ division_links:
   decision_type: division
 - decision:
     chamber_slug: commons
-    date: 2021-04-19
-    division_number: 264
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
     date: 2022-01-26
     division_number: 176
   alignment: agree

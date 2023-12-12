@@ -29,13 +29,4 @@ division_links:
   status: active
   notes: ''
   decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2011-06-20
-    division_number: 299
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
 agreement_links: []

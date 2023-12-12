@@ -76,15 +76,6 @@ division_links:
 - decision:
     chamber_slug: commons
     date: 2007-03-07
-    division_number: 71
-  alignment: neutral
-  strength: weak
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2007-03-07
     division_number: 72
   alignment: agree
   strength: strong
@@ -106,15 +97,6 @@ division_links:
     division_number: 47
   alignment: agree
   strength: strong
-  status: active
-  notes: ''
-  decision_type: division
-- decision:
-    chamber_slug: commons
-    date: 2013-10-18
-    division_number: 105
-  alignment: neutral
-  strength: weak
   status: active
   notes: ''
   decision_type: division
