@@ -351,3 +351,11 @@ source_pw_vote:
   division_id: BIGINT
   mp_id: BIGINT
   vote: VARCHAR
+vote_motions:
+  debate_type: VARCHAR
+  gid: VARCHAR
+  question: VARCHAR
+  tidied_motion: VARCHAR
+  full_motion_speech: VARCHAR
+  full_motion_gid: VARCHAR
+  vote_type: VARCHAR

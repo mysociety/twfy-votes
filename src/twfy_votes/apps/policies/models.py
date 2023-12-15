@@ -781,7 +781,8 @@ class PolicyLinkDisplayGroup(BaseModel):
             item = GroupTableItem(
                 policy_name=str(
                     UrlColumn(
-                        url=link.policy.url(request=request), text=link.policy.name
+                        url=link.policy.url(request=request),
+                        text=link.policy.context_description or link.policy.name,
                     )
                 ),
                 policy_status=link.policy.status,

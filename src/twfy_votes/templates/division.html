@@ -24,9 +24,25 @@
 
 <p>Vote had {{ item.overall_breakdown.vote_participant_count }} participants.</p>
 
+
+{% with cluster = item.details.cluster_desc() %}
+
+{% if cluster %}
 <h3>Voting cluster</h3>
 
 <p>{{ item.details.cluster_desc() }}</p>
+
+{% endif %}
+{% endwith %}
+
+{% if item.details.vote_motion_analysis %}
+
+<h3>Vote type</h3>
+
+<p>{{ item.details.vote_type() }}</p>
+
+{% endif %}
+
 
 <h3>Use of parliamentary powers</h3>
 
@@ -40,25 +56,33 @@
 {% endif %}
 {% endwith %}
 
-<h2>Motion</h2>
-
-<div class="motion">
 
 
-    {{ item.details.safe_motion() | safe }}
-    <p style="font-style: italic;">Note: The motion scraper currently pulls out all block quotes - explaining the
-        sometimes random paragraphs that
-        are included.</p>
-</div>
+{% if item.details.vote_motion_analysis %}
 
+<h2>Reduced Motion</h2>
 
+<p>{{ item.details.vote_motion_analysis.tidied_motion }}</p>
 
-
-{% with twfy_link = item.details.motion_twfy_link() %}
+{% with twfy_link = item.details.vote_motion_analysis.twfy_motion_url() %}
 {% if twfy_link %}
 <p><a href="{{ twfy_link }}">View motion in TheyWorkForYou</a></p>
 {% endif %}
 {% endwith %}
+
+<h2> More motion options </h2>
+<button data-bs-toggle="collapse" data-bs-target="#extracted-question">Extracted question</button>
+<div id="extracted-question" class="collapse ">
+    {{ item.details.vote_motion_analysis.question|safe }}
+</div>
+
+<button data-bs-toggle="collapse" data-bs-target="#full-motion">Full motion speech</button>
+<div id="full-motion" class="collapse ">
+    {{ item.details.vote_motion_analysis.full_motion_speech|safe }}
+
+</div>
+
+{% endif %}
 
 
 {% if item.details.manual_motion %}

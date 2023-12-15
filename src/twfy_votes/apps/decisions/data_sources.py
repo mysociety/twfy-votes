@@ -4,9 +4,10 @@ the duckdb database from various sources.
 """
 
 from pathlib import Path
+from typing import Any
 
 from ...helpers.duck import DuckQuery, DuckUrl, YamlData
-from .models import GovernmentParties, ManualMotion
+from .models import GovernmentParties, ManualMotion, VoteMotionAnalysis
 
 processed_data = Path("data", "cached")
 raw_data = Path("data", "raw")
@@ -28,6 +29,17 @@ politician_data = DuckUrl(
 class government_parties_nested(YamlData[GovernmentParties]):
     yaml_source = Path("data", "raw", "government_parties.yaml")
     validation_model = GovernmentParties
+
+
+@duck.as_python_source
+class vote_motions(YamlData[VoteMotionAnalysis]):
+    yaml_source = Path("data", "processed", "motions.yaml")
+    validation_model = VoteMotionAnalysis
+
+    @classmethod
+    def get_data_solo(cls) -> list[dict[str, Any]]:
+        data: dict[str, list[dict[str, Any]]] = super().get_data_solo()  # type: ignore
+        return data["items"]
 
 
 @duck.as_view
