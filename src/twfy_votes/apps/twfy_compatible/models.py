@@ -2,7 +2,11 @@ from datetime import date
 
 from pydantic import BaseModel
 from twfy_votes.apps.decisions.models import Vote, VotePosition
-from twfy_votes.apps.policies.models import ReducedPersonPolicyLink
+from twfy_votes.apps.policies.models import (
+    PolicyDirection,
+    PolicyStrength,
+    ReducedPersonPolicyLink,
+)
 
 # from ...helpers.data.models import StrEnum
 from twfy_votes.helpers.data.models import StrEnum
@@ -30,6 +34,21 @@ class PopoloVoteType(StrEnum):
     AYE3 = "aye3"
     NO3 = "no3"
     BOTH3 = "both3"
+
+    @classmethod
+    def from_modern(cls, direction: PolicyDirection, strength: PolicyStrength):
+        if direction == PolicyDirection.AGREE:
+            if strength == PolicyStrength.STRONG:
+                return cls.AYE3
+            elif strength == PolicyStrength.WEAK:
+                return cls.AYE
+        elif direction == PolicyDirection.AGAINST:
+            if strength == PolicyStrength.STRONG:
+                return cls.NO3
+            elif strength == PolicyStrength.WEAK:
+                return cls.NO
+        elif direction == PolicyDirection.NEUTRAL:
+            return cls.BOTH
 
 
 class PopoloDirection(StrEnum):
@@ -69,6 +88,7 @@ class VoteEvent(BaseModel):
 class PopoloMotion(BaseModel):
     id: str
     organization_id: str
+    policy_vote: PopoloVoteType
     text: str
     date: date
     vote_events: list[VoteEvent]
