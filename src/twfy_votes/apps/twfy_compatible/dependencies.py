@@ -122,7 +122,7 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
             continue
         division = link.decision
         strength = link.strength
-        id = f"pw-{division.date}-{division.chamber.slug}"
+        id = f"pw-{division.date}-{division.division_number}-{division.chamber.slug}"
         div_and_votes = div_and_votes_lookup[division.division_id]
         motion_result = div_and_votes.overall_breakdown.motion_result_int
         motion_desc = pw_style_motion_description(
