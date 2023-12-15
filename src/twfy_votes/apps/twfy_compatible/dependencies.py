@@ -135,6 +135,7 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
         division_url = get_division_url(division, policy_id)
         motion = m.PopoloMotion(
             id=id,
+            policy_vote=m.PopoloVoteType.from_modern(link.alignment, link.strength),
             organization_id=motion_org,
             text=division.division_name,
             date=division.date,
