@@ -124,9 +124,11 @@ class AsyncDuckResponse:
 
         return df
 
-    async def records(self) -> list[dict[str, Any]]:
+    async def records(self, nan_to_none: bool = False) -> list[dict[str, Any]]:
         df = await self.df()
-        return df.fillna(np.nan).replace([np.nan], [None]).to_dict(orient="records")  # type: ignore
+        if nan_to_none:
+            df = df.fillna(np.nan).replace([np.nan], [None])
+        return df.to_dict(orient="records")  # type: ignore
 
     async def first_record(self) -> dict[str, Any]:
         df = await self.df()

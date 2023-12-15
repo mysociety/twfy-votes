@@ -84,6 +84,7 @@ class BaseQuery:
         duck: ConnectedDuckQuery[AsyncDuckResponse],
         func: Callable[[dict[str, Any]], T],
         unnest_record: bool = True,
+        nan_to_none: bool = False,
     ) -> list[T]:
         """
         Pipe the records from a query to a function.
@@ -93,7 +94,9 @@ class BaseQuery:
         e.g. {'a__b__c': 1} -> {'a': {'b': {'c': 1}}
 
         """
-        records = await duck.compile(self, variables=self.params).records()
+        records = await duck.compile(self, variables=self.params).records(
+            nan_to_none=nan_to_none
+        )
         if unnest_record:
             records = [unnest(r) for r in records]
         return [func(r) for r in records]
@@ -106,10 +109,13 @@ class BaseQuery:
         model: Type[BaseModelLikeType],
         duck: ConnectedDuckQuery[AsyncDuckResponse],
         validate: validate = validate.NO_VALIDATION,
+        nan_to_none: bool = False,
     ) -> list[BaseModelLikeType]:
         validate_options = self.__class__.validate
 
-        records = await self.pipe_records_to(duck, model.model_validate)
+        records = await self.pipe_records_to(
+            duck, model.model_validate, nan_to_none=nan_to_none
+        )
 
         if validate == validate_options.ONLY_ONE:
             if len(records) == 0:
