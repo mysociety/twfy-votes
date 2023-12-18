@@ -125,3 +125,19 @@ def test_vote_participants_2015(client: TestClient):
     data = response.json()
 
     assert data["overall_breakdown"]["total_possible_members"] == 650
+
+
+def test_all_popolo_policies(client: TestClient):
+    """
+    Check all popolo policies are valid for the commons active list.
+    This one takes a bit of time, but catches all errors that would stump the
+    TheyWorkForYou importer.
+    Given this is the most important bridging function.
+    """
+    response = client.get("/policies/commons/active/all.json")
+    data = response.json()
+
+    policy_ids = [policy["id"] for policy in data["policies"]]
+    for p in policy_ids:
+        response = client.get(f"/twfy-compatible/popolo/{p}.json")
+        assert response.status_code == 200, f"Failed on {p}"
