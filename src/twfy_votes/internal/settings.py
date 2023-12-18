@@ -38,7 +38,7 @@ class Settings(BaseSettings):
     render_dir: Path = top_level / "_site"
     base_url: str = base_url
     server_production: bool = Field(default=False, alias="SERVER_PRODUCTION")
-    twfy_api_key: str = Field(default=None, alias="TWFY_API_KEY")
+    twfy_api_key: str = Field(default="", alias="TWFY_API_KEY")
 
 
 settings = Settings()
