@@ -40,7 +40,7 @@ tqdm = "^4.66.1"
 httpx = "^0.24.1"
 aioduckdb = { git = "https://github.com/NickCrews/aioduckdb.git", rev = "patch-1" }
 ruamel-yaml = "0.18.3"
-pyarrow = "^13.0.0"
+pyarrow = "^14.0.1"
 jinjasql2 = "^0.1.10"
 beautifulsoup4 = "^4.12.2"
 rich = "^13.6.0"
