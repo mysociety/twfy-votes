@@ -66,6 +66,9 @@ def public_whip_score_difference(
         )  # Absences on normal votes reduce the total of the comparison
     )
 
+    if avaliable_points == 0:
+        return -1
+
     return points / avaliable_points
 
 

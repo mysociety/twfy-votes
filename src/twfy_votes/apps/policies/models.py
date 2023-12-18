@@ -539,7 +539,10 @@ class VoteDistribution(BaseModel):
         )
 
         self.distance_score = score
-        self.similarity_score = 1.0 - score
+        if self.distance_score == -1:
+            self.similarity_score = -1
+        else:
+            self.similarity_score = 1.0 - score
 
     def score_simplifed(self):
         from .analysis import simplified_score_difference
