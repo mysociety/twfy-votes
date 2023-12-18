@@ -1,13 +1,89 @@
+from pathlib import Path
 from typing import Any
 
+import pandas as pd
 import requests
 import rich
+import tqdm
 from bs4 import BeautifulSoup
 from pydantic import BaseModel
 
 from ...helpers.data.models import StashableBase
+from ...internal.db import duck_core
 from ...internal.settings import settings
 from .models import VoteMotionAnalysis, VoteType
+
+
+def gids_from_df(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    assuming a df with column source_gid - return a list of gids
+    minus the prefix stuff
+    """
+    gids = df["source_gid"].str.split("/", expand=True).drop(columns=[0])
+    gids.columns = ["chamber", "gid"]
+    gids["source"] = df["division_date"]
+    gids = gids.sort_values(by=["gid"])
+    return gids
+
+
+async def get_new_gids(run_all: bool = False) -> list[str]:
+    duck = await duck_core.child_query()
+
+    query = """
+    select * from policy_votes_with_id
+    join pw_division using (division_id)
+    """
+    df = await duck.compile(query).df()
+    gids = gids_from_df(df)
+    gids = gids[gids["chamber"].isin(["debate"])]
+    policy_gids = gids["gid"].to_list()
+
+    # get all recent gids
+    query = """
+    select * from pw_division
+    """
+    df = await duck.compile(query).df()
+    gids = gids_from_df(df)
+    gids = gids[gids["chamber"].isin(["debate"])]
+    gids = gids[gids["gid"].str.startswith("2022") | gids["gid"].str.startswith("2023")]
+    recent_gids = gids["gid"].to_list()
+
+    combined_gids = sorted(list(set(policy_gids + recent_gids)))
+
+    if run_all is False:
+        collection = MotionCollection.from_path(
+            Path("data", "processed", "motions.yaml")
+        )
+        existing_gids = set([m.gid for m in collection.items])
+        combined_gids = [gid for gid in combined_gids if gid not in existing_gids]
+    combined_gids = sorted(combined_gids)
+    return combined_gids
+
+
+async def update_motion_yaml(specific_gid: str | None = None, run_all: bool = False):
+    collection = MotionCollection.from_path(Path("data", "processed", "motions.yaml"))
+    if specific_gid:
+        reduced_gids = [specific_gid]
+        collection.items = [x for x in collection.items if x.gid != specific_gid]
+    else:
+        reduced_gids = await get_new_gids(run_all=run_all)
+
+    twfy = TWFYMotionProcessor()
+    # sort reduced_gids
+    for gid in tqdm.tqdm(reduced_gids):
+        try:
+            result = twfy.get_motion(debate_type="commons", gid=gid).to_reduced()
+            collection.items.append(result)
+        except APIError as e:
+            print(e)
+            continue
+        except Exception as e:
+            print(f"Error with {gid}")
+            raise e
+
+    # sort collection.items by gid
+    collection.items = sorted(collection.items, key=lambda x: x.gid)
+    collection.to_path(Path("data", "processed", "motions.yaml"))
 
 
 class APIError(Exception):
@@ -65,6 +141,11 @@ def catagorise_motion(motion: str) -> VoteType:
         return VoteType.APPROVE_STATUTORY_INSTRUMENT
     elif any_present(l_motion, ["makes provision as set out in this order"]):
         return VoteType.TIMETABLE_CHANGE
+    elif any_present(
+        l_motion,
+        ["following standing order be made", "orders be standing orders of the house"],
+    ):
+        return VoteType.STANDING_ORDER_CHANGE
     elif any_present(l_motion, ["first reading"]):
         return VoteType.FIRST_STAGE
     elif any_present(
@@ -89,8 +170,7 @@ def catagorise_motion(motion: str) -> VoteType:
         return VoteType.AMENDMENT
     elif any_present(l_motion, ["humble address be presented"]):
         return VoteType.HUMBLE_ADDRESS
-    elif any_present(l_motion, ["following standing order be made"]):
-        return VoteType.STANDING_ORDER_CHANGE
+
     elif any_present(l_motion, ["that the house sit in private"]):
         return VoteType.PRIVATE_SITTING
     elif all_present(l_motion, ["confidence in", "government"]):

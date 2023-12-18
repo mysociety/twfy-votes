@@ -86,6 +86,22 @@ async def update():
 @app.command()
 @coroutine
 @load_db
+async def update_motions_info(gid: Optional[str] = None, all: bool = False):
+    """
+    Create the cached tables that are used in views
+    and are a bit too expensive to run on the fly.
+    Roughly needs to be run each time the data is updated.
+
+    Specific a specifc gid to refetch that one.
+    """
+    from .apps.decisions.motion_analysis import update_motion_yaml
+
+    await update_motion_yaml(specific_gid=gid, run_all=all)
+
+
+@app.command()
+@coroutine
+@load_db
 async def create_voting_records(
     policy_id: Optional[int] = None, person_id: Optional[int] = None
 ):
