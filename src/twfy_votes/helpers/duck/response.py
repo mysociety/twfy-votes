@@ -2,6 +2,7 @@ from typing import Any, TypeVar
 
 import aioduckdb
 import duckdb
+import numpy as np
 import pandas as pd
 
 from .types import CompiledJinjaSQL, DataSourceValue, SQLQuery
@@ -123,8 +124,10 @@ class AsyncDuckResponse:
 
         return df
 
-    async def records(self) -> list[dict[str, Any]]:
+    async def records(self, nan_to_none: bool = False) -> list[dict[str, Any]]:
         df = await self.df()
+        if nan_to_none:
+            df = df.fillna(np.nan).replace([np.nan], [None])
         return df.to_dict(orient="records")  # type: ignore
 
     async def first_record(self) -> dict[str, Any]:

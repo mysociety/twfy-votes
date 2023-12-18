@@ -17,6 +17,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+        TWFY_API_KEY: ${{ secrets.TWFY_API_KEY }}
+
     steps:
     - uses: actions/checkout@v4
 

@@ -28,9 +28,14 @@ from .queries import (
     GetCurrentPeopleQuery,
     GetPersonQuery,
     GovDivisionBreakDownQuery,
+    MotionQuery,
     PartyDivisionBreakDownQuery,
     PersonVotesQuery,
 )
+
+
+def aliases(*args: str) -> Any:
+    return Field(..., validation_alias=AliasChoices(*args))
 
 
 class AllowedChambers(StrEnum):
@@ -50,8 +55,66 @@ class VotePosition(StrEnum):
     TELLAYE = "tellaye"
 
 
-def aliases(*args: str) -> Any:
-    return Field(..., validation_alias=AliasChoices(*args))
+class VoteType(StrEnum):
+    """
+    Enum for different types of parlimentary vote.
+    Not all of these are formal descriptions.
+    Converging on 'stages' rather than readings across Parliament.
+
+    """
+
+    AMENDMENT = "amendment"
+    TEN_MINUTE_RULE = "ten_minute_rule"
+    LORDS_AMENDMENT = (
+        "lords_amendment"  # not an amendment in the lords, but commons responding to it
+    )
+    FIRST_STAGE = "first_stage"
+    SECOND_STAGE = "second_stage"
+    COMMITEE_CLAUSE = "committee_clause"
+    SECOND_STAGE_COMMITTEE = (
+        "second_stage_committee"  # approval of clauses in committee
+    )
+    THIRD_STAGE = "third_stage"
+    APPROVE_STATUTORY_INSTRUMENT = "approve_statutory_instrument"
+    ADJOURNMENT = "adjournment"
+    TIMETABLE_CHANGE = (
+        "timetable_change"  # tracking motions that take control of the order paper
+    )
+    HUMBLE_ADDRESS = "humble_address"
+    CONFIDENCE = "confidence"
+    STANDING_ORDER_CHANGE = "standing_order_change"
+    PRIVATE_SITTING = "private_sitting"
+    OTHER = "other"
+
+    def display_name(self):
+        return self.replace("_", " ").title()
+
+
+class VoteMotionAnalysis(BaseModel):
+    debate_type: str
+    gid: str
+    question: str
+    tidied_motion: str | None = None
+    full_motion_speech: str
+    full_motion_gid: str | None = None
+    vote_type: VoteType
+
+    def twfy_motion_url(self):
+        # hardcode to commons votes for now
+        link_format = "https://www.theyworkforyou.com/{debate_slug}/?id={gid}"
+        return link_format.format(debate_slug="debates", gid=self.full_motion_gid)
+
+    def motion_uses_powers(self):
+        """
+        We only need to do vote analysis for votes that aren't inherently using powers based on
+        classification further up.
+        """
+
+        if self.vote_type in [VoteType.ADJOURNMENT, VoteType.OTHER]:
+            non_action = is_nonaction_vote(self.full_motion_speech)
+            return not non_action
+        else:
+            return True
 
 
 class ManualMotion(BaseModel):
@@ -312,6 +375,9 @@ class PowersAnalysis(StrEnum):
     DOES_NOT_USE_POWERS = "does_not_use_powers"
     INSUFFICENT_INFO = "insufficent_info"
 
+    def display_name(self):
+        return self.value.replace("_", " ").title()
+
 
 class DivisionInfo(BaseModel):
     key: str = aliases("key", "division_key")
@@ -328,6 +394,7 @@ class DivisionInfo(BaseModel):
     debate_gid: str
     clock_time: str | None = None
     voting_cluster: str | None = None
+    vote_motion_analysis: VoteMotionAnalysis | None = None
 
     @computed_field
     @property
@@ -366,10 +433,25 @@ class DivisionInfo(BaseModel):
             return True
         return False
 
+    def vote_type(self):
+        if self.vote_motion_analysis:
+            return VoteType(self.vote_motion_analysis.vote_type).display_name()
+        return "Unknown"
+
     def motion_uses_powers(self) -> PowersAnalysis:
         """
         If either the motion or the manual motion triggers the non-action vote criteria.
+        We're also now deferring to the motion calculated via the twfy wiki.
+        At some point, we want to drop motion and manual motion from the main table.
+
         """
+
+        if self.vote_motion_analysis:
+            if self.vote_motion_analysis.motion_uses_powers():
+                return PowersAnalysis.USES_POWERS
+            else:
+                return PowersAnalysis.DOES_NOT_USE_POWERS
+
         motion_based_nonaction = is_nonaction_vote(self.motion)
         manual_motion_based_nonaction = is_nonaction_vote(self.manual_motion)
 
@@ -431,6 +513,33 @@ class DivisionInfo(BaseModel):
         )
 
     @classmethod
+    async def upgrade_with_motions(
+        cls, items: list[DivisionInfo]
+    ) -> list[DivisionInfo]:
+        duck = await duck_core.child_query()
+        # at this point we only have special info for commons divisions
+        division_gids = [
+            x.source_gid.split("/")[-1] for x in items if x.chamber.slug == "commons"
+        ]
+        if len(division_gids) > 0:
+            # get the motion info
+            motions = await MotionQuery(gids=division_gids).to_model_list(
+                model=VoteMotionAnalysis, duck=duck, nan_to_none=True
+            )
+            # make lookup based on gid
+            motion_lookup = {x.gid: x for x in motions}
+        else:
+            motion_lookup = {}
+
+        # add the motion info to the division info
+        for item in items:
+            item.vote_motion_analysis = motion_lookup.get(
+                item.source_gid.split("/")[-1], None
+            )
+
+        return items
+
+    @classmethod
     async def from_partials(cls, partials: list[PartialDivision]) -> list[DivisionInfo]:
         duck = await duck_core.child_query()
         if len(partials) == 0:
@@ -440,6 +549,8 @@ class DivisionInfo(BaseModel):
                 keys=[x.key for x in partials]
             ).to_model_list(model=DivisionInfo, duck=duck)
 
+        items = await cls.upgrade_with_motions(items)
+
         return items
 
     @classmethod
@@ -447,10 +558,10 @@ class DivisionInfo(BaseModel):
         """
         Elevate to a division.
         """
-        duck = await duck_core.child_query()
-        return await DivisionQueryKeys(keys=[partial.key]).to_model_single(
-            model=DivisionInfo, duck=duck
-        )
+        items = await cls.from_partials([partial])
+        if len(items) != 1:
+            raise ValueError("Expected one division to be returned")
+        return items[0]
 
 
 class DivisionListing(BaseModel):
@@ -470,8 +581,9 @@ class DivisionListing(BaseModel):
             {
                 "Date": d.date,
                 "Division": UrlColumn(url=d.url(request), text=d.division_name),
-                "Powers": d.motion_uses_powers(),
-                "voting_cluster": d.voting_cluster,
+                "Vote Type": d.vote_type(),
+                "Powers": d.motion_uses_powers().display_name(),
+                "Voting Cluster": d.voting_cluster,
             }
             for d in self.divisions
         ]
@@ -510,6 +622,8 @@ class DivisionListing(BaseModel):
             end_date=end_date,
             chamber_slug=chamber.slug,
         ).to_model_list(model=DivisionInfo, duck=duck)
+
+        divisions = await DivisionInfo.upgrade_with_motions(divisions)
 
         return DivisionListing(
             chamber=chamber,

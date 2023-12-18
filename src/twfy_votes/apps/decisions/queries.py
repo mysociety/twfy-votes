@@ -28,6 +28,18 @@ class DivisionQuery(BaseQuery):
     chamber_slug: str
 
 
+class MotionQuery(BaseQuery):
+    query_template = """
+        SELECT
+            *
+        FROM
+            vote_motions
+        WHERE
+            gid in {{ gids | inclause }}
+        """
+    gids: list[str]
+
+
 class DivisionQueryKeys(BaseQuery):
     query_template = """
         SELECT
