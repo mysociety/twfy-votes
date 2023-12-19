@@ -1,7 +1,10 @@
 id: 837
-name: a wholly elected House of Lords
+name: An Elected House of Lords
 context_description: a <strong>wholly elected</strong> House of Lords
-policy_description: 'the House of Lords should be wholly elected '
+policy_description: The House of Lords is the upper house of the UK Parliament. There
+  have been votes on moving away from a position where members of the House of Lords
+  are either appointed or have inherited their seats to a system where members are
+  elected.
 notes: ''
 status: active
 strength_meaning: classic

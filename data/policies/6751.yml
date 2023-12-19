@@ -1,10 +1,12 @@
 id: 6751
-name: mass surveillance of people&rsquo;s communications and activities
+name: Mass Surveillance
 context_description: <b>mass surveillance</b> of people&rsquo;s communications and
   activities
-policy_description: "the UK state should, subject to safeguards, be allowed to obtain,
-  retain and look at personal and private information from the population en-mass
-  eg. people's communications, health records, travel data etc. "
+policy_description: There have been votes in Parliament on if the state should be
+  permitted, with safeguards, to intercept people&rsquo;s communications en masse,
+  as well as obtain and use datasets which could include people&rsquo;s personal banking,
+  travel, and health data. The question of if the state should be able to require
+  the retention of details of people&rsquo;s internet use has also been voted on.
 notes: ''
 status: active
 strength_meaning: classic

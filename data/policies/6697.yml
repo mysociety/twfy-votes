@@ -1,7 +1,10 @@
 id: 6697
-name: selling England&rsquo;s state owned forests
+name: Public Forests
 context_description: selling England&rsquo;s state owned <b>forests</b>
-policy_description: England's public forests should be sold
+policy_description: The Public Forest Estate in England comprises about 2% of the
+  land in England and 18% of the woods and forests. MPs have voted on if the estate
+  ought remain publicly-owned and managed by the Forestry Commission or if it should
+  be sold off.
 notes: ''
 status: active
 strength_meaning: classic

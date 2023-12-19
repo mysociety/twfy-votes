@@ -1,8 +1,8 @@
 id: 1136
 name: fewer MPs in the House of Commons
 context_description: <b>fewer MPs</b> in the House of Commons
-policy_description: the number of constituencies represented in Parliament should
-  be reduced, and that therefore should be fewer MPs
+policy_description: There have been votes in Parliament on reducing the number of
+  MPs in the House of Commons and reviewing the boundaries of parliamentary constituencies.
 notes: ''
 status: active
 strength_meaning: classic

@@ -1,9 +1,10 @@
 id: 1071
-name: allowing ministers to intervene in inquests
+name: Ministers Intervening in Inquests
 context_description: allowing ministers to <b>intervene in inquests</b>
-policy_description: "ministers should be able to legally intervene in a coroner's
-  inquest and either order it to take place without a jury or suspend it and impose
-  an inquiry in its place.  \r\n\r\n"
+policy_description: "There have been votes in Parliament on the powers of ministers
+  to intervene in inquests. Specific votes were held on questions including if the
+  Secretary of State ought be able to order a coroner's inquest to take place without
+  a jury and if a minister ought be able to suspend a coroner's inquest. "
 notes: ''
 status: active
 strength_meaning: classic

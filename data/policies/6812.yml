@@ -1,11 +1,11 @@
 id: 6812
 name: Free Trade
-context_description: <b>free trade</b>
+context_description: measures to allow <b>free trade</b>
 policy_description: There have been votes in Parliament on the United Kingdom's membership
   of the European Union, free trade agreements, import tariffs and other matters related
   to Free Trade.
 notes: ''
-status: candidate
+status: draft
 strength_meaning: classic
 highlightable: false
 chamber: commons

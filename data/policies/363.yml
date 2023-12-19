@@ -1,7 +1,9 @@
 id: 363
-name: introducing foundation hospitals
+name: Introducing foundation hospitals
 context_description: introducing <b>foundation hospitals</b>
-policy_description: foundation hospitals should be introduced
+policy_description: Foundation Hospitals are hospitals run by NHS Foundation Trusts.
+  An NHS Foundation Trust is part of the NHS in England and Wales given financial
+  and managerial independence from the Department of Health
 notes: ''
 status: active
 strength_meaning: classic

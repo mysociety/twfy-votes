@@ -1,7 +1,10 @@
 id: 6685
-name: a banker&rsquo;s bonus tax
+name: Bankers' Bonus Tax
 context_description: a <b>banker&rsquo;s bonus tax</b>
-policy_description: that there ought be a specific tax on Bankers' Bonuses
+policy_description: There have been votes in Parliament on the level of taxation applied
+  to Banker' Bonuses. In 2009 a one-off 50% tax on on any individual discretionary
+  bonus over Â£25,000 paid to a banker was levied and there have been a number of
+  votes since on reintroducing such a tax.
 notes: ''
 status: active
 strength_meaning: classic

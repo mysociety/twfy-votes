@@ -1,7 +1,8 @@
 id: 6699
-name: higher taxes on plane tickets
+name: Taxes on Plane Tickets
 context_description: higher <b>taxes on plane tickets</b>
-policy_description: Air Passenger Duty should be increased
+policy_description: MPs have held a number of votes on the rates of Air Passenger
+  Duty and the details of which flights it ought apply to.
 notes: ''
 status: active
 strength_meaning: classic

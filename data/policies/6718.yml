@@ -1,9 +1,9 @@
 id: 6718
-name: restrictions on fees charged to tenants by letting agents
+name: Letting Agent Fees
 context_description: restrictions on <b>fees</b> charged to tenants by <b>letting
   agents</b>
-policy_description: letting agent fees, charged to tenants, ought be more strongly
-  regulated or even banned
+policy_description: There have been votes in Parliament on if letting agent fees,
+  charged to tenants, ought be more strongly regulated or even banned.
 notes: ''
 status: active
 strength_meaning: classic

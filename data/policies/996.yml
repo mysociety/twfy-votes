@@ -1,9 +1,8 @@
 id: 996
-name: a transparent Parliament
+name: Transparancy of Parliament
 context_description: a <b>transparent Parliament</b>
-policy_description: the Freedom of Information Act should not be changed to exclude
-  Parliament or all correspondence between MPs and any part of government, and that
-  expenses, the Register of Members' Interests &c. should be more public
+policy_description: There have been number of votes in Parliament on how transparently
+  Parliament is run, particularly in respect of MPs' expenses.
 notes: ''
 status: active
 strength_meaning: classic

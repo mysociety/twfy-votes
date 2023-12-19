@@ -1,10 +1,12 @@
 id: 6711
-name: an annual tax on the value of expensive homes (popularly known as a mansion
-  tax)
+name: Tax on Value of Expensive Homes
 context_description: an annual tax on the value of expensive homes (popularly known
   as a <b>mansion tax</b>)
-policy_description: There ought be an annual tax on the value of properties worth
-  over a certain amount. The proposed tax is popularly known as the mansion tax.
+policy_description: here have been votes in Parliament on the introduction of a new
+  property tax on expensive homes. Such a tax, popularly dubbed a "mansion tax", would
+  introduce a requirement for those with residential properties worth over a certain
+  amount to pay a fraction of the property's value (or a fraction of its value over
+  a certain amount) to the Government each year.
 notes: ''
 status: active
 strength_meaning: classic

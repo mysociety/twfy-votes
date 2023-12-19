@@ -1,9 +1,11 @@
 id: 1087
-name: a stricter asylum system
+name: Asylum
 context_description: a <b>stricter asylum system</b>
-policy_description: the asylum system should be stricter by tightening the criteria
-  for acceptance, setting tougher rules for allowable activities and making it easier
-  for government agencies to remove asylum seekers
+policy_description: 'The asylum system is intended to protect people fleeing persecution
+  in their own countries. Parliament has voted on subjects including: routes via which
+  people may enter the United Kingdom to seek asylum; the circumstances in which those
+  seeking asylum may work; support for those seeking asylum and if to allow those
+  claiming asylum to be removed to other countries while their claim is assessed.'
 notes: ''
 status: active
 strength_meaning: classic

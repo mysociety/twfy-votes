@@ -1,10 +1,12 @@
 id: 6716
-name: allowing employees to exchange some employment rights for shares in the company
-  they work for
+name: Shares for Rights
 context_description: allowing employees to exchange some employment <b>rights for
   shares</b> in the company they work for
-policy_description: Employers ought be permitted not to extend certain employment
-  rights to those with employee shareholders status.
+policy_description: There have been votes in Parliament on the introduction of the
+  employee shareholder scheme which is an employee status obtained when an employee
+  is given shares worth at least Â£2,000 in return for which the employer is permitted
+  not to extend unfair dismissal rights, rights to statutory redundancy pay and other
+  employment rights to the employee.
 notes: ''
 status: active
 strength_meaning: classic

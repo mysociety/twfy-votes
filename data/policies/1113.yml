@@ -1,8 +1,10 @@
 id: 1113
-name: an equal number of electors per parliamentary constituency
+name: Equalise Number of Electors Per Parliamentary Constituency
 context_description: an <b>equal number of electors</b> per parliamentary constituency
-policy_description: Parliamentary constituencies ought to contain approximately equal
-  number of electors
+policy_description: There have been votes in Parliament on equalising the number of
+  people who elect each MP. Specific votes have been held on if there ought be exceptions
+  to rules aimed at equalising the size of constituencies for special cases such as
+  Cornwall and the Isle of Wight.
 notes: ''
 status: active
 strength_meaning: classic

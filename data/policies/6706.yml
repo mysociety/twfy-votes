@@ -1,9 +1,11 @@
 id: 6706
-name: strengthening the Military Covenant
+name: Military Covenant
 context_description: strengthening the <b>Military Covenant</b>
-policy_description: the Military Covenant should be stronger, and have the force of
-  law, and more generally there should be more support for current and former armed
-  service members
+policy_description: The armed forces covenant sets out the relationship between the
+  nation, the government and the armed forces. It recognises the nation's moral obligation
+  to members of the armed forces and their families. MPs have voted on the extent
+  to which there should be special provisions for current, and former, service personnel
+  in relation to public services.
 notes: ''
 status: active
 strength_meaning: classic

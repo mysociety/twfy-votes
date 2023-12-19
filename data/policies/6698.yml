@@ -1,7 +1,10 @@
 id: 6698
-name: fixed periods between parliamentary elections
+name: Fixed Term Parliaments
 context_description: <b>fixed periods between parliamentary elections</b>
-policy_description: there should be regular general elections at set intervals
+policy_description: Fixed Term Parliaments involve holding general elections on a
+  regular basis, for example every five years, with some exceptions permitting early
+  elections. Without Fixed Term Parliaments a party with a majority had significant
+  influence over the timing of a general election.
 notes: ''
 status: active
 strength_meaning: classic

@@ -1,9 +1,9 @@
 id: 6677
-name: restricting the provision of services to private patients by the NHS
+name: NHS Services for Private Patients
 context_description: restricting the provision of services to <b>private patients</b>
   by the NHS
-policy_description: the ability of NHS Foundation Trusts to make money from private
-  patients ought be restricted and reduced
+policy_description: There have been votes in Parliament on restricting the ability
+  of NHS Trusts to generate income from private patients.
 notes: ''
 status: active
 strength_meaning: classic

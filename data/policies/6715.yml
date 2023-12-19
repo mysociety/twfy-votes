@@ -1,10 +1,11 @@
 id: 6715
-name: allowing national security sensitive evidence to be put before courts in secret
-  sessions
+name: Security Sensitive Evidence in Courts
 context_description: allowing national security sensitive evidence to be put before
   <b>courts in secret sessions</b>
-policy_description: there should be a system for introducing material to a court privately
-  without the public or parties to the case having access to it
+policy_description: There have been votes in Parliament on if there should be a mechanism
+  for material deemed national security sensitive to be made available to a civil
+  court and a special advocate but not parties to the case. The mechanism is called
+  the "closed material procedure".
 notes: ''
 status: active
 strength_meaning: classic

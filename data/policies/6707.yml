@@ -1,8 +1,10 @@
 id: 6707
-name: restricting the scope of legal aid
+name: Legal Aid
 context_description: restricting the scope of <b>legal aid</b>
-policy_description: The provision of legal aid ought be restricted; the scope of cases
-  and circumstances in which legal aid may be provided should be reduced.
+policy_description: There have been votes in Parliament on the subject of eligibility
+  for legal aid. Matters which have been voted on include means testing, if aid should
+  be generally restricted to those residing in the UK, and which legal services should
+  be funded by legal aid.
 notes: ''
 status: active
 strength_meaning: classic

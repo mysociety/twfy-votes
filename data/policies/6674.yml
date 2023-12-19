@@ -1,7 +1,10 @@
 id: 6674
-name: raising welfare benefits at least in line with prices
+name: Welfare Benefit Levels
 context_description: raising <b>welfare benefits</b> at least in line with prices
-policy_description: Welfare benefits ought rise at least in line with prices
+policy_description: Welfare benefits are payments, including tax credits, which the
+  Government makes to those on who are on low incomes or who meet certain criteria.
+  There have been votes in Parliament on the level of these payments and if they should
+  increase at least in line with prices.
 notes: ''
 status: active
 strength_meaning: classic

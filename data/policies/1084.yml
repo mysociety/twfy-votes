@@ -1,9 +1,10 @@
 id: 1084
-name: a more proportional system for electing MPs
+name: Proportional Representation When Electing MPs
 context_description: a more <a href="https://en.wikipedia.org/wiki/Proportional_representation">proportional
   system</a> for electing MPs
-policy_description: "the voting system should change to a more proportional one which
-  links vote and seat numbers more equally\r\n\r\n\r\n"
+policy_description: 'There have been votes in Parliament on if the system used to
+  elect MPs to the House of Commons should change to a one where the proportion of
+  seats won by a political party better reflects the proportion of the vote they win. '
 notes: ''
 status: active
 strength_meaning: classic

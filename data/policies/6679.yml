@@ -1,7 +1,8 @@
 id: 6679
-name: reducing the rate of corporation tax
+name: Corporation Tax Rate
 context_description: reducing the rate of <b>corporation tax</b>
-policy_description: the main rate of Corporation Tax ought be reduced
+policy_description: There have been votes in Parliament on the rate of tax charged
+  on a company's profits.
 notes: ''
 status: active
 strength_meaning: classic

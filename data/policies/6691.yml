@@ -1,8 +1,10 @@
 id: 6691
-name: stronger tax incentives for companies to invest in assets
+name: Incentives for Companies to Invest in Assets
 context_description: stronger tax <b>incentives for companies to invest</b> in assets
-policy_description: "companies' corporation tax ought be reduced more in respect of
-  investment in assets; primarily this relates to capital allowances. "
+policy_description: The tax incentive for companies to invest in assets (eg. new equipment)
+  is determined by the "annual investment allowance" - the amount spent on investing
+  assets in a year which companies (or self-employed individuals) can deduct from
+  their profits prior to the calculation of corporation tax.
 notes: ''
 status: active
 strength_meaning: classic

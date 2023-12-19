@@ -1,7 +1,9 @@
 id: 6705
-name: requiring pub companies to offer pub landlords rent-only leases
+name: Pub Leases
 context_description: requiring pub companies to offer <b>pub landlords rent-only leases</b>
-policy_description: pub companies ought be required to offer rent only leases
+policy_description: There have been votes in Parliament on the question of if pub
+  companies should be required to offer their tenants an option to rent the premises
+  with no requirement to buy beer, and other supplies, from the pub company.
 notes: ''
 status: active
 strength_meaning: classic

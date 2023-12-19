@@ -1,9 +1,10 @@
 id: 984
-name: replacing Trident with a new nuclear weapons system
+name: Trident Nuclear Weapons System Replacement
 context_description: replacing <b>Trident</b> with a new nuclear weapons system
-policy_description: the Trident submarine nuclear weapons system should be replaced
-  by a new nuclear weapons system of at least the same capability by the time it is
-  decommissioned
+policy_description: The UK's Trident nuclear weapons system, comprising missile armed
+  submarines, provides a continuous at-sea nuclear deterrent. There have been votes
+  on if the system should be replaced with a new nuclear deterrent when Trident reaches
+  the end of its lifespan.
 notes: ''
 status: active
 strength_meaning: classic

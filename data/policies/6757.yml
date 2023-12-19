@@ -1,8 +1,10 @@
 id: 6757
-name: military action against ISIL (Daesh)
+name: Military Action Against Group Known as ISIS, ISIL or Daesh
 context_description: <b>military action against <a href="https://en.wikipedia.org/wiki/Islamic_State_of_Iraq_and_the_Levant">ISIL
   (Daesh)</a></b>
-policy_description: The actions of Daesh / ISIL need to be tackled by military action
+policy_description: There have been votes in Parliament on whether the UK should take
+  part in military action in Iraq and Syria against the group known as ISIS, ISIL
+  or Daesh.
 notes: ''
 status: active
 strength_meaning: classic

@@ -1,7 +1,9 @@
 id: 811
-name: smoking bans
+name: Smoking bans
 context_description: <b>smoking bans</b>
-policy_description: all smoking should be banned
+policy_description: Smoking Bans - Over the years there have been votes in Parliament
+  on banning smoking in restaurants, public buildings, pubs, and in cars with children
+  present.
 notes: ''
 status: active
 strength_meaning: classic

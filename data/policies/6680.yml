@@ -1,9 +1,9 @@
 id: 6680
-name: raising the threshold at which people start to pay income tax
+name: Income Tax Personal Allowance
 context_description: raising the threshold at which people start to pay <b>income
   tax</b>
-policy_description: 'increase the personal tax free allowance for income tax reduce
-  income tax for many people and to remove some from income tax all together. '
+policy_description: There have been votes in Parliament on the earnings threshold
+  at which an individual starts to become subject to income tax.
 notes: ''
 status: active
 strength_meaning: classic

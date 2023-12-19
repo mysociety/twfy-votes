@@ -1,9 +1,9 @@
 id: 1052
-name: university tuition fees
+name: University tuition fees
 context_description: university <b>tuition fees</b>
-policy_description: the cost of university education should be charged for at the
-  point of use in the form of top-up or tuition fees, albeit accompanied by government-subsidised
-  loans
+policy_description: There have been votes in Parliament on tuition fees applicable
+  to UK undergraduate students at universities in England. Subjects of specific votes
+  have been on the subjects of introducing fees, increasing to fees, and capping fees.
 notes: ''
 status: active
 strength_meaning: classic

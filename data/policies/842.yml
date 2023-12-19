@@ -1,8 +1,10 @@
 id: 842
-name: a lower voting age
+name: Voting age
 context_description: a lower <b>voting age</b>
-policy_description: the age at which citizens can vote in elections should be lowered
-  from 18 to 16
+policy_description: There have been votes in Parliament on reducing the voting age
+  from eighteen to sixteen for local government elections, for elections to the Westminster
+  and European Parliaments and for the referendum on the United Kingdom's membership
+  of the European Union.
 notes: ''
 status: active
 strength_meaning: classic

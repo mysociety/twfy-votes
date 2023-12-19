@@ -1,7 +1,9 @@
 id: 6733
-name: higher taxes on banks
+name: Taxation of Banks
 context_description: higher <b>taxes on banks</b>
-policy_description: banks should be taxed more
+policy_description: 'There have been votes in Parliament on taxation of banks. The
+  "banking levy" is one such tax: it is charged annually based on the amount a bank
+  holds in assets.'
 notes: ''
 status: active
 strength_meaning: classic

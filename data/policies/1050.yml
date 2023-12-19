@@ -1,8 +1,8 @@
 id: 1050
-name: the hunting ban
+name: Hunting ban
 context_description: the <b>hunting ban</b>
-policy_description: people should not be allowed to hunt wild animals (primarily foxes)
-  with hounds
+policy_description: A vote for a hunting ban is a vote against people being allowed
+  to hunt wild animals (primarily foxes) with hounds.
 notes: ''
 status: active
 strength_meaning: classic

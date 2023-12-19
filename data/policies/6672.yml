@@ -1,10 +1,11 @@
 id: 6672
-name: reducing housing benefit for social tenants deemed to have excess bedrooms (which
-  Labour describe as the "bedroom tax")
+name: Housing Benefit Reduction For Those Deemed to have Excess Bedrooms
 context_description: reducing <b>housing benefit</b> for social tenants deemed to
   have excess bedrooms (which Labour describe as the "bedroom tax")
-policy_description: housing related benefits should be reduced for social housing
-  tenants who are deemed to have excess bedrooms.
+policy_description: There have been votes in Parliament on the introduction, and operation
+  of, a policy to restrict housing benefit for those in social housing deemed to have
+  excess bedrooms. This policy has been called the "Bedroom Tax" by Labour and some
+  commentators.
 notes: ''
 status: active
 strength_meaning: classic
