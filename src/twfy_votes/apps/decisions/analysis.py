@@ -101,12 +101,13 @@ def is_nonaction_vote(motion_text: str, quiet: bool = True) -> bool:
         "recognises",
         "takes note",
         "agrees with the goverment's decision",
+        "regret that the gracious speech",
     ]
     action_phrases = [
         "orders that",
-        "requires the Goverment",
+        "requires the goverment",
         "censures",
-        "declines to give a Second Reading",
+        "declines to give a second reading",
     ]
 
     # this doesn't seem like a thing

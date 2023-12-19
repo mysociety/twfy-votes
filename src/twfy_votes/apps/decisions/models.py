@@ -81,6 +81,7 @@ class VoteType(StrEnum):
         "timetable_change"  # tracking motions that take control of the order paper
     )
     HUMBLE_ADDRESS = "humble_address"
+    GOVERNMENT_AGENDA = "government_agenda"  # monarch's speech etc
     CONFIDENCE = "confidence"
     STANDING_ORDER_CHANGE = "standing_order_change"
     PRIVATE_SITTING = "private_sitting"
@@ -110,7 +111,11 @@ class VoteMotionAnalysis(BaseModel):
         classification further up.
         """
 
-        if self.vote_type in [VoteType.ADJOURNMENT, VoteType.OTHER]:
+        if self.vote_type in [
+            VoteType.ADJOURNMENT,
+            VoteType.OTHER,
+            VoteType.GOVERNMENT_AGENDA,
+        ]:
             non_action = is_nonaction_vote(self.full_motion_speech)
             return not non_action
         else:
@@ -445,37 +450,48 @@ class DivisionInfo(BaseModel):
         At some point, we want to drop motion and manual motion from the main table.
 
         """
-
+        result = PowersAnalysis.DOES_NOT_USE_POWERS
         if self.vote_motion_analysis:
             if self.vote_motion_analysis.motion_uses_powers():
-                return PowersAnalysis.USES_POWERS
-            else:
-                return PowersAnalysis.DOES_NOT_USE_POWERS
+                result = PowersAnalysis.USES_POWERS
 
-        motion_based_nonaction = is_nonaction_vote(self.motion)
-        manual_motion_based_nonaction = is_nonaction_vote(self.manual_motion)
+            if self.vote_motion_analysis.vote_type == VoteType.AMENDMENT:
+                poor_quality_motion = self.poor_quality_motion_text()
+                if self.manual_motion and not poor_quality_motion:
+                    if is_nonaction_vote(self.motion):
+                        result = PowersAnalysis.DOES_NOT_USE_POWERS
+                    else:
+                        result = PowersAnalysis.USES_POWERS
 
-        poor_quality_motion = self.poor_quality_motion_text()
+            return result
 
-        if poor_quality_motion and self.manual_motion:
-            # if we have a poor quality motion and we have a manual motion, use that alone
-            if manual_motion_based_nonaction:
-                return PowersAnalysis.DOES_NOT_USE_POWERS
+        if self.manual_motion or self.motion:
+            motion_based_nonaction = is_nonaction_vote(self.motion)
+            manual_motion_based_nonaction = is_nonaction_vote(self.manual_motion)
+
+            poor_quality_motion = self.poor_quality_motion_text()
+
+            if poor_quality_motion and self.manual_motion:
+                # if we have a poor quality motion and we have a manual motion, use that alone
+                if manual_motion_based_nonaction:
+                    return PowersAnalysis.DOES_NOT_USE_POWERS
+                else:
+                    return PowersAnalysis.USES_POWERS
+            elif poor_quality_motion and not self.manual_motion:
+                # if we have a poor quality motion and no manual motion, we assume a negative response (has powers)
+                # is false and return insufficent info
+                if motion_based_nonaction:
+                    return PowersAnalysis.DOES_NOT_USE_POWERS
+                else:
+                    return PowersAnalysis.INSUFFICENT_INFO
             else:
-                return PowersAnalysis.USES_POWERS
-        elif poor_quality_motion and not self.manual_motion:
-            # if we have a poor quality motion and no manual motion, we assume a negative response (has powers)
-            # is false and return insufficent info
-            if motion_based_nonaction:
-                return PowersAnalysis.DOES_NOT_USE_POWERS
-            else:
-                return PowersAnalysis.INSUFFICENT_INFO
-        else:
-            # we have both a good quality motion and a manual motion, if either one says non action, trust that
-            if motion_based_nonaction | manual_motion_based_nonaction:
-                return PowersAnalysis.DOES_NOT_USE_POWERS
-            else:
-                return PowersAnalysis.USES_POWERS
+                # we have both a good quality motion and a manual motion, if either one says non action, trust that
+                if motion_based_nonaction | manual_motion_based_nonaction:
+                    return PowersAnalysis.DOES_NOT_USE_POWERS
+                else:
+                    return PowersAnalysis.USES_POWERS
+
+        return PowersAnalysis.INSUFFICENT_INFO
 
     def motion_text_only(self) -> str:
         soup = BeautifulSoup(self.motion, "html.parser")

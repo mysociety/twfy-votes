@@ -166,6 +166,8 @@ def catagorise_motion(motion: str) -> VoteType:
         return VoteType.ADJOURNMENT
     elif all_present(l_motion, ["amendment", "lords"]):
         return VoteType.LORDS_AMENDMENT
+    elif any_present(l_motion, ["gracious speech"]):
+        return VoteType.GOVERNMENT_AGENDA
     elif any_present(l_motion, ["amendment", "clause be added to the bill"]):
         return VoteType.AMENDMENT
     elif any_present(l_motion, ["humble address be presented"]):
