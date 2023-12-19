@@ -6,10 +6,11 @@ from typing import Awaitable, Callable, Optional, ParamSpec, TypeVar
 
 import typer
 import uvicorn
-from trogon import Trogon
+from trogon import Trogon  # type: ignore
 from typer.main import get_group
 
 from .apps.core.db import db_lifespan
+from .apps.policies.models import PolicyDirection, PolicyStrength
 
 app = typer.Typer(help="")
 
@@ -141,6 +142,26 @@ async def validate_voting_records(sample_size: int = 10):
     from .apps.policies.vr_validator import test_policy_sample
 
     await test_policy_sample(sample_size)
+
+
+@app.command()
+def add_vote_to_policy(
+    votes_url: str,
+    policy_id: int,
+    vote_alignment: PolicyDirection,
+    strength: PolicyStrength = PolicyStrength.STRONG,
+):
+    """
+    Add a vote to a policy based on a twfy-votes URL.
+    """
+    from .apps.policies.tools import add_vote_to_policy_from_url
+
+    add_vote_to_policy_from_url(
+        votes_url=votes_url,
+        policy_id=policy_id,
+        vote_alignment=vote_alignment,
+        strength=strength,
+    )
 
 
 def run_fastapi_prod_server():
