@@ -4,7 +4,7 @@ context_description: <b>photographic voter identification at polling stations</b
 policy_description: There have been votes in Parliament on introducing a requirement
   for photographic identification to vote at polling stations.
 notes: ''
-status: draft
+status: candidate
 strength_meaning: classic
 highlightable: false
 chamber: commons
@@ -34,7 +34,7 @@ division_links:
     date: 2021-05-19
     division_number: 3
   alignment: against
-  strength: strong
+  strength: weak
   status: active
   notes: ''
   decision_type: division
