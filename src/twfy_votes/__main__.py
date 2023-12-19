@@ -6,6 +6,8 @@ from typing import Awaitable, Callable, Optional, ParamSpec, TypeVar
 
 import typer
 import uvicorn
+from trogon import Trogon
+from typer.main import get_group
 
 from .apps.core.db import db_lifespan
 
@@ -20,6 +22,14 @@ TReturn = TypeVar("TReturn")
 
 # Create a ParamSpec variable for capturing argument types.
 P = ParamSpec("P")
+
+
+@app.command()
+def ui(ctx: typer.Context):
+    """
+    Open terminal UI
+    """
+    Trogon(get_group(app), click_context=ctx).run()
 
 
 def coroutine(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, TReturn]:
