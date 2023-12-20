@@ -21,6 +21,7 @@ from ..decisions.models import (
     PartialAgreement,
     PartialDivision,
     Person,
+    PowersAnalysis,
 )
 from ..decisions.queries import DivisionBreakDownQuery
 from .queries import (
@@ -858,3 +859,87 @@ class PersonPolicyDisplay(BaseModel):
             groups.append(PolicyLinkDisplayGroup(name=group.name, links=links))
 
         return groups
+
+
+class IssueType(StrEnum):
+    STRONG_WITHOUT_POWER = "strong_without_power"
+    NO_STRONG_VOTES = "no_strong_votes"
+    NO_STRONG_VOTES_AFTER_POWER_CHANGE = "no_strong_votes_after_power_change"
+
+
+class PolicyReport(BaseModel):
+    policy: Policy
+    division_issues: dict[IssueType, list[DivisionInfo]] = Field(default_factory=dict)
+    policy_issues: list[IssueType] = Field(default_factory=list)
+
+    def add_from_division_issue(
+        self, division_link: PolicyDecisionLink[DivisionInfo], issue: IssueType
+    ):
+        """
+        Add an issue to the list of issues for this division
+        """
+        ignore_format = f"ignore:{issue}"
+        if ignore_format in division_link.notes:
+            return
+
+        if issue not in self.division_issues:
+            self.division_issues[issue] = []
+        self.division_issues[issue].append(division_link.decision)
+
+    def add_policy_issue(self, issue: IssueType):
+        """
+        Add an issue to the list of issues for this policy
+        """
+        ignore_format = f"ignore:{issue}"
+        if ignore_format in self.policy.notes:
+            return
+
+        if issue not in self.policy_issues:
+            self.policy_issues.append(issue)
+
+    def len_division_issues(self) -> int:
+        return sum([len(x) for x in self.division_issues.values()])
+
+    def has_issues(self) -> bool:
+        return len(self.policy_issues) > 0 or len(self.division_issues) > 0
+
+    @classmethod
+    async def fetch_multiple(
+        cls,
+        statuses: list[PolicyStatus],
+    ):
+        """
+        Run checks on policies.
+        """
+        policies = []
+        for status in statuses:
+            policies += await Policy.for_collection(status=status)
+        return [cls.from_policy(policy=policy) for policy in policies]
+
+    @classmethod
+    def from_policy(cls, policy: Policy) -> PolicyReport:
+        """
+        Score policy for identified issues
+        """
+        report = PolicyReport(policy=policy)
+        strong_count = 0
+        strong_without_power = 0
+        for division in policy.division_links:
+            # Test for overlap of strong votes and no powers
+            uses_powers = (
+                division.decision.motion_uses_powers() == PowersAnalysis.USES_POWERS
+            )
+            if division.strength == PolicyStrength.STRONG:
+                strong_count += 1
+            if division.strength == PolicyStrength.STRONG and not uses_powers:
+                report.add_from_division_issue(
+                    division_link=division, issue=IssueType.STRONG_WITHOUT_POWER
+                )
+                strong_without_power += 1
+
+        if strong_count == 0:
+            report.add_policy_issue(issue=IssueType.NO_STRONG_VOTES)
+        elif strong_count - strong_without_power == 0:
+            report.add_policy_issue(issue=IssueType.NO_STRONG_VOTES_AFTER_POWER_CHANGE)
+
+        return report
