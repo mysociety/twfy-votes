@@ -8,14 +8,61 @@ from .models import (
     AllowedChambers,
     LinkStatus,
     PartialDivision,
+    PartialPolicy,
     PartialPolicyDecisionLink,
     PolicyDirection,
+    PolicyGroupSlug,
+    PolicyStatus,
     PolicyStrength,
 )
 
 vote_folder = Path("data", "policies")
 
 PartialDivisionLink = PartialPolicyDecisionLink[PartialDivision]
+
+
+def create_new_policy(
+    name: str,
+    context_description: str = "",
+    policy_description: str = "",
+    status: PolicyStatus = PolicyStatus.DRAFT,
+    chamber: AllowedChambers = AllowedChambers.COMMONS,
+    groups: list[PolicyGroupSlug] = [],
+):
+    """ """
+    all_current_ids = [int(x.stem) for x in vote_folder.glob("*.yml")]
+
+    # Giving a healthy range to existing PW policies (generally less than 10000)
+    starting_value = {
+        AllowedChambers.COMMONS: 20000,
+        AllowedChambers.LORDS: 30000,
+        AllowedChambers.WALES: 40000,
+        AllowedChambers.SCOTLAND: 50000,
+        AllowedChambers.NI: 60000,
+    }
+
+    policy_id = starting_value[chamber]
+    while policy_id in all_current_ids:
+        policy_id += 1
+
+    policy = PartialPolicy(
+        id=policy_id,
+        name=name,
+        context_description=context_description,
+        policy_description=policy_description,
+        status=status,
+        chamber=chamber,
+        groups=groups,
+        highlightable=False,
+        division_links=[],
+        agreement_links=[],
+    ).model_dump()
+
+    policy_path = vote_folder / f"{policy_id}.yml"
+
+    data_to_yaml(policy, policy_path)
+
+    print(f"Created policy {policy_id} at {policy_path}")
 
 
 def add_vote_to_policy_from_url(

@@ -10,7 +10,13 @@ from trogon import Trogon  # type: ignore
 from typer.main import get_group
 
 from .apps.core.db import db_lifespan
-from .apps.policies.models import PolicyDirection, PolicyStrength
+from .apps.policies.models import (
+    AllowedChambers,
+    PolicyDirection,
+    PolicyGroupSlug,
+    PolicyStatus,
+    PolicyStrength,
+)
 
 app = typer.Typer(help="")
 
@@ -161,6 +167,30 @@ def add_vote_to_policy(
         policy_id=policy_id,
         vote_alignment=vote_alignment,
         strength=strength,
+    )
+
+
+@app.command()
+def create_policy(
+    name: str,
+    context_description: str = "",
+    policy_description: str = "",
+    status: PolicyStatus = PolicyStatus.DRAFT,
+    chamber: AllowedChambers = AllowedChambers.COMMONS,
+    groups: list[PolicyGroupSlug] = [],
+):
+    """
+    Create a new policy
+    """
+    from .apps.policies.tools import create_new_policy
+
+    create_new_policy(
+        name=name,
+        context_description=context_description,
+        policy_description=policy_description,
+        status=status,
+        chamber=chamber,
+        groups=groups,
     )
 
 
