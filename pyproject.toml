@@ -45,6 +45,7 @@ jinjasql2 = "^0.1.10"
 beautifulsoup4 = "^4.12.2"
 rich = "^13.6.0"
 trogon = "^0.5.0"
+requests = "^2.31.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.1.2"
