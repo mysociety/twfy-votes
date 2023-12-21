@@ -881,11 +881,12 @@ class PolicyReport(BaseModel):
         """
         ignore_format = f"ignore:{issue}"
         if ignore_format in division_link.notes:
-            return
+            return False
 
         if issue not in self.division_issues:
             self.division_issues[issue] = []
         self.division_issues[issue].append(division_link.decision)
+        return True
 
     def add_policy_issue(self, issue: IssueType):
         """
@@ -893,10 +894,11 @@ class PolicyReport(BaseModel):
         """
         ignore_format = f"ignore:{issue}"
         if ignore_format in self.policy.notes:
-            return
+            return False
 
         if issue not in self.policy_issues:
             self.policy_issues.append(issue)
+        return True
 
     def len_division_issues(self) -> int:
         return sum([len(x) for x in self.division_issues.values()])
@@ -933,10 +935,10 @@ class PolicyReport(BaseModel):
             if division.strength == PolicyStrength.STRONG:
                 strong_count += 1
             if division.strength == PolicyStrength.STRONG and not uses_powers:
-                report.add_from_division_issue(
+                if report.add_from_division_issue(
                     division_link=division, issue=IssueType.STRONG_WITHOUT_POWER
-                )
-                strong_without_power += 1
+                ):
+                    strong_without_power += 1
 
         if strong_count == 0:
             report.add_policy_issue(issue=IssueType.NO_STRONG_VOTES)
