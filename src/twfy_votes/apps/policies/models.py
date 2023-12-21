@@ -121,6 +121,7 @@ class PolicyStatus(StrEnum):
     CANDIDATE = "candidate"
     DRAFT = "draft"
     REJECTED = "rejected"
+    RETIRED = "retired"
 
 
 class LinkStatus(StrEnum):

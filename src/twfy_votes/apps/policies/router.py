@@ -21,7 +21,11 @@ router = StaticAPIRouter(template_directory=settings.template_dir)
 @router.use_template("policies.html")
 async def policies(context: GetContext, all_chambers: AllChambers):
     context["all_chambers"] = all_chambers
-    context["all_statuses"] = [x for x in PolicyStatus if x != PolicyStatus.REJECTED]
+    context["all_statuses"] = [
+        x
+        for x in PolicyStatus
+        if x not in [PolicyStatus.REJECTED, PolicyStatus.RETIRED]
+    ]
     return context
 
 
