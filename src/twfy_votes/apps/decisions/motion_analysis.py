@@ -139,6 +139,8 @@ def catagorise_motion(motion: str) -> VoteType:
 
     if all_present(l_motion, ["be approved", "laid before this house"]):
         return VoteType.APPROVE_STATUTORY_INSTRUMENT
+    if all_present(l_motion, ["be revoked", "laid before this house"]):
+        return VoteType.REVOKE_STATUTORY_INSTRUMENT
     elif any_present(l_motion, ["makes provision as set out in this order"]):
         return VoteType.TIMETABLE_CHANGE
     elif any_present(
@@ -164,6 +166,17 @@ def catagorise_motion(motion: str) -> VoteType:
         return VoteType.TEN_MINUTE_RULE
     elif any_present(l_motion, ["do adjourn until"]):
         return VoteType.ADJOURNMENT
+    elif any_present(
+        l_motion,
+        [
+            "takes note of european union document",
+            "takes note of european document",
+            "takes note of draft european council decision",
+        ],
+    ) or all_present(
+        l_motion, ["takes note of regulation", "of the european parliament"]
+    ):
+        return VoteType.EU_DOCUMENT_SCRUTINY
     elif all_present(l_motion, ["amendment", "lords"]):
         return VoteType.LORDS_AMENDMENT
     elif any_present(l_motion, ["gracious speech"]):
@@ -172,7 +185,6 @@ def catagorise_motion(motion: str) -> VoteType:
         return VoteType.AMENDMENT
     elif any_present(l_motion, ["humble address be presented"]):
         return VoteType.HUMBLE_ADDRESS
-
     elif any_present(l_motion, ["that the house sit in private"]):
         return VoteType.PRIVATE_SITTING
     elif all_present(l_motion, ["confidence in", "government"]):

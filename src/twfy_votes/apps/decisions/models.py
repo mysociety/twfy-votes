@@ -76,6 +76,7 @@ class VoteType(StrEnum):
     )
     THIRD_STAGE = "third_stage"
     APPROVE_STATUTORY_INSTRUMENT = "approve_statutory_instrument"
+    REVOKE_STATUTORY_INSTRUMENT = "revoke_statutory_instrument"  # negative procedure
     ADJOURNMENT = "adjournment"
     TIMETABLE_CHANGE = (
         "timetable_change"  # tracking motions that take control of the order paper
@@ -85,6 +86,7 @@ class VoteType(StrEnum):
     CONFIDENCE = "confidence"
     STANDING_ORDER_CHANGE = "standing_order_change"
     PRIVATE_SITTING = "private_sitting"
+    EU_DOCUMENT_SCRUTINY = "eu_document_scrutiny"  # historically, a vote noting a document was a requirement before a minister could support in council
     OTHER = "other"
 
     def display_name(self):
