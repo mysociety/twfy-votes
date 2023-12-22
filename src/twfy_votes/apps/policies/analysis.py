@@ -8,6 +8,10 @@ def public_whip_score_difference(
     num_strong_votes_absent: float,
     num_strong_votes_abstain: float,
     num_votes_abstain: float,
+    num_agreements_same: float,
+    num_strong_agreements_same: float,
+    num_agreements_different: float,
+    num_strong_agreements_different: float,
 ) -> float:
     """
     Calculate the classic Public Whip score for a difference between two MPs.
@@ -32,6 +36,8 @@ def public_whip_score_difference(
     But the second is that strong votes penalise absences more than normal votes.
 
     Strong votes were originally intended to reflect three line whips, but in practice have broadened out to mean 'more important'.
+
+    Do nothing with agreements for the moment.
 
     """
 
@@ -82,12 +88,18 @@ def simplified_score_difference(
     num_strong_votes_absent: float,
     num_strong_votes_abstain: float,
     num_votes_abstain: float,
+    num_agreements_same: float,
+    num_strong_agreements_same: float,
+    num_agreements_different: float,
+    num_strong_agreements_different: float,
 ) -> float:
     """
     This is a simplified version of the public whip scoring system.
     Normal weight votes are 'informative' only, and have no score.
     neither has an absence weight.
     Abstensions are recorded as present - but half the value of a normal vote.
+
+    Do nothing with agreements for the moment.
 
     """
 

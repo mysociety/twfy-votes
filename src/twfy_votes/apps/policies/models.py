@@ -27,6 +27,8 @@ from ..decisions.queries import DivisionBreakDownQuery
 from .queries import (
     AllPolicyQuery,
     GroupStatusPolicyQuery,
+    PolicyAgreementPersonQuery,
+    PolicyAgreementPolicyQuery,
     PolicyDistributionPersonQuery,
     PolicyDistributionQuery,
     PolicyIdQuery,
@@ -487,6 +489,10 @@ class VoteDistribution(BaseModel):
     num_strong_votes_absent: float = 0.0
     num_votes_abstain: float = 0.0
     num_strong_votes_abstain: float = 0.0
+    num_agreements_same: float = 0.0
+    num_strong_agreements_same: float = 0.0
+    num_agreements_different: float = 0.0
+    num_strong_agreements_different: float = 0.0
     start_year: int
     end_year: int
     distance_score: float = 0.0
@@ -542,6 +548,10 @@ class VoteDistribution(BaseModel):
             num_strong_votes_absent=self.num_strong_votes_absent,
             num_strong_votes_abstain=self.num_strong_votes_abstain,
             num_votes_abstain=self.num_votes_abstain,
+            num_agreements_different=self.num_agreements_different,
+            num_agreements_same=self.num_agreements_same,
+            num_strong_agreements_different=self.num_strong_agreements_different,
+            num_strong_agreements_same=self.num_strong_agreements_same,
         )
 
         self.distance_score = score
@@ -562,6 +572,10 @@ class VoteDistribution(BaseModel):
             num_strong_votes_absent=self.num_strong_votes_absent,
             num_strong_votes_abstain=self.num_strong_votes_abstain,
             num_votes_abstain=self.num_votes_abstain,
+            num_agreements_different=self.num_agreements_different,
+            num_agreements_same=self.num_agreements_same,
+            num_strong_agreements_different=self.num_strong_agreements_different,
+            num_strong_agreements_same=self.num_strong_agreements_same,
         )
 
         self.distance_score = score
@@ -713,6 +727,17 @@ class PersonPolicyLink(BaseModel):
             .compile(duck=duck)
             .df()
         )
+
+        adf = (
+            await PolicyAgreementPersonQuery(person_id=person_id)
+            .compile(duck=duck)
+            .df()
+        )
+
+        # this merge will give the same values for agreements for both sides of the comparison
+        # merge left because most policies don't have agreements
+        df = df.merge(adf, on=["policy_id", "person_id"], how="left").fillna(0)
+
         return cls.from_df(df=df)
 
     @classmethod
@@ -728,6 +753,16 @@ class PersonPolicyLink(BaseModel):
             .df()
         )
 
+        adf = (
+            await PolicyAgreementPolicyQuery(policy_id=policy_id)
+            .compile(duck=duck)
+            .df()
+        )
+
+        # this merge will give the same values for agreements for both sides of the comparison
+        # merge left because most policies don't have agreements
+        df = df.merge(adf, on=["person_id", "policy_id"], how="left").fillna(0)
+
         return cls.from_df(df=df)
 
     @classmethod
@@ -736,6 +771,7 @@ class PersonPolicyLink(BaseModel):
         Create a list of PersonPolicyLinks from a dataframe
         """
         items: list[Self] = []
+
         for grouper, gdf in df.groupby(  # type: ignore
             ["policy_id", "person_id", "chamber", "comparison_party"]
         ):
