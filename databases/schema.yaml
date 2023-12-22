@@ -171,6 +171,13 @@ policies:
     date DATE, decision_ref VARCHAR, division_name VARCHAR, "key" VARCHAR, source_gid
     VARCHAR), decision_key VARCHAR, decision_type VARCHAR, notes VARCHAR, status VARCHAR,
     strength VARCHAR)[]
+policy_agreement_count:
+  person_id: BIGINT
+  policy_id: BIGINT
+  num_strong_agreements_same: HUGEINT
+  num_strong_agreements_different: HUGEINT
+  num_weak_agreements_same: HUGEINT
+  num_weak_agreements_different: HUGEINT
 policy_agreements:
   policy_id: BIGINT
   division_date: DATE

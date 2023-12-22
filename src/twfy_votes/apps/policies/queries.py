@@ -171,6 +171,22 @@ class PolicyDistributionQuery(BaseQuery):
     single_comparisons: bool = False
 
 
+class PolicyAgreementPersonQuery(BaseQuery):
+    query_template = """
+        select * from policy_agreement_count
+        where person_id = {{ person_id }}
+    """
+    person_id: int
+
+
+class PolicyAgreementPolicyQuery(BaseQuery):
+    query_template = """
+        select * from policy_agreement_count
+        where policy_id = {{ policy_id }}
+    """
+    policy_id: int
+
+
 class PolicyDistributionPersonQuery(BaseQuery):
     """
     Get the policy distribution calculation associated with a person.

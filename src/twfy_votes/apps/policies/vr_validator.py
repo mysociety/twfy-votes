@@ -33,6 +33,10 @@ class Score(BaseModel):
     num_strong_votes_absent: float = 0.0
     num_votes_abstained: float = 0.0
     num_strong_votes_abstained: float = 0.0
+    num_agreements_same: float = 0.0
+    num_strong_agreements_same: float = 0.0
+    num_agreements_different: float = 0.0
+    num_strong_agreements_different: float = 0.0
     num_comparators: list[int] = Field(default_factory=list)
 
     def __eq__(self, other: Self) -> bool:
@@ -246,6 +250,25 @@ async def get_scores_slow(
     def is_valid_date(date: str) -> bool:
         mask = (mp_dates["start_date"] <= date) & (mp_dates["end_date"] >= date)
         return mask.any()
+
+    # iterate through all agreements
+    for decision_link in policy.agreement_links:
+        if not is_valid_date(decision_link.decision.date.isoformat()):
+            continue
+        if decision_link.decision.chamber.slug != chamber:
+            continue
+        if decision_link.alignment == PolicyDirection.NEUTRAL:
+            continue
+        if decision_link.strength == PolicyStrength.STRONG:
+            if decision_link.alignment == PolicyDirection.AGREE:
+                member_score.num_strong_agreements_same += 1
+            else:
+                member_score.num_strong_agreements_different += 1
+        else:
+            if decision_link.alignment == PolicyDirection.AGREE:
+                member_score.num_agreements_same += 1
+            else:
+                member_score.num_agreements_different += 1
 
     # iterate through all divisions
     for decision_link in policy.division_links:
