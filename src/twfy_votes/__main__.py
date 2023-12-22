@@ -141,13 +141,15 @@ async def create_voting_records(
 @app.command()
 @coroutine
 @load_db
-async def validate_voting_records(sample_size: int = 10):
+async def validate_voting_records(
+    sample_size: int = 10, policy_id: Optional[int] = None
+):
     """
     Run a validation on a random sample of voting records.
     """
     from .apps.policies.vr_validator import test_policy_sample
 
-    await test_policy_sample(sample_size)
+    await test_policy_sample(sample_size, policy_id)
 
 
 @app.command()
