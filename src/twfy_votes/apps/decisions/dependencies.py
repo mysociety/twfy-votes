@@ -9,18 +9,22 @@ from __future__ import annotations
 
 import datetime
 from typing import Literal
+
 from ...helpers.static_fastapi.dependencies import dependency_alias_for
 from .models import (
+    AgreementAndVotes,
+    AgreementInfo,
     AllowedChambers,
     Chamber,
     ChamberWithYearRange,
     DivisionAndVotes,
     DivisionInfo,
     DivisionListing,
+    PartialAgreement,
     PartialDivision,
     Person,
-    PersonAndVotes,
     PersonAndRecords,
+    PersonAndVotes,
 )
 
 
@@ -58,6 +62,27 @@ async def GetDivisionAndVotes(division: GetDivision) -> DivisionAndVotes:
     Fetch the full votes from a division object
     """
     return await DivisionAndVotes.from_division(division)
+
+
+@dependency_alias_for(AgreementInfo)
+async def GetAgreement(
+    chamber_slug: AllowedChambers, date: datetime.date, decision_ref: str
+) -> AgreementInfo:
+    """
+    Get a partial agreement and elevate it to a full agreement
+    """
+    partial = PartialAgreement(
+        chamber_slug=chamber_slug, date=date, decision_ref=decision_ref
+    )
+    return await AgreementInfo.from_partial(partial)
+
+
+@dependency_alias_for(AgreementAndVotes)
+async def GetAgreementAndVotes(agreement: GetAgreement) -> AgreementAndVotes:
+    """
+    Fetch the full votes from a division object
+    """
+    return await AgreementAndVotes.from_agreement(agreement)
 
 
 @dependency_alias_for(DivisionListing)

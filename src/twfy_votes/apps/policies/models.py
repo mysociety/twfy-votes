@@ -149,7 +149,7 @@ class PartialPolicyDecisionLink(BaseModel, Generic[PartialDecisionType]):
                 return DecisionType.DIVISION
             case PartialAgreement():
                 return DecisionType.AGREEMENT
-            case _:  # type: ignore
+            case _:
                 raise ValueError("Must have agreement or division")
 
     @computed_field
