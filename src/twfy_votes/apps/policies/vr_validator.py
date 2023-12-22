@@ -428,22 +428,43 @@ async def validate_approach(
     )
 
 
-async def test_policy_sample(sample: int = 50) -> bool:
+async def test_policy_sample(sample: int = 50, policy_id: int | None = None) -> bool:
     """
     Pick a random sample of policies and people and validate that the fast and slow approaches
     reach the same conclusion.
     """
-    query = """
-    select * from '{{ parquet_path | sqlsafe }}'
-    USING sample {{ sample_size | sqlsafe }}
-    """
+
     chamber_slug = "commons"
 
     path = Path("data", "processed", "person_policies.parquet")
 
     duck = await duck_core.child_query()
 
-    df = await duck.compile(query, {"parquet_path": path, "sample_size": sample}).df()
+    if policy_id is None:
+        query = """
+        select * from '{{ parquet_path | sqlsafe }}'
+        USING sample {{ sample_size | sqlsafe }}
+        """
+        df = await duck.compile(
+            query, {"parquet_path": path, "sample_size": sample}
+        ).df()
+    else:
+        query = """
+        SELECT * from
+            (
+            SELECT
+                *
+            FROM 
+                '{{ parquet_path | sqlsafe }}'
+            WHERE
+                policy_id = {{ policy_id }}
+            )
+        USING sample {{ sample_size | sqlsafe }}
+
+        """
+        df = await duck.compile(
+            query, {"parquet_path": path, "policy_id": policy_id, "sample_size": sample}
+        ).df()
 
     run_random_check = True
 
