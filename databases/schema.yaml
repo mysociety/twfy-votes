@@ -171,6 +171,16 @@ policies:
     date DATE, decision_ref VARCHAR, division_name VARCHAR, "key" VARCHAR, source_gid
     VARCHAR), decision_key VARCHAR, decision_type VARCHAR, notes VARCHAR, status VARCHAR,
     strength VARCHAR)[]
+policy_agreements:
+  policy_id: BIGINT
+  division_date: DATE
+  chamber: VARCHAR
+  decision_ref: VARCHAR
+  key: VARCHAR
+  strength: VARCHAR
+  strong_int: BIGINT
+  alignment: VARCHAR
+  notes: VARCHAR
 policy_distributions:
   is_target: INTEGER
   policy_id: BIGINT
