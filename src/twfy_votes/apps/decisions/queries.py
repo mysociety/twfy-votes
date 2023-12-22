@@ -191,6 +191,22 @@ class DivisionBreakDownQuery(BaseQuery):
     division_ids: list[int]
 
 
+class ChamberAgreementsQuery(BaseQuery):
+    query_template = """
+    SELECT
+        * exclude (chamber_slug,),
+        chamber_slug as chamber__slug
+    FROM
+        pw_agreements
+    WHERE
+        chamber_slug = {{ chamber_slug }} and
+        date between {{ start_date }} and {{ end_date }}
+    """
+    chamber_slug: str
+    start_date: datetime.date
+    end_date: datetime.date
+
+
 class ChamberDivisionsQuery(BaseQuery):
     query_template = """
     SELECT

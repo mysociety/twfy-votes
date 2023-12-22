@@ -81,12 +81,12 @@ class TestDivision(BaseTestResponse):
 
 
 class TestDivisionsYear(BaseTestResponse):
-    url = "/decisions/divisions/commons/2023"
+    url = "/decisions/commons/2023"
     has_json = True
 
 
 class TestDivisionsMonth(BaseTestResponse):
-    url = "/decisions/divisions/commons/2023/10"
+    url = "/decisions/commons/2023/10"
     has_json = True
 
 
