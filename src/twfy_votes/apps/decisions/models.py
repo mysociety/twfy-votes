@@ -21,6 +21,7 @@ from .analysis import is_nonaction_vote
 from .queries import (
     AgreementKeyVotesQuery,
     AgreementQueryKeys,
+    ChamberAgreementsQuery,
     ChamberDivisionsQuery,
     DivisionBreakDownQuery,
     DivisionIdsVotesQuery,
@@ -385,7 +386,7 @@ class AgreementInfo(BaseModel):
     division_name: str
     vote_motion_analysis: VoteMotionAnalysis | None = None
     motion: str = ""
-    voting_cluster: str = ""
+    voting_cluster: str = "Agreement"
 
     @computed_field
     @property
@@ -691,14 +692,20 @@ class DivisionInfo(BaseModel):
         return items[0]
 
 
-class DivisionListing(BaseModel):
+class DecisionListing(BaseModel):
     chamber: Chamber
     start_date: datetime.date
     end_date: datetime.date
     divisions: list[DivisionInfo]
+    agreements: list[AgreementInfo]
+
+    def divisions_and_agreements(self):
+        combined = self.divisions + self.agreements
+        combined.sort(key=lambda x: x.source_gid, reverse=True)
+        return combined
 
     def grouped_divisions(self):
-        divisions = self.divisions
+        divisions = self.divisions_and_agreements()
         divisions.sort(key=lambda x: x.date, reverse=True)
         for month_id, divs in groupby(divisions, lambda x: x.date.month):
             yield month_name[month_id], list(divs)
@@ -712,14 +719,14 @@ class DivisionListing(BaseModel):
                 "Powers": d.motion_uses_powers().display_name(),
                 "Voting Cluster": d.voting_cluster,
             }
-            for d in self.divisions
+            for d in self.divisions_and_agreements()
         ]
 
         df = pd.DataFrame(data=data)
         return style_df(df)
 
     @classmethod
-    async def from_chamber_year(cls, chamber: Chamber, year: int) -> DivisionListing:
+    async def from_chamber_year(cls, chamber: Chamber, year: int) -> DecisionListing:
         start_date = datetime.date(year, 1, 1)
         end_date = datetime.date(year, 12, 31)
         return await cls.from_chamber(chamber, start_date, end_date)
@@ -727,7 +734,7 @@ class DivisionListing(BaseModel):
     @classmethod
     async def from_chamber_year_month(
         cls, chamber: Chamber, year: int, month: int
-    ) -> DivisionListing:
+    ) -> DecisionListing:
         start_date = datetime.date(year, month, 1)
         next_month = month + 1
         if next_month > 12:
@@ -742,7 +749,7 @@ class DivisionListing(BaseModel):
         chamber: Chamber,
         start_date: datetime.date,
         end_date: datetime.date,
-    ) -> DivisionListing:
+    ) -> DecisionListing:
         duck = await duck_core.child_query()
         divisions = await ChamberDivisionsQuery(
             start_date=start_date,
@@ -750,13 +757,21 @@ class DivisionListing(BaseModel):
             chamber_slug=chamber.slug,
         ).to_model_list(model=DivisionInfo, duck=duck)
 
-        divisions = await DivisionInfo.upgrade_with_motions(divisions)
+        agreements = await ChamberAgreementsQuery(
+            start_date=start_date,
+            end_date=end_date,
+            chamber_slug=chamber.slug,
+        ).to_model_list(model=AgreementInfo, duck=duck)
 
-        return DivisionListing(
+        divisions = await DivisionInfo.upgrade_with_motions(divisions)
+        agreements = await AgreementInfo.upgrade_with_motions(agreements)
+
+        return DecisionListing(
             chamber=chamber,
             start_date=start_date,
             end_date=end_date,
             divisions=divisions,
+            agreements=agreements,
         )
 
 

@@ -17,9 +17,9 @@ from .models import (
     AllowedChambers,
     Chamber,
     ChamberWithYearRange,
+    DecisionListing,
     DivisionAndVotes,
     DivisionInfo,
-    DivisionListing,
     PartialAgreement,
     PartialDivision,
     Person,
@@ -85,17 +85,17 @@ async def GetAgreementAndVotes(agreement: GetAgreement) -> AgreementAndVotes:
     return await AgreementAndVotes.from_agreement(agreement)
 
 
-@dependency_alias_for(DivisionListing)
-async def GetDivisionListing(
+@dependency_alias_for(DecisionListing)
+async def GetDecisionListing(
     chamber: GetChamber, year: int, month: int | None = None
-) -> DivisionListing:
+) -> DecisionListing:
     """
     Get a list of divisions for a chamber and year
     """
     if month:
-        return await DivisionListing.from_chamber_year_month(chamber, year, month)
+        return await DecisionListing.from_chamber_year_month(chamber, year, month)
     else:
-        return await DivisionListing.from_chamber_year(chamber, year)
+        return await DecisionListing.from_chamber_year(chamber, year)
 
 
 @dependency_alias_for(list[ChamberWithYearRange])
