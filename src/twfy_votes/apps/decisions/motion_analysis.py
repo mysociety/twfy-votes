@@ -21,7 +21,8 @@ def gids_from_df(df: pd.DataFrame) -> pd.DataFrame:
     """
     gids = df["source_gid"].str.split("/", expand=True).drop(columns=[0])
     gids.columns = ["chamber", "gid"]
-    gids["source"] = df["division_date"]
+    if "division_date" in df.columns:
+        gids["source"] = df["division_date"]
     gids = gids.sort_values(by=["gid"])
     return gids
 
@@ -48,7 +49,16 @@ async def get_new_gids(run_all: bool = False) -> list[str]:
     gids = gids[gids["gid"].str.startswith("2022") | gids["gid"].str.startswith("2023")]
     recent_gids = gids["gid"].to_list()
 
-    combined_gids = sorted(list(set(policy_gids + recent_gids)))
+    # get all agreement gids
+    query = """
+    select * from pw_agreements
+    """
+    df = await duck.compile(query).df()
+    gids = gids_from_df(df)
+    gids = gids[gids["chamber"].isin(["debate"])]
+    agreement_gids = gids["gid"].to_list()
+
+    combined_gids = sorted(list(set(policy_gids + recent_gids + agreement_gids)))
 
     if run_all is False:
         collection = MotionCollection.from_path(
@@ -360,7 +370,7 @@ class TWFYMotionProcessor:
         # allow this to be several previous - sometimes the speaker says something
         all_ids = [x.gid for x in debates]
         vote_index = all_ids.index(data.vote.gid)
-        offset = 1
+        offset = 0
         question_debates = []
         while offset <= 3:
             # get the speech where someone actually puts the question

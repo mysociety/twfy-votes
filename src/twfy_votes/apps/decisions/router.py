@@ -4,6 +4,7 @@ from ...helpers.static_fastapi.static import StaticAPIRouter
 from ...internal.settings import settings
 from ..core.dependencies import GetContext
 from .dependencies import (
+    GetAgreementAndVotes,
     GetChambersWithYearRange,
     GetDivisionAndVotes,
     GetDivisionListing,
@@ -70,6 +71,18 @@ async def api_division(division: GetDivisionAndVotes):
 @router.use_template("division.html")
 async def division(context: GetContext, division: GetDivisionAndVotes):
     context["item"] = division
+    return context
+
+
+@router.get("/decisions/agreement/{chamber_slug}/{date}/{decision_ref}.json")
+async def api_agreement(agreement: GetAgreementAndVotes):
+    return agreement
+
+
+@router.get_html("/decisions/agreement/{chamber_slug}/{date}/{decision_ref}")
+@router.use_template("agreement.html")
+async def agreement(context: GetContext, agreement: GetAgreementAndVotes):
+    context["item"] = agreement
     return context
 
 

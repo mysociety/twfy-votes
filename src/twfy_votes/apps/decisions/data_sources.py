@@ -7,7 +7,12 @@ from pathlib import Path
 from typing import Any
 
 from ...helpers.duck import DuckQuery, DuckUrl, YamlData
-from .models import GovernmentParties, ManualMotion, VoteMotionAnalysis
+from .models import (
+    GovernmentParties,
+    ManualMotion,
+    PartialAgreement,
+    VoteMotionAnalysis,
+)
 
 processed_data = Path("data", "cached")
 raw_data = Path("data", "raw")
@@ -29,6 +34,12 @@ politician_data = DuckUrl(
 class government_parties_nested(YamlData[GovernmentParties]):
     yaml_source = Path("data", "raw", "government_parties.yaml")
     validation_model = GovernmentParties
+
+
+@duck.as_python_source
+class pw_agreements(YamlData[PartialAgreement]):
+    yaml_source = Path("data", "raw", "agreements.yaml")
+    validation_model = PartialAgreement
 
 
 @duck.as_python_source
@@ -326,6 +337,30 @@ class get_effective_vote:
         when 'tellno' then 'no'
         else vote
     end       
+    """
+
+
+@duck.as_view
+class cm_agreement_present:
+    query = """
+        SELECT
+            key,
+            mp_id,
+            chamber_slug,
+            'collective' as vote,
+            pd_people.given_name as person__first_name,
+            pd_people.last_name as person__last_name,
+            pd_people.nice_name as person__nice_name,
+            pw_mp.party as person__party,
+            mp_id as membership_id,
+            person as person__person_id,
+        FROM
+            pw_agreements
+        JOIN
+            pw_mp on pw_agreements.date between pw_mp.entered_house and pw_mp.left_house
+            and pw_agreements.chamber_slug = pw_mp.house
+        JOIN
+            pd_people on (pd_people.person_id = pw_mp.person)
     """
 
 

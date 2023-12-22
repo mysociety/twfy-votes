@@ -95,6 +95,11 @@ class TestPersonPolicy(BaseTestResponse):
     has_json = True
 
 
+class TestAgreementInfo(BaseTestResponse):
+    url = "/decisions/agreement/commons/2019-06-24/b.530.1"
+    has_json = True
+
+
 def test_valid_policy_xml(client: TestClient):
     response = client.get("/twfy-compatible/policies/6679.xml")
     assert response.status_code == 200

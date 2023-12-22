@@ -1,4 +1,15 @@
 # This is an automatically generated file on database load to reflect changes in tables
+cm_agreement_present:
+  key: VARCHAR
+  mp_id: BIGINT
+  chamber_slug: VARCHAR
+  vote: VARCHAR
+  person__first_name: VARCHAR
+  person__last_name: VARCHAR
+  person__nice_name: VARCHAR
+  person__party: VARCHAR
+  membership_id: BIGINT
+  person__person_id: BIGINT
 cm_votes_with_people:
   division_id: BIGINT
   mp_id: BIGINT
@@ -156,7 +167,10 @@ policies:
   division_links: STRUCT(alignment VARCHAR, decision STRUCT(chamber_slug VARCHAR,
     date DATE, division_number BIGINT, "key" VARCHAR), decision_key VARCHAR, decision_type
     VARCHAR, notes VARCHAR, status VARCHAR, strength VARCHAR)[]
-  agreement_links: INTEGER[]
+  agreement_links: STRUCT(alignment VARCHAR, decision STRUCT(chamber_slug VARCHAR,
+    date DATE, decision_ref VARCHAR, division_name VARCHAR, "key" VARCHAR, source_gid
+    VARCHAR), decision_key VARCHAR, decision_type VARCHAR, notes VARCHAR, status VARCHAR,
+    strength VARCHAR)[]
 policy_distributions:
   is_target: INTEGER
   policy_id: BIGINT
@@ -192,6 +206,13 @@ policy_votes_with_id:
   alignment: VARCHAR
   notes: VARCHAR
   division_id: BIGINT
+pw_agreements:
+  chamber_slug: VARCHAR
+  date: DATE
+  decision_ref: VARCHAR
+  division_name: VARCHAR
+  key: VARCHAR
+  source_gid: VARCHAR
 pw_chamber_division_span:
   chamber_slug: VARCHAR
   latest_year: VARCHAR
