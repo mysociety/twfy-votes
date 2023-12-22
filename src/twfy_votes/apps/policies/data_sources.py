@@ -52,6 +52,41 @@ class policy_votes(YamlData[PartialPolicy]):
         return data
 
 
+@duck.as_python_source
+class policy_agreements(YamlData[PartialPolicy]):
+    """
+    Also add this as a seperate table to make query maths easier
+    """
+
+    yaml_source = Path("data", "policies", "*.yml")
+    validation_model = PartialPolicy
+
+    @classmethod
+    def post_validation(cls, models: list[PartialPolicy]) -> list[dict[str, Any]]:
+        data: list[dict[str, Any]] = []
+
+        for policy in models:
+            for decision in policy.agreement_links:
+                if decision.decision:
+                    data.append(
+                        {
+                            "policy_id": policy.id,
+                            "division_date": decision.decision.date,
+                            "chamber": decision.decision.chamber_slug,
+                            "decision_ref": decision.decision.decision_ref,
+                            "key": decision.decision.key,
+                            "strength": decision.strength,
+                            "strong_int": 1
+                            if decision.strength == PolicyStrength.STRONG
+                            else 0,
+                            "alignment": decision.alignment,
+                            "notes": decision.notes,
+                        }
+                    )
+
+        return data
+
+
 @duck.as_table
 class policy_votes_with_id:
     """

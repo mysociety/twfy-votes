@@ -365,7 +365,6 @@ class Policy(PolicyBase):
 
     async def division_df(self, request: Request):
         duck = await duck_core.child_query()
-        all_decisions = [x.model_dump() for x in self.division_links]
         decision_infos = [x.decision.division_id for x in self.division_links]
         decision_breakdowns = await DivisionBreakDownQuery(
             division_ids=decision_infos
@@ -379,27 +378,32 @@ class Policy(PolicyBase):
             x.division_id: x for x in decision_breakdowns
         }
 
-        breakdown_in_order = [
-            breakdown_lookup[x.decision.division_id] for x in self.division_links
-        ]
+        all_decisions = self.division_links + self.agreement_links
+        all_decisions_dump = [x.model_dump() for x in all_decisions]
 
         # need to make participant count line up
+        participant_count = []
+        for decision in all_decisions:
+            if isinstance(decision.decision, DivisionInfo):
+                participant_count.append(
+                    breakdown_lookup[
+                        decision.decision.division_id
+                    ].vote_participant_count
+                )
+            else:
+                participant_count.append("-")
 
-        df = pd.DataFrame(data=all_decisions)
+        df = pd.DataFrame(data=all_decisions_dump)
         df["decision"] = [
             UrlColumn(url=x.decision.url(request), text=x.decision.division_name)
-            for x in self.division_links
+            for x in all_decisions
         ]
-        df["uses_powers"] = [
-            x.decision.motion_uses_powers() for x in self.division_links
-        ]
-        df["participant_count"] = [
-            x.vote_participant_count if x else 0 for x in breakdown_in_order
-        ]
-        df["voting_cluster"] = [x.decision.voting_cluster for x in self.division_links]
+        df["uses_powers"] = [x.decision.motion_uses_powers() for x in all_decisions]
+        df["voting_cluster"] = [x.decision.voting_cluster for x in all_decisions]
+        df["participant_count"] = participant_count
 
-        banned_columns = ["decision_type", "notes"]
-        df = df.drop(columns=banned_columns)
+        banned_columns = ["notes", "status"]
+        df = df.drop(columns=banned_columns).sort_values("strength")
         return style_df(df=df)
 
     def url(self, request: Request):
