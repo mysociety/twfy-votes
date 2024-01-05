@@ -6,10 +6,17 @@ from typing import Awaitable, Callable, Optional, ParamSpec, TypeVar
 
 import typer
 import uvicorn
-from trogon import Trogon
+from trogon import Trogon  # type: ignore
 from typer.main import get_group
 
 from .apps.core.db import db_lifespan
+from .apps.policies.models import (
+    AllowedChambers,
+    PolicyDirection,
+    PolicyGroupSlug,
+    PolicyStatus,
+    PolicyStrength,
+)
 
 app = typer.Typer(help="")
 
@@ -134,13 +141,59 @@ async def create_voting_records(
 @app.command()
 @coroutine
 @load_db
-async def validate_voting_records(sample_size: int = 10):
+async def validate_voting_records(
+    sample_size: int = 10, policy_id: Optional[int] = None
+):
     """
     Run a validation on a random sample of voting records.
     """
     from .apps.policies.vr_validator import test_policy_sample
 
-    await test_policy_sample(sample_size)
+    await test_policy_sample(sample_size, policy_id)
+
+
+@app.command()
+def add_vote_to_policy(
+    votes_url: str,
+    policy_id: int,
+    vote_alignment: PolicyDirection,
+    strength: PolicyStrength = PolicyStrength.STRONG,
+):
+    """
+    Add a vote to a policy based on a twfy-votes URL.
+    """
+    from .apps.policies.tools import add_vote_to_policy_from_url
+
+    add_vote_to_policy_from_url(
+        votes_url=votes_url,
+        policy_id=policy_id,
+        vote_alignment=vote_alignment,
+        strength=strength,
+    )
+
+
+@app.command()
+def create_policy(
+    name: str,
+    context_description: str = "",
+    policy_description: str = "",
+    status: PolicyStatus = PolicyStatus.DRAFT,
+    chamber: AllowedChambers = AllowedChambers.COMMONS,
+    groups: list[PolicyGroupSlug] = [],
+):
+    """
+    Create a new policy
+    """
+    from .apps.policies.tools import create_new_policy
+
+    create_new_policy(
+        name=name,
+        context_description=context_description,
+        policy_description=policy_description,
+        status=status,
+        chamber=chamber,
+        groups=groups,
+    )
 
 
 def run_fastapi_prod_server():

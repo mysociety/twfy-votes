@@ -52,6 +52,84 @@ class policy_votes(YamlData[PartialPolicy]):
         return data
 
 
+@duck.as_python_source
+class policy_agreements(YamlData[PartialPolicy]):
+    """
+    Also add this as a seperate table to make query maths easier
+    """
+
+    yaml_source = Path("data", "policies", "*.yml")
+    validation_model = PartialPolicy
+
+    @classmethod
+    def post_validation(cls, models: list[PartialPolicy]) -> list[dict[str, Any]]:
+        data: list[dict[str, Any]] = []
+
+        for policy in models:
+            for decision in policy.agreement_links:
+                if decision.decision:
+                    data.append(
+                        {
+                            "policy_id": policy.id,
+                            "division_date": decision.decision.date,
+                            "chamber": decision.decision.chamber_slug,
+                            "decision_ref": decision.decision.decision_ref,
+                            "key": decision.decision.key,
+                            "strength": decision.strength,
+                            "strong_int": 1
+                            if decision.strength == PolicyStrength.STRONG
+                            else 0,
+                            "alignment": decision.alignment,
+                            "notes": decision.notes,
+                        }
+                    )
+
+        return data
+
+
+@duck.as_view
+class policy_agreement_count:
+    """
+    Calculations for agreements are *much* simpler because by defintion there is no difference between
+    comparable members of a party - they were all there.
+
+    Could later make this a cached table on startup... but it's lightweight for now.
+
+    This table for each person and policy gives a simple count of the strong and weak agreements
+
+    """
+
+    query = """
+    select
+        * exclude (num_same, num_different),
+        num_same - num_strong_agreements_same as num_weak_agreements_same,
+        num_different - num_strong_agreements_different as num_weak_agreements_different
+    from
+        (
+        SELECT
+            person_id,
+            policy_id,
+            count(strong_int) filter (where alignment = 'agree') as num_same,
+            sum(strong_int) filter (where alignment = 'agree') as num_strong_agreements_same,
+            count(strong_int) filter (where alignment = 'against') as num_different,
+            sum(strong_int) filter (where alignment = 'against') as num_strong_agreements_different,
+        FROM
+            (
+                SELECT
+                    policy_agreements.*,
+                    person as person_id
+                FROM
+                    policy_agreements
+                JOIN
+                    pw_mp
+                        on division_date between pw_mp.entered_house and pw_mp.left_house
+            )
+        GROUP BY
+            all
+        )
+    """
+
+
 @duck.as_table
 class policy_votes_with_id:
     """

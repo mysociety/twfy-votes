@@ -22,6 +22,20 @@ In principle, this current version can be deployed as a static site (not yet con
 
 For more options `python -m twfy-votes --help`.
 
+## Adding divisions to policies
+
+Policies are stored in `data/policies` as YAML files.
+
+You can edit these directly - or use the CLI.
+
+Either use the `--help` option, or run `script/tui` to get a visual interface.
+
+Then select `add-vote-to-policy` and feed it a policy id, the URL of a division (from twfy-votes - the actual domain is ignored so can be the pattern from a local instance) - the alignment (if the vote passing agrees with the policy, or disagrees), and strength of the policy (strong or weak - weak is for informative votes and are not used in scoring). 
+
+This can then be reviewed in a local server - running the test suite `script/test` will run standard checks on the policy and the feed into TWFY.
+
+This can then be committed, and a PR created for review.
+
 # Development
 
 There's a configured devcontainer for working in VS Code otherwise - the `dockerfile.dev` container is the one to use. As duckdb is used, there's no current need for separate DB host.

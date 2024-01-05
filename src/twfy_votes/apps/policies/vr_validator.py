@@ -33,6 +33,10 @@ class Score(BaseModel):
     num_strong_votes_absent: float = 0.0
     num_votes_abstained: float = 0.0
     num_strong_votes_abstained: float = 0.0
+    num_agreements_same: float = 0.0
+    num_strong_agreements_same: float = 0.0
+    num_agreements_different: float = 0.0
+    num_strong_agreements_different: float = 0.0
     num_comparators: list[int] = Field(default_factory=list)
 
     def __eq__(self, other: Self) -> bool:
@@ -247,6 +251,25 @@ async def get_scores_slow(
         mask = (mp_dates["start_date"] <= date) & (mp_dates["end_date"] >= date)
         return mask.any()
 
+    # iterate through all agreements
+    for decision_link in policy.agreement_links:
+        if not is_valid_date(decision_link.decision.date.isoformat()):
+            continue
+        if decision_link.decision.chamber.slug != chamber:
+            continue
+        if decision_link.alignment == PolicyDirection.NEUTRAL:
+            continue
+        if decision_link.strength == PolicyStrength.STRONG:
+            if decision_link.alignment == PolicyDirection.AGREE:
+                member_score.num_strong_agreements_same += 1
+            else:
+                member_score.num_strong_agreements_different += 1
+        else:
+            if decision_link.alignment == PolicyDirection.AGREE:
+                member_score.num_agreements_same += 1
+            else:
+                member_score.num_agreements_different += 1
+
     # iterate through all divisions
     for decision_link in policy.division_links:
         # ignore neutral policies
@@ -405,22 +428,43 @@ async def validate_approach(
     )
 
 
-async def test_policy_sample(sample: int = 50) -> bool:
+async def test_policy_sample(sample: int = 50, policy_id: int | None = None) -> bool:
     """
     Pick a random sample of policies and people and validate that the fast and slow approaches
     reach the same conclusion.
     """
-    query = """
-    select * from '{{ parquet_path | sqlsafe }}'
-    USING sample {{ sample_size | sqlsafe }}
-    """
+
     chamber_slug = "commons"
 
     path = Path("data", "processed", "person_policies.parquet")
 
     duck = await duck_core.child_query()
 
-    df = await duck.compile(query, {"parquet_path": path, "sample_size": sample}).df()
+    if policy_id is None:
+        query = """
+        select * from '{{ parquet_path | sqlsafe }}'
+        USING sample {{ sample_size | sqlsafe }}
+        """
+        df = await duck.compile(
+            query, {"parquet_path": path, "sample_size": sample}
+        ).df()
+    else:
+        query = """
+        SELECT * from
+            (
+            SELECT
+                *
+            FROM 
+                '{{ parquet_path | sqlsafe }}'
+            WHERE
+                policy_id = {{ policy_id }}
+            )
+        USING sample {{ sample_size | sqlsafe }}
+
+        """
+        df = await duck.compile(
+            query, {"parquet_path": path, "policy_id": policy_id, "sample_size": sample}
+        ).df()
 
     run_random_check = True
 

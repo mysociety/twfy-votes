@@ -81,17 +81,22 @@ class TestDivision(BaseTestResponse):
 
 
 class TestDivisionsYear(BaseTestResponse):
-    url = "/decisions/divisions/commons/2023"
+    url = "/decisions/commons/2023"
     has_json = True
 
 
 class TestDivisionsMonth(BaseTestResponse):
-    url = "/decisions/divisions/commons/2023/10"
+    url = "/decisions/commons/2023/10"
     has_json = True
 
 
 class TestPersonPolicy(BaseTestResponse):
     url = "/person/10001/records/commons/labour"
+    has_json = True
+
+
+class TestAgreementInfo(BaseTestResponse):
+    url = "/decisions/agreement/commons/2019-06-24/b.530.1"
     has_json = True
 
 

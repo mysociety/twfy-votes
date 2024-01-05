@@ -20,6 +20,9 @@ from ...internal.db import duck_core
 from ..policies.queries import GetPersonParties
 from .analysis import is_nonaction_vote
 from .queries import (
+    AgreementKeyVotesQuery,
+    AgreementQueryKeys,
+    ChamberAgreementsQuery,
     ChamberDivisionsQuery,
     DivisionBreakDownQuery,
     DivisionIdsVotesQuery,
@@ -81,6 +84,7 @@ class VotePosition(StrEnum):
     ABSENT = "absent"
     TELLNO = "tellno"
     TELLAYE = "tellaye"
+    COLLECTIVE = "collective"  # used for votes where the whole chamber votes as one
 
 
 class VoteType(StrEnum):
@@ -104,6 +108,7 @@ class VoteType(StrEnum):
     )
     THIRD_STAGE = "third_stage"
     APPROVE_STATUTORY_INSTRUMENT = "approve_statutory_instrument"
+    REVOKE_STATUTORY_INSTRUMENT = "revoke_statutory_instrument"  # negative procedure
     ADJOURNMENT = "adjournment"
     TIMETABLE_CHANGE = (
         "timetable_change"  # tracking motions that take control of the order paper
@@ -113,6 +118,7 @@ class VoteType(StrEnum):
     CONFIDENCE = "confidence"
     STANDING_ORDER_CHANGE = "standing_order_change"
     PRIVATE_SITTING = "private_sitting"
+    EU_DOCUMENT_SCRUTINY = "eu_document_scrutiny"  # historically, a vote noting a document was a requirement before a minister could support in council
     OTHER = "other"
 
     def display_name(self):
@@ -201,21 +207,32 @@ class Chamber(BaseModel):
             case _:
                 raise ValueError(f"Invalid house slug {self.slug}")
 
-    def twfy_debate_link(self, gid: str) -> str:
-        link_format = "https://www.theyworkforyou.com/{debate_slug}/?id={gid}"
+    def pw_alias(self):
+        # Alias for internal debate storage
         match self.slug:
             case "commons":
-                return link_format.format(debate_slug="debates", gid=gid)
+                return "debate"
+            case _:
+                return self.twfy_alias()
+
+    def twfy_alias(self):
+        # Alias for internal debate storage
+        match self.slug:
+            case "commons":
+                return "debates"
             case "lords":
-                return link_format.format(debate_slug="lords", gid=gid)
+                return "lords"
             case "scotland":
-                return link_format.format(debate_slug="sp", gid=gid)
+                return "sp"
             case "wales":
-                return link_format.format(debate_slug="senedd", gid=gid)
+                return "senedd"
             case "ni":
-                return link_format.format(debate_slug="ni", gid=gid)
+                return "ni"
             case _:
                 raise ValueError(f"Invalid house slug {self.slug}")
+
+    def twfy_debate_link(self, gid: str) -> str:
+        return f"https://www.theyworkforyou.com/{self.twfy_alias()}/?id={gid}"
 
 
 class ChamberWithYearRange(BaseModel):
@@ -300,7 +317,7 @@ class Vote(BaseModel):
     membership_id: int
     division: DivisionInfo | None = None
     vote: VotePosition
-    diff_from_party_average: float
+    diff_from_party_average: float = 0
 
     @computed_field
     @property
@@ -318,7 +335,9 @@ class Vote(BaseModel):
                 return "Against motion (Teller)"
             case VotePosition.TELLAYE:
                 return "With motion (Teller)"
-            case _:  # type: ignore
+            case VotePosition.COLLECTIVE:
+                return "Collective"
+            case _:
                 raise ValueError(f"Invalid vote position {self.vote}")
 
     @computed_field
@@ -329,7 +348,11 @@ class Vote(BaseModel):
                 return 1
             case VotePosition.NO | VotePosition.TELLNO:
                 return -1
-            case VotePosition.ABSTENTION | VotePosition.ABSENT:
+            case (
+                VotePosition.ABSTENTION
+                | VotePosition.ABSENT
+                | VotePosition.COLLECTIVE
+            ):
                 return 0
             case _:  # type: ignore
                 raise ValueError(f"Invalid vote position {self.vote}")
@@ -355,15 +378,135 @@ class VoteWithDivisionID(Vote):
     division_id: int
 
 
+class VoteWithKey(Vote):
+    """
+    Small helper object when fetch votes
+    associated with multiple divisions
+    """
+
+    key: str
+
+
 class PartialAgreement(BaseModel):
     chamber_slug: AllowedChambers
     date: datetime.date = aliases("date", "division_date")
-    decision_ref: str  # Anticpated this will be the ref style used in TWFY to refer to the speech containing the agreement minus the date e.g. "a.974.1#g991.0"
+    decision_ref: str  # The bit after the date in the TWF ref
+    division_name: str = ""  # Here so this model can be used to load from YAML - not used to promote to AgreementInfo
 
     @computed_field
     @property
     def key(self) -> str:
         return f"{self.chamber_slug}-{self.date.isoformat()}-{self.decision_ref}"
+
+    @computed_field
+    @property
+    def source_gid(self) -> str:
+        # add the boiler plateos tuff here
+        debate_slug = Chamber(slug=self.chamber_slug).pw_alias()
+        return f"uk.org.publicwhip/{debate_slug}/{self.date.isoformat()}{self.decision_ref}"
+
+
+class AgreementInfo(BaseModel):
+    key: str = aliases("key", "agreement_key")
+    chamber: Chamber
+    date: datetime.date = aliases("date", "division_date")
+    decision_ref: str
+    division_name: str
+    vote_motion_analysis: VoteMotionAnalysis | None = None
+    motion: str = ""
+    voting_cluster: str = "Agreement"
+
+    @computed_field
+    @property
+    def source_gid(self) -> str:
+        return f"{self.date.isoformat()}{self.decision_ref}"
+
+    @computed_field
+    @property
+    def twfy_link(self) -> str:
+        return self.chamber.twfy_debate_link(self.source_gid)
+
+    def vote_type(self):
+        if self.vote_motion_analysis:
+            return VoteType(self.vote_motion_analysis.vote_type).display_name()
+        return "Unknown"
+
+    def url(self, request: Request):
+        return absolute_url_for(
+            request,
+            "agreement",
+            chamber_slug=self.chamber.slug,
+            date=self.date,
+            decision_ref=self.decision_ref,
+        )
+
+    def motion_uses_powers(self):
+        if self.vote_motion_analysis:
+            if self.vote_motion_analysis.motion_uses_powers():
+                return PowersAnalysis.USES_POWERS
+            else:
+                return PowersAnalysis.DOES_NOT_USE_POWERS
+        return PowersAnalysis.INSUFFICENT_INFO
+
+    @classmethod
+    async def upgrade_with_motions(
+        cls, items: list[AgreementInfo]
+    ) -> list[AgreementInfo]:
+        duck = await duck_core.child_query()
+        # at this point we only have special info for commons divisions
+        division_gids = [x.source_gid for x in items if x.chamber.slug == "commons"]
+        if len(division_gids) > 0:
+            # get the motion info
+            motions = await MotionQuery(gids=division_gids).to_model_list(
+                model=VoteMotionAnalysis, duck=duck, nan_to_none=True
+            )
+            # make lookup based on gid
+            motion_lookup = {x.gid: x for x in motions}
+        else:
+            motion_lookup = {}
+
+        # add the motion info to the division info
+        for item in items:
+            item.vote_motion_analysis = motion_lookup.get(
+                item.source_gid.split("/")[-1], None
+            )
+
+        return items
+
+    @classmethod
+    async def from_partials(
+        cls, partials: list[PartialAgreement]
+    ) -> list[AgreementInfo]:
+        duck = await duck_core.child_query()
+        if len(partials) == 0:
+            items = []
+        else:
+            items = await AgreementQueryKeys(
+                keys=[x.key for x in partials]
+            ).to_model_list(model=AgreementInfo, duck=duck)
+
+        items = await cls.upgrade_with_motions(items)
+
+        return items
+
+    @classmethod
+    async def from_partial(cls, partial: PartialAgreement) -> AgreementInfo:
+        """
+        Elevate to a agreement.
+        """
+        items = await cls.from_partials([partial])
+        if len(items) != 1:
+            raise ValueError("Expected one division to be returned")
+        return items[0]
+
+
+class PowersAnalysis(StrEnum):
+    USES_POWERS = "uses_powers"
+    DOES_NOT_USE_POWERS = "does_not_use_powers"
+    INSUFFICENT_INFO = "insufficent_info"
+
+    def display_name(self):
+        return self.value.replace("_", " ").title()
 
 
 class PartialDivision(BaseModel):
@@ -379,37 +522,6 @@ class PartialDivision(BaseModel):
     @property
     def key(self) -> str:
         return f"{self.chamber_slug}-{self.date.isoformat()}-{self.division_number}"
-
-
-class AgreementInfo(BaseModel):
-    key: str = aliases("key", "agreement_key")
-    house: Chamber
-    date: datetime.date = aliases("date", "division_date")
-    decision_ref: str
-    division_name: str
-    motion: str
-    voting_cluster: str = ""
-
-    def url(self, request: Request):
-        return ""
-
-    def motion_uses_powers(self):
-        return PowersAnalysis.INSUFFICENT_INFO
-
-    @classmethod
-    async def from_partials(
-        cls, partials: list[PartialAgreement]
-    ) -> list[AgreementInfo]:
-        return []
-
-
-class PowersAnalysis(StrEnum):
-    USES_POWERS = "uses_powers"
-    DOES_NOT_USE_POWERS = "does_not_use_powers"
-    INSUFFICENT_INFO = "insufficent_info"
-
-    def display_name(self):
-        return self.value.replace("_", " ").title()
 
 
 class DivisionInfo(BaseModel):
@@ -608,14 +720,20 @@ class DivisionInfo(BaseModel):
         return items[0]
 
 
-class DivisionListing(BaseModel):
+class DecisionListing(BaseModel):
     chamber: Chamber
     start_date: datetime.date
     end_date: datetime.date
     divisions: list[DivisionInfo]
+    agreements: list[AgreementInfo]
+
+    def divisions_and_agreements(self):
+        combined = self.divisions + self.agreements
+        combined.sort(key=lambda x: x.source_gid, reverse=True)
+        return combined
 
     def grouped_divisions(self):
-        divisions = self.divisions
+        divisions = self.divisions_and_agreements()
         divisions.sort(key=lambda x: x.date, reverse=True)
         for month_id, divs in groupby(divisions, lambda x: x.date.month):
             yield month_name[month_id], list(divs)
@@ -629,14 +747,14 @@ class DivisionListing(BaseModel):
                 "Powers": d.motion_uses_powers().display_name(),
                 "Voting Cluster": d.voting_cluster,
             }
-            for d in self.divisions
+            for d in self.divisions_and_agreements()
         ]
 
         df = pd.DataFrame(data=data)
         return style_df(df)
 
     @classmethod
-    async def from_chamber_year(cls, chamber: Chamber, year: int) -> DivisionListing:
+    async def from_chamber_year(cls, chamber: Chamber, year: int) -> DecisionListing:
         start_date = datetime.date(year, 1, 1)
         end_date = datetime.date(year, 12, 31)
         return await cls.from_chamber(chamber, start_date, end_date)
@@ -644,7 +762,7 @@ class DivisionListing(BaseModel):
     @classmethod
     async def from_chamber_year_month(
         cls, chamber: Chamber, year: int, month: int
-    ) -> DivisionListing:
+    ) -> DecisionListing:
         start_date = datetime.date(year, month, 1)
         next_month = month + 1
         if next_month > 12:
@@ -659,7 +777,7 @@ class DivisionListing(BaseModel):
         chamber: Chamber,
         start_date: datetime.date,
         end_date: datetime.date,
-    ) -> DivisionListing:
+    ) -> DecisionListing:
         duck = await duck_core.child_query()
         divisions = await ChamberDivisionsQuery(
             start_date=start_date,
@@ -667,13 +785,21 @@ class DivisionListing(BaseModel):
             chamber_slug=chamber.slug,
         ).to_model_list(model=DivisionInfo, duck=duck)
 
-        divisions = await DivisionInfo.upgrade_with_motions(divisions)
+        agreements = await ChamberAgreementsQuery(
+            start_date=start_date,
+            end_date=end_date,
+            chamber_slug=chamber.slug,
+        ).to_model_list(model=AgreementInfo, duck=duck)
 
-        return DivisionListing(
+        divisions = await DivisionInfo.upgrade_with_motions(divisions)
+        agreements = await AgreementInfo.upgrade_with_motions(agreements)
+
+        return DecisionListing(
             chamber=chamber,
             start_date=start_date,
             end_date=end_date,
             divisions=divisions,
+            agreements=agreements,
         )
 
 
@@ -724,6 +850,74 @@ class PersonAndVotes(BaseModel):
             raise ValueError("Some votes have no division associated with them")
         df = pd.DataFrame(data=data)
         return style_df(df, percentage_columns=["Party alignment"])
+
+
+class AgreementAndVotes(BaseModel):
+    chamber: Chamber
+    date: datetime.date = aliases("date", "division_date")
+    division_ref: str
+    details: AgreementInfo
+    votes: list[Vote]
+
+    @classmethod
+    async def from_agreements(
+        cls, agreements: list[AgreementInfo]
+    ) -> list[AgreementAndVotes]:
+        """
+        Fetch multiple connected sets of divisions, votes, and breakdowns
+        """
+        duck = await duck_core.child_query()
+
+        # get the division_ids
+        keys = [d.key for d in agreements]
+
+        votes = await AgreementKeyVotesQuery(keys=keys).to_model_list(
+            model=VoteWithKey,
+            duck=duck,
+            validate=AgreementKeyVotesQuery.validate.NOT_ZERO,
+        )
+
+        items = []
+
+        for agreement in agreements:
+            agreement_votes = [v for v in votes if v.key == agreement.key]
+
+            items.append(
+                AgreementAndVotes(
+                    chamber=agreement.chamber,
+                    date=agreement.date,
+                    division_ref=agreement.decision_ref,
+                    details=agreement,
+                    votes=[
+                        Vote.model_validate(v.model_dump()) for v in agreement_votes
+                    ],
+                )
+            )
+
+        return items
+
+    @classmethod
+    async def from_agreement(cls, agreement: AgreementInfo) -> AgreementAndVotes:
+        agreements = await cls.from_agreements([agreement])
+        if len(agreements) != 1:
+            raise ValueError("Expected one agreement to be returned")
+
+        return agreements[0]
+
+    def votes_df(self, request: Request) -> str:
+        data = [
+            {
+                "Person": UrlColumn(
+                    url=v.person.votes_url(request), text=v.person.nice_name
+                ),
+                "Party": v.person.party,
+                "Vote": v.vote_desc,
+            }
+            for v in self.votes
+        ]
+
+        df = pd.DataFrame(data=data)
+        return style_df(df)
 
 
 class DivisionAndVotes(BaseModel):

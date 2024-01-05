@@ -21,7 +21,8 @@ def gids_from_df(df: pd.DataFrame) -> pd.DataFrame:
     """
     gids = df["source_gid"].str.split("/", expand=True).drop(columns=[0])
     gids.columns = ["chamber", "gid"]
-    gids["source"] = df["division_date"]
+    if "division_date" in df.columns:
+        gids["source"] = df["division_date"]
     gids = gids.sort_values(by=["gid"])
     return gids
 
@@ -48,7 +49,16 @@ async def get_new_gids(run_all: bool = False) -> list[str]:
     gids = gids[gids["gid"].str.startswith("2022") | gids["gid"].str.startswith("2023")]
     recent_gids = gids["gid"].to_list()
 
-    combined_gids = sorted(list(set(policy_gids + recent_gids)))
+    # get all agreement gids
+    query = """
+    select * from pw_agreements
+    """
+    df = await duck.compile(query).df()
+    gids = gids_from_df(df)
+    gids = gids[gids["chamber"].isin(["debate"])]
+    agreement_gids = gids["gid"].to_list()
+
+    combined_gids = sorted(list(set(policy_gids + recent_gids + agreement_gids)))
 
     if run_all is False:
         collection = MotionCollection.from_path(
@@ -139,6 +149,8 @@ def catagorise_motion(motion: str) -> VoteType:
 
     if all_present(l_motion, ["be approved", "laid before this house"]):
         return VoteType.APPROVE_STATUTORY_INSTRUMENT
+    if all_present(l_motion, ["be revoked", "laid before this house"]):
+        return VoteType.REVOKE_STATUTORY_INSTRUMENT
     elif any_present(l_motion, ["makes provision as set out in this order"]):
         return VoteType.TIMETABLE_CHANGE
     elif any_present(
@@ -164,6 +176,17 @@ def catagorise_motion(motion: str) -> VoteType:
         return VoteType.TEN_MINUTE_RULE
     elif any_present(l_motion, ["do adjourn until"]):
         return VoteType.ADJOURNMENT
+    elif any_present(
+        l_motion,
+        [
+            "takes note of european union document",
+            "takes note of european document",
+            "takes note of draft european council decision",
+        ],
+    ) or all_present(
+        l_motion, ["takes note of regulation", "of the european parliament"]
+    ):
+        return VoteType.EU_DOCUMENT_SCRUTINY
     elif all_present(l_motion, ["amendment", "lords"]):
         return VoteType.LORDS_AMENDMENT
     elif any_present(l_motion, ["gracious speech"]):
@@ -172,7 +195,6 @@ def catagorise_motion(motion: str) -> VoteType:
         return VoteType.AMENDMENT
     elif any_present(l_motion, ["humble address be presented"]):
         return VoteType.HUMBLE_ADDRESS
-
     elif any_present(l_motion, ["that the house sit in private"]):
         return VoteType.PRIVATE_SITTING
     elif all_present(l_motion, ["confidence in", "government"]):
@@ -348,7 +370,7 @@ class TWFYMotionProcessor:
         # allow this to be several previous - sometimes the speaker says something
         all_ids = [x.gid for x in debates]
         vote_index = all_ids.index(data.vote.gid)
-        offset = 1
+        offset = 0
         question_debates = []
         while offset <= 3:
             # get the speech where someone actually puts the question

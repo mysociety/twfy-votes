@@ -40,6 +40,19 @@ class MotionQuery(BaseQuery):
     gids: list[str]
 
 
+class AgreementQueryKeys(BaseQuery):
+    query_template = """
+    SELECT
+        * exclude (chamber_slug,),
+        chamber_slug as chamber__slug
+    FROM
+        pw_agreements
+    WHERE
+        key in {{ keys | inclause }}
+    """
+    keys: list[str]
+
+
 class DivisionQueryKeys(BaseQuery):
     query_template = """
         SELECT
@@ -76,6 +89,15 @@ class DivisionIDsQuery(BaseQuery):
             division_id in {{ division_ids | inclause }}
         """
     division_ids: list[int]
+
+
+class AgreementKeyVotesQuery(BaseQuery):
+    query_template = """
+    SELECT * from cm_agreement_present
+    WHERE
+        key in {{ keys | inclause }}
+    """
+    keys: list[str]
 
 
 class DivisionIdsVotesQuery(BaseQuery):
@@ -166,6 +188,22 @@ class DivisionBreakDownQuery(BaseQuery):
         division_id in {{ division_ids | inclause }}
     """
     division_ids: list[int]
+
+
+class ChamberAgreementsQuery(BaseQuery):
+    query_template = """
+    SELECT
+        * exclude (chamber_slug,),
+        chamber_slug as chamber__slug
+    FROM
+        pw_agreements
+    WHERE
+        chamber_slug = {{ chamber_slug }} and
+        date between {{ start_date }} and {{ end_date }}
+    """
+    chamber_slug: str
+    start_date: datetime.date
+    end_date: datetime.date
 
 
 class ChamberDivisionsQuery(BaseQuery):

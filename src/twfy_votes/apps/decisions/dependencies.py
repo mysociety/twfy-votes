@@ -9,18 +9,22 @@ from __future__ import annotations
 
 import datetime
 from typing import Literal
+
 from ...helpers.static_fastapi.dependencies import dependency_alias_for
 from .models import (
+    AgreementAndVotes,
+    AgreementInfo,
     AllowedChambers,
     Chamber,
     ChamberWithYearRange,
+    DecisionListing,
     DivisionAndVotes,
     DivisionInfo,
-    DivisionListing,
+    PartialAgreement,
     PartialDivision,
     Person,
-    PersonAndVotes,
     PersonAndRecords,
+    PersonAndVotes,
 )
 
 
@@ -60,17 +64,38 @@ async def GetDivisionAndVotes(division: GetDivision) -> DivisionAndVotes:
     return await DivisionAndVotes.from_division(division)
 
 
-@dependency_alias_for(DivisionListing)
-async def GetDivisionListing(
+@dependency_alias_for(AgreementInfo)
+async def GetAgreement(
+    chamber_slug: AllowedChambers, date: datetime.date, decision_ref: str
+) -> AgreementInfo:
+    """
+    Get a partial agreement and elevate it to a full agreement
+    """
+    partial = PartialAgreement(
+        chamber_slug=chamber_slug, date=date, decision_ref=decision_ref
+    )
+    return await AgreementInfo.from_partial(partial)
+
+
+@dependency_alias_for(AgreementAndVotes)
+async def GetAgreementAndVotes(agreement: GetAgreement) -> AgreementAndVotes:
+    """
+    Fetch the full votes from a division object
+    """
+    return await AgreementAndVotes.from_agreement(agreement)
+
+
+@dependency_alias_for(DecisionListing)
+async def GetDecisionListing(
     chamber: GetChamber, year: int, month: int | None = None
-) -> DivisionListing:
+) -> DecisionListing:
     """
     Get a list of divisions for a chamber and year
     """
     if month:
-        return await DivisionListing.from_chamber_year_month(chamber, year, month)
+        return await DecisionListing.from_chamber_year_month(chamber, year, month)
     else:
-        return await DivisionListing.from_chamber_year(chamber, year)
+        return await DecisionListing.from_chamber_year(chamber, year)
 
 
 @dependency_alias_for(list[ChamberWithYearRange])

@@ -16,6 +16,7 @@ from .models import (
     Policy,
     PolicyCollection,
     PolicyGroupSlug,
+    PolicyReport,
     PolicyStatus,
 )
 
@@ -58,3 +59,19 @@ async def GetPersonPolicy(person_id: int, chamber_slug: AllowedChambers, party_i
         comparison_party=party_id,
         chamber_slug=chamber_slug,
     )
+
+
+@dependency_alias_for(list[PolicyReport])
+async def GetAllPolicyReports():
+    """
+    Get reports for active and candidate polices for interface.
+    The pytest only enforces tests on active policies.
+    """
+    return await PolicyReport.fetch_multiple(
+        statuses=[PolicyStatus.ACTIVE, PolicyStatus.CANDIDATE]
+    )
+
+
+@dependency_alias_for(PolicyReport)
+async def GetPolicyReport(policy: GetPolicy):
+    return PolicyReport.from_policy(policy=policy)

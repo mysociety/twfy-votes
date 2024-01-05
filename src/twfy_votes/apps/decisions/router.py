@@ -4,9 +4,10 @@ from ...helpers.static_fastapi.static import StaticAPIRouter
 from ...internal.settings import settings
 from ..core.dependencies import GetContext
 from .dependencies import (
+    GetAgreementAndVotes,
     GetChambersWithYearRange,
+    GetDecisionListing,
     GetDivisionAndVotes,
-    GetDivisionListing,
     GetPeopleList,
     GetPersonAndRecords,
     GetPersonAndVotes,
@@ -73,22 +74,34 @@ async def division(context: GetContext, division: GetDivisionAndVotes):
     return context
 
 
-@router.get("/decisions/divisions/{chamber_slug}/{year}/{month}.json")
-@router.get("/decisions/divisions/{chamber_slug}/{year}.json")
-async def api_divisions_list(division_list: GetDivisionListing) -> GetDivisionListing:
+@router.get("/decisions/agreement/{chamber_slug}/{date}/{decision_ref}.json")
+async def api_agreement(agreement: GetAgreementAndVotes):
+    return agreement
+
+
+@router.get_html("/decisions/agreement/{chamber_slug}/{date}/{decision_ref}")
+@router.use_template("agreement.html")
+async def agreement(context: GetContext, agreement: GetAgreementAndVotes):
+    context["item"] = agreement
+    return context
+
+
+@router.get("/decisions/{chamber_slug}/{year}/{month}.json")
+@router.get("/decisions/{chamber_slug}/{year}.json")
+async def api_decisions_list(division_list: GetDecisionListing) -> GetDecisionListing:
     return division_list
 
 
-@router.get_html("/decisions/divisions/{chamber_slug}/{year}")
+@router.get_html("/decisions/{chamber_slug}/{year}")
 @router.use_template("division_list.html")
-async def divisions_list(context: GetContext, division_list: GetDivisionListing):
+async def decisions_list(context: GetContext, division_list: GetDecisionListing):
     context["search"] = division_list
     return context
 
 
-@router.get_html("/decisions/divisions/{chamber_slug}/{year}/{month}")
+@router.get_html("/decisions/{chamber_slug}/{year}/{month}")
 @router.use_template("division_list_month.html")
-async def divisions_list_month(context: GetContext, division_list: GetDivisionListing):
+async def decisions_list_month(context: GetContext, division_list: GetDecisionListing):
     context["search"] = division_list
     return context
 

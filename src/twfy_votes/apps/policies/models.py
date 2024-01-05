@@ -21,11 +21,14 @@ from ..decisions.models import (
     PartialAgreement,
     PartialDivision,
     Person,
+    PowersAnalysis,
 )
 from ..decisions.queries import DivisionBreakDownQuery
 from .queries import (
     AllPolicyQuery,
     GroupStatusPolicyQuery,
+    PolicyAgreementPersonQuery,
+    PolicyAgreementPolicyQuery,
     PolicyDistributionPersonQuery,
     PolicyDistributionQuery,
     PolicyIdQuery,
@@ -120,6 +123,7 @@ class PolicyStatus(StrEnum):
     CANDIDATE = "candidate"
     DRAFT = "draft"
     REJECTED = "rejected"
+    RETIRED = "retired"
 
 
 class LinkStatus(StrEnum):
@@ -147,7 +151,7 @@ class PartialPolicyDecisionLink(BaseModel, Generic[PartialDecisionType]):
                 return DecisionType.DIVISION
             case PartialAgreement():
                 return DecisionType.AGREEMENT
-            case _:  # type: ignore
+            case _:
                 raise ValueError("Must have agreement or division")
 
     @computed_field
@@ -363,7 +367,6 @@ class Policy(PolicyBase):
 
     async def division_df(self, request: Request):
         duck = await duck_core.child_query()
-        all_decisions = [x.model_dump() for x in self.division_links]
         decision_infos = [x.decision.division_id for x in self.division_links]
         decision_breakdowns = await DivisionBreakDownQuery(
             division_ids=decision_infos
@@ -377,27 +380,32 @@ class Policy(PolicyBase):
             x.division_id: x for x in decision_breakdowns
         }
 
-        breakdown_in_order = [
-            breakdown_lookup[x.decision.division_id] for x in self.division_links
-        ]
+        all_decisions = self.division_links + self.agreement_links
+        all_decisions_dump = [x.model_dump() for x in all_decisions]
 
         # need to make participant count line up
+        participant_count = []
+        for decision in all_decisions:
+            if isinstance(decision.decision, DivisionInfo):
+                participant_count.append(
+                    breakdown_lookup[
+                        decision.decision.division_id
+                    ].vote_participant_count
+                )
+            else:
+                participant_count.append("-")
 
-        df = pd.DataFrame(data=all_decisions)
+        df = pd.DataFrame(data=all_decisions_dump)
         df["decision"] = [
             UrlColumn(url=x.decision.url(request), text=x.decision.division_name)
-            for x in self.division_links
+            for x in all_decisions
         ]
-        df["uses_powers"] = [
-            x.decision.motion_uses_powers() for x in self.division_links
-        ]
-        df["participant_count"] = [
-            x.vote_participant_count if x else 0 for x in breakdown_in_order
-        ]
-        df["voting_cluster"] = [x.decision.voting_cluster for x in self.division_links]
+        df["uses_powers"] = [x.decision.motion_uses_powers() for x in all_decisions]
+        df["voting_cluster"] = [x.decision.voting_cluster for x in all_decisions]
+        df["participant_count"] = participant_count
 
-        banned_columns = ["decision_type", "notes"]
-        df = df.drop(columns=banned_columns)
+        banned_columns = ["notes", "status"]
+        df = df.drop(columns=banned_columns).sort_values("strength")
         return style_df(df=df)
 
     def url(self, request: Request):
@@ -481,6 +489,10 @@ class VoteDistribution(BaseModel):
     num_strong_votes_absent: float = 0.0
     num_votes_abstain: float = 0.0
     num_strong_votes_abstain: float = 0.0
+    num_agreements_same: float = 0.0
+    num_strong_agreements_same: float = 0.0
+    num_agreements_different: float = 0.0
+    num_strong_agreements_different: float = 0.0
     start_year: int
     end_year: int
     distance_score: float = 0.0
@@ -536,6 +548,10 @@ class VoteDistribution(BaseModel):
             num_strong_votes_absent=self.num_strong_votes_absent,
             num_strong_votes_abstain=self.num_strong_votes_abstain,
             num_votes_abstain=self.num_votes_abstain,
+            num_agreements_different=self.num_agreements_different,
+            num_agreements_same=self.num_agreements_same,
+            num_strong_agreements_different=self.num_strong_agreements_different,
+            num_strong_agreements_same=self.num_strong_agreements_same,
         )
 
         self.distance_score = score
@@ -556,6 +572,10 @@ class VoteDistribution(BaseModel):
             num_strong_votes_absent=self.num_strong_votes_absent,
             num_strong_votes_abstain=self.num_strong_votes_abstain,
             num_votes_abstain=self.num_votes_abstain,
+            num_agreements_different=self.num_agreements_different,
+            num_agreements_same=self.num_agreements_same,
+            num_strong_agreements_different=self.num_strong_agreements_different,
+            num_strong_agreements_same=self.num_strong_agreements_same,
         )
 
         self.distance_score = score
@@ -725,6 +745,17 @@ class PersonPolicyLink(BaseModel):
             .compile(duck=duck)
             .df()
         )
+
+        adf = (
+            await PolicyAgreementPersonQuery(person_id=person_id)
+            .compile(duck=duck)
+            .df()
+        )
+
+        # this merge will give the same values for agreements for both sides of the comparison
+        # merge left because most policies don't have agreements
+        df = df.merge(adf, on=["policy_id", "person_id"], how="left").fillna(0)
+
         return cls.from_df(df=df)
 
     @classmethod
@@ -739,6 +770,17 @@ class PersonPolicyLink(BaseModel):
             .compile(duck=duck)
             .df()
         )
+
+        adf = (
+            await PolicyAgreementPolicyQuery(policy_id=policy_id)
+            .compile(duck=duck)
+            .df()
+        )
+
+        # this merge will give the same values for agreements for both sides of the comparison
+        # merge left because most policies don't have agreements
+        df = df.merge(adf, on=["person_id", "policy_id"], how="left").fillna(0)
+
         return cls.from_df(df=df)
 
     @classmethod
@@ -765,7 +807,7 @@ class PersonPolicyLink(BaseModel):
         )
 
         items: list[Self] = []
-        for grouper, gdf in df.set_index("is_target").groupby(  # type: ignore
+        for grouper, gdf in df.groupby(  # type: ignore
             ["policy_id", "person_id", "chamber", "comparison_party"]
         ):
             grouper: tuple[int, int, AllowedChambers, str]
@@ -891,3 +933,89 @@ class PersonPolicyDisplay(BaseModel):
             groups.append(PolicyLinkDisplayGroup(name=group.name, links=links))
 
         return groups
+
+
+class IssueType(StrEnum):
+    STRONG_WITHOUT_POWER = "strong_without_power"
+    NO_STRONG_VOTES = "no_strong_votes"
+    NO_STRONG_VOTES_AFTER_POWER_CHANGE = "no_strong_votes_after_power_change"
+
+
+class PolicyReport(BaseModel):
+    policy: Policy
+    division_issues: dict[IssueType, list[DivisionInfo]] = Field(default_factory=dict)
+    policy_issues: list[IssueType] = Field(default_factory=list)
+
+    def add_from_division_issue(
+        self, division_link: PolicyDecisionLink[DivisionInfo], issue: IssueType
+    ):
+        """
+        Add an issue to the list of issues for this division
+        """
+        ignore_format = f"ignore:{issue}"
+        if ignore_format in division_link.notes:
+            return False
+
+        if issue not in self.division_issues:
+            self.division_issues[issue] = []
+        self.division_issues[issue].append(division_link.decision)
+        return True
+
+    def add_policy_issue(self, issue: IssueType):
+        """
+        Add an issue to the list of issues for this policy
+        """
+        ignore_format = f"ignore:{issue}"
+        if ignore_format in self.policy.notes:
+            return False
+
+        if issue not in self.policy_issues:
+            self.policy_issues.append(issue)
+        return True
+
+    def len_division_issues(self) -> int:
+        return sum([len(x) for x in self.division_issues.values()])
+
+    def has_issues(self) -> bool:
+        return len(self.policy_issues) > 0 or len(self.division_issues) > 0
+
+    @classmethod
+    async def fetch_multiple(
+        cls,
+        statuses: list[PolicyStatus],
+    ):
+        """
+        Run checks on policies.
+        """
+        policies = []
+        for status in statuses:
+            policies += await Policy.for_collection(status=status)
+        return [cls.from_policy(policy=policy) for policy in policies]
+
+    @classmethod
+    def from_policy(cls, policy: Policy) -> PolicyReport:
+        """
+        Score policy for identified issues
+        """
+        report = PolicyReport(policy=policy)
+        strong_count = 0
+        strong_without_power = 0
+        for division in policy.division_links:
+            # Test for overlap of strong votes and no powers
+            uses_powers = (
+                division.decision.motion_uses_powers() == PowersAnalysis.USES_POWERS
+            )
+            if division.strength == PolicyStrength.STRONG:
+                strong_count += 1
+            if division.strength == PolicyStrength.STRONG and not uses_powers:
+                if report.add_from_division_issue(
+                    division_link=division, issue=IssueType.STRONG_WITHOUT_POWER
+                ):
+                    strong_without_power += 1
+
+        if strong_count == 0:
+            report.add_policy_issue(issue=IssueType.NO_STRONG_VOTES)
+        elif strong_count - strong_without_power == 0:
+            report.add_policy_issue(issue=IssueType.NO_STRONG_VOTES_AFTER_POWER_CHANGE)
+
+        return report
