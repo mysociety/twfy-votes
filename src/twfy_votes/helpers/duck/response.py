@@ -8,6 +8,23 @@ import pandas as pd
 from .types import CompiledJinjaSQL, DataSourceValue, SQLQuery
 
 
+def dataframe_to_dict_records(df: pd.DataFrame) -> list[dict[str, Any]]:
+    """
+    Convert a DataFrame into a list of dictionaries.
+
+    This is a dumber but faster approach than then to_dict method.
+    Because we know the columns are basic types, we can just iterate over the rows
+    """
+    cols = list(df)
+    col_arr_map = {col: df[col].astype(object).to_numpy() for col in cols}
+    records = []
+    for i in range(len(df)):
+        record = {col: col_arr_map[col][i] for col in cols}
+        records.append(record)
+
+    return records
+
+
 class DuckResponse:
     def __init__(
         self,
@@ -128,7 +145,7 @@ class AsyncDuckResponse:
         df = await self.df()
         if nan_to_none:
             df = df.fillna(np.nan).replace([np.nan], [None])
-        return df.to_dict(orient="records")  # type: ignore
+        return dataframe_to_dict_records(df)
 
     async def first_record(self) -> dict[str, Any]:
         df = await self.df()

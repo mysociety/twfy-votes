@@ -3,7 +3,8 @@ from __future__ import annotations
 import datetime
 from calendar import month_name
 from itertools import groupby
-from typing import Any, Literal
+from operator import attrgetter
+from typing import Any, Literal, TypeVar
 
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -35,6 +36,33 @@ from .queries import (
     PartyDivisionBreakDownQuery,
     PersonVotesQuery,
 )
+
+T = TypeVar("T")
+
+
+def dataframe_to_dict_records(df: pd.DataFrame) -> list[dict[str, Any]]:
+    """
+    Convert a DataFrame into a list of dictionaries.
+
+    This is a dumber but faster approach than then to_dict method.
+    Because we know the columns are basic types, we can just iterate over the rows
+    """
+    cols = list(df)
+    col_arr_map = {col: df[col].astype(object).to_numpy() for col in cols}
+    records = []
+    for i in range(len(df)):
+        record = {col: col_arr_map[col][i] for col in cols}
+        records.append(record)
+
+    return records
+
+
+def group_by_key(data_list: list[T], key: str) -> dict[str | int, list[T]]:
+    # Function to create a dictionary from a list using a key
+    key_func = attrgetter(key)
+    return {
+        k: list(g) for k, g in groupby(sorted(data_list, key=key_func), key=key_func)
+    }
 
 
 def aliases(*args: str) -> Any:
@@ -904,21 +932,50 @@ class DivisionAndVotes(BaseModel):
 
     @classmethod
     async def from_divisions(
-        cls, divisions: list[DivisionInfo]
+        cls,
+        divisions: list[DivisionInfo],
+        overall_breakdown_only: bool = False,
     ) -> list[DivisionAndVotes]:
         """
         Fetch multiple connected sets of divisions, votes, and breakdowns
         """
         duck = await duck_core.child_query()
-
         # get the division_ids
         division_ids = [d.division_id for d in divisions]
 
+        """
+        # This is a more direct method - but because we can end up with quite a lot of votes
+        # method below is about twice as quick
         votes = await DivisionIdsVotesQuery(division_ids=division_ids).to_model_list(
-            model=VoteWithDivisionID,
             duck=duck,
+            model=VoteWithDivisionID,
             validate=DivisionIdsVotesQuery.validate.NOT_ZERO,
         )
+        """
+
+        # get df of results
+        df = await DivisionIdsVotesQuery(division_ids=division_ids).compile(duck).df()
+
+        # create person objects first
+        # limit df to just columns that start person__ and remove that prefix from the column names
+        person_df = df.filter(regex="^person__").rename(columns=lambda x: x[8:])
+        person_df["membership_id"] = df["membership_id"].astype(int)
+        person_df = person_df.drop_duplicates()
+        person_records = dataframe_to_dict_records(person_df)
+        person_lookup = {
+            x["membership_id"]: Person.model_validate(x) for x in person_records
+        }
+
+        # create vote objects
+        df["person"] = df["membership_id"].astype(int).map(person_lookup)
+        # drop all the columns that start with person__
+        votes_df = df.drop(columns=df.filter(regex="^person__").columns)
+
+        # create votes from dataframe
+        votes = [
+            VoteWithDivisionID.model_validate(x)
+            for x in dataframe_to_dict_records(votes_df)
+        ]
 
         # calculate the overall breakdown of how people voted and the result
         overall_breakdowns = await DivisionBreakDownQuery(
@@ -929,39 +986,43 @@ class DivisionAndVotes(BaseModel):
             validate=DivisionBreakDownQuery.validate.NOT_ZERO,
         )
 
-        # do the same by party
-        party_breakdowns = await PartyDivisionBreakDownQuery(
-            division_ids=division_ids
-        ).to_model_list(
-            duck=duck,
-            model=DivisionBreakdown,
-            validate=PartyDivisionBreakDownQuery.validate.NOT_ZERO,
-        )
+        if overall_breakdown_only:
+            party_breakdowns = []
+            gov_breakdowns = []
+        else:
+            # do the same by party
+            party_breakdowns = await PartyDivisionBreakDownQuery(
+                division_ids=division_ids
+            ).to_model_list(
+                duck=duck,
+                model=DivisionBreakdown,
+                validate=PartyDivisionBreakDownQuery.validate.NOT_ZERO,
+            )
 
-        # get breakdown by gov/other
-        gov_breakdowns = await GovDivisionBreakDownQuery(
-            division_ids=division_ids
-        ).to_model_list(
-            duck=duck,
-            model=DivisionBreakdown,
-            validate=PartyDivisionBreakDownQuery.validate.NOT_ZERO,
-        )
+            # get breakdown by gov/other
+            gov_breakdowns = await GovDivisionBreakDownQuery(
+                division_ids=division_ids
+            ).to_model_list(
+                duck=duck,
+                model=DivisionBreakdown,
+                validate=PartyDivisionBreakDownQuery.validate.NOT_ZERO,
+            )
 
         # Assembly a list of DivisionAndVotes objects based on the division_ids in all the above objects
 
         division_and_votes = []
+        div_breakdown_lookup = group_by_key(overall_breakdowns, "division_id")
+        div_party_breakdown_lookup = group_by_key(party_breakdowns, "division_id")
+        div_gov_breakdown_lookup = group_by_key(gov_breakdowns, "division_id")
+        votes_lookup = group_by_key(votes, "division_id")
 
         for division in divisions:
-            div_votes = [v for v in votes if v.division_id == division.division_id]
-            div_breakdown = [
-                b for b in overall_breakdowns if b.division_id == division.division_id
-            ][0]
-            div_party_breakdown = [
-                b for b in party_breakdowns if b.division_id == division.division_id
-            ]
-            div_gov_breakdown = [
-                b for b in gov_breakdowns if b.division_id == division.division_id
-            ]
+            div_votes = votes_lookup.get(division.division_id, [])
+            div_breakdown = div_breakdown_lookup[division.division_id][0]
+            div_party_breakdown = div_party_breakdown_lookup.get(
+                division.division_id, []
+            )
+            div_gov_breakdown = div_gov_breakdown_lookup.get(division.division_id, [])
 
             division_and_votes.append(
                 DivisionAndVotes(
@@ -969,7 +1030,7 @@ class DivisionAndVotes(BaseModel):
                     date=division.date,
                     division_number=division.division_number,
                     details=division,
-                    votes=[Vote.model_validate(v.model_dump()) for v in div_votes],
+                    votes=[v for v in div_votes],
                     overall_breakdown=div_breakdown,
                     party_breakdowns=div_party_breakdown,
                     gov_breakdowns=div_gov_breakdown,
