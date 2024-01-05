@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, ClassVar, Generic, TypeVar, overload
+from typing import Any, ClassVar, Generic, TypeVar, cast, overload
 
 import pandas as pd
 from fastapi import Request
@@ -617,6 +617,24 @@ class ReducedPersonPolicyLink(BaseModel):
         )
 
 
+def dataframe_to_dict_index(df: pd.DataFrame) -> dict[Any, dict[Any, Any]]:
+    """
+    Convert a DataFrame into a dictionary of dictionaries.
+
+    This is a dumber but faster approach than then to_dict method.
+    Because we know the columns are basic types, we can just iterate over the rows
+    """
+    cols = list(df)
+    col_arr_map = {col: df[col].astype(object).to_numpy() for col in cols}
+    records = {}
+
+    for index, i in zip(df.index.values, range(len(df))):
+        record = {col: col_arr_map[col][i] for col in cols}
+        records[index] = record
+
+    return records
+
+
 class PersonPolicyLink(BaseModel):
     """
     Storage object to connect person_id and policy_id
@@ -721,7 +739,6 @@ class PersonPolicyLink(BaseModel):
             .compile(duck=duck)
             .df()
         )
-
         return cls.from_df(df=df)
 
     @classmethod
@@ -729,22 +746,37 @@ class PersonPolicyLink(BaseModel):
         """
         Create a list of PersonPolicyLinks from a dataframe
         """
+
+        # more efficent to construct them all here
+        df["vote_distributions"] = df.apply(  # type: ignore
+            lambda x: VoteDistribution(  # type: ignore
+                num_votes_same=x.num_votes_same,
+                num_strong_votes_same=x.num_strong_votes_same,
+                num_votes_different=x.num_votes_different,
+                num_strong_votes_different=x.num_strong_votes_different,
+                num_votes_absent=x.num_votes_absent,
+                num_strong_votes_absent=x.num_strong_votes_absent,
+                num_votes_abstain=x.num_votes_abstained,
+                num_strong_votes_abstain=x.num_strong_votes_abstained,
+                start_year=x.start_year,
+                end_year=x.end_year,
+            ).score(strength_meaning=x.strength_meaning),
+            axis="columns",
+        )
+
         items: list[Self] = []
-        for grouper, gdf in df.groupby(  # type: ignore
+        for grouper, gdf in df.set_index("is_target").groupby(  # type: ignore
             ["policy_id", "person_id", "chamber", "comparison_party"]
         ):
             grouper: tuple[int, int, AllowedChambers, str]
-            strength_meaning = StrengthMeaning(gdf["strength_meaning"].iloc[0])
             policy_id, person_id, chamber, comparison_party = grouper
 
-            gdf = gdf.set_index("is_target").to_dict("index")
-            target_values = VoteDistribution.model_validate(gdf[1]).score(
-                strength_meaning
-            )
+            target_values = cast(VoteDistribution, gdf["vote_distributions"][1])
             # if no comparison, then there are no compariable mps (rare) of the same party, so just use self.
-            comparison_values = VoteDistribution.model_validate(
-                gdf.get(0, gdf[1])
-            ).score(strength_meaning)
+            comparison_values: VoteDistribution = gdf["vote_distributions"].get(
+                0,
+                target_values,  # type: ignore
+            )
 
             items.append(
                 cls(
@@ -757,6 +789,7 @@ class PersonPolicyLink(BaseModel):
                     no_party_comparison=0 not in gdf,
                 ).score()
             )
+
         return items
 
 

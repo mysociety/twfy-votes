@@ -85,19 +85,18 @@ class DivisionIdsVotesQuery(BaseQuery):
 
     query_template = """
     SELECT
-        pw_division.division_id,
+        division_id,
         given_name as person__first_name,
         last_name as person__last_name,
         nice_name as person__nice_name,
         party_name as person__party,
-        pw_votes_with_party_difference.mp_id as membership_id,
+        mp_id as membership_id,
         person_id as person__person_id,
-        pw_votes_with_party_difference.* exclude (division_id, mp_id, __index_level_0__)
+        pw_votes_with_party_difference.* exclude (division_id, mp_id, __index_level_0__, given_name, last_name, nice_name, party_name)
     FROM
-        pw_division
-    JOIN pw_votes_with_party_difference using (division_id)
+        pw_votes_with_party_difference
     WHERE
-        pw_division.division_id in {{ division_ids | inclause }}
+        division_id in {{ division_ids | inclause }}
     """
     division_ids: list[int]
 

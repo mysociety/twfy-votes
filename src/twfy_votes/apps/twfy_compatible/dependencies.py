@@ -102,7 +102,6 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
     Create a replacement object for the https://www.publicwhip.org.uk/data/popolo/363.json
     view
     """
-
     policy = await Policy.from_id(policy_id)
 
     # just refer back to public whip for moment as we're not public
@@ -112,8 +111,11 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
 
     div_and_votes_collection: list[
         DivisionAndVotes
-    ] = await DivisionAndVotes.from_divisions(divisions)
+    ] = await DivisionAndVotes.from_divisions(divisions, overall_breakdown_only=True)
+
     div_and_votes_lookup = {x.details.division_id: x for x in div_and_votes_collection}
+
+    alignments = await PersonPolicyLink.from_policy_id(policy_id)
 
     aspects = []
     for link in policy.division_links:
@@ -130,7 +132,8 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
         )
         motion_org = org_type(division.chamber)
         counts = breakdown_to_vote_count(div_and_votes.overall_breakdown)
-        votes = [m.PopoloVote.from_vote(v) for v in div_and_votes.votes]
+        # turn off pydantic validation for a big speed boost here
+        votes = [m.PopoloVote.from_vote_unvalidated(v) for v in div_and_votes.votes]
         vote_events = m.VoteEvent(counts=counts, votes=votes)
         division_url = get_division_url(division, policy_id)
         motion = m.PopoloMotion(
@@ -146,8 +149,6 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
         )
         aspects.append(aspect)
 
-    alignments = await PersonPolicyLink.from_policy_id(policy_id)
-
     reduced_alignments = [
         ReducedPersonPolicyLink.from_person_policy_link(x) for x in alignments
     ]
@@ -159,4 +160,5 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
         aspects=aspects,
         alignments=reduced_alignments,
     )
+
     return policy
