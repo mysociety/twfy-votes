@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from ...helpers.static_fastapi.dependencies import dependency_alias_for
+from ...helpers.static_fastapi.dependencies import DependsAlias
 from .models import (
     AllowedChambers,
     PersonPolicyDisplay,
@@ -21,12 +21,12 @@ from .models import (
 )
 
 
-@dependency_alias_for(PolicyCollection)
+@DependsAlias.as_decorator
 async def GetPolicyCollection(
     group_slug: PolicyGroupSlug | None | Literal["all"] = None,
     chamber_slug: AllowedChambers | None | Literal["all"] = None,
     status: PolicyStatus | None | Literal["all"] = None,
-):
+) -> PolicyCollection:
     if group_slug == "all":
         group_slug = None
     if chamber_slug == "all":
@@ -39,21 +39,23 @@ async def GetPolicyCollection(
     )
 
 
-@dependency_alias_for(list[PolicyCollection])
-async def GetGroupsAndPolicies():
+@DependsAlias.as_decorator
+async def GetGroupsAndPolicies() -> list[PolicyCollection]:
     """
     Get a list of groups and policies for the sidebar
     """
     return await PolicyCollection.fetch_all()
 
 
-@dependency_alias_for(Policy)
-async def GetPolicy(policy_id: int):
+@DependsAlias.as_decorator
+async def GetPolicy(policy_id: int) -> Policy:
     return await Policy.from_id(id=policy_id)
 
 
-@dependency_alias_for(PersonPolicyDisplay)
-async def GetPersonPolicy(person_id: int, chamber_slug: AllowedChambers, party_id: str):
+@DependsAlias.as_decorator
+async def GetPersonPolicy(
+    person_id: int, chamber_slug: AllowedChambers, party_id: str
+) -> PersonPolicyDisplay:
     return await PersonPolicyDisplay.from_person_and_party(
         person_id=person_id,
         comparison_party=party_id,
@@ -61,8 +63,8 @@ async def GetPersonPolicy(person_id: int, chamber_slug: AllowedChambers, party_i
     )
 
 
-@dependency_alias_for(list[PolicyReport])
-async def GetAllPolicyReports():
+@DependsAlias.as_decorator
+async def GetAllPolicyReports() -> list[PolicyReport]:
     """
     Get reports for active and candidate polices for interface.
     The pytest only enforces tests on active policies.
@@ -72,6 +74,6 @@ async def GetAllPolicyReports():
     )
 
 
-@dependency_alias_for(PolicyReport)
-async def GetPolicyReport(policy: GetPolicy):
+@DependsAlias.as_decorator
+async def GetPolicyReport(policy: GetPolicy) -> PolicyReport:
     return PolicyReport.from_policy(policy=policy)

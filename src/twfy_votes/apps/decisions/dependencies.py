@@ -10,7 +10,7 @@ from __future__ import annotations
 import datetime
 from typing import Literal
 
-from ...helpers.static_fastapi.dependencies import dependency_alias_for
+from ...helpers.static_fastapi.dependencies import DependsAlias
 from .models import (
     AgreementAndVotes,
     AgreementInfo,
@@ -28,7 +28,7 @@ from .models import (
 )
 
 
-@dependency_alias_for(Chamber)
+@DependsAlias.as_decorator
 async def GetChamber(chamber_slug: AllowedChambers) -> Chamber:
     """
     Get a chamber object from a slug
@@ -36,12 +36,12 @@ async def GetChamber(chamber_slug: AllowedChambers) -> Chamber:
     return Chamber(slug=chamber_slug)
 
 
-@dependency_alias_for(list[Chamber])
+@DependsAlias.as_decorator
 async def AllChambers() -> list[Chamber]:
     return [Chamber(slug=chamber_slug) for chamber_slug in AllowedChambers]
 
 
-@dependency_alias_for(DivisionInfo)
+@DependsAlias.as_decorator
 async def GetDivision(
     chamber_slug: AllowedChambers,
     date: datetime.date,
@@ -56,7 +56,7 @@ async def GetDivision(
     return await DivisionInfo.from_partial(partial)
 
 
-@dependency_alias_for(DivisionAndVotes)
+@DependsAlias.as_decorator
 async def GetDivisionAndVotes(division: GetDivision) -> DivisionAndVotes:
     """
     Fetch the full votes from a division object
@@ -64,7 +64,7 @@ async def GetDivisionAndVotes(division: GetDivision) -> DivisionAndVotes:
     return await DivisionAndVotes.from_division(division)
 
 
-@dependency_alias_for(AgreementInfo)
+@DependsAlias.as_decorator
 async def GetAgreement(
     chamber_slug: AllowedChambers, date: datetime.date, decision_ref: str
 ) -> AgreementInfo:
@@ -77,7 +77,7 @@ async def GetAgreement(
     return await AgreementInfo.from_partial(partial)
 
 
-@dependency_alias_for(AgreementAndVotes)
+@DependsAlias.as_decorator
 async def GetAgreementAndVotes(agreement: GetAgreement) -> AgreementAndVotes:
     """
     Fetch the full votes from a division object
@@ -85,7 +85,7 @@ async def GetAgreementAndVotes(agreement: GetAgreement) -> AgreementAndVotes:
     return await AgreementAndVotes.from_agreement(agreement)
 
 
-@dependency_alias_for(DecisionListing)
+@DependsAlias.as_decorator
 async def GetDecisionListing(
     chamber: GetChamber, year: int, month: int | None = None
 ) -> DecisionListing:
@@ -98,7 +98,7 @@ async def GetDecisionListing(
         return await DecisionListing.from_chamber_year(chamber, year)
 
 
-@dependency_alias_for(list[ChamberWithYearRange])
+@DependsAlias.as_decorator
 async def GetChambersWithYearRange():
     """
     Get a list of chambers with the years they have divisions for
@@ -106,7 +106,7 @@ async def GetChambersWithYearRange():
     return await ChamberWithYearRange.fetch_all()
 
 
-@dependency_alias_for(Person)
+@DependsAlias.as_decorator
 async def GetPerson(person_id: int) -> Person:
     """
     Get a person object from a person_id
@@ -114,7 +114,7 @@ async def GetPerson(person_id: int) -> Person:
     return await Person.from_id(person_id)
 
 
-@dependency_alias_for(PersonAndVotes)
+@DependsAlias.as_decorator
 async def GetPersonAndVotes(person: GetPerson) -> PersonAndVotes:
     """
     Fetch the full votes from a division object
@@ -122,7 +122,7 @@ async def GetPersonAndVotes(person: GetPerson) -> PersonAndVotes:
     return await PersonAndVotes.from_person(person)
 
 
-@dependency_alias_for(list[Person])
+@DependsAlias.as_decorator
 async def GetPeopleList(people_option: Literal["current", "all"]) -> list[Person]:
     """
     Get a list of all people
@@ -130,7 +130,7 @@ async def GetPeopleList(people_option: Literal["current", "all"]) -> list[Person
     return await Person.fetch_group(people_option)
 
 
-@dependency_alias_for(PersonAndRecords)
+@DependsAlias.as_decorator
 async def GetPersonAndRecords(person: GetPerson) -> PersonAndRecords:
     """
     Fetch the full votes from a division object

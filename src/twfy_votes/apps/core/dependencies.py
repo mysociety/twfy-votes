@@ -11,7 +11,7 @@ from typing import Any
 
 from fastapi import Request
 
-from ...helpers.static_fastapi.dependencies import dependency_alias_for
+from ...helpers.static_fastapi.dependencies import DependsAlias
 from ...internal.common import absolute_url_for
 from ...internal.settings import settings
 
@@ -27,8 +27,8 @@ def _url_for(request: Request):
     return inner
 
 
-@dependency_alias_for(dict[str, Any])
-async def GetContext(request: Request):
+@DependsAlias.as_decorator
+async def GetContext(request: Request) -> dict[str, Any]:
     """
     Copy and return the universal context with the current request added
     """

@@ -1,9 +1,5 @@
 """
-This module contains the dependency functions for the FastAPI app.
-
-This acts as tiered and shared logic between views, that lets the views be
-simple and declarative.
-
+Helper functions for managing dependencies.
 """
 from __future__ import annotations
 
@@ -16,6 +12,7 @@ from typing import (
     Generator,
     Type,
     TypeVar,
+    get_type_hints,
 )
 
 from fastapi import Depends
@@ -30,42 +27,39 @@ AsyncAgnosticDependencyFunction = Callable[
 ]
 
 
-def dependency_alias_for(
-    dependency_class: Type[DecoratorType],
-) -> Callable[[AsyncAgnosticDependencyFunction[DecoratorType]], Type[DecoratorType]]:
-    """
-    Tidies up FastAPI dependency injection.
-
-    Rather than specify the function as metadata in typing.Annotated,
-    instead use this as a decorator on the function.
-
-    e.g. rather than:
-
-    ```
-    def context_dependency():
-        return {"item": "value"}
-
-    GetContext = Annotated[dict, Depends(context_dependency)]
-    ```
-
-    use:
-
-    ```
-    @dependency_alias_for(dict[str, str])
-    def GetContext():
-        return {"item": "value"}
-    ```
-
-    This has the same result - GetText is an Annotated object.
-
-    The function is then not accessible directly - but the advantage is
-    type checkers can check if the function matches the type annotation.
-
-    """
-
-    def decorator(
-        func: AsyncAgnosticDependencyFunction[DecoratorType],
+class DependsAliasMeta(type):
+    def __getitem__(
+        cls,
+        item: AsyncAgnosticDependencyFunction[DecoratorType],
     ) -> Type[DecoratorType]:
-        return Annotated[dependency_class, Depends(func)]
+        depends_type = get_type_hints(item).get("return", Any)
+        return Annotated[depends_type, Depends(item)]
 
-    return decorator
+    as_decorator = __getitem__
+
+
+class DependsAlias(metaclass=DependsAliasMeta):
+    """
+    DependsAlias streamlines declarations for dependency injection.
+
+    Rather than:
+
+    item: Annotated[str, Depends(get_item)]
+
+    You can write:
+
+    item: DependsAlias[get_item]
+
+    If the return type is specified for `get_item`, item will appear as that type.
+    Otherwise, it will appear as Any.
+
+    If there is a function that *only* returns a dependency, you can use the
+    as_decorator method to use it as a decorator:
+
+    @DependsAlias.as_decorator
+    async def GetItem() -> str:
+        return "item"
+
+    item: GetItem
+
+    """
