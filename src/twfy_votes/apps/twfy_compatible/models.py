@@ -69,13 +69,13 @@ class PopoloVote(BaseModel):
     option: PopoloVoteOption
 
     @classmethod
-    def from_vote(cls, vote: Vote):
+    def from_vote_unvalidated(cls, vote: Vote):
         if vote.vote == VotePosition.ABSTENTION:
             option = PopoloVoteOption.BOTH
         else:
             option = PopoloVoteOption(vote.vote)
 
-        return cls(
+        return cls.model_construct(
             id=f"uk.org.publicwhip/person/{vote.person.person_id}", option=option
         )
 
