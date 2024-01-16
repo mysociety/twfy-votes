@@ -2,7 +2,7 @@
 Helper functions for bridging from our data to the current popolo output of public whip.
 """
 
-from ...helpers.static_fastapi.dependencies import DependsAlias
+from ...helpers.static_fastapi.dependencies import dependency
 from ..decisions.models import (
     AllowedChambers,
     Chamber,
@@ -96,7 +96,7 @@ def get_division_url(div: DivisionInfo, policy_id: int) -> str:
     )
 
 
-@DependsAlias.as_decorator
+@dependency
 async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
     """
     Create a replacement object for the https://www.publicwhip.org.uk/data/popolo/363.json

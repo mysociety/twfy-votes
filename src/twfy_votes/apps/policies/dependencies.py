@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from ...helpers.static_fastapi.dependencies import DependsAlias
+from ...helpers.static_fastapi.dependencies import dependency
 from .models import (
     AllowedChambers,
     PersonPolicyDisplay,
@@ -21,7 +21,7 @@ from .models import (
 )
 
 
-@DependsAlias.as_decorator
+@dependency
 async def GetPolicyCollection(
     group_slug: PolicyGroupSlug | None | Literal["all"] = None,
     chamber_slug: AllowedChambers | None | Literal["all"] = None,
@@ -39,7 +39,7 @@ async def GetPolicyCollection(
     )
 
 
-@DependsAlias.as_decorator
+@dependency
 async def GetGroupsAndPolicies() -> list[PolicyCollection]:
     """
     Get a list of groups and policies for the sidebar
@@ -47,12 +47,12 @@ async def GetGroupsAndPolicies() -> list[PolicyCollection]:
     return await PolicyCollection.fetch_all()
 
 
-@DependsAlias.as_decorator
+@dependency
 async def GetPolicy(policy_id: int) -> Policy:
     return await Policy.from_id(id=policy_id)
 
 
-@DependsAlias.as_decorator
+@dependency
 async def GetPersonPolicy(
     person_id: int, chamber_slug: AllowedChambers, party_id: str
 ) -> PersonPolicyDisplay:
@@ -63,7 +63,7 @@ async def GetPersonPolicy(
     )
 
 
-@DependsAlias.as_decorator
+@dependency
 async def GetAllPolicyReports() -> list[PolicyReport]:
     """
     Get reports for active and candidate polices for interface.
@@ -74,6 +74,6 @@ async def GetAllPolicyReports() -> list[PolicyReport]:
     )
 
 
-@DependsAlias.as_decorator
+@dependency
 async def GetPolicyReport(policy: GetPolicy) -> PolicyReport:
     return PolicyReport.from_policy(policy=policy)
