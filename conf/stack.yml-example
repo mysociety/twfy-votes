@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  twfy-votes:
+    image: twfy-votes:latest
+    ports:
+      - "${PORT}:8080"
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
