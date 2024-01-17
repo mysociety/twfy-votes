@@ -415,7 +415,7 @@ class pw_divisions_with_counts:
         sum(case when effective_vote = 'both' then 1 else 0 end) as neutral_motion,
         for_motion + against_motion as signed_votes,
         for_motion - against_motion as motion_majority,
-        for_motion / signed_votes as motion_majority_ratio,
+        for_motion / signed_votes as for_motion_percentage,
         case 
             when motion_majority = 0 then 0
             when motion_majority > 0 then 1
@@ -446,7 +446,7 @@ class pw_divisions_party_with_counts:
         sum(case when effective_vote = 'abstention' then 1 else 0 end) as neutral_motion,
         for_motion + against_motion as signed_votes,
         for_motion - against_motion as motion_majority,
-        for_motion / signed_votes as motion_majority_ratio,
+        for_motion / signed_votes as for_motion_percentage,
         case 
             when motion_majority = 0 then 0
             when motion_majority > 0 then 1
@@ -476,7 +476,7 @@ class pw_divisions_gov_with_counts:
         sum(case when effective_vote = 'both' then 1 else 0 end) as neutral_motion,
         for_motion + against_motion as signed_votes,
         for_motion - against_motion as motion_majority,
-        for_motion / signed_votes as motion_majority_ratio,
+        for_motion / signed_votes as for_motion_percentage,
         case 
             when motion_majority = 0 then 0
             when motion_majority > 0 then 1
@@ -498,13 +498,13 @@ class pw_votes_with_party_difference:
     query = """
     SELECT
         cm_votes_with_people.*,
-        motion_majority_ratio,
+        for_motion_percentage,
         case effective_vote
             when 'aye' then 1
             when 'no' then 0
             when 'abstention' then 0.5
         end as effective_vote_int,
-        abs(effective_vote_int - motion_majority_ratio) as diff_from_party_average
+        abs(effective_vote_int - for_motion_percentage) as diff_from_party_average
     FROM
         cm_votes_with_people
     JOIN
