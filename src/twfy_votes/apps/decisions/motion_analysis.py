@@ -46,7 +46,7 @@ async def get_new_gids(run_all: bool = False) -> list[str]:
     df = await duck.compile(query).df()
     gids = gids_from_df(df)
     gids = gids[gids["chamber"].isin(["debate"])]
-    gids = gids[gids["gid"].str.startswith("2022") | gids["gid"].str.startswith("2023")]
+    gids = gids[gids["gid"].str[:4].astype(int) >= 2022]
     recent_gids = gids["gid"].to_list()
 
     # get all agreement gids
@@ -251,6 +251,17 @@ def get_motion_indent_in_isolation(body: str) -> str | None:
             motion_started = True
 
 
+def revision_agnostic_gid(gid: str) -> str:
+    # the revision is a,b,c after the iso date
+    # we don't care about this for the purposes of comparisons
+
+    # split by dot
+    gid_parts = gid.split(".")
+    if gid_parts[0][-1] in "abcd":
+        gid_parts[0] = gid_parts[0][:-1]
+    return ".".join(gid_parts)
+
+
 class TWFYMotionProcessor:
     """
     Handler for fetching debates from the TheyWorkForYou API.
@@ -286,8 +297,16 @@ class TWFYMotionProcessor:
         data = self.fetch_debate(debate_type=debate_type, gid=gid)
         if len(data) < 2:
             raise ValueError(f"Expected at least 2 items, got {len(data)}")
-        vote_gids = [x for x in data if x.gid == gid]
-        debate_gids = [x for x in data if x.gid != gid]
+        vote_gids = [
+            x
+            for x in data
+            if revision_agnostic_gid(x.gid) == revision_agnostic_gid(gid)
+        ]
+        debate_gids = [
+            x
+            for x in data
+            if revision_agnostic_gid(x.gid) != revision_agnostic_gid(gid)
+        ]
         if len(vote_gids) != 1:
             raise ValueError(f"Expected 1 vote, got {len(vote_gids)}")
         if len(debate_gids) < 1:
