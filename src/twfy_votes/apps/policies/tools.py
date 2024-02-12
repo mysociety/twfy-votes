@@ -7,6 +7,7 @@ from ...helpers.data.models import data_to_yaml
 from .models import (
     AllowedChambers,
     LinkStatus,
+    PartialAgreement,
     PartialDivision,
     PartialPolicy,
     PartialPolicyDecisionLink,
@@ -19,6 +20,7 @@ from .models import (
 vote_folder = Path("data", "policies")
 
 PartialDivisionLink = PartialPolicyDecisionLink[PartialDivision]
+PartialAgreementLink = PartialPolicyDecisionLink[PartialAgreement]
 
 
 def create_new_policy(
@@ -72,9 +74,38 @@ def add_vote_to_policy_from_url(
     strength: PolicyStrength = PolicyStrength.STRONG,
 ):
     parts = votes_url.split("/")
-    chamber_slug = AllowedChambers(parts[-3])
-    date = datetime.datetime.strptime(parts[-2], "%Y-%m-%d").date()
-    division_number = int(parts[-1])
+
+    match parts[-4]:
+        case "division" as decision_type:
+            chamber_slug = AllowedChambers(parts[-3])
+            date = datetime.datetime.strptime(parts[-2], "%Y-%m-%d").date()
+            division_number = int(parts[-1])
+            partial = PartialDivision(
+                chamber_slug=chamber_slug, date=date, division_number=division_number
+            )
+            policy_link = PartialPolicyDecisionLink[PartialDivision](
+                decision=partial,
+                alignment=vote_alignment,
+                strength=strength,
+                status=LinkStatus.ACTIVE,
+            ).model_dump()
+
+        case "agreement" as decision_type:
+            chamber_slug = AllowedChambers(parts[-3])
+            date = datetime.datetime.strptime(parts[-2], "%Y-%m-%d").date()
+            decision_ref = parts[-1]
+            partial = PartialAgreement(
+                chamber_slug=chamber_slug, date=date, decision_ref=decision_ref
+            )
+            policy_link = PartialPolicyDecisionLink[PartialAgreement](
+                decision=partial,
+                alignment=vote_alignment,
+                strength=strength,
+                status=LinkStatus.ACTIVE,
+            ).model_dump()
+
+        case _ as p:
+            raise ValueError(f"{p} not a decision type.")
 
     policy_path = vote_folder / f"{policy_id}.yml"
 
@@ -86,29 +117,19 @@ def add_vote_to_policy_from_url(
 
     data = yaml.load(policy_path)
 
-    partial = PartialDivision(
-        chamber_slug=chamber_slug, date=date, division_number=division_number
-    )
-
-    policy_link = PartialDivisionLink(
-        decision=partial,
-        alignment=vote_alignment,
-        strength=strength,
-        status=LinkStatus.ACTIVE,
-    ).model_dump()
     del policy_link["decision_key"]
 
-    data["division_links"].append(policy_link)
+    data[f"{decision_type}_links"].append(policy_link)
 
     # quick double check haven't done this before
     keys = []
-    for division in data["division_links"]:
+    for division in data[f"{decision_type}_links"]:
         decision = division["decision"]
         key = "-".join(
             [
                 decision["chamber_slug"],
                 str(decision["date"]),
-                str(decision["division_number"]),
+                str(decision.get("division_number", decision.get("division_ref"))),
             ]
         )
         if key in keys:
