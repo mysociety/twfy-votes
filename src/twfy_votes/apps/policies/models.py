@@ -398,6 +398,7 @@ class Policy(PolicyBase):
                 participant_count.append("-")
 
         df = pd.DataFrame(data=all_decisions_dump)
+        df["month"] = [x.decision.date.strftime("%Y-%m") for x in all_decisions]
         df["decision"] = [
             UrlColumn(url=x.decision.url(request), text=x.decision.division_name)
             for x in all_decisions
@@ -405,6 +406,14 @@ class Policy(PolicyBase):
         df["uses_powers"] = [x.decision.motion_uses_powers() for x in all_decisions]
         df["voting_cluster"] = [x.decision.voting_cluster for x in all_decisions]
         df["participant_count"] = participant_count
+
+        # move month to front
+        cols = [x for x in df.columns if x != "month"]
+        cols = ["month"] + cols
+        df = df[cols]
+
+        # sort inverse by month
+        df = df.sort_values("month", ascending=False)
 
         banned_columns = ["notes", "status"]
         df = df.drop(columns=banned_columns).sort_values("strength")
