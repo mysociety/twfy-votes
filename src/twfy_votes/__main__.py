@@ -9,7 +9,6 @@ import uvicorn
 from trogon import Trogon  # type: ignore
 from typer.main import get_group
 
-from .apps.core.db import db_lifespan
 from .apps.policies.models import (
     AllowedChambers,
     PolicyDirection,
@@ -50,6 +49,8 @@ def coroutine(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, TReturn]:
 def load_db(f: Callable[P, Awaitable[TReturn]]) -> Callable[P, Awaitable[TReturn]]:
     @wraps(f)
     async def wrapper(*args: P.args, **kwargs: P.kwargs) -> TReturn:
+        from .apps.core.db import db_lifespan
+
         async with db_lifespan():
             return await f(*args, **kwargs)
 

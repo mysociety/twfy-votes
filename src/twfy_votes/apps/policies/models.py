@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from typing import Any, ClassVar, Generic, TypeVar, cast, overload
+from typing import TYPE_CHECKING, Any, ClassVar, Generic, TypeVar, cast, overload
 
 import pandas as pd
-from fastapi import Request
 from pydantic import Field, computed_field
 from typing_extensions import Self
 
@@ -36,6 +35,9 @@ from .queries import (
 
 PartialDecisionType = TypeVar("PartialDecisionType", PartialAgreement, PartialDivision)
 InfoType = TypeVar("InfoType", AgreementInfo, DivisionInfo)
+
+if TYPE_CHECKING:
+    from fastapi import Request
 
 
 def nice_headers(s: str) -> str:

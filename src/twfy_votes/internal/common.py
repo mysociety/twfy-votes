@@ -1,9 +1,13 @@
-from typing import Any
+from __future__ import annotations
 
-from fastapi import APIRouter, Request
+from typing import TYPE_CHECKING, Any
+
 from starlette.datastructures import URL
 
 from .settings import settings
+
+if TYPE_CHECKING:
+    from fastapi import APIRouter, Request
 
 
 def absolute_url_for(request: Request, __name: str, **path_params: Any) -> URL:
