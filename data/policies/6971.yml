@@ -49,4 +49,14 @@ division_links:
   status: active
   notes: ''
   decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2022-06-14
+    division_number: 13
+    key: commons-2022-06-14-13
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
 agreement_links: []

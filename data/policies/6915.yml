@@ -230,4 +230,24 @@ division_links:
   status: active
   notes: ''
   decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2023-06-12
+    division_number: 251
+    key: commons-2023-06-12-251
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2022-10-18
+    division_number: 64
+    key: commons-2022-10-18-64
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
 agreement_links: []

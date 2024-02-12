@@ -1,5 +1,5 @@
 id: 6731
-name: Trade Union Regulation
+name: Stricter Trade Union Regulation
 context_description: more restrictive <b>regulation of trade union activity</b>
 policy_description: There have been votes in Parliament on the way trade unions are
   regulated, including on the law related to industrial action and strike ballots.
@@ -132,6 +132,66 @@ division_links:
     chamber_slug: commons
     date: 2022-01-26
     division_number: 177
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2022-07-11
+    division_number: 33
+    key: commons-2022-07-11-33
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2023-01-30
+    division_number: 166
+    key: commons-2023-01-30-166
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2023-11-28
+    division_number: 9
+    key: commons-2023-11-28-9
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2023-11-28
+    division_number: 10
+    key: commons-2023-11-28-10
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2023-11-28
+    division_number: 11
+    key: commons-2023-11-28-11
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2023-11-29
+    division_number: 12
+    key: commons-2023-11-29-12
   alignment: agree
   strength: strong
   status: active

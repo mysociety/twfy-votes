@@ -93,4 +93,14 @@ division_links:
   status: active
   notes: ''
   decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2023-05-24
+    division_number: 243
+    key: commons-2023-05-24-243
+  alignment: against
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
 agreement_links: []

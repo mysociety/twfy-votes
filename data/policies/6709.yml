@@ -571,4 +571,24 @@ division_links:
   status: active
   notes: ''
   decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2022-12-14
+    division_number: 132
+    key: commons-2022-12-14-132
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2023-10-17
+    division_number: 328
+    key: commons-2023-10-17-328
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
 agreement_links: []
