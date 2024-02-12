@@ -9,6 +9,10 @@ homepage = "https://github.com/mysociety/twfy-votes"
 repository = "https://github.com/mysociety/twfy-votes"
 include = ["LICENSE.md"]
 
+[tool.poetry.scripts]
+votes = "twfy_votes.__main__:app"
+
+
 [tool.poetry_bumpversion.file."src/twfy_votes/__init__.py"]
 
 [tool.ruff]
