@@ -63,7 +63,7 @@ division_links:
   alignment: agree
   strength: strong
   status: active
-  notes: 'ignore:strong_without_power'
+  notes: ignore:strong_without_power
   decision_type: division
 - decision:
     chamber_slug: commons
@@ -90,7 +90,7 @@ division_links:
   alignment: agree
   strength: strong
   status: active
-  notes: 'ignore:strong_without_power'
+  notes: ignore:strong_without_power
   decision_type: division
 - decision:
     chamber_slug: commons
@@ -99,7 +99,7 @@ division_links:
   alignment: against
   strength: strong
   status: active
-  notes: 'ignore:strong_without_power'
+  notes: ignore:strong_without_power
   decision_type: division
 - decision:
     chamber_slug: commons
@@ -108,6 +108,6 @@ division_links:
   alignment: agree
   strength: strong
   status: active
-  notes: 'ignore:strong_without_power'
+  notes: ignore:strong_without_power
   decision_type: division
 agreement_links: []
