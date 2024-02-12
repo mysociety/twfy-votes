@@ -36,11 +36,11 @@ def create_new_policy(
 
     # Giving a healthy range to existing PW policies (generally less than 10000)
     starting_value = {
-        AllowedChambers.COMMONS: 20000,
-        AllowedChambers.LORDS: 30000,
-        AllowedChambers.WALES: 40000,
-        AllowedChambers.SCOTLAND: 50000,
-        AllowedChambers.NI: 60000,
+        AllowedChambers.COMMONS: 20001,
+        AllowedChambers.LORDS: 30001,
+        AllowedChambers.WALES: 40001,
+        AllowedChambers.SCOTLAND: 50001,
+        AllowedChambers.NI: 60001,
     }
 
     policy_id = starting_value[chamber]
