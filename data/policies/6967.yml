@@ -1,9 +1,10 @@
 id: 6967
 name: Access to Abortion
 context_description: fewer obstacles for <b>access to abortion</b>
-policy_description: There have been votes in Parliament on the circumstances in which
-  abortion should be legal, on restricting protests outside abortion clinics, on controlling
-  access to abortion and on access to abortion in Northern Ireland.
+policy_description: |
+  There have been votes in Parliament on the circumstances in which abortion should be legal,
+  protecting access by banning harassment and protests outside abortion clinics,
+  on controlling access to abortion, and on access to abortion in Northern Ireland.
 notes: ''
 status: candidate
 strength_meaning: classic
@@ -133,6 +134,26 @@ division_links:
     chamber_slug: commons
     date: 2022-03-30
     division_number: 237
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2022-10-18
+    division_number: 62
+    key: commons-2022-10-18-62
+  alignment: agree
+  strength: strong
+  status: active
+  notes: ''
+  decision_type: division
+- decision:
+    chamber_slug: commons
+    date: 2023-03-07
+    division_number: 185
+    key: commons-2023-03-07-185
   alignment: agree
   strength: strong
   status: active
