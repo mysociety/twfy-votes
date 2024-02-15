@@ -1,3 +1,4 @@
+import shutil
 from pathlib import Path
 from typing import Any
 
@@ -70,8 +71,25 @@ async def get_new_gids(run_all: bool = False) -> list[str]:
     return combined_gids
 
 
-async def update_motion_yaml(specific_gid: str | None = None, run_all: bool = False):
-    collection = MotionCollection.from_path(Path("data", "processed", "motions.yaml"))
+async def update_motion_yaml(
+    specific_gid: str | None = None, run_all: bool = False, updated_stored: bool = False
+):
+    stored_path = Path("data", "processed", "motions.yaml")
+    cached_path = Path("data", "cached", "motions.yaml")
+
+    if settings.twfy_api_key == "":
+        print("No TWFY API key set, skipping motion update")
+        return
+
+    if cached_path.exists() is False:
+        # copy from stored path
+        shutil.copy(stored_path, cached_path)
+
+    # if stored_path is larger than cached_path, copy from stored path
+    if stored_path.stat().st_size > cached_path.stat().st_size:
+        shutil.copy(stored_path, cached_path)
+
+    collection = MotionCollection.from_path(cached_path)
     if specific_gid:
         reduced_gids = [specific_gid]
         collection.items = [x for x in collection.items if x.gid != specific_gid]
@@ -93,7 +111,10 @@ async def update_motion_yaml(specific_gid: str | None = None, run_all: bool = Fa
 
     # sort collection.items by gid
     collection.items = sorted(collection.items, key=lambda x: x.gid)
-    collection.to_path(Path("data", "processed", "motions.yaml"))
+    collection.to_path(cached_path)
+
+    if updated_stored:
+        shutil.copy(cached_path, stored_path)
 
 
 class APIError(Exception):

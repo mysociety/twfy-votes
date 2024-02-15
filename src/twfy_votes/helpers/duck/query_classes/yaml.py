@@ -22,8 +22,12 @@ class YamlData(Generic[T]):
     @classmethod
     def get_data_solo(cls) -> list[dict[str, Any]]:
         yaml = YAML(typ="safe")
-        yaml_data = yaml.load(cls.yaml_source)
+        yaml_data = yaml.load(cls._get_yaml_source())
         return yaml_data
+
+    @classmethod
+    def _get_yaml_source(cls) -> Path:
+        return cls.yaml_source
 
     @classmethod
     def get_validation_class(cls) -> Type[T]:

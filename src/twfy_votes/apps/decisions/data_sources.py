@@ -44,13 +44,21 @@ class pw_agreements(YamlData[PartialAgreement]):
 
 @duck.as_python_source
 class vote_motions(YamlData[VoteMotionAnalysis]):
-    yaml_source = Path("data", "processed", "motions.yaml")
+    yaml_source = Path("data", "cached", "motions.yaml")
+    alt_yaml_source = Path("data", "processed", "motions.yaml")
     validation_model = VoteMotionAnalysis
+
+    @classmethod
+    def _get_yaml_source(cls) -> Path:
+        if cls.yaml_source.exists():
+            return cls.yaml_source
+        else:
+            return cls.alt_yaml_source
 
     @classmethod
     def get_data_solo(cls) -> list[dict[str, Any]]:
         data: dict[str, list[dict[str, Any]]] = super().get_data_solo()  # type: ignore
-        return data["items"]
+        return data.get("items", [])
 
 
 @duck.as_view
