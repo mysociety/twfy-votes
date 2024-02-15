@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, ClassVar, Generic, TypeVar, cast, overload
+from typing import TYPE_CHECKING, Any, ClassVar, Generic, Type, TypeVar, cast, overload
 
 import pandas as pd
 from pydantic import Field, computed_field
@@ -31,6 +31,12 @@ from .queries import (
     PolicyDistributionPersonQuery,
     PolicyDistributionQuery,
     PolicyIdQuery,
+)
+from .scoring import (
+    PublicWhipScore,
+    ScoreFloatPair,
+    ScoringFuncProtocol,
+    SimplifiedScore,
 )
 
 PartialDecisionType = TypeVar("PartialDecisionType", PartialAgreement, PartialDivision)
@@ -544,60 +550,41 @@ class VoteDistribution(BaseModel):
             case _:
                 raise ValueError("Score must be between 0 and 1")
 
-    def score_classic(self):
-        """
-        Just run the classic public whip score calculation
-        """
-        from .analysis import public_whip_score_difference
-
-        score = public_whip_score_difference(
-            num_votes_same=self.num_votes_same,
-            num_strong_votes_same=self.num_strong_votes_same,
-            num_votes_different=self.num_votes_different,
-            num_strong_votes_different=self.num_strong_votes_different,
-            num_votes_absent=self.num_votes_absent,
-            num_strong_votes_absent=self.num_strong_votes_absent,
-            num_strong_votes_abstain=self.num_strong_votes_abstain,
-            num_votes_abstain=self.num_votes_abstain,
-            num_agreements_different=self.num_agreements_different,
-            num_agreements_same=self.num_agreements_same,
-            num_strong_agreements_different=self.num_strong_agreements_different,
-            num_strong_agreements_same=self.num_strong_agreements_same,
+    def score_against_function(self, score_cls: Type[ScoringFuncProtocol]):
+        return score_cls.score(
+            votes_same=ScoreFloatPair(
+                weak=self.num_votes_same, strong=self.num_strong_votes_same
+            ),
+            votes_different=ScoreFloatPair(
+                weak=self.num_votes_different, strong=self.num_strong_votes_different
+            ),
+            votes_absent=ScoreFloatPair(
+                weak=self.num_votes_absent, strong=self.num_strong_votes_absent
+            ),
+            votes_abstain=ScoreFloatPair(
+                weak=self.num_votes_abstain, strong=self.num_strong_votes_abstain
+            ),
+            agreements_same=ScoreFloatPair(
+                weak=self.num_agreements_same, strong=self.num_strong_agreements_same
+            ),
+            agreements_different=ScoreFloatPair(
+                weak=self.num_agreements_different,
+                strong=self.num_strong_agreements_different,
+            ),
         )
+
+    def score(self, strength_meaning: StrengthMeaning):
+        match strength_meaning:
+            case StrengthMeaning.CLASSIC:
+                score = self.score_against_function(PublicWhipScore)
+            case StrengthMeaning.SIMPLIFIED:
+                score = self.score_against_function(SimplifiedScore)
 
         self.distance_score = score
         if self.distance_score == -1:
             self.similarity_score = -1
         else:
             self.similarity_score = 1.0 - score
-
-    def score_simplifed(self):
-        from .analysis import simplified_score_difference
-
-        score = simplified_score_difference(
-            num_votes_same=self.num_votes_same,
-            num_strong_votes_same=self.num_strong_votes_same,
-            num_votes_different=self.num_votes_different,
-            num_strong_votes_different=self.num_strong_votes_different,
-            num_votes_absent=self.num_votes_absent,
-            num_strong_votes_absent=self.num_strong_votes_absent,
-            num_strong_votes_abstain=self.num_strong_votes_abstain,
-            num_votes_abstain=self.num_votes_abstain,
-            num_agreements_different=self.num_agreements_different,
-            num_agreements_same=self.num_agreements_same,
-            num_strong_agreements_different=self.num_strong_agreements_different,
-            num_strong_agreements_same=self.num_strong_agreements_same,
-        )
-
-        self.distance_score = score
-        self.similarity_score = 1.0 - score
-
-    def score(self, strength_meaning: StrengthMeaning):
-        match StrengthMeaning(strength_meaning):
-            case StrengthMeaning.CLASSIC:
-                self.score_classic()
-            case StrengthMeaning.SIMPLIFIED:
-                self.score_simplifed()
 
         return self
 
