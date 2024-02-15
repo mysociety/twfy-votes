@@ -96,9 +96,11 @@ async def update():
         create_commons_cluster,
         process_cached_tables,
     )
+    from .apps.decisions.motion_analysis import update_motion_yaml
 
     await process_cached_tables()
     await create_commons_cluster()
+    await update_motion_yaml()
 
 
 @app.command()
@@ -106,15 +108,12 @@ async def update():
 @load_db
 async def update_motions_info(gid: Optional[str] = None, all: bool = False):
     """
-    Create the cached tables that are used in views
-    and are a bit too expensive to run on the fly.
-    Roughly needs to be run each time the data is updated.
-
+    Update the motion info from the API and store in repo.
     Specific a specifc gid to refetch that one.
     """
     from .apps.decisions.motion_analysis import update_motion_yaml
 
-    await update_motion_yaml(specific_gid=gid, run_all=all)
+    await update_motion_yaml(specific_gid=gid, run_all=all, updated_stored=True)
 
 
 @app.command()
