@@ -411,8 +411,8 @@ async def validate_approach(
 
     di = df.set_index("is_target").to_dict("index")
     fast_approach = PolicyComparison(
-        target_distribution=Score.model_validate(di[1]),
-        other_distribution=Score.model_validate(di[0]),
+        target_distribution=(td := Score.model_validate(di[1])),
+        other_distribution=Score.model_validate(di.get(0, td)),
     )
 
     # get slow approach
