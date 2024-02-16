@@ -2,7 +2,17 @@
 
 set -e
 
+# Get environment variables, if they exist.
+ENV_FILE=${ENV_FILE:-conf/env.sh}
+if [ -f "$ENV_FILE" ]; then
+  echo "==> Loading environment from ${ENV_FILE}"
+  source $ENV_FILE
+fi
+
+# Check this exists with a default, in case env file didn't load
+TWFY_API_KEY=${TWFY_API_KEY:-""}
+
 cd "$(dirname "$0")/.."
 echo "==> Building twfy-votes..."
 docker pull python:3.10-bullseye
-docker build -t twfy-votes:latest .
+docker build -t twfy-votes:latest --build-arg TWFY_API_KEY=${TWFY_API_KEY} .

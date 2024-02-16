@@ -1,5 +1,6 @@
 FROM python:3.10-bullseye
 
+ARG TWFY_API_KEY=""
 ENV DEBIAN_FRONTEND noninteractive
 COPY pyproject.toml poetry.loc[k] /
 RUN curl -sSL https://install.python-poetry.org | python - && \
@@ -15,5 +16,6 @@ WORKDIR /workspaces/twfy-votes
 ENV SERVER_PRODUCTION=true
 ENV PORT=8080
 ENV PATH="/root/.local/bin:${PATH}"
+ENV TWFY_API_KEY=${TWFY_API_KEY}
 RUN python -m twfy_votes update
 CMD ["python", "-m", "twfy_votes" ,"run-server", "--live"]
