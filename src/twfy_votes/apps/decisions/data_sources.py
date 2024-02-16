@@ -97,22 +97,83 @@ class party_lookup:
     source = raw_data / "party_lookup.csv"
 
 
+@duck.as_table
+class pd_people_source:
+    source = politician_data / "person_alternative_names.parquet"
+
+
+@duck.as_view
+class pd_people_non_unique:
+    """
+    Reconstruct the people table to tidy up where
+    names are stored in different columns for lords.
+    """
+
+    query = """
+    SELECT
+        * exclude (person_id),
+        case
+            when family_name is null then lordname
+            else family_name
+        end as last_name,
+        split(person_id, '/')[-1] as person_id,
+        case
+        when honorific_prefix is null then
+            concat(given_name, ' ', last_name)
+        else
+            concat(given_name, ' ', last_name, ' (', honorific_prefix, ')')
+        end as nice_name,
+        ROW_NUMBER() OVER (PARTITION BY person_id) as row_number
+    FROM
+        pd_people_source
+    WHERE
+        note = 'Main'
+    """
+
+
+@duck.as_view
+class pd_people:
+    query = """
+    SELECT
+    *
+    FROM
+        pd_people_non_unique
+    WHERE
+        row_number = 1
+    """
+
+
 @duck.as_source
 class source_pw_mp:
-    source = public_whip / "pw_mp.parquet"
+    source = politician_data / "simple_memberships.parquet"
 
 
 @duck.as_table
 class pw_mp:
+    """
+    This is replicating the structure of the pw_mp table from public whip
+    from twfy sources.
+
+    In principle some of the renaming could now be avoided with changing references internally.
+
+    e.g. consistency on 'chamber' rather than house.
+    """
+
     query = """
     select
-    source_pw_mp.* exclude(party),
-    case when twfy_party_slug is null then party else twfy_party_slug end as party,
-     from 
+    CAST(split(source_pw_mp.membership_id, '/')[-1] as BIGINT) as mp_id,
+    constituency as constituency,
+    CAST(split(source_pw_mp.person_id, '/')[-1] as BIGINT) as person,
+    source_pw_mp.start_date as entered_house,
+    source_pw_mp.end_date as left_house,
+    source_pw_mp.chamber as house,
+    source_pw_mp.party as party,
+    pd_people.given_name as first_name,
+    pd_people.last_name as last_name,
+    pd_people.nice_name as nice_name,
+    from 
         source_pw_mp
-    left join party_lookup on (
-        source_pw_mp.party = party_lookup.pw_party_slug
-    )
+    left join pd_people on (source_pw_mp.person_id = pd_people.person_id)
 """
 
 
@@ -221,52 +282,6 @@ class pw_division:
         (source_pw_division.division_date between pd_member_counts.start_date and
         pd_member_counts.end_date and
         source_pw_division.house = pd_member_counts.chamber)
-    """
-
-
-@duck.as_table
-class pd_people_source:
-    source = politician_data / "person_alternative_names.parquet"
-
-
-@duck.as_view
-class pd_people_non_unique:
-    """
-    Reconstruct the people table to tidy up where
-    names are stored in different columns for lords.
-    """
-
-    query = """
-    SELECT
-        * exclude (person_id),
-        case
-            when family_name is null then lordname
-            else family_name
-        end as last_name,
-        split(person_id, '/')[-1] as person_id,
-        case
-        when honorific_prefix is null then
-            concat(given_name, ' ', last_name)
-        else
-            concat(given_name, ' ', last_name, ' (', honorific_prefix, ')')
-        end as nice_name,
-        ROW_NUMBER() OVER (PARTITION BY person_id) as row_number
-    FROM
-        pd_people_source
-    WHERE
-        note = 'Main'
-    """
-
-
-@duck.as_view
-class pd_people:
-    query = """
-    SELECT
-    *
-    FROM
-        pd_people_non_unique
-    WHERE
-        row_number = 1
     """
 
 

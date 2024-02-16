@@ -307,18 +307,15 @@ pw_manual_motions:
   manual_motion: VARCHAR
 pw_mp:
   mp_id: BIGINT
-  first_name: VARCHAR
-  last_name: VARCHAR
-  title: VARCHAR
   constituency: VARCHAR
+  person: BIGINT
   entered_house: VARCHAR
   left_house: VARCHAR
-  entered_reason: VARCHAR
-  left_reason: VARCHAR
-  person: BIGINT
   house: VARCHAR
-  gid: VARCHAR
   party: VARCHAR
+  first_name: VARCHAR
+  last_name: VARCHAR
+  nice_name: VARCHAR
 pw_vote:
   division_id: BIGINT
   mp_id: BIGINT
@@ -372,19 +369,17 @@ source_pw_division:
   house: VARCHAR
   clock_time: VARCHAR
 source_pw_mp:
-  mp_id: BIGINT
-  first_name: VARCHAR
-  last_name: VARCHAR
-  title: VARCHAR
+  membership_id: VARCHAR
+  person_id: VARCHAR
   constituency: VARCHAR
+  start_date: VARCHAR
+  end_date: VARCHAR
+  start_reason: VARCHAR
+  end_reason: VARCHAR
   party: VARCHAR
-  entered_house: VARCHAR
-  left_house: VARCHAR
-  entered_reason: VARCHAR
-  left_reason: VARCHAR
-  person: BIGINT
-  house: VARCHAR
-  gid: VARCHAR
+  chamber: VARCHAR
+  label: VARCHAR
+  role: VARCHAR
 source_pw_vote:
   division_id: BIGINT
   mp_id: BIGINT
