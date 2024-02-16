@@ -27,6 +27,7 @@ async def reload_database():
         create_commons_cluster,
         process_cached_tables,
     )
+    from ..decisions.motion_analysis import update_motion_yaml
 
     duck_core.loading_status = duck_core.LoadingStatus.CREATING_CACHE
 
@@ -40,8 +41,8 @@ async def reload_database():
     # recreate cached tables
     await process_cached_tables(reload_core)
     await create_commons_cluster(reload_core)
+    await update_motion_yaml(duck_manager=reload_core)
     await reload_core.close()
-
     # reload source files into current core - as cached tables will have updated
     await duck_core.get_loaded_core(data_sources)
 
