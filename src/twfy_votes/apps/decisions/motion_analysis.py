@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 from pydantic import BaseModel
 
 from ...helpers.data.models import StashableBase
+from ...helpers.duck.core import AsyncDuckDBManager
 from ...internal.db import duck_core
 from ...internal.settings import settings
 from .models import VoteMotionAnalysis, VoteType
@@ -28,8 +29,10 @@ def gids_from_df(df: pd.DataFrame) -> pd.DataFrame:
     return gids
 
 
-async def get_new_gids(run_all: bool = False) -> list[str]:
-    duck = await duck_core.child_query()
+async def get_new_gids(
+    run_all: bool = False, duck_manager: AsyncDuckDBManager = duck_core
+) -> list[str]:
+    duck = await duck_manager.child_query()
 
     query = """
     select * from policy_votes_with_id
@@ -72,7 +75,10 @@ async def get_new_gids(run_all: bool = False) -> list[str]:
 
 
 async def update_motion_yaml(
-    specific_gid: str | None = None, run_all: bool = False, updated_stored: bool = False
+    specific_gid: str | None = None,
+    run_all: bool = False,
+    updated_stored: bool = False,
+    duck_manager: AsyncDuckDBManager = duck_core,
 ):
     stored_path = Path("data", "processed", "motions.yaml")
     cached_path = Path("data", "cached", "motions.yaml")
@@ -94,7 +100,7 @@ async def update_motion_yaml(
         reduced_gids = [specific_gid]
         collection.items = [x for x in collection.items if x.gid != specific_gid]
     else:
-        reduced_gids = await get_new_gids(run_all=run_all)
+        reduced_gids = await get_new_gids(run_all=run_all, duck_manager=duck_manager)
 
     twfy = TWFYMotionProcessor()
     # sort reduced_gids
