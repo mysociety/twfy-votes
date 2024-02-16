@@ -92,10 +92,7 @@ PythonDataSource = TypeVar(
 
 @runtime_checkable
 class DuckView(Protocol):
-    @property
-    @classmethod
-    def query(cls) -> str:
-        ...
+    query: str
 
 
 @runtime_checkable
@@ -125,10 +122,7 @@ BaseModelLikeType = TypeVar("BaseModelLikeType", bound=BaseModelLike)
 
 @runtime_checkable
 class SourceView(Protocol):
-    @classmethod
-    @property
-    def source(cls) -> FileSourceType:
-        ...
+    source: FileSourceType
 
 
 @runtime_checkable

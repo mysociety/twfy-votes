@@ -52,6 +52,8 @@ from .types import (
     PythonDataSource,
     PythonDataSourceCallableProtocol,
     QueryToCache,
+    SourceView,
+    SourceViewInstance,
     SourceViewType,
 )
 from .url import DuckUrl
@@ -129,13 +131,13 @@ class DuckQuery:
 
         return complex_query
 
-    def as_table_macro(self, item: DuckMacro):
+    def as_table_macro(self, item: Type[DuckMacro]):
         """
         Decorator to store a macro as part of a longer running query
         """
         return self.as_macro(item, table=True)
 
-    def as_macro(self, item: DuckMacro, table: bool = False) -> DuckMacro:
+    def as_macro(self, item: Type[DuckMacro], table: bool = False) -> Type[DuckMacro]:
         name = get_name(item)
 
         args = getattr(item, "args", None)
@@ -174,7 +176,9 @@ class DuckQuery:
 
         return item
 
-    def as_source(self, item: SourceViewType, to_table: bool = False) -> SourceViewType:
+    def as_source(
+        self, item: Type[SourceViewType], to_table: bool = False
+    ) -> Type[SourceViewType]:
         """
         Decorator to store a source as part of a longer running query
         """
@@ -201,7 +205,9 @@ class DuckQuery:
         self.queries.append(query)
         return item
 
-    def as_view(self, item: DuckViewType, as_table: bool = False) -> DuckViewType:
+    def as_view(
+        self, item: Type[DuckViewType], as_table: bool = False
+    ) -> Type[DuckViewType]:
         """
         Decorator to stash a view as part of a longer running query
         """
@@ -235,15 +241,18 @@ class DuckQuery:
 
         return item
 
-    def as_table(self, item: DuckorSourceViewType) -> DuckorSourceViewType:
+    def as_table(self, item: Type[DuckorSourceViewType]) -> Type[DuckorSourceViewType]:
         """
         Decorator to convert something implementing SourceView to a DuckResponse
         """
-        if isinstance(item, DuckView):
+        if isinstance(item, DuckView | DuckViewInstance):
             return self.as_view(item, as_table=True)
-        return self.as_source(item, to_table=True)
+        elif isinstance(item, SourceView | SourceViewInstance):
+            return self.as_source(item, to_table=True)
+        else:
+            raise ValueError("Can only use as_table on a DuckView or SourceView")
 
-    def as_cached_table(self, item: DuckView):
+    def as_cached_table(self, item: Type[DuckView]):
         """
         Decorator to highlight a query should be cached by the update function
 
