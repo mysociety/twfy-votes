@@ -149,7 +149,10 @@ async def validate_voting_records(
     """
     from .apps.policies.vr_validator import test_policy_sample
 
-    await test_policy_sample(sample_size, policy_id)
+    has_errors = await test_policy_sample(sample_size, policy_id)
+
+    if has_errors:
+        raise ValueError("Validation failed")
 
 
 @app.command()
