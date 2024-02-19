@@ -18,43 +18,33 @@ division_links:
     division_number: 104
   alignment: against
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2015-11-02
     division_number: 105
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2015-11-02
     division_number: 106
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2016-01-12
     division_number: 160
   alignment: against
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2016-01-12
     division_number: 163
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 agreement_links: []

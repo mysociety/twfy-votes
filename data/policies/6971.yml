@@ -19,36 +19,28 @@ division_links:
     division_number: 163
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2018-07-11
     division_number: 207
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2021-11-03
     division_number: 99
   alignment: against
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2021-11-30
     division_number: 125
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2022-06-14
@@ -56,7 +48,5 @@ division_links:
     key: commons-2022-06-14-13
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 agreement_links: []

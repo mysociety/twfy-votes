@@ -20,16 +20,12 @@ division_links:
     division_number: 194
   alignment: against
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2022-03-28
     division_number: 232
   alignment: against
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 agreement_links: []

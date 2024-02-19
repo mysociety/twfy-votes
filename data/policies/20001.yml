@@ -19,9 +19,7 @@ division_links:
     key: commons-2023-06-19-258
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2021-11-03
@@ -29,9 +27,7 @@ division_links:
     key: commons-2021-11-03-99
   alignment: against
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2023-06-06
@@ -39,9 +35,7 @@ division_links:
     key: commons-2023-06-06-245
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 agreement_links:
 - decision:
     chamber_slug: commons
@@ -52,9 +46,7 @@ agreement_links:
     source_gid: uk.org.publicwhip/debate/2023-10-25c.936.7
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: agreement
 - decision:
     chamber_slug: commons
     date: 2021-11-16
@@ -64,6 +56,4 @@ agreement_links:
     source_gid: uk.org.publicwhip/debate/2021-11-16d.489.1
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: agreement

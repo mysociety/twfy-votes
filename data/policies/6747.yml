@@ -17,25 +17,19 @@ division_links:
     division_number: 74
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2016-01-19
     division_number: 167
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2016-06-15
     division_number: 20
   alignment: agree
   strength: weak
-  status: active
   notes: ''
-  decision_type: division
 agreement_links: []

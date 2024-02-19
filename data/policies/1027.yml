@@ -18,115 +18,89 @@ division_links:
     division_number: 112
   alignment: agree
   strength: weak
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2008-03-05
     division_number: 117
   alignment: agree
   strength: weak
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2008-03-05
     division_number: 118
   alignment: agree
   strength: weak
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2011-02-01
     division_number: 186
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2011-10-24
     division_number: 372
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2013-05-15
     division_number: 3
   alignment: agree
   strength: weak
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2013-07-05
     division_number: 45
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2013-11-22
     division_number: 134
   alignment: agree
   strength: weak
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2014-10-17
     division_number: 58
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2015-06-09
     division_number: 5
   alignment: against
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2015-06-09
     division_number: 6
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2015-09-07
     division_number: 61
   alignment: agree
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2016-02-29
     division_number: 201
   alignment: agree
   strength: weak
-  status: active
   notes: ''
-  decision_type: division
 agreement_links: []
