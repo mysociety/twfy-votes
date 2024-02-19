@@ -19,16 +19,12 @@ division_links:
     division_number: 188
   alignment: against
   strength: strong
-  status: active
   notes: ''
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2011-02-02
     division_number: 189
   alignment: agree
   strength: weak
-  status: active
   notes: ''
-  decision_type: division
 agreement_links: []

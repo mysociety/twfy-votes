@@ -19,25 +19,19 @@ division_links:
     division_number: 53
   alignment: agree
   strength: strong
-  status: active
   notes: ignore:strong_without_power
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2015-12-02
     division_number: 138
   alignment: against
   strength: strong
-  status: active
   notes: ignore:strong_without_power
-  decision_type: division
 - decision:
     chamber_slug: commons
     date: 2015-12-02
     division_number: 139
   alignment: agree
   strength: strong
-  status: active
   notes: ignore:strong_without_power
-  decision_type: division
 agreement_links: []

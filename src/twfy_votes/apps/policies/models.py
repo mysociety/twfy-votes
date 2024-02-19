@@ -134,11 +134,6 @@ class PolicyStatus(StrEnum):
     RETIRED = "retired"
 
 
-class LinkStatus(StrEnum):
-    ACTIVE = "active"
-    DRAFT = "draft"
-
-
 class DecisionType(StrEnum):
     DIVISION = "division"
     AGREEMENT = "agreement"
@@ -148,11 +143,8 @@ class PartialPolicyDecisionLink(BaseModel, Generic[PartialDecisionType]):
     decision: PartialDecisionType
     alignment: PolicyDirection
     strength: PolicyStrength = PolicyStrength.WEAK
-    status: LinkStatus = LinkStatus.ACTIVE
     notes: str = ""
 
-    @computed_field
-    @property
     def decision_type(self) -> str:
         match self.decision:
             case PartialDivision():
@@ -172,7 +164,6 @@ class PolicyDecisionLink(BaseModel, Generic[InfoType]):
     decision: InfoType
     alignment: PolicyDirection
     strength: PolicyStrength = PolicyStrength.WEAK
-    status: LinkStatus = LinkStatus.ACTIVE
     notes: str = ""
 
     @computed_field
@@ -210,7 +201,7 @@ class PolicyDecisionLink(BaseModel, Generic[InfoType]):
         # get first type of decision
         decisions = [x.decision for x in partials]
 
-        decision_types = [x.decision_type for x in partials]
+        decision_types = [x.decision_type() for x in partials]
         decision_type = DecisionType(decision_types[0])
 
         if len(set(decision_types)) != 1:
@@ -231,7 +222,6 @@ class PolicyDecisionLink(BaseModel, Generic[InfoType]):
                             decision=decision,
                             alignment=partial.alignment,
                             strength=partial.strength,
-                            status=partial.status,
                             notes=partial.notes,
                         )
                     )
@@ -243,7 +233,6 @@ class PolicyDecisionLink(BaseModel, Generic[InfoType]):
                             decision=decision,
                             alignment=partial.alignment,
                             strength=partial.strength,
-                            status=partial.status,
                             notes=partial.notes,
                         )
                     )
@@ -421,7 +410,7 @@ class Policy(PolicyBase):
         # sort inverse by month
         df = df.sort_values("month", ascending=False)
 
-        banned_columns = ["notes", "status"]
+        banned_columns = ["notes"]
         df = df.drop(columns=banned_columns).sort_values("strength")
         return style_df(df=df)
 
