@@ -23,3 +23,11 @@ async def test_policy_issues(client: TestClient):
     assert (
         any([x.has_issues() for x in reports]) is False
     ), "A policy has issues! Use report view for more info"
+
+
+def test_voting_records_up_to_date():
+    from twfy_votes.apps.policies.vr_generator import check_policy_hash
+
+    assert (
+        check_policy_hash() is True
+    ), "Voting records have not been recalcuated after an update"
