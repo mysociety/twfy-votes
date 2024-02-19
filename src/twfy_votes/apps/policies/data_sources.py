@@ -117,12 +117,12 @@ class policy_agreement_count:
             (
                 SELECT
                     policy_agreements.*,
-                    person as person_id
+                    person_id
                 FROM
                     policy_agreements
                 JOIN
-                    pw_mp
-                        on division_date between pw_mp.entered_house and pw_mp.left_house
+                    pd_memberships
+                        on division_date between pd_memberships.start_date and pd_memberships.end_date
             )
         GROUP BY
             all
@@ -149,7 +149,7 @@ class policy_votes_with_id:
         pw_division
     on(
         policy_votes.division_date = pw_division.division_date
-        and policy_votes.chamber = pw_division.house
+        and policy_votes.chamber = pw_division.chamber
         and policy_votes.division_number = pw_division.division_number
     )
     
@@ -167,14 +167,17 @@ class pw_vote_with_absences:
     query = """
     select distinct
         pw_division.division_id,
-        pw_mp.mp_id,
+        pdm.membership_id as membership_id,
         case when vote is null then 'absent' else get_effective_vote(vote) end as vote
     from
         pw_division
     join
-        pw_mp on (pw_division.division_date between pw_mp.entered_house and pw_mp.left_house and pw_division.house = pw_mp.house)
+        pd_memberships as pdm on
+            (pw_division.division_date between pdm.start_date
+             and pdm.end_date
+             and pw_division.chamber = pdm.chamber)
     left join
-        pw_vote on (pw_vote.division_id = pw_division.division_id and pw_vote.mp_id = pw_mp.mp_id)
+        pw_vote on (pw_vote.division_id = pw_division.division_id and pw_vote.membership_id = pdm.membership_id)
     """
 
 
@@ -187,15 +190,13 @@ class target_memberships:
     args = ["_person_id", "_chamber_slug"]
     macro = """
     select
-        person as person_id,
-        mp_id as membership_id,
         get_effective_party(party) as membership_party,
-        * exclude (mp_id, party)
+        * exclude (party)
     from
-        pw_mp
+        pd_memberships
     where
-    person = {{ _person_id }} and
-    house = {{ _chamber_slug }}
+        person_id = {{ _person_id }} and
+        chamber = {{ _chamber_slug }}
     """
 
 
@@ -209,8 +210,8 @@ class policy_alignment:
     macro = """
     SELECT
         policy_id,
-        pw_mp.person as person_id,
-        case pw_mp.person when {{ _person_id }} then 1 else 0 end as is_target,
+        pdm.person_id as person_id,
+        case pdm.person_id when {{ _person_id }} then 1 else 0 end as is_target,
         strong_int,
         -- alignment,
         policy_votes.division_id as division_id,
@@ -222,7 +223,7 @@ class policy_alignment:
         case (pw_vote.vote, alignment) when ('aye', 'against') then 1 when ('no', 'agree') then 1 else 0 end as answer_disagreed,
         case when mp_vote = 'abstention' then 1 else 0 end as abstained,
         case when mp_vote = 'absent' then 1 else 0 end as absent,
-        -- unique_rows((policy_id, policy_votes.division_id, pw_mp.person)) AS dupe_count
+        -- unique_rows((policy_id, policy_votes.division_id, pdm.person_id)) AS dupe_count
     FROM
         policy_votes_with_id as policy_votes
     join
@@ -231,19 +232,19 @@ class policy_alignment:
         pw_division on (policy_votes.division_id = pw_division.division_id)
     join
         target_memberships({{ _person_id}}, {{ _chamber_slug }}) as target_memberships
-            on policy_votes.division_date between target_memberships.entered_house and target_memberships.left_house
+            on policy_votes.division_date between target_memberships.start_date and target_memberships.end_date
     join
         pw_vote_with_absences as pw_vote on (policy_votes.division_id = pw_vote.division_id)
     join
-        pw_mp using (mp_id)
+        pd_memberships as pdm on (pw_vote.membership_id = pdm.membership_id)
     where
         policy_votes.alignment != 'neutral'
         and policy_votes.chamber = {{ _chamber_slug }}
         and policies.chamber = {{ _chamber_slug }}
         and ( -- here we want either the persons own divisions, or the divisions of the party they are in.
-            pw_mp.person = {{ _person_id }}
+            pdm.person_id = {{ _person_id }}
             or
-            party = {{ _party_id }}
+            pdm.party_reduced = {{ _party_id }}
             )
     """
 
@@ -295,15 +296,15 @@ class pw_comparison_party:
 
     query = """
         select
-        house as chamber,
-        person as person_id,
+        chamber,
+        person_id,
         CASE
         WHEN person_id IN (10172, 14031, 25873) THEN
-            get_effective_party(last(party order by entered_house))
+            get_effective_party(last(party order by pdm.start_date))
         ELSE
-        get_effective_party(first(party order by entered_house))
+        get_effective_party(first(party order by pdm.end_date))
         END 
         as comparison_party
-        from pw_mp
-        group by person_id, house    
+        from pd_memberships as pdm
+        group by person_id, chamber    
     """

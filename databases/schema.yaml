@@ -1,23 +1,24 @@
 # This is an automatically generated file on database load to reflect changes in tables
 cm_agreement_present:
   key: VARCHAR
-  mp_id: BIGINT
+  membership_id: BIGINT
   chamber_slug: VARCHAR
   vote: VARCHAR
   person__first_name: VARCHAR
   person__last_name: VARCHAR
   person__nice_name: VARCHAR
   person__party: VARCHAR
-  membership_id: BIGINT
   person__person_id: BIGINT
 cm_votes_with_people:
   division_id: BIGINT
-  mp_id: BIGINT
+  membership_id: BIGINT
   vote: VARCHAR
   effective_vote: VARCHAR
-  person_id: VARCHAR
+  person_id: BIGINT
+  party: VARCHAR
   party_name: VARCHAR
-  party_name_reduced: VARCHAR
+  party_reduced: VARCHAR
+  party_reduced_name: VARCHAR
   given_name: VARCHAR
   last_name: VARCHAR
   nice_name: VARCHAR
@@ -40,6 +41,18 @@ government_parties_unnest_parties:
   end_date: DATE
   party: VARCHAR
   is_gov: BOOLEAN
+memberships_adjusted:
+  membership_id: BIGINT
+  constituency: VARCHAR
+  person_id: BIGINT
+  start_date: VARCHAR
+  end_date: VARCHAR
+  chamber: VARCHAR
+  party: VARCHAR
+  party_reduced: VARCHAR
+  first_name: VARCHAR
+  last_name: VARCHAR
+  nice_name: VARCHAR
 party_lookup:
   pw_party_slug: VARCHAR
   twfy_party_slug: VARCHAR
@@ -48,36 +61,20 @@ pd_member_counts:
   end_date: VARCHAR
   members_count: BIGINT
   chamber: VARCHAR
-pd_members_and_orgs:
-  organization_id: VARCHAR
-  on_behalf_of_id: VARCHAR
-  end_date: VARCHAR
-  end_reason: VARCHAR
-  post_id: VARCHAR
-  start_date: VARCHAR
-  start_reason: VARCHAR
-  label: VARCHAR
-  role: VARCHAR
-  redirect: VARCHAR
-  reason: VARCHAR
-  person_id: VARCHAR
-  membership_id: VARCHAR
-  party_name: VARCHAR
-  party_name_reduced: VARCHAR
 pd_memberships:
-  id: VARCHAR
-  organization_id: VARCHAR
-  on_behalf_of_id: VARCHAR
-  end_date: VARCHAR
-  end_reason: VARCHAR
-  post_id: VARCHAR
+  membership_id: BIGINT
+  constituency: VARCHAR
+  person_id: BIGINT
   start_date: VARCHAR
-  start_reason: VARCHAR
-  label: VARCHAR
-  role: VARCHAR
-  redirect: VARCHAR
-  reason: VARCHAR
-  person_id: VARCHAR
+  end_date: VARCHAR
+  chamber: VARCHAR
+  party: VARCHAR
+  party_reduced: VARCHAR
+  first_name: VARCHAR
+  last_name: VARCHAR
+  nice_name: VARCHAR
+  party_name: VARCHAR
+  party_reduced_name: VARCHAR
 pd_orgs:
   classification: VARCHAR
   id: VARCHAR
@@ -165,12 +162,11 @@ policies:
   chamber: VARCHAR
   groups: VARCHAR[]
   division_links: STRUCT(alignment VARCHAR, decision STRUCT(chamber_slug VARCHAR,
-    date DATE, division_number BIGINT, "key" VARCHAR), decision_key VARCHAR, decision_type
-    VARCHAR, notes VARCHAR, status VARCHAR, strength VARCHAR)[]
+    date DATE, division_number BIGINT, "key" VARCHAR), decision_key VARCHAR, notes
+    VARCHAR, strength VARCHAR)[]
   agreement_links: STRUCT(alignment VARCHAR, decision STRUCT(chamber_slug VARCHAR,
     date DATE, decision_ref VARCHAR, division_name VARCHAR, "key" VARCHAR, source_gid
-    VARCHAR), decision_key VARCHAR, decision_type VARCHAR, notes VARCHAR, status VARCHAR,
-    strength VARCHAR)[]
+    VARCHAR), decision_key VARCHAR, notes VARCHAR, strength VARCHAR)[]
 policy_agreement_count:
   person_id: BIGINT
   policy_id: BIGINT
@@ -250,8 +246,8 @@ pw_division:
   debate_url: VARCHAR
   source_gid: VARCHAR
   debate_gid: VARCHAR
-  house: VARCHAR
   clock_time: VARCHAR
+  chamber: VARCHAR
   manual_motion: VARCHAR
   voting_cluster: VARCHAR
   division_key: VARCHAR
@@ -294,44 +290,29 @@ pw_divisions_with_counts:
   motion_majority: DOUBLE
   for_motion_percentage: DOUBLE
   motion_result_int: INTEGER
-pw_last_party:
-  person_id: VARCHAR
-  party: VARCHAR
-pw_last_party_vote_based:
-  person_id: BIGINT
-  party: VARCHAR
 pw_manual_motions:
   chamber: VARCHAR
   division_date: DATE
   division_number: BIGINT
   manual_motion: VARCHAR
-pw_mp:
-  mp_id: BIGINT
-  constituency: VARCHAR
-  person: BIGINT
-  entered_house: VARCHAR
-  left_house: VARCHAR
-  house: VARCHAR
-  party: VARCHAR
-  first_name: VARCHAR
-  last_name: VARCHAR
-  nice_name: VARCHAR
 pw_vote:
   division_id: BIGINT
-  mp_id: BIGINT
+  membership_id: BIGINT
   vote: VARCHAR
 pw_vote_with_absences:
   division_id: BIGINT
-  mp_id: BIGINT
+  membership_id: BIGINT
   vote: VARCHAR
 pw_votes_with_party_difference:
   division_id: BIGINT
-  mp_id: BIGINT
+  membership_id: BIGINT
   vote: VARCHAR
   effective_vote: VARCHAR
-  person_id: VARCHAR
+  person_id: BIGINT
+  party: VARCHAR
   party_name: VARCHAR
-  party_name_reduced: VARCHAR
+  party_reduced: VARCHAR
+  party_reduced_name: VARCHAR
   given_name: VARCHAR
   last_name: VARCHAR
   nice_name: VARCHAR
@@ -341,19 +322,20 @@ pw_votes_with_party_difference:
   effective_vote_int: DECIMAL(11,1)
   diff_from_party_average: DOUBLE
 source_pd_memberships:
-  id: VARCHAR
+  membership_id: VARCHAR
   person_id: VARCHAR
-  organization_id: VARCHAR
-  on_behalf_of_id: VARCHAR
-  end_date: VARCHAR
-  end_reason: VARCHAR
-  post_id: VARCHAR
+  constituency: VARCHAR
   start_date: VARCHAR
+  end_date: VARCHAR
   start_reason: VARCHAR
+  end_reason: VARCHAR
+  party: VARCHAR
+  chamber: VARCHAR
   label: VARCHAR
   role: VARCHAR
-  redirect: VARCHAR
-  reason: VARCHAR
+  first_name: VARCHAR
+  last_name: VARCHAR
+  nice_name: VARCHAR
 source_pw_division:
   division_id: BIGINT
   valid: BIGINT
@@ -368,18 +350,6 @@ source_pw_division:
   debate_gid: VARCHAR
   house: VARCHAR
   clock_time: VARCHAR
-source_pw_mp:
-  membership_id: VARCHAR
-  person_id: VARCHAR
-  constituency: VARCHAR
-  start_date: VARCHAR
-  end_date: VARCHAR
-  start_reason: VARCHAR
-  end_reason: VARCHAR
-  party: VARCHAR
-  chamber: VARCHAR
-  label: VARCHAR
-  role: VARCHAR
 source_pw_vote:
   division_id: BIGINT
   mp_id: BIGINT

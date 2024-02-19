@@ -91,7 +91,7 @@ class PolicyAffectedPeople(BaseQuery):
 
     query_template = """
     SELECT distinct
-        person as person_id
+        person_id
     FROM
         policy_votes
     join
@@ -101,12 +101,12 @@ class PolicyAffectedPeople(BaseQuery):
             (
             pw_division.division_date = policy_votes.division_date and 
             pw_division.division_number = policy_votes.division_number and 
-            pw_division.house = policy_votes.chamber
+            pw_division.chamber = policy_votes.chamber
             )
     join
         pw_vote using (division_id)
     join
-        pw_mp using (mp_id)
+        pd_memberships on (pw_vote.membership_id = pd_memberships.membership_id)
     where policies.chamber = {{ chamber_slug }}
     {% if policy_ids %}
     and policy_id in {{ policy_ids| inclause }}
@@ -124,9 +124,9 @@ class GetPersonParties(BaseQuery):
 
     query_template = """
     select * from (
-    select distinct(party) as party from pw_mp
-    where house == {{ chamber_slug }}
-    and person == {{ person_id }}
+    select distinct(party) as party from pd_memberships
+    where chamber == {{ chamber_slug }}
+    and person_id == {{ person_id }}
     )
     {% if banned_parties %}
     where party not in {{ banned_parties | inclause }}

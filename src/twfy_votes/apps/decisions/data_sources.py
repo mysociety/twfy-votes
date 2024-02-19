@@ -143,37 +143,77 @@ class pd_people:
     """
 
 
+@duck.as_macro
+class get_effective_party:
+    """
+    Reduce variant parties to a single canonical entry
+    mostly taking out the co-operative part of labour/co-operative
+    """
+
+    args = ["party"]
+    macro = """
+        case
+            when party = 'labourco-operative' then 'labour'
+            else party
+        end
+    """
+
+
 @duck.as_source
-class source_pw_mp:
+class pd_orgs:
+    source = politician_data / "organizations.parquet"
+
+
+@duck.as_source
+class pd_posts:
+    source = politician_data / "posts.parquet"
+
+
+@duck.as_source
+class source_pd_memberships:
     source = politician_data / "simple_memberships.parquet"
 
 
-@duck.as_table
-class pw_mp:
+@duck.as_view
+class memberships_adjusted:
     """
-    This is replicating the structure of the pw_mp table from public whip
-    from twfy sources.
-
-    In principle some of the renaming could now be avoided with changing references internally.
-
-    e.g. consistency on 'chamber' rather than house.
+    Intermediate view that adjusts the memberships table
     """
 
     query = """
     select
-    CAST(split(source_pw_mp.membership_id, '/')[-1] as BIGINT) as mp_id,
+    CAST(split(source.membership_id, '/')[-1] as BIGINT) as membership_id,
     constituency as constituency,
-    CAST(split(source_pw_mp.person_id, '/')[-1] as BIGINT) as person,
-    source_pw_mp.start_date as entered_house,
-    source_pw_mp.end_date as left_house,
-    source_pw_mp.chamber as house,
-    source_pw_mp.party as party,
-    pd_people.given_name as first_name,
-    pd_people.last_name as last_name,
-    pd_people.nice_name as nice_name,
+    CAST(split(source.person_id, '/')[-1] as BIGINT) as person_id,
+    source.start_date as start_date,
+    case when source.end_date is null then '9999-12-31' else source.end_date end as end_date,
+    source.chamber as chamber,
+    source.party as party,
+    get_effective_party(source.party) as party_reduced,
+    source.first_name as first_name,
+    source.last_name as last_name,
+    source.nice_name as nice_name
     from 
-        source_pw_mp
-    left join pd_people on (source_pw_mp.person_id = pd_people.person_id)
+        source_pd_memberships as source
+"""
+
+
+@duck.as_table
+class pd_memberships:
+    """
+    This uses a simplified version of the memberships table
+    Which brings in the party and chamber information
+    """
+
+    query = """
+    SELECT
+        source.*,
+        pd_orgs.name AS party_name,
+        po2.name AS party_reduced_name
+    FROM 
+        memberships_adjusted AS source
+    LEFT JOIN pd_orgs ON source.party = pd_orgs.id
+    LEFT JOIN pd_orgs AS po2 ON source.party_reduced = po2.id;
 """
 
 
@@ -222,7 +262,12 @@ class null_to_zero:
 @duck.as_table
 class pw_vote:
     query = """
-    select * exclude (vote), get_clean_vote(vote) as vote from source_pw_vote
+    SELECT
+        * exclude (vote, mp_id),
+        mp_id as membership_id,
+        get_clean_vote(vote) as vote
+    FROM
+        source_pw_vote
     """
 
 
@@ -265,7 +310,8 @@ class pd_member_counts:
 class pw_division:
     query = """
     SELECT
-        source_pw_division.*,
+        source_pw_division.* EXCLUDE (house),
+        house as chamber,
         CASE WHEN manual_motion is NULL THEN '' ELSE manual_motion END AS manual_motion,
         CASE WHEN cluster is NULL THEN '' ELSE cluster END AS voting_cluster,
         concat(house, '-', source_pw_division.division_date, '-', source_pw_division.division_number) as division_key,
@@ -282,68 +328,6 @@ class pw_division:
         (source_pw_division.division_date between pd_member_counts.start_date and
         pd_member_counts.end_date and
         source_pw_division.house = pd_member_counts.chamber)
-    """
-
-
-@duck.as_source
-class source_pd_memberships:
-    source = politician_data / "memberships.parquet"
-
-
-@duck.as_table
-class pd_memberships:
-    query = """
-    select
-        * exclude (person_id),
-        split(person_id, '/')[-1] as person_id,
-    from source_pd_memberships
-    """
-
-
-@duck.as_table
-class pd_orgs:
-    source = politician_data / "organizations.parquet"
-
-
-@duck.as_table
-class pd_posts:
-    source = politician_data / "posts.parquet"
-
-
-@duck.as_macro
-class get_effective_party:
-    """
-    Reduce variant parties to a single canonical entry
-    mostly taking out the co-operative part of labour/co-operative
-    """
-
-    args = ["party"]
-    macro = """
-        case
-            when party = 'labourco-operative' then 'labour'
-            else party
-        end
-    """
-
-
-@duck.as_view
-class pd_members_and_orgs:
-    """
-    Update the memberships table to include the party name
-    and map better to the IDs used by the public whip trailer.
-    """
-
-    query = """
-    SELECT
-        pd_memberships.* exclude (id, person_id),
-        split(person_id, '/')[-1] as person_id,
-        split(pd_memberships.id, '/')[-1] as membership_id,
-        pd_orgs.name as party_name,
-        get_effective_party(pd_orgs.name) as party_name_reduced
-    FROM
-        pd_memberships
-    JOIN
-        pd_orgs on (pd_memberships.on_behalf_of_id = pd_orgs.id)
     """
 
 
@@ -368,22 +352,21 @@ class cm_agreement_present:
     query = """
         SELECT
             key,
-            mp_id,
+            membership_id,
             chamber_slug,
             'collective' as vote,
             pd_people.given_name as person__first_name,
             pd_people.last_name as person__last_name,
             pd_people.nice_name as person__nice_name,
-            pw_mp.party as person__party,
-            mp_id as membership_id,
-            person as person__person_id,
+            pd_memberships.party_name as person__party,
+            pd_memberships.person_id as person__person_id,
         FROM
             pw_agreements
         JOIN
-            pw_mp on pw_agreements.date between pw_mp.entered_house and pw_mp.left_house
-            and pw_agreements.chamber_slug = pw_mp.house
+            pd_memberships on pw_agreements.date between pd_memberships.start_date and pd_memberships.end_date
+            and pw_agreements.chamber_slug = pd_memberships.chamber
         JOIN
-            pd_people on (pd_people.person_id = pw_mp.person)
+            pd_people on (pd_people.person_id = pd_memberships.person_id)
     """
 
 
@@ -398,17 +381,19 @@ class cm_votes_with_people:
         pw_vote.*,
         get_effective_vote(vote) as effective_vote,
         person_id,
-        party_name,
-        party_name_reduced,
+        pd_memberships.party as party,
+        pd_memberships.party_name as party_name,
+        pd_memberships.party_reduced as party_reduced,
+        pd_memberships.party_reduced_name as party_reduced_name,
         given_name,
-        last_name,
-        nice_name,
+        pd_memberships.last_name as last_name,
+        pd_memberships.nice_name as nice_name,
         CASE WHEN government_parties.is_gov is NULL THEN 'Other' ELSE 'Government' END AS is_gov,
         total_possible_members
     FROM
         pw_vote
     JOIN
-        pd_members_and_orgs on (pw_vote.mp_id = pd_members_and_orgs.membership_id)
+        pd_memberships on (pw_vote.membership_id = pd_memberships.membership_id)
     JOIN
         pd_people using (person_id)
     LEFT JOIN
@@ -417,8 +402,8 @@ class cm_votes_with_people:
         government_parties on
             (division_date between government_parties.start_date and 
             government_parties.end_date and 
-            government_parties.party = party_name_reduced and
-            pw_division.house = government_parties.chamber)
+            government_parties.party = pd_memberships.party_reduced and
+            pw_division.chamber = government_parties.chamber)
     """
 
 
@@ -461,7 +446,7 @@ class pw_divisions_party_with_counts:
     query = """
     SELECT
         division_id,
-        party_name_reduced as grouping,
+        party_reduced_name as grouping,
         count(*) as vote_participant_count,
         any_value(total_possible_members) as total_possible_members,
         sum(case when effective_vote = 'aye' then 1 else 0 end) as for_motion,
@@ -534,7 +519,7 @@ class pw_votes_with_party_difference:
         pw_divisions_party_with_counts
             on
                 (cm_votes_with_people.division_id = pw_divisions_party_with_counts.division_id and
-                 cm_votes_with_people.party_name_reduced = pw_divisions_party_with_counts.grouping)
+                 cm_votes_with_people.party_reduced_name = pw_divisions_party_with_counts.grouping)
     """
 
 
@@ -545,57 +530,9 @@ class pw_chamber_division_span:
     """
 
     query = """
-    select house as chamber_slug,
+    select chamber as chamber_slug,
         SUBSTRING(max(division_date),1,4) as latest_year,
         SUBSTRING(min(division_date),1,4) as earliest_year,
     from pw_division
     group by all
-    """
-
-
-@duck.as_view
-class pw_last_party:
-    query = """
-        select
-            split(person_id, '/')[-1] as person_id,
-            last(on_behalf_of_id) as party
-        from (
-            select * from (
-                select 
-                    on_behalf_of_id as party,
-                    pd_memberships.* exclude (organization_id),
-                    case when pd_memberships.organization_id is NULL then pd_posts.organization_id else pd_memberships.organization_id end as organization_id
-                from pd_memberships
-                left join pd_posts on pd_posts.id = pd_memberships.post_id
-                )
-            where organization_id = 'house-of-commons'
-            order by start_date asc
-            )
-        group by 
-            person_id
-"""
-
-
-@duck.as_view
-class pw_last_party_vote_based:
-    """
-    This just replies on the public whip table for parties rather than people.json
-    Using for moment so party references are simplified.
-    """
-
-    query = """
-        select
-            person_id,
-            last(membership_party) as party
-            from (
-            select
-                mp_id as membership_id,
-                party as membership_party,
-                person as person_id,
-                * exclude (mp_id, person, party)
-            from
-                pw_mp
-            order by mp_id
-            )
-        group by person_id
     """
