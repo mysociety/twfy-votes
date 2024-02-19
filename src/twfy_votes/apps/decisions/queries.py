@@ -10,18 +10,18 @@ from twfy_votes.helpers.duck import BaseQuery
 class DivisionQuery(BaseQuery):
     query_template = """
         SELECT
-            * exclude (house, clock_time),
+            * exclude (chamber, clock_time),
         CASE 
             WHEN clock_time IS NULL THEN 'No recorded time'
             ELSE CAST(clock_time AS VARCHAR)
         END AS clock_time,
-        house as house__slug
+        chamber as chamber__slug
         FROM
             pw_division
         WHERE
             division_date = {{ division_date }} and
             division_number = {{ division_number }} and
-            house = {{ chamber_slug }}
+            chamber = {{ chamber_slug }}
         """
     division_date: datetime.date
     division_number: int
@@ -56,12 +56,12 @@ class AgreementQueryKeys(BaseQuery):
 class DivisionQueryKeys(BaseQuery):
     query_template = """
         SELECT
-            * exclude (house, clock_time),
+            * exclude (chamber, clock_time),
         CASE 
             WHEN clock_time IS NULL THEN 'No recorded time'
             ELSE CAST(clock_time AS VARCHAR)
         END AS clock_time,
-        house as chamber__slug
+        chamber as chamber__slug
         FROM
             pw_division
         WHERE
@@ -77,12 +77,12 @@ class DivisionIDsQuery(BaseQuery):
 
     query_template = """
         SELECT
-            * exclude (house, clock_time),
+            * exclude (chamber, clock_time),
         CASE 
             WHEN clock_time IS NULL THEN 'No recorded time'
             ELSE CAST(clock_time AS VARCHAR)
         END AS clock_time,
-        house as chamber__slug
+        chamber as chamber__slug
         FROM
             pw_division
         WHERE
@@ -112,9 +112,8 @@ class DivisionIdsVotesQuery(BaseQuery):
         last_name as person__last_name,
         nice_name as person__nice_name,
         party_name as person__party,
-        mp_id as membership_id,
         person_id as person__person_id,
-        pw_votes_with_party_difference.* exclude (division_id, mp_id, __index_level_0__, given_name, last_name, nice_name, party_name)
+        pw_votes_with_party_difference.* exclude (division_id, __index_level_0__, given_name, last_name, nice_name, party)
     FROM
         pw_votes_with_party_difference
     WHERE
@@ -130,17 +129,16 @@ class DivisionVotesQuery(BaseQuery):
         given_name as person__first_name,
         last_name as person__last_name,
         nice_name as person__nice_name,
-        party_name as person__party,
-        pw_votes_with_party_difference.mp_id as membership_id,
+        party as person__party,
         person_id as person__person_id,
-        pw_votes_with_party_difference.* exclude (division_id, mp_id, __index_level_0__)
+        pw_votes_with_party_difference.* exclude (division_id, __index_level_0__)
     FROM
         pw_division
     JOIN pw_votes_with_party_difference using (division_id)
     WHERE
         pw_division.division_date = {{ division_date }} and
         pw_division.division_number = {{ division_number }} and
-        pw_division.house = {{ chamber_slug }}
+        pw_division.chamber = {{ chamber_slug }}
     """
     division_date: datetime.date
     division_number: int
@@ -153,12 +151,11 @@ class PersonVotesQuery(BaseQuery):
         given_name as person__first_name,
         last_name as person__last_name,
         nice_name as person__nice_name,
-        party_name as person__party,
-        pw_votes_with_party_difference.mp_id as membership_id,
+        party as person__party,
         person_id as person__person_id,
-        pw_votes_with_party_difference.* exclude (division_id, mp_id, __index_level_0__),
+        pw_votes_with_party_difference.* exclude (division_id, __index_level_0__),
         division_key as division__division_key,
-        house as division__chamber__slug,
+        chamber as division__chamber__slug,
         division_id as division__division_id,
         division_date as division__division_date,
         division_number as division__division_number,
@@ -209,8 +206,8 @@ class ChamberAgreementsQuery(BaseQuery):
 class ChamberDivisionsQuery(BaseQuery):
     query_template = """
     SELECT
-        * exclude (house, clock_time),
-        house as chamber__slug,
+        * exclude (chamber, clock_time),
+        chamber as chamber__slug,
         CASE 
             WHEN clock_time IS NULL THEN 'No recorded time'
             ELSE CAST(clock_time AS VARCHAR)
@@ -218,7 +215,7 @@ class ChamberDivisionsQuery(BaseQuery):
     FROM
         pw_division
     WHERE
-        house = {{ chamber_slug }} and
+        chamber = {{ chamber_slug }} and
         division_date between {{ start_date }} and {{ end_date }}
     """
     chamber_slug: str
@@ -282,19 +279,7 @@ class GetCurrentPeopleQuery(BaseQuery):
     FROM
         pd_people
     JOIN pd_memberships using (person_id)
-    where pd_memberships.end_date is null
+    where pd_memberships.end_date = '9999-12-31'
     ORDER BY
         person_id
     """
-
-
-class GetLastParty(BaseQuery):
-    query_template = """
-    SELECT
-        *
-    FROM
-        pw_last_party_vote_based
-    where
-        person_id == {{ person_id }}
-    """
-    person_id: int

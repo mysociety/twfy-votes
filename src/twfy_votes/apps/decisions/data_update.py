@@ -36,7 +36,7 @@ async def create_commons_cluster(duck_manager: AsyncDuckDBManager = duck_core):
         ) as other
     from pw_divisions_gov_with_counts
     join pw_division on (pw_division.division_id = pw_divisions_gov_with_counts.division_id)
-    where pw_division.house = 'commons'
+    where pw_division.chamber = 'commons'
     group by pw_divisions_gov_with_counts.division_id
     order by pw_divisions_gov_with_counts.division_id
     """
