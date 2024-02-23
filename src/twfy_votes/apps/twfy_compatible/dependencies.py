@@ -151,17 +151,18 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
         aspects.append(aspect)
 
     # Need to use the party name when passing to TWFY
+    # not sure this is needed - leaving out for moment
 
-    parties_query = """
-    select id, name from pd_orgs
-    """
-    duck = await duck_core.child_query()
-    parties = await duck.compile(parties_query).records()
+    # parties_query = """
+    # select id, name from pd_orgs
+    # """
+    # duck = await duck_core.child_query()
+    # parties = await duck.compile(parties_query).records()
 
-    party_lookup = {row["id"]: row["name"] for row in parties}
+    # arty_lookup = {row["id"]: row["name"] for row in parties}
 
-    for x in alignments:
-        x.comparison_party = party_lookup.get(x.comparison_party, x.comparison_party)
+    # for x in alignments:
+    #    x.comparison_party = party_lookup.get(x.comparison_party, x.comparison_party)
 
     reduced_alignments = [
         ReducedPersonPolicyLink.from_person_policy_link(x) for x in alignments
