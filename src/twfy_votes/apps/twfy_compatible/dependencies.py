@@ -3,6 +3,7 @@ Helper functions for bridging from our data to the current popolo output of publ
 """
 
 from ...helpers.static_fastapi.dependencies import dependency
+from ..core.db import duck_core
 from ..decisions.models import (
     AllowedChambers,
     Chamber,
@@ -148,6 +149,19 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
             source=division_url, direction=motion_desc, motion=motion
         )
         aspects.append(aspect)
+
+    # Need to use the party name when passing to TWFY
+
+    parties_query = """
+    select id, name from pd_orgs
+    """
+    duck = await duck_core.child_query()
+    parties = await duck.compile(parties_query).records()
+
+    party_lookup = {row["id"]: row["name"] for row in parties}
+
+    for x in alignments:
+        x.comparison_party = party_lookup.get(x.comparison_party, x.comparison_party)
 
     reduced_alignments = [
         ReducedPersonPolicyLink.from_person_policy_link(x) for x in alignments
