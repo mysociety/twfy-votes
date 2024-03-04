@@ -2,12 +2,12 @@ id: 6915
 name: Restrictions on the Right to Protest
 context_description: restricting the <b>right to protest</b>
 policy_description: |
-  The right to protest emerges from the rights of assembly, association and free expression.
   There have been votes in Parliament on imposing conditions and restrictions on the form and practice of the right to protest.
+  The right to protest emerges from the rights of assembly, association and free expression.
   Advocates of restrictions on the right to protest justify these measures as a means of balancing the rights of protestors
   with the rights and freedoms of others. 
 notes: ''
-status: candidate
+status: draft
 strength_meaning: classic
 highlightable: false
 chamber: commons

@@ -2,8 +2,7 @@ id: 6802
 name: Heathrow Airport Expansion
 context_description: adding a <b>third runway at Heathrow Airport</b>
 policy_description: "There have been votes in Parliament on expanding Heathrow Airport
-  by adding a third runway.\n\n(While editing the list of what's under Transport move
-  High Speed Rail policy 6753 there too from Business and the Economy)"
+  by adding a third runway."
 notes: ''
 status: candidate
 strength_meaning: classic
