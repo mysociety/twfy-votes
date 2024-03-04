@@ -182,7 +182,7 @@ def test_absences_no_effect():
     result_with_absences = SimplifiedScore.score(
         votes_same=ScoreFloatPair(weak=5.0, strong=5.0),
         votes_different=ScoreFloatPair(weak=0.0, strong=0.0),
-        votes_absent=ScoreFloatPair(weak=5.0, strong=0.0),
+        votes_absent=ScoreFloatPair(weak=5.0, strong=1.0),
         votes_abstain=ScoreFloatPair(weak=0.0, strong=0.0),
         agreements_same=ScoreFloatPair(weak=5.0, strong=5.0),
         agreements_different=ScoreFloatPair(weak=0.0, strong=0.0),
@@ -191,6 +191,66 @@ def test_absences_no_effect():
     assert (
         result == result_with_absences
     ), "Expected score to be the same with or without absences"
+
+
+def test_absence_cap_strong():
+    result_with_absences = SimplifiedScore.score(
+        votes_same=ScoreFloatPair(weak=5.0, strong=10.0),
+        votes_different=ScoreFloatPair(weak=0.0, strong=0.0),
+        votes_absent=ScoreFloatPair(weak=0.0, strong=2.0),
+        votes_abstain=ScoreFloatPair(weak=0.0, strong=0.0),
+        agreements_same=ScoreFloatPair(weak=0.0, strong=0.0),
+        agreements_different=ScoreFloatPair(weak=0.0, strong=0.0),
+    )
+
+    assert (
+        result_with_absences == 0.06
+    ), f"Expected score to be the cap - instead was {result_with_absences}"
+
+
+def test_absence_cap_strong_against():
+    result_with_absences = SimplifiedScore.score(
+        votes_same=ScoreFloatPair(weak=0.0, strong=0.0),
+        votes_different=ScoreFloatPair(weak=5.0, strong=10.0),
+        votes_absent=ScoreFloatPair(weak=0.0, strong=2.0),
+        votes_abstain=ScoreFloatPair(weak=0.0, strong=0.0),
+        agreements_same=ScoreFloatPair(weak=0.0, strong=0.0),
+        agreements_different=ScoreFloatPair(weak=0.0, strong=0.0),
+    )
+
+    assert (
+        result_with_absences == 0.94
+    ), f"Expected score to be the cap - instead was {result_with_absences}"
+
+
+def test_absence_cap_one_third():
+    result_with_absences = SimplifiedScore.score(
+        votes_same=ScoreFloatPair(weak=5.0, strong=10.0),
+        votes_different=ScoreFloatPair(weak=0.0, strong=0.0),
+        votes_absent=ScoreFloatPair(weak=0.0, strong=5.0),
+        votes_abstain=ScoreFloatPair(weak=0.0, strong=0.0),
+        agreements_same=ScoreFloatPair(weak=0.0, strong=0.0),
+        agreements_different=ScoreFloatPair(weak=0.0, strong=0.0),
+    )
+
+    assert (
+        result_with_absences == 0.16
+    ), f"Expected score to be the cap - instead was {result_with_absences}"
+
+
+def test_absence_cap_one_third_against():
+    result_with_absences = SimplifiedScore.score(
+        votes_same=ScoreFloatPair(weak=0.0, strong=0.0),
+        votes_different=ScoreFloatPair(weak=5.0, strong=10.0),
+        votes_absent=ScoreFloatPair(weak=0.0, strong=5.0),
+        votes_abstain=ScoreFloatPair(weak=0.0, strong=0.0),
+        agreements_same=ScoreFloatPair(weak=0.0, strong=0.0),
+        agreements_different=ScoreFloatPair(weak=0.0, strong=0.0),
+    )
+
+    assert (
+        result_with_absences == 0.84
+    ), f"Expected score to be the cap - instead was {result_with_absences}"
 
 
 def test_weak_agreements_change_nothing():
