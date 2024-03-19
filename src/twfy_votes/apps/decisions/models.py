@@ -115,6 +115,7 @@ class VoteType(StrEnum):
     )
     HUMBLE_ADDRESS = "humble_address"
     GOVERNMENT_AGENDA = "government_agenda"  # monarch's speech etc
+    FINANCIAL = "financial"
     CONFIDENCE = "confidence"
     STANDING_ORDER_CHANGE = "standing_order_change"
     PRIVATE_SITTING = "private_sitting"

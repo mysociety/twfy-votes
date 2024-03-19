@@ -226,6 +226,13 @@ def catagorise_motion(motion: str) -> VoteType:
         return VoteType.PRIVATE_SITTING
     elif all_present(l_motion, ["confidence in", "government"]):
         return VoteType.CONFIDENCE
+    elif all_present(
+        l_motion,
+        [
+            "be granted to his Majesty to be issued by the treasury out of the consolidated fund"
+        ],
+    ):
+        return VoteType.FINANCIAL
     else:
         return VoteType.OTHER
 
