@@ -8,7 +8,7 @@ policy_description: The armed forces covenant sets out the relationship between 
   in relation to public services.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -26,7 +26,7 @@ division_links:
     date: 2011-02-16
     division_number: 210
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -40,7 +40,7 @@ division_links:
     date: 2012-06-26
     division_number: 27
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

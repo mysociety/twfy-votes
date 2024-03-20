@@ -5,7 +5,7 @@ policy_description: A number of votes were held relating to holding investigatio
   into the US led invasion of Iraq in 2003
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -51,21 +51,21 @@ division_links:
     date: 2006-10-31
     division_number: 330
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2006-10-31
     division_number: 331
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2007-06-11
     division_number: 135
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -114,6 +114,6 @@ division_links:
     date: 2016-11-30
     division_number: 99
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 agreement_links: []

@@ -4,8 +4,8 @@ context_description: <b>culling badgers</b> to tackle bovine tuberculosis
 policy_description: There have been votes in Parliament on if badgers ought be culled
   in an effort to control bovine tuberculosis.
 notes: ''
-status: active
-strength_meaning: classic
+status: retired
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -16,27 +16,27 @@ division_links:
     date: 2012-10-25
     division_number: 87
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2013-06-05
     division_number: 21
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2013-06-05
     division_number: 22
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2014-03-13
     division_number: 232
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 agreement_links: []

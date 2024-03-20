@@ -6,8 +6,8 @@ policy_description: The Public Forest Estate in England comprises about 2% of th
   ought remain publicly-owned and managed by the Forestry Commission or if it should
   be sold off.
 notes: ''
-status: active
-strength_meaning: classic
+status: retired
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -18,7 +18,7 @@ division_links:
     date: 2011-02-02
     division_number: 188
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

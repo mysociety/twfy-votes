@@ -8,7 +8,7 @@ policy_description: There have been votes in Parliament on the introduction, and
   commentators.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: true
 chamber: commons
 groups:
@@ -61,21 +61,21 @@ division_links:
     date: 2013-02-27
     division_number: 167
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2013-11-12
     division_number: 126
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2013-11-12
     division_number: 127
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -117,21 +117,21 @@ division_links:
     date: 2014-11-26
     division_number: 97
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2014-12-17
     division_number: 120
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2014-12-17
     division_number: 121
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

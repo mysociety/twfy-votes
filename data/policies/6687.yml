@@ -8,7 +8,7 @@ policy_description: Schools with "Academy Status" are given financial independen
   social and health education.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -82,7 +82,7 @@ division_links:
     date: 2016-04-13
     division_number: 236
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

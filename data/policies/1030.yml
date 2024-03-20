@@ -7,7 +7,7 @@ policy_description: There have been votes in Parliament on targets for reducing 
   invest in projects which, for example, reduce greenhouse gas emissions.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -242,14 +242,14 @@ division_links:
     date: 2019-10-24
     division_number: 10
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2020-02-05
     division_number: 32
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -354,7 +354,7 @@ division_links:
     date: 2022-05-18
     division_number: 4
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -370,5 +370,5 @@ agreement_links:
     date: 2019-06-24
     decision_ref: b.530.1
   alignment: agree
-  strength: weak
+  strength: strong
   notes: ''

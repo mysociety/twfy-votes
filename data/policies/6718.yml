@@ -6,7 +6,7 @@ policy_description: There have been votes in Parliament on if letting agent fees
   charged to tenants, ought be more strongly regulated or even banned.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -38,7 +38,7 @@ division_links:
     date: 2014-06-25
     division_number: 21
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

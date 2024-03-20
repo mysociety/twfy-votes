@@ -4,8 +4,8 @@ context_description: slowing the rise in <b>rail fares</b>
 policy_description: 'There have been votes in Parliament on the subject of regulating,
   and capping, rail fares. '
 notes: ''
-status: active
-strength_meaning: classic
+status: retired
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -16,7 +16,7 @@ division_links:
     date: 2012-01-11
     division_number: 420
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -30,14 +30,14 @@ division_links:
     date: 2012-09-05
     division_number: 56
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2013-01-09
     division_number: 132
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

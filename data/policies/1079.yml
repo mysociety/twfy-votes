@@ -5,7 +5,7 @@ policy_description: There have been votes in Parliament on the removal of the he
   peers from the House of Lords.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: true
 chamber: commons
 groups:
@@ -86,6 +86,6 @@ division_links:
     date: 2016-10-19
     division_number: 70
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 agreement_links: []

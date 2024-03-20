@@ -7,7 +7,7 @@ policy_description: Parliament has voted on whether hydraulic fracturing (fracki
   ought be regulated.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -32,7 +32,7 @@ division_links:
     date: 2015-02-11
     division_number: 156
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

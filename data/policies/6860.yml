@@ -2,10 +2,11 @@ id: 6860
 name: Action to Reduce the Spread of COVID-19
 context_description: public health measures and social restrictions to reduce the
   spread of <b>COVID-19</b>
-policy_description: There have been votes in Parliament on public health measures and social restrictions intended to reduce the spread of COVID-19.
+policy_description: There have been votes in Parliament on public health measures
+  and social restrictions intended to reduce the spread of COVID-19.
 notes: ''
 status: candidate
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -86,7 +87,7 @@ division_links:
     date: 2020-10-14
     division_number: 137
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -142,7 +143,7 @@ division_links:
     date: 2021-01-25
     division_number: 211
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -170,7 +171,7 @@ division_links:
     date: 2021-06-15
     division_number: 26
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

@@ -6,7 +6,7 @@ policy_description: There have been votes in Parliament on the question of if pu
   with no requirement to buy beer, and other supplies, from the pub company.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -17,14 +17,14 @@ division_links:
     date: 2013-01-09
     division_number: 131
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2014-01-21
     division_number: 183
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

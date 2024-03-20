@@ -1,11 +1,11 @@
 id: 6802
 name: Heathrow Airport Expansion
 context_description: adding a <b>third runway at Heathrow Airport</b>
-policy_description: "There have been votes in Parliament on expanding Heathrow Airport
-  by adding a third runway."
+policy_description: There have been votes in Parliament on expanding Heathrow Airport
+  by adding a third runway.
 notes: ''
 status: candidate
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -16,14 +16,14 @@ division_links:
     date: 2008-04-02
     division_number: 142
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2009-01-28
     division_number: 26
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

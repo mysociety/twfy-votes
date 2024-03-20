@@ -7,7 +7,7 @@ policy_description: There have been votes in Parliament on the degree of the UK'
   of a European Union External Action Service.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: true
 chamber: commons
 groups:
@@ -375,7 +375,7 @@ division_links:
     date: 2011-12-13
     division_number: 411
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -417,7 +417,7 @@ division_links:
     date: 2013-07-15
     division_number: 60
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -487,7 +487,7 @@ division_links:
     date: 2014-11-19
     division_number: 87
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -529,14 +529,14 @@ division_links:
     date: 2016-06-15
     division_number: 21
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2016-07-06
     division_number: 36
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -550,7 +550,7 @@ division_links:
     date: 2016-12-07
     division_number: 102
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -1075,7 +1075,7 @@ division_links:
     date: 2020-07-15
     division_number: 77
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -1117,6 +1117,6 @@ division_links:
     date: 2022-05-18
     division_number: 4
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 agreement_links: []

@@ -7,7 +7,7 @@ policy_description: There have been votes in Parliament on equalising the number
   Cornwall and the Isle of Wight.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: true
 chamber: commons
 groups:
@@ -32,7 +32,7 @@ division_links:
     date: 2010-11-01
     division_number: 104
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

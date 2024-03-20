@@ -8,7 +8,7 @@ policy_description: The policies outlined in the "programme for government" also
   are right
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -215,7 +215,7 @@ division_links:
     date: 2011-11-23
     division_number: 400
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -264,7 +264,7 @@ division_links:
     date: 2012-02-07
     division_number: 461
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -306,7 +306,7 @@ division_links:
     date: 2012-03-13
     division_number: 488
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -348,7 +348,7 @@ division_links:
     date: 2012-06-26
     division_number: 27
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

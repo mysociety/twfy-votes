@@ -5,7 +5,7 @@ policy_description: There have been votes in Parliament on the rates of taxation
   to fuel for motor vehicles.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -32,7 +32,7 @@ division_links:
     date: 2011-02-07
     division_number: 191
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -109,7 +109,7 @@ division_links:
     date: 2012-11-12
     division_number: 100
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
