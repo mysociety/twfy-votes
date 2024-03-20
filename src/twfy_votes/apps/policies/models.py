@@ -140,6 +140,7 @@ class DecisionType(StrEnum):
 
 
 class PartialPolicyDecisionLink(BaseModel, Generic[PartialDecisionType]):
+    policy_id: int | None = None
     decision: PartialDecisionType
     alignment: PolicyDirection
     strength: PolicyStrength = PolicyStrength.WEAK
@@ -161,6 +162,7 @@ class PartialPolicyDecisionLink(BaseModel, Generic[PartialDecisionType]):
 
 
 class PolicyDecisionLink(BaseModel, Generic[InfoType]):
+    policy_id: int | None = None
     decision: InfoType
     alignment: PolicyDirection
     strength: PolicyStrength = PolicyStrength.WEAK
@@ -219,6 +221,7 @@ class PolicyDecisionLink(BaseModel, Generic[InfoType]):
                 for decision, partial in zip(decisions, partials):
                     full_links.append(
                         PolicyDecisionLink[DivisionInfo](
+                            policy_id=partial.policy_id,
                             decision=decision,
                             alignment=partial.alignment,
                             strength=partial.strength,
@@ -227,9 +230,15 @@ class PolicyDecisionLink(BaseModel, Generic[InfoType]):
                     )
             case DecisionType.AGREEMENT:
                 decisions = await AgreementInfo.from_partials(partials=decisions)
+
+                # need to rearrange decisions so it's in the correct order as partials
+                decision_lookup = {x.key: x for x in decisions}
+                decisions = [decision_lookup[x.decision_key] for x in partials]
+
                 for decision, partial in zip(decisions, partials):
                     full_links.append(
                         PolicyDecisionLink[AgreementInfo](
+                            policy_id=partial.policy_id,
                             decision=decision,
                             alignment=partial.alignment,
                             strength=partial.strength,
@@ -301,13 +310,17 @@ class Policy(PolicyBase):
         divisions = [x for y in divisions for x in y]
         full_decisions = await PolicyDecisionLink.from_partials(partials=divisions)
         # create a lookup from a PartialPolicyDecisionLink to a PolicyDecisionLink
-        division_lookup = {x.decision.key: x for x in full_decisions}
+        division_link_lookup = {
+            f"{x.policy_id}-{x.decision.key}": x for x in full_decisions
+        }
         # get agreements
         agreements = [x.agreement_links for x in partials]
         agreements = [x for y in agreements for x in y]
         full_agreements = await PolicyDecisionLink.from_partials(partials=agreements)
         # create a lookup from a PartialPolicyDecisionLink to a PolicyDecisionLink
-        agreement_lookup = {x.decision.key: x for x in full_agreements}
+        agreement_link_lookup = {
+            f"{x.policy_id}-{x.decision.key}": x for x in full_agreements
+        }
         return [
             cls(
                 name=x.name,
@@ -322,10 +335,12 @@ class Policy(PolicyBase):
                 strength_meaning=x.strength_meaning,
                 highlightable=x.highlightable,
                 division_links=[
-                    division_lookup[y.decision_key] for y in x.division_links
+                    division_link_lookup[f"{y.policy_id}-{y.decision.key}"]
+                    for y in x.division_links
                 ],
                 agreement_links=[
-                    agreement_lookup[y.decision_key] for y in x.agreement_links
+                    agreement_link_lookup[f"{y.policy_id}-{y.decision.key}"]
+                    for y in x.agreement_links
                 ],
             )
             for x in partials
@@ -350,6 +365,12 @@ class Policy(PolicyBase):
             model=PartialPolicy,
             validate=AllPolicyQuery.validate.NO_VALIDATION,
         )
+
+        for p in policies:
+            for link in p.division_links:
+                link.policy_id = p.id
+            for link in p.agreement_links:
+                link.policy_id = p.id
 
         return await cls.from_partials(partials=policies)
 
@@ -536,6 +557,8 @@ class VoteDistribution(BaseModel):
                 return "Almost always voted against"
             case s if 0.95 < s <= 1:
                 return "Consistently voted against"
+            case s if s == -1:
+                return "No data available"
             case _:
                 raise ValueError("Score must be between 0 and 1")
 
@@ -999,7 +1022,13 @@ class PolicyReport(BaseModel):
                     division_link=division, issue=IssueType.STRONG_WITHOUT_POWER
                 ):
                     strong_without_power += 1
-
+            if (
+                "opposition" in division.decision.division_name.lower()
+                and division.strength == PolicyStrength.STRONG
+            ):
+                report.add_from_division_issue(
+                    division_link=division, issue=IssueType.STRONG_WITHOUT_POWER
+                )
         if strong_count == 0:
             report.add_policy_issue(issue=IssueType.NO_STRONG_VOTES)
         elif strong_count - strong_without_power == 0:
