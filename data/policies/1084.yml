@@ -7,7 +7,7 @@ policy_description: 'There have been votes in Parliament on if the system used t
   seats won by a political party better reflects the proportion of the vote they win. '
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: true
 chamber: commons
 groups:
@@ -60,6 +60,6 @@ division_links:
     date: 2020-01-20
     division_number: 18
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 agreement_links: []

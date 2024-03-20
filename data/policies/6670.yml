@@ -7,7 +7,7 @@ policy_description: 'There have been votes in Parliament on the level of spendin
   and the operation of specific benefits. '
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: true
 chamber: commons
 groups:
@@ -25,14 +25,14 @@ division_links:
     date: 2011-01-19
     division_number: 176
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2011-01-19
     division_number: 177
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -179,21 +179,21 @@ division_links:
     date: 2013-02-27
     division_number: 167
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2013-11-12
     division_number: 126
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2013-11-12
     division_number: 127
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -207,7 +207,7 @@ division_links:
     date: 2014-02-11
     division_number: 209
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -235,7 +235,7 @@ division_links:
     date: 2015-06-04
     division_number: 3
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -277,7 +277,7 @@ division_links:
     date: 2015-10-20
     division_number: 80
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -319,14 +319,14 @@ division_links:
     date: 2015-11-18
     division_number: 127
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2016-01-06
     division_number: 157
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -368,21 +368,21 @@ division_links:
     date: 2016-05-26
     division_number: 2
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2016-06-08
     division_number: 15
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2016-07-20
     division_number: 51
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -396,14 +396,14 @@ division_links:
     date: 2016-11-16
     division_number: 82
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2021-01-18
     division_number: 197
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -417,14 +417,14 @@ division_links:
     date: 2021-09-15
     division_number: 74
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2021-09-21
     division_number: 81
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -445,7 +445,7 @@ division_links:
     date: 2022-01-24
     division_number: 167
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -466,6 +466,6 @@ division_links:
     date: 2022-05-18
     division_number: 4
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 agreement_links: []

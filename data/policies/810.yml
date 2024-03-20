@@ -8,7 +8,7 @@ policy_description: There have been votes in Parliament on a number of aspects o
   laws governing the operation of casinos.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -110,13 +110,13 @@ division_links:
     date: 2014-01-08
     division_number: 172
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2014-01-08
     division_number: 173
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 agreement_links: []

@@ -7,7 +7,7 @@ policy_description: There have been votes in Parliament both on the principle of
   certain point, and on the details of the operation of that cap.
 notes: ''
 status: candidate
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -25,7 +25,7 @@ division_links:
     date: 2020-02-25
     division_number: 36
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

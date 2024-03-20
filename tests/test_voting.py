@@ -9,7 +9,6 @@ async def test_voting_records(client: TestClient):
     await test_policy_sample(5)
 
 
-@pytest.mark.skip(reason="Wait for intital issues to be fixed, then turn this on")
 @pytest.mark.asyncio
 async def test_policy_issues(client: TestClient):
     """

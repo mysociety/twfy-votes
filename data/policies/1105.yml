@@ -5,7 +5,7 @@ policy_description: there have been votes in Parliament on the privatisation of 
   Mail. Royal Mail was privatised in October 2013.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -16,7 +16,7 @@ division_links:
     date: 2009-02-11
     division_number: 36
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

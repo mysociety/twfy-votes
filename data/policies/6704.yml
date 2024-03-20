@@ -8,7 +8,7 @@ policy_description: There have been votes in Parliament relating to finanical in
   and on limiting carbon dioxide emissions from power stations.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -19,14 +19,14 @@ division_links:
     date: 2011-11-23
     division_number: 400
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2011-11-23
     division_number: 401
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

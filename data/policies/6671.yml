@@ -5,7 +5,7 @@ policy_description: 'There have been votes in Parliament on the level of funding
   local councils. '
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: true
 chamber: commons
 groups:
@@ -16,7 +16,7 @@ division_links:
     date: 2010-06-29
     division_number: 12
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -65,7 +65,7 @@ division_links:
     date: 2018-03-28
     division_number: 134
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -79,7 +79,7 @@ division_links:
     date: 2021-01-25
     division_number: 211
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

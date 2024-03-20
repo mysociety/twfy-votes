@@ -6,7 +6,7 @@ policy_description: There have been votes in Parliament on the speed of the incr
   to the same state pension age for men and women.
 notes: ''
 status: candidate
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -17,7 +17,7 @@ division_links:
     date: 2011-06-08
     division_number: 287
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -45,20 +45,20 @@ division_links:
     date: 2016-01-07
     division_number: 159
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2016-11-30
     division_number: 100
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2017-11-29
     division_number: 50
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 agreement_links: []

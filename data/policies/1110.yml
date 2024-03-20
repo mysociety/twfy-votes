@@ -5,7 +5,7 @@ policy_description: There have been votes in Parliament on the rate at which Val
   Added Tax (VAT) is charged.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: true
 chamber: commons
 groups:
@@ -72,7 +72,7 @@ division_links:
     date: 2011-06-22
     division_number: 304
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -212,6 +212,6 @@ division_links:
     date: 2022-05-18
     division_number: 3
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 agreement_links: []

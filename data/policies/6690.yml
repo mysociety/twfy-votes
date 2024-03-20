@@ -5,7 +5,7 @@ policy_description: Parliament has voted on measures, including the introduction
   a general anti-abuse rule, aimed at tackling abusive tax avoidance.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -51,7 +51,7 @@ division_links:
     date: 2016-04-13
     division_number: 235
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -107,7 +107,7 @@ division_links:
     date: 2020-02-25
     division_number: 35
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

@@ -5,7 +5,7 @@ policy_description: Elected Police and Crime Commissioners are individuals respo
   for the strategic direction and oversight of the police in England and Wales.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -16,7 +16,7 @@ division_links:
     date: 2010-09-08
     division_number: 57
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -51,7 +51,7 @@ division_links:
     date: 2011-05-23
     division_number: 285
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

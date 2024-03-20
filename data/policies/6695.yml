@@ -6,7 +6,7 @@ policy_description: There have been votes in Parliament on the extent of powers 
   trading.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -206,7 +206,7 @@ division_links:
     date: 2013-01-23
     division_number: 139
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -220,7 +220,7 @@ division_links:
     date: 2013-10-16
     division_number: 102
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -234,35 +234,35 @@ division_links:
     date: 2014-01-08
     division_number: 171
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2014-01-08
     division_number: 172
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2014-01-08
     division_number: 173
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2014-11-05
     division_number: 74
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2015-02-11
     division_number: 156
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -304,7 +304,7 @@ division_links:
     date: 2016-04-13
     division_number: 236
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

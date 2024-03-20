@@ -5,7 +5,7 @@ policy_description: Parliament has voted on whether the United Kingdom should re
   a member of the European Union
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -16,7 +16,7 @@ division_links:
     date: 2016-06-15
     division_number: 21
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -30,7 +30,7 @@ division_links:
     date: 2016-12-07
     division_number: 102
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

@@ -5,7 +5,7 @@ policy_description: There have been number of votes in Parliament on how transpa
   Parliament is run, particularly in respect of MPs' expenses.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:

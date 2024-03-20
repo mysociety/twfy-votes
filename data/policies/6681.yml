@@ -6,7 +6,7 @@ policy_description: 'There have been votes in Parliament on the rate of income t
   as the additional rate. '
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -31,7 +31,7 @@ division_links:
     date: 2012-11-28
     division_number: 105
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -66,14 +66,14 @@ division_links:
     date: 2014-11-05
     division_number: 73
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2015-03-04
     division_number: 168
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

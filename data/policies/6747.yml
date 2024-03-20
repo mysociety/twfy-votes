@@ -4,8 +4,8 @@ context_description: greater public control of <b>bus services</b>
 policy_description: There have been votes in Parliament on greater public control
   of bus services.
 notes: ''
-status: active
-strength_meaning: classic
+status: retired
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -16,14 +16,14 @@ division_links:
     date: 2014-11-05
     division_number: 74
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2016-01-19
     division_number: 167
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

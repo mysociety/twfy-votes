@@ -7,7 +7,7 @@ policy_description: Right to Remain for European Union Nationals in the UK - The
   the UK having the right to remain.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -18,14 +18,14 @@ division_links:
     date: 2016-06-15
     division_number: 21
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2016-07-06
     division_number: 36
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -39,14 +39,14 @@ division_links:
     date: 2016-10-19
     division_number: 69
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2016-12-07
     division_number: 102
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -319,6 +319,6 @@ division_links:
     date: 2021-07-07
     division_number: 47
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 agreement_links: []

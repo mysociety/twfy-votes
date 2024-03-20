@@ -7,7 +7,7 @@ policy_description: There have been votes in Parliament on if GPs should buy ser
   patients.
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -32,7 +32,7 @@ division_links:
     date: 2011-05-09
     division_number: 268
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -46,21 +46,21 @@ division_links:
     date: 2011-10-26
     division_number: 377
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2012-03-13
     division_number: 488
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2012-03-13
     division_number: 489
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

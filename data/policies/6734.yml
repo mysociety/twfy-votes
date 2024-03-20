@@ -4,7 +4,7 @@ context_description: stronger <b>laws and enforcement of immigration rules</b>
 policy_description: The UK should have stronger laws to tackle illegal immigration
 notes: ''
 status: active
-strength_meaning: classic
+strength_meaning: simplified
 highlightable: false
 chamber: commons
 groups:
@@ -99,7 +99,7 @@ division_links:
     date: 2021-05-19
     division_number: 3
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
