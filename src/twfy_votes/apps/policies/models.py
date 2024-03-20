@@ -431,7 +431,7 @@ class Policy(PolicyBase):
         # sort inverse by month
         df = df.sort_values("month", ascending=False)
 
-        banned_columns = ["notes"]
+        banned_columns = ["notes", "policy_id"]
         df = df.drop(columns=banned_columns).sort_values("strength")
         return style_df(df=df)
 
@@ -949,12 +949,14 @@ class IssueType(StrEnum):
     STRONG_WITHOUT_POWER = "strong_without_power"
     NO_STRONG_VOTES = "no_strong_votes"
     NO_STRONG_VOTES_AFTER_POWER_CHANGE = "no_strong_votes_after_power_change"
+    ONLY_ONE_STRONG_VOTE = "only_one_strong_vote"
 
 
 class PolicyReport(BaseModel):
     policy: Policy
     division_issues: dict[IssueType, list[DivisionInfo]] = Field(default_factory=dict)
     policy_issues: list[IssueType] = Field(default_factory=list)
+    policy_warnings: list[IssueType] = Field(default_factory=list)
 
     def add_from_division_issue(
         self, division_link: PolicyDecisionLink[DivisionInfo], issue: IssueType
@@ -971,7 +973,7 @@ class PolicyReport(BaseModel):
         self.division_issues[issue].append(division_link.decision)
         return True
 
-    def add_policy_issue(self, issue: IssueType):
+    def add_policy_issue(self, issue: IssueType, warning: bool = False):
         """
         Add an issue to the list of issues for this policy
         """
@@ -979,8 +981,12 @@ class PolicyReport(BaseModel):
         if ignore_format in self.policy.notes:
             return False
 
-        if issue not in self.policy_issues:
-            self.policy_issues.append(issue)
+        if warning:
+            if issue not in self.policy_warnings:
+                self.policy_warnings.append(issue)
+        else:
+            if issue not in self.policy_issues:
+                self.policy_issues.append(issue)
         return True
 
     def len_division_issues(self) -> int:
@@ -988,6 +994,13 @@ class PolicyReport(BaseModel):
 
     def has_issues(self) -> bool:
         return len(self.policy_issues) > 0 or len(self.division_issues) > 0
+
+    def has_issues_or_warnings(self) -> bool:
+        return (
+            len(self.policy_issues) > 0
+            or len(self.division_issues) > 0
+            or len(self.policy_warnings) > 0
+        )
 
     @classmethod
     async def fetch_multiple(
@@ -1007,6 +1020,7 @@ class PolicyReport(BaseModel):
         """
         Score policy for identified issues
         """
+
         report = PolicyReport(policy=policy)
         strong_count = 0
         strong_without_power = 0
@@ -1033,5 +1047,7 @@ class PolicyReport(BaseModel):
             report.add_policy_issue(issue=IssueType.NO_STRONG_VOTES)
         elif strong_count - strong_without_power == 0:
             report.add_policy_issue(issue=IssueType.NO_STRONG_VOTES_AFTER_POWER_CHANGE)
+        if strong_count == 1:
+            report.add_policy_issue(issue=IssueType.ONLY_ONE_STRONG_VOTE, warning=True)
 
         return report

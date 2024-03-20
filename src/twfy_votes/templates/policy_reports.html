@@ -7,9 +7,11 @@
 
 <p>Policy level issues: {{ policy_level_errors }}</p>
 <p>Division level issues: {{ division_level_errors }}</p>
+<p>Policy level warnings: {{ policy_level_warnings }}</p>
+
 
 {% for policy_report in item %}
-{% if policy_report.has_issues() %}
+{% if policy_report.has_issues_or_warnings() %}
 <hr />
 {% include "_policy_report_include.html" %}
 {% endif %}
