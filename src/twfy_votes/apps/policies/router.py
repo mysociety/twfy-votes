@@ -73,6 +73,7 @@ async def api_all_reports(policy: GetAllPolicyReports) -> GetAllPolicyReports:
 async def app_reports(context: GetContext, reports: GetAllPolicyReports):
     context["item"] = reports
     context["policy_level_errors"] = sum([len(x.policy_issues) for x in reports])
+    context["policy_level_warnings"] = sum([len(x.policy_warnings) for x in reports])
     context["division_level_errors"] = sum([x.len_division_issues() for x in reports])
     return context
 

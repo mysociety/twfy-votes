@@ -13,6 +13,17 @@
 </ul>
 {% endif %}
 
+
+{% if policy_report.policy_warnings|length > 0 %}
+<h2>Policy-level warnings</h2>
+<ul>
+    {% for issue in policy_report.policy_warnings %}
+
+    <li>{{ issue }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 {% if policy_report.division_issues|length > 0 %}
 
 <h2>Division-level issues</h2>

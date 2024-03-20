@@ -163,10 +163,10 @@ policies:
   groups: VARCHAR[]
   division_links: STRUCT(alignment VARCHAR, decision STRUCT(chamber_slug VARCHAR,
     date DATE, division_number BIGINT, "key" VARCHAR), decision_key VARCHAR, notes
-    VARCHAR, strength VARCHAR)[]
+    VARCHAR, policy_id INTEGER, strength VARCHAR)[]
   agreement_links: STRUCT(alignment VARCHAR, decision STRUCT(chamber_slug VARCHAR,
     date DATE, decision_ref VARCHAR, division_name VARCHAR, "key" VARCHAR, source_gid
-    VARCHAR), decision_key VARCHAR, notes VARCHAR, strength VARCHAR)[]
+    VARCHAR), decision_key VARCHAR, notes VARCHAR, policy_id INTEGER, strength VARCHAR)[]
 policy_agreement_count:
   person_id: BIGINT
   policy_id: BIGINT
