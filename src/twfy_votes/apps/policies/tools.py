@@ -38,7 +38,7 @@ def create_new_policy(
     starting_value = {
         AllowedChambers.COMMONS: 20001,
         AllowedChambers.LORDS: 30001,
-        AllowedChambers.WALES: 40001,
+        AllowedChambers.SENEDD: 40001,
         AllowedChambers.SCOTLAND: 50001,
         AllowedChambers.NI: 60001,
     }
