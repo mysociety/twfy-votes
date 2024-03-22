@@ -253,18 +253,18 @@ pw_division:
   division_key: VARCHAR
   total_possible_members: BIGINT
 pw_division_cluster:
-  division_id: BIGINT
-  cluster: VARCHAR
+  division_id: 'NULL'
+  cluster: 'NULL'
 pw_divisions_gov_with_counts:
   division_id: BIGINT
   grouping: VARCHAR
   vote_participant_count: BIGINT
   total_possible_members: BIGINT
-  for_motion: DOUBLE
-  against_motion: DOUBLE
-  neutral_motion: DOUBLE
-  signed_votes: DOUBLE
-  motion_majority: DOUBLE
+  for_motion: HUGEINT
+  against_motion: HUGEINT
+  neutral_motion: HUGEINT
+  signed_votes: HUGEINT
+  motion_majority: HUGEINT
   for_motion_percentage: DOUBLE
   motion_result_int: INTEGER
 pw_divisions_party_with_counts:
@@ -272,22 +272,22 @@ pw_divisions_party_with_counts:
   grouping: VARCHAR
   vote_participant_count: BIGINT
   total_possible_members: BIGINT
-  for_motion: DOUBLE
-  against_motion: DOUBLE
-  neutral_motion: DOUBLE
-  signed_votes: DOUBLE
-  motion_majority: DOUBLE
+  for_motion: HUGEINT
+  against_motion: HUGEINT
+  neutral_motion: HUGEINT
+  signed_votes: HUGEINT
+  motion_majority: HUGEINT
   for_motion_percentage: DOUBLE
   motion_result_int: INTEGER
 pw_divisions_with_counts:
   division_id: BIGINT
   vote_participant_count: BIGINT
   total_possible_members: BIGINT
-  for_motion: DOUBLE
-  against_motion: DOUBLE
-  neutral_motion: DOUBLE
-  signed_votes: DOUBLE
-  motion_majority: DOUBLE
+  for_motion: HUGEINT
+  against_motion: HUGEINT
+  neutral_motion: HUGEINT
+  signed_votes: HUGEINT
+  motion_majority: HUGEINT
   for_motion_percentage: DOUBLE
   motion_result_int: INTEGER
 pw_manual_motions:
