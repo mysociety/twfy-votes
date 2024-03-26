@@ -16,16 +16,23 @@ from ...internal.settings import settings
 from .models import VoteMotionAnalysis, VoteType
 
 
-def gids_from_df(df: pd.DataFrame) -> pd.DataFrame:
+def gids_from_df(df: pd.DataFrame, split_long_gid: bool = False) -> pd.DataFrame:
     """
     assuming a df with column source_gid - return a list of gids
     minus the prefix stuff
     """
-    gids = df["source_gid"].str.split("/", expand=True).drop(columns=[0])
-    gids.columns = ["chamber", "gid"]
+    if split_long_gid:
+        gids = df["source_gid"].str.split("/", expand=True).drop(columns=[0])
+        gids.columns = ["chamber", "gid"]
+    else:
+        gids = df[["chamber", "source_gid"]].rename(columns={"source_gid": "gid"})
     if "division_date" in df.columns:
         gids["source"] = df["division_date"]
     gids = gids.sort_values(by=["gid"])
+    # remove any empty gids
+    gids = gids[gids["gid"].notnull()]
+    # remove any just empty string gids
+    gids = gids[gids["gid"] != ""]
     return gids
 
 
@@ -40,7 +47,7 @@ async def get_new_gids(
     """
     df = await duck.compile(query).df()
     gids = gids_from_df(df)
-    gids = gids[gids["chamber"].isin(["debate"])]
+    gids = gids[gids["chamber"].isin(["debate", "commons"])]
     policy_gids = gids["gid"].to_list()
 
     # get all recent gids
@@ -49,7 +56,7 @@ async def get_new_gids(
     """
     df = await duck.compile(query).df()
     gids = gids_from_df(df)
-    gids = gids[gids["chamber"].isin(["debate"])]
+    gids = gids[gids["chamber"].isin(["debate", "commons"])]
     gids = gids[gids["gid"].str[:4].astype(int) >= 2022]
     recent_gids = gids["gid"].to_list()
 
@@ -58,8 +65,8 @@ async def get_new_gids(
     select * from pw_agreements
     """
     df = await duck.compile(query).df()
-    gids = gids_from_df(df)
-    gids = gids[gids["chamber"].isin(["debate"])]
+    gids = gids_from_df(df, split_long_gid=True)
+    gids = gids[gids["chamber"].isin(["debate", "commons"])]
     agreement_gids = gids["gid"].to_list()
 
     combined_gids = sorted(list(set(policy_gids + recent_gids + agreement_gids)))
