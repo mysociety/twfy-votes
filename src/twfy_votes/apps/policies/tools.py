@@ -6,7 +6,6 @@ from ruamel.yaml import YAML
 from ...helpers.data.models import data_to_yaml
 from .models import (
     AllowedChambers,
-    LinkStatus,
     PartialAgreement,
     PartialDivision,
     PartialPolicy,
@@ -84,10 +83,7 @@ def add_vote_to_policy_from_url(
                 chamber_slug=chamber_slug, date=date, division_number=division_number
             )
             policy_link = PartialPolicyDecisionLink[PartialDivision](
-                decision=partial,
-                alignment=vote_alignment,
-                strength=strength,
-                status=LinkStatus.ACTIVE,
+                decision=partial, alignment=vote_alignment, strength=strength
             ).model_dump()
 
         case "agreement" as decision_type:
@@ -98,10 +94,7 @@ def add_vote_to_policy_from_url(
                 chamber_slug=chamber_slug, date=date, decision_ref=decision_ref
             )
             policy_link = PartialPolicyDecisionLink[PartialAgreement](
-                decision=partial,
-                alignment=vote_alignment,
-                strength=strength,
-                status=LinkStatus.ACTIVE,
+                decision=partial, alignment=vote_alignment, strength=strength
             ).model_dump()
 
         case _ as p:
