@@ -194,4 +194,22 @@ division_links:
   alignment: agree
   strength: strong
   notes: ''
+- policy_id:
+  decision:
+    chamber_slug: commons
+    date: 2024-01-17
+    division_number: 52
+    key: commons-2024-01-17-52
+  alignment: agree
+  strength: strong
+  notes: ''
+- policy_id:
+  decision:
+    chamber_slug: commons
+    date: 2024-01-17
+    division_number: 53
+    key: commons-2024-01-17-53
+  alignment: agree
+  strength: strong
+  notes: ''
 agreement_links: []

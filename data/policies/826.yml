@@ -186,7 +186,7 @@ division_links:
     date: 2014-03-05
     division_number: 216
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
@@ -213,6 +213,15 @@ division_links:
     chamber_slug: commons
     date: 2019-07-18
     division_number: 438
+  alignment: agree
+  strength: strong
+  notes: ''
+- policy_id:
+  decision:
+    chamber_slug: commons
+    date: 2024-03-01
+    division_number: 86
+    key: commons-2024-03-01-86
   alignment: agree
   strength: strong
   notes: ''

@@ -73,4 +73,13 @@ division_links:
   alignment: agree
   strength: strong
   notes: ''
+- policy_id:
+  decision:
+    chamber_slug: commons
+    date: 2024-03-12
+    division_number: 89
+    key: commons-2024-03-12-89
+  alignment: agree
+  strength: strong
+  notes: ''
 agreement_links: []
