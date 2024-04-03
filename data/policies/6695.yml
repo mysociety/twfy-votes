@@ -397,4 +397,13 @@ division_links:
   alignment: against
   strength: strong
   notes: ''
+- policy_id:
+  decision:
+    chamber_slug: commons
+    date: 2024-01-10
+    division_number: 41
+    key: commons-2024-01-10-41
+  alignment: against
+  strength: weak
+  notes: ''
 agreement_links: []
