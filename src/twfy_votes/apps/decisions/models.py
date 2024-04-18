@@ -73,7 +73,7 @@ class AllowedChambers(StrEnum):
     COMMONS = "commons"
     LORDS = "lords"
     SCOTLAND = "scotland"
-    WALES = "wales"
+    SENEDD = "senedd"
     NI = "ni"
 
 
@@ -184,7 +184,7 @@ class Chamber(BaseModel):
                 return "Lords"
             case "scotland":
                 return "MSPs"
-            case "wales":
+            case "senedd":
                 return "MSs"
             case "ni":
                 return "AMs"
@@ -201,7 +201,7 @@ class Chamber(BaseModel):
                 return "House of Lords"
             case "scotland":
                 return "Scottish Parliament"
-            case "wales":
+            case "senedd":
                 return "Senedd"
             case "ni":
                 return "Northern Ireland Assembly"
@@ -225,7 +225,7 @@ class Chamber(BaseModel):
                 return "lords"
             case "scotland":
                 return "sp"
-            case "wales":
+            case "senedd":
                 return "senedd"
             case "ni":
                 return "ni"
@@ -376,7 +376,7 @@ class VoteWithDivisionID(Vote):
     associated with multiple divisions
     """
 
-    division_id: int
+    division_id: str
 
 
 class VoteWithKey(Vote):
@@ -529,13 +529,13 @@ class DivisionInfo(BaseModel):
     key: str = aliases("key", "division_key")
     chamber: Chamber
     date: datetime.date = aliases("date", "division_date")
-    division_id: int
+    division_id: str
     division_number: int
-    division_name: str
-    source_url: str
-    motion: str
+    division_name: str = aliases("division_name", "division_title")
+    source_url: str | None = None
+    motion: str = ""
     manual_motion: str
-    debate_url: str
+    debate_url: str | None = None
     source_gid: str
     debate_gid: str
     clock_time: str | None = None
@@ -805,7 +805,7 @@ class DecisionListing(BaseModel):
 
 
 class DivisionBreakdown(BaseModel):
-    division_id: int
+    division_id: str
     grouping: str | None = None
     vote_participant_count: int
     for_motion: int

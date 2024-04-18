@@ -24,6 +24,8 @@ public_whip = DuckUrl(
     "https://pages.mysociety.org/publicwhip-data/data/public_whip_data/latest"
 )
 
+twfy = DuckUrl("https://www.theyworkforyou.com/pwdata/votes")
+
 # this is indirectly sources from parlparse's people.json
 politician_data = DuckUrl(
     "https://pages.mysociety.org/politician_data/data/uk_politician_data/latest"
@@ -218,8 +220,78 @@ class pd_memberships:
 
 
 @duck.as_source
+class source_pw_division:
+    source = twfy / "divisions.parquet"
+
+
+if (processed_data / "voting_clusters.parquet").exists():
+    # need a quick back up here because cluster table is used in the division table
+    # which is loaded when trying to run the update script that will create it in the first place
+    @duck.as_source
+    class pw_division_cluster:  # type: ignore
+        source = processed_data / "voting_clusters.parquet"
+else:
+
+    @duck.as_view
+    class pw_division_cluster:
+        query = """
+            SELECT
+            NULL AS division_id,
+            NULL AS cluster
+            WHERE
+            1 = 0;
+            """
+
+
+@duck.as_table
+class pd_member_counts:
+    source = politician_data / "membership_counts.parquet"
+
+
+@duck.as_python_source
+class pw_manual_motions(YamlData[ManualMotion]):
+    yaml_source = Path("data", "divisions", "manual_motions.yaml")
+    validation_model = ManualMotion
+
+
+@duck.as_table
+class pw_division:
+    query = """
+    SELECT
+        source_pw_division.* EXCLUDE (house, gid, division_title),
+        house as chamber,
+        division_title as division_name,
+        split(gid, '/')[-1] as source_gid,
+        split(gid, '/')[-1] as debate_gid,
+        null as clock_time,
+        '' as source_url,
+        '' as motion,
+        '' as debate_url,
+        CASE WHEN manual_motion is NULL THEN '' ELSE manual_motion END AS manual_motion,
+        CASE WHEN cluster is NULL THEN '' ELSE cluster END AS voting_cluster,
+        concat(house, '-', source_pw_division.division_date, '-', source_pw_division.division_number) as division_key,
+        pd_member_counts.members_count as total_possible_members
+    FROM
+        source_pw_division
+    LEFT JOIN pw_manual_motions on
+        (source_pw_division.house = pw_manual_motions.chamber
+         and source_pw_division.division_date = pw_manual_motions.division_date
+         and source_pw_division.division_number = pw_manual_motions.division_number
+         )
+    LEFT JOIN pw_division_cluster on (source_pw_division.division_id = cast(pw_division_cluster.division_id as string))
+    LEFT JOIN pd_member_counts on
+        (source_pw_division.division_date between pd_member_counts.start_date and
+        pd_member_counts.end_date and
+        source_pw_division.house = pd_member_counts.chamber)
+    WHERE
+        house != 'pbc'
+        AND source_pw_division.division_id NOT LIKE '%cy-senedd%'
+    """
+
+
+@duck.as_source
 class source_pw_vote:
-    source = public_whip / "pw_vote.parquet"
+    source = twfy / "votes.parquet"
 
 
 @duck.as_macro
@@ -259,75 +331,22 @@ class null_to_zero:
     """
 
 
-@duck.as_table
+@duck.as_view
 class pw_vote:
     query = """
+
     SELECT
-        * exclude (vote, mp_id),
-        mp_id as membership_id,
-        get_clean_vote(vote) as vote
-    FROM
-        source_pw_vote
-    """
-
-
-@duck.as_python_source
-class pw_manual_motions(YamlData[ManualMotion]):
-    yaml_source = Path("data", "divisions", "manual_motions.yaml")
-    validation_model = ManualMotion
-
-
-@duck.as_source
-class source_pw_division:
-    source = public_whip / "pw_division.parquet"
-
-
-if (processed_data / "voting_clusters.parquet").exists():
-    # need a quick back up here because cluster table is used in the division table
-    # which is loaded when trying to run the update script that will create it in the first place
-    @duck.as_source
-    class pw_division_cluster:  # type: ignore
-        source = processed_data / "voting_clusters.parquet"
-else:
-
-    @duck.as_view
-    class pw_division_cluster:
-        query = """
-            SELECT
-            NULL AS division_id,
-            NULL AS cluster
-            WHERE
-            1 = 0;
-            """
-
-
-@duck.as_table
-class pd_member_counts:
-    source = politician_data / "membership_counts.parquet"
-
-
-@duck.as_table
-class pw_division:
-    query = """
-    SELECT
-        source_pw_division.* EXCLUDE (house),
-        house as chamber,
-        CASE WHEN manual_motion is NULL THEN '' ELSE manual_motion END AS manual_motion,
-        CASE WHEN cluster is NULL THEN '' ELSE cluster END AS voting_cluster,
-        concat(house, '-', source_pw_division.division_date, '-', source_pw_division.division_number) as division_key,
-        pd_member_counts.members_count as total_possible_members
-    FROM
-        source_pw_division
-    LEFT JOIN pw_manual_motions on
-        (source_pw_division.house = pw_manual_motions.chamber
-         and source_pw_division.division_date = pw_manual_motions.division_date
-         and source_pw_division.division_number = pw_manual_motions.division_number
-         )
-    LEFT JOIN pw_division_cluster on (source_pw_division.division_id = pw_division_cluster.division_id)
-    LEFT JOIN pd_member_counts on
-        (source_pw_division.division_date between pd_member_counts.start_date and
-        pd_member_counts.end_date and
-        source_pw_division.house = pd_member_counts.chamber)
+        division_id as division_id,
+        get_clean_vote(vote) as vote,
+        pd_memberships.membership_id
+    from source_pw_vote
+        join pw_division
+            using (division_id)
+        join pd_memberships
+            on
+                source_pw_vote.person_id = pd_memberships.person_id
+            and
+                pw_division.division_date between pd_memberships.start_date and pd_memberships.end_date
     """
 
 
@@ -518,7 +537,7 @@ class pw_votes_with_party_difference:
     JOIN
         pw_divisions_party_with_counts
             on
-                (cm_votes_with_people.division_id = pw_divisions_party_with_counts.division_id and
+                (cast(cm_votes_with_people.division_id as string) = cast(pw_divisions_party_with_counts.division_id as string) and
                  cm_votes_with_people.party_reduced_name = pw_divisions_party_with_counts.grouping)
     """
 
