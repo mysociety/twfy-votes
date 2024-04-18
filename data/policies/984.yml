@@ -61,5 +61,5 @@ division_links:
     division_number: 46
   alignment: agree
   strength: strong
-  notes: ''
+  notes: 'ignore:strong_without_power'
 agreement_links: []
