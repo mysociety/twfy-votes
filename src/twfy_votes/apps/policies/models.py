@@ -21,6 +21,7 @@ from ..decisions.models import (
     PartialDivision,
     Person,
     PowersAnalysis,
+    VoteType,
 )
 from ..decisions.queries import DivisionBreakDownQuery
 from .queries import (
@@ -953,6 +954,7 @@ class IssueType(StrEnum):
     STRONG_WITHOUT_POWER = "strong_without_power"
     NO_STRONG_VOTES = "no_strong_votes"
     NO_STRONG_VOTES_AFTER_POWER_CHANGE = "no_strong_votes_after_power_change"
+    STRONG_VOTE_GOV_AGENDA = "strong_vote_gov_agenda"
     ONLY_ONE_STRONG_VOTE = "only_one_strong_vote"
 
 
@@ -1035,6 +1037,18 @@ class PolicyReport(BaseModel):
             )
             if division.strength == PolicyStrength.STRONG:
                 strong_count += 1
+            if division.strength == PolicyStrength.STRONG:
+                vma = division.decision.vote_motion_analysis
+                vote_type = vma.vote_type if vma else "Unknown"
+                if (
+                    "queen's speech" in division.decision.division_name.lower()
+                    or vote_type == VoteType.GOVERNMENT_AGENDA
+                ):
+                    if report.add_from_division_issue(
+                        division_link=division, issue=IssueType.STRONG_VOTE_GOV_AGENDA
+                    ):
+                        strong_without_power += 1
+
             if division.strength == PolicyStrength.STRONG and not uses_powers:
                 if report.add_from_division_issue(
                     division_link=division, issue=IssueType.STRONG_WITHOUT_POWER

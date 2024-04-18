@@ -46,7 +46,7 @@ division_links:
     date: 2013-05-15
     division_number: 4
   alignment: agree
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons

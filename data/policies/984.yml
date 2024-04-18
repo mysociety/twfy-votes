@@ -53,13 +53,13 @@ division_links:
     date: 2016-05-26
     division_number: 3
   alignment: against
-  strength: strong
+  strength: weak
   notes: ''
 - decision:
     chamber_slug: commons
     date: 2016-07-18
     division_number: 46
   alignment: agree
-  strength: weak
-  notes: ''
+  strength: strong
+  notes: 'ignore:strong_without_power'
 agreement_links: []

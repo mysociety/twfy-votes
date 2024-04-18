@@ -89,6 +89,7 @@ async def update_motion_yaml(
 
     if cached_path.exists() is False:
         # copy from stored path
+        cached_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(stored_path, cached_path)
 
     # if stored_path is larger than cached_path, copy from stored path
@@ -173,7 +174,6 @@ class VoteSearch(BaseModel):
 
 def catagorise_motion(motion: str) -> VoteType:
     l_motion = motion.lower()
-
     if all_present(l_motion, ["be approved", "laid before this house"]):
         return VoteType.APPROVE_STATUTORY_INSTRUMENT
     if all_present(l_motion, ["be revoked", "laid before this house"]):
@@ -214,10 +214,10 @@ def catagorise_motion(motion: str) -> VoteType:
         l_motion, ["takes note of regulation", "of the european parliament"]
     ):
         return VoteType.EU_DOCUMENT_SCRUTINY
-    elif all_present(l_motion, ["amendment", "lords"]):
-        return VoteType.LORDS_AMENDMENT
     elif any_present(l_motion, ["gracious speech"]):
         return VoteType.GOVERNMENT_AGENDA
+    elif all_present(l_motion, ["amendment", "lords"]):
+        return VoteType.LORDS_AMENDMENT
     elif any_present(l_motion, ["amendment", "clause be added to the bill"]):
         return VoteType.AMENDMENT
     elif any_present(l_motion, ["humble address be presented"]):
