@@ -1,7 +1,7 @@
 # This notebook imports legacy publicwhip policy information into yaml files that power new database
 
 from ...helpers.duck.core import AsyncDuckDBManager
-from ...internal.db import duck_core, get_db_lifespan
+from ...internal.db import LifeSpanManager, duck_core
 from ..decisions.data_sources import duck as decisions_duck
 from ..policies.data_sources import duck as policies_duck
 
@@ -49,4 +49,4 @@ async def reload_database():
 
 load_common_core = CommonCore().load_common_core
 
-db_lifespan = get_db_lifespan(data_sources)
+db_lifespan = LifeSpanManager(data_sources)
