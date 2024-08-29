@@ -87,7 +87,7 @@ class policy_agreements(YamlData[PartialPolicy]):
         return data
 
 
-@duck.as_view
+@duck.as_table_macro
 class policy_agreement_count:
     """
     Calculations for agreements are *much* simpler because by defintion there is no difference between
@@ -99,7 +99,8 @@ class policy_agreement_count:
 
     """
 
-    query = """
+    args = ["_period_start", "_period_end"]
+    macro = """
     select
         * exclude (num_same, num_different),
         num_same - num_strong_agreements_same as num_weak_agreements_same,
@@ -123,6 +124,8 @@ class policy_agreement_count:
                 JOIN
                     pd_memberships
                         on division_date between pd_memberships.start_date and pd_memberships.end_date
+                WHERE
+                    division_date between {{ _period_start }} and {{ _period_end }}
             )
         GROUP BY
             all
@@ -206,14 +209,13 @@ class policy_alignment:
     Table macro - For each vote/absence, calculate the policy alignment per person.
     """
 
-    args = ["_person_id", "_chamber_slug", "_party_id"]
+    args = ["_person_id", "_chamber_slug", "_party_id", "_start_date", "_end_date"]
     macro = """
     SELECT
         policy_id,
         pdm.person_id as person_id,
         case pdm.person_id when {{ _person_id }} then 1 else 0 end as is_target,
         strong_int,
-        -- alignment,
         policy_votes.division_id as division_id,
         policy_votes.division_date as division_date,
         policy_votes.division_number as division_number,
@@ -223,7 +225,6 @@ class policy_alignment:
         case (pw_vote.vote, alignment) when ('aye', 'against') then 1 when ('no', 'agree') then 1 else 0 end as answer_disagreed,
         case when mp_vote = 'abstention' then 1 else 0 end as abstained,
         case when mp_vote = 'absent' then 1 else 0 end as absent,
-        -- unique_rows((policy_id, policy_votes.division_id, pdm.person_id)) AS dupe_count
     FROM
         policy_votes_with_id as policy_votes
     join
@@ -241,6 +242,8 @@ class policy_alignment:
         policy_votes.alignment != 'neutral'
         and policy_votes.chamber = {{ _chamber_slug }}
         and policies.chamber = {{ _chamber_slug }}
+        and policy_votes.division_date between {{ _start_date }} and {{ _end_date }}
+        and pw_division.division_date between {{ _start_date }} and {{ _end_date }}
         and ( -- here we want either the persons own divisions, or the divisions of the party they are in.
             pdm.person_id = {{ _person_id }}
             or
@@ -257,7 +260,7 @@ class comparisons_by_policy_vote:
     This will be floats - but will sum to the same total of votes as the number of divisions the target could vote in.
     """
 
-    args = ["_person_id", "_chamber_slug", "_party_id"]
+    args = ["_person_id", "_chamber_slug", "_party_id", "_start_date", "_end_date"]
     macro = """
     select
         is_target,
@@ -272,7 +275,11 @@ class comparisons_by_policy_vote:
         sum(absent) / total as num_divisions_absent,
         sum(answer_agreed) + sum(answer_disagreed) + sum(abstained) + sum(absent) as num_comparators,
     from
-        policy_alignment({{ _person_id }}, {{ _chamber_slug }}, {{ _party_id }})
+        policy_alignment({{ _person_id }},
+                         {{ _chamber_slug }},
+                         {{ _party_id }},
+                         {{ _start_date }},
+                         {{ _end_date }})
     group by
         is_target, policy_id, division_id
     """

@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 from xml.dom import minidom
 
 from fastapi import Response
-from twfy_votes.apps.policies.models import PersonPolicyLink
+from twfy_votes.apps.policies.models import PersonPolicyLink, PolicyTimePeriodSlug
 
 from ...helpers.static_fastapi.static import StaticAPIRouter
 from ...internal.settings import settings
@@ -19,7 +19,9 @@ async def twfy_compatible_xml_policy(context: GetContext, policy_id: int):
     """
     Generate a TheyWorkForYou compatible XML file for a policy
     """
-    policy_links = await PersonPolicyLink.from_policy_id(policy_id)
+    policy_links = await PersonPolicyLink.from_policy_id(
+        policy_id, comparison_period_slug=PolicyTimePeriodSlug.ALL_TIME
+    )
     root = ET.Element("publicwhip")
     for person in policy_links:
         personinfo = ET.SubElement(root, "personinfo")

@@ -95,8 +95,6 @@ pd_people:
   surname: VARCHAR
   organization_id: VARCHAR
   honorific_suffix: VARCHAR
-  additional_names: VARCHAR
-  additional__name: VARCHAR
   last_name: VARCHAR
   person_id: VARCHAR
   nice_name: VARCHAR
@@ -117,8 +115,6 @@ pd_people_non_unique:
   surname: VARCHAR
   organization_id: VARCHAR
   honorific_suffix: VARCHAR
-  additional_names: VARCHAR
-  additional__name: VARCHAR
   last_name: VARCHAR
   person_id: VARCHAR
   nice_name: VARCHAR
@@ -140,15 +136,13 @@ pd_people_source:
   surname: VARCHAR
   organization_id: VARCHAR
   honorific_suffix: VARCHAR
-  additional_names: VARCHAR
-  additional__name: VARCHAR
 pd_posts:
+  end_date: VARCHAR
   id: VARCHAR
   label: VARCHAR
   organization_id: VARCHAR
   role: VARCHAR
   start_date: VARCHAR
-  end_date: VARCHAR
   area_name: VARCHAR
 policies:
   id: BIGINT
@@ -167,13 +161,6 @@ policies:
   agreement_links: STRUCT(alignment VARCHAR, decision STRUCT(chamber_slug VARCHAR,
     date DATE, decision_ref VARCHAR, division_name VARCHAR, "key" VARCHAR, source_gid
     VARCHAR), decision_key VARCHAR, notes VARCHAR, policy_id INTEGER, strength VARCHAR)[]
-policy_agreement_count:
-  person_id: BIGINT
-  policy_id: BIGINT
-  num_strong_agreements_same: HUGEINT
-  num_strong_agreements_different: HUGEINT
-  num_weak_agreements_same: HUGEINT
-  num_weak_agreements_different: HUGEINT
 policy_agreements:
   policy_id: BIGINT
   division_date: DATE
@@ -200,6 +187,7 @@ policy_distributions:
   person_id: BIGINT
   comparison_party: VARCHAR
   chamber: VARCHAR
+  period_slug: VARCHAR
 policy_votes:
   policy_id: BIGINT
   division_date: DATE

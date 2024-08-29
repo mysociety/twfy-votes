@@ -1,6 +1,17 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, ClassVar, Generic, Type, TypeVar, cast, overload
+import datetime
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    ClassVar,
+    Generic,
+    NamedTuple,
+    Type,
+    TypeVar,
+    cast,
+    overload,
+)
 
 import pandas as pd
 from pydantic import Field, computed_field
@@ -43,8 +54,67 @@ from .scoring import (
 PartialDecisionType = TypeVar("PartialDecisionType", PartialAgreement, PartialDivision)
 InfoType = TypeVar("InfoType", AgreementInfo, DivisionInfo)
 
+
 if TYPE_CHECKING:
     from fastapi import Request
+
+
+class PolicyTimePeriodSlug(StrEnum):
+    ALL_TIME = "all_time"
+    LABOUR_1997 = "labour_1997"
+    COALITION_2010 = "coalition_2010"
+    CONSERVATIVE_2015 = "conservative_2015"
+    LABOUR_2024 = "labour_2024"
+
+
+class TimeRange(NamedTuple):
+    desc: str
+    start_date: datetime.date
+    end_date: datetime.date
+
+
+class PolicyTimePeriod(BaseModel):
+    slug: PolicyTimePeriodSlug
+
+    period_descs: ClassVar[dict[PolicyTimePeriodSlug, TimeRange]] = {
+        PolicyTimePeriodSlug.ALL_TIME: TimeRange(
+            "All time", datetime.date(1900, 1, 1), datetime.date(2100, 1, 1)
+        ),
+        PolicyTimePeriodSlug.LABOUR_1997: TimeRange(
+            "Labour 1997-2010", datetime.date(1997, 5, 1), datetime.date(2010, 5, 6)
+        ),
+        PolicyTimePeriodSlug.COALITION_2010: TimeRange(
+            "Coalition 2010-2015",
+            datetime.date(2010, 5, 6),
+            datetime.date(2015, 5, 7),
+        ),
+        PolicyTimePeriodSlug.CONSERVATIVE_2015: TimeRange(
+            "Conservative 2015-2024",
+            datetime.date(2015, 5, 7),
+            datetime.date(2024, 7, 4),
+        ),
+        PolicyTimePeriodSlug.LABOUR_2024: TimeRange(
+            "Labour 2024-", datetime.date(2024, 7, 5), datetime.date(2100, 1, 1)
+        ),
+    }
+
+    @computed_field
+    @property
+    def desc(self) -> str:
+        return self.period_descs[self.slug].desc
+
+    @computed_field
+    @property
+    def start_date(self) -> datetime.date:
+        return self.period_descs[self.slug].start_date
+
+    @computed_field
+    @property
+    def end_date(self) -> datetime.date:
+        return self.period_descs[self.slug].end_date
+
+    def is_valid_date(self, date: datetime.date) -> bool:
+        return self.start_date <= date <= self.end_date
 
 
 def nice_headers(s: str) -> str:
@@ -605,6 +675,7 @@ class VoteDistribution(BaseModel):
 class ReducedPersonPolicyLink(BaseModel):
     person_id: str
     policy_id: int
+    comparison_period: PolicyTimePeriod
     comparison_party: str
     chamber: AllowedChambers
     person_distance_from_policy: float
@@ -635,6 +706,7 @@ class ReducedPersonPolicyLink(BaseModel):
         return cls(
             person_id=person_id,
             policy_id=link.policy_id,
+            comparison_period=link.comparison_period,
             comparison_party=link.comparison_party,
             chamber=link.chamber,
             count_present=int(both_voted),
@@ -673,6 +745,7 @@ class PersonPolicyLink(BaseModel):
 
     person_id: int
     policy_id: int
+    comparison_period: PolicyTimePeriod
     comparison_party: str
     chamber: AllowedChambers
     own_distribution: VoteDistribution
@@ -749,16 +822,27 @@ class PersonPolicyLink(BaseModel):
         return False
 
     @classmethod
-    async def from_person_id(cls, person_id: int) -> list[Self]:
+    async def from_person_id(
+        cls, person_id: int, comparison_period_slug: PolicyTimePeriodSlug
+    ) -> list[Self]:
+        comparison_period = PolicyTimePeriod(slug=comparison_period_slug)
+
         duck = await duck_core.child_query()
         df = (
-            await PolicyDistributionPersonQuery(person_id=person_id)
+            await PolicyDistributionPersonQuery(
+                person_id=person_id,
+                period_slug=comparison_period.slug,
+            )
             .compile(duck=duck)
             .df()
         )
 
         adf = (
-            await PolicyAgreementPersonQuery(person_id=person_id)
+            await PolicyAgreementPersonQuery(
+                person_id=person_id,
+                start_date=comparison_period.start_date.isoformat(),
+                end_date=comparison_period.end_date.isoformat(),
+            )
             .compile(duck=duck)
             .df()
         )
@@ -771,19 +855,31 @@ class PersonPolicyLink(BaseModel):
 
     @classmethod
     async def from_policy_id(
-        cls, policy_id: int, single_comparisons: bool = False
+        cls,
+        policy_id: int,
+        comparison_period_slug: PolicyTimePeriodSlug,
+        single_comparisons: bool = False,
     ) -> list[Self]:
         duck = await duck_core.child_query()
+
+        comparison_period = PolicyTimePeriod(slug=comparison_period_slug)
+
         df = (
             await PolicyDistributionQuery(
-                policy_id=policy_id, single_comparisons=single_comparisons
+                policy_id=policy_id,
+                single_comparisons=single_comparisons,
+                period_slug=comparison_period.slug,
             )
             .compile(duck=duck)
             .df()
         )
 
         adf = (
-            await PolicyAgreementPolicyQuery(policy_id=policy_id)
+            await PolicyAgreementPolicyQuery(
+                policy_id=policy_id,
+                start_date=comparison_period.start_date.isoformat(),
+                end_date=comparison_period.end_date.isoformat(),
+            )
             .compile(duck=duck)
             .df()
         )
@@ -791,6 +887,7 @@ class PersonPolicyLink(BaseModel):
         # this merge will give the same values for agreements for both sides of the comparison
         # merge left because most policies don't have agreements
         df = df.merge(adf, on=["person_id", "policy_id"], how="left").fillna(0)
+        df["period_slug"] = comparison_period_slug
 
         return cls.from_df(df=df)
 
@@ -824,10 +921,16 @@ class PersonPolicyLink(BaseModel):
         items: list[Self] = []
 
         for grouper, gdf in df.set_index("is_target").groupby(  # type: ignore
-            ["policy_id", "person_id", "chamber", "comparison_party"]
+            ["policy_id", "person_id", "chamber", "comparison_party", "period_slug"]
         ):
-            grouper: tuple[int, int, AllowedChambers, str]
-            policy_id, person_id, chamber, comparison_party = grouper
+            grouper: tuple[int, int, AllowedChambers, str, str]
+            (
+                policy_id,
+                person_id,
+                chamber,
+                comparison_party,
+                policy_period_slug,
+            ) = grouper
             target_values = cast(VoteDistribution, gdf["vote_distributions"][1])
             # if no comparison, then there are no compariable mps (rare) of the same party, so just use self.
             comparison_values: VoteDistribution = gdf["vote_distributions"].get(
@@ -835,10 +938,17 @@ class PersonPolicyLink(BaseModel):
                 target_values,  # type: ignore
             )
 
+            comparison_period = PolicyTimePeriod(
+                slug=PolicyTimePeriodSlug(
+                    policy_period_slug,
+                )
+            )
+
             items.append(
                 cls(
                     person_id=person_id,
                     policy_id=policy_id,
+                    comparison_period=comparison_period,
                     comparison_party=comparison_party,
                     chamber=chamber,
                     own_distribution=target_values,
@@ -900,7 +1010,11 @@ class PersonPolicyDisplay(BaseModel):
 
     @classmethod
     async def from_person_and_party(
-        cls, person_id: int, chamber_slug: AllowedChambers, comparison_party: str
+        cls,
+        person_id: int,
+        chamber_slug: AllowedChambers,
+        comparison_party: str,
+        comparison_period_slug: PolicyTimePeriodSlug,
     ):
         all_policies = await Policy.for_collection(chamber=chamber_slug)
 
@@ -908,7 +1022,9 @@ class PersonPolicyDisplay(BaseModel):
 
         policy_lookup = {x.id: x for x in all_policies if x.status in allowed_status}
 
-        links = await PersonPolicyLink.from_person_id(person_id=person_id)
+        links = await PersonPolicyLink.from_person_id(
+            person_id=person_id, comparison_period_slug=comparison_period_slug
+        )
         # narrow down to just ones for right party
         links = [x for x in links if x.comparison_party == comparison_party]
 
