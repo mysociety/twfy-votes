@@ -20,6 +20,8 @@ from .models import (
     PolicyDecisionLink,
     PolicyDirection,
     PolicyStrength,
+    PolicyTimePeriod,
+    PolicyTimePeriodSlug,
 )
 from .vr_generator import get_pivot_df
 
@@ -198,7 +200,12 @@ async def votes_from_decision_link(
 
 
 async def get_scores_slow(
-    *, person_id: int, policy_id: int, party: str, debug: bool = False
+    *,
+    person_id: int,
+    policy_id: int,
+    party: str,
+    comparison_period_slug: PolicyTimePeriodSlug,
+    debug: bool = False,
 ) -> PolicyComparison:
     """
     This calculates the score a much slower way than the SQL method.
@@ -206,6 +213,7 @@ async def get_scores_slow(
     information and processing it.
     Ideally, this will agree with the less easy to read SQL method.
     """
+    comparsion_period = PolicyTimePeriod(slug=comparison_period_slug)
     policy = await Policy.from_id(policy_id)
     chamber = policy.chamber.slug
 
@@ -228,6 +236,8 @@ async def get_scores_slow(
     # iterate through all agreements
     for decision_link in policy.agreement_links:
         if not is_valid_date(decision_link.decision.date.isoformat()):
+            continue
+        if not comparsion_period.is_valid_date(decision_link.decision.date):
             continue
         if decision_link.decision.chamber.slug != chamber:
             continue
@@ -256,6 +266,15 @@ async def get_scores_slow(
             debug_print("policy out of chamber - discarded")
             continue
 
+        if not comparsion_period.is_valid_date(decision_link.decision.date):
+            debug_print("policy not in comparison period - discarded")
+            continue
+
+        if not is_valid_date(decision_link.decision.date.isoformat()):
+            debug_print("person not a member of this date")
+            # this person was not a member on this date
+            continue
+
         # get associated votes for this divisio
         votes = await votes_from_decision_link(decision_link)
         if votes[0].division_id != decision_link.decision.division_id:
@@ -272,11 +291,6 @@ async def get_scores_slow(
         other_this_vote_score = Score()
 
         person_ids = rel_party_members["person_id"].astype(int).tolist()
-
-        if not is_valid_date(date):
-            debug_print("person not a member of this date")
-            # this person was not a member on this date
-            continue
 
         debug_print(is_strong, decision_link.strength, decision_link.alignment)
 
@@ -370,6 +384,7 @@ async def validate_approach(
     policy_id: int,
     party_id: str,
     chamber_slug: str,
+    comparison_period_slug: PolicyTimePeriodSlug,
     debug: bool = False,
 ) -> ValidationResult:
     """
@@ -377,9 +392,15 @@ async def validate_approach(
     Python function.
     """
 
+    period = PolicyTimePeriod(slug=comparison_period_slug)
+
     # get fast approach
     df = await get_pivot_df(
-        person_id=person_id, party_id=party_id, chamber_slug=chamber_slug
+        person_id=person_id,
+        party_id=party_id,
+        chamber_slug=chamber_slug,
+        start_date=period.start_date,
+        end_date=period.end_date,
     )
     df = df[df["policy_id"] == policy_id]
 
@@ -392,7 +413,11 @@ async def validate_approach(
 
     # get slow approach
     slow_approach = await get_scores_slow(
-        person_id=person_id, policy_id=policy_id, party=party_id, debug=debug
+        person_id=person_id,
+        policy_id=policy_id,
+        party=party_id,
+        comparison_period_slug=comparison_period_slug,
+        debug=debug,
     )
 
     # validate if they're reaching the same conclusion
@@ -449,12 +474,14 @@ async def test_policy_sample(sample: int = 50, policy_id: int | None = None) -> 
             policy_id = int(row["policy_id"])
             person_id = int(row["person_id"])
             party_id = str(row["comparison_party"])
+            period_slug = PolicyTimePeriodSlug(row["period_slug"])
 
             result = await validate_approach(
                 person_id=person_id,
                 policy_id=policy_id,
                 chamber_slug=chamber_slug,
                 party_id=party_id,
+                comparison_period_slug=period_slug,
             )
 
             summary = {

@@ -18,6 +18,7 @@ from .models import (
     PolicyGroupSlug,
     PolicyReport,
     PolicyStatus,
+    PolicyTimePeriodSlug,
 )
 
 
@@ -54,12 +55,16 @@ async def GetPolicy(policy_id: int) -> Policy:
 
 @dependency
 async def GetPersonPolicy(
-    person_id: int, chamber_slug: AllowedChambers, party_id: str
+    person_id: int,
+    chamber_slug: AllowedChambers,
+    party_id: str,
+    comparison_period_slug: PolicyTimePeriodSlug = PolicyTimePeriodSlug.ALL_TIME,
 ) -> PersonPolicyDisplay:
     return await PersonPolicyDisplay.from_person_and_party(
         person_id=person_id,
         comparison_party=party_id,
         chamber_slug=chamber_slug,
+        comparison_period_slug=comparison_period_slug,
     )
 
 

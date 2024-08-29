@@ -1,4 +1,5 @@
 import json
+from datetime import date
 from hashlib import md5
 from pathlib import Path
 
@@ -9,6 +10,7 @@ from twfy_votes.apps.core.db import duck_core
 from twfy_votes.apps.policies.queries import PolicyPivotTable
 
 from ..decisions.models import AllowedChambers
+from ..policies.models import PolicyTimePeriod, PolicyTimePeriodSlug
 from .queries import GetPersonParties, PolicyAffectedPeople
 
 policy_dir = Path("data", "policies")
@@ -29,15 +31,25 @@ async def get_parties(person_id: int, chamber_slug: AllowedChambers) -> list[str
 
 
 async def get_pivot_df(
-    *, person_id: int, party_id: str, chamber_slug: str
+    *,
+    person_id: int,
+    party_id: str,
+    chamber_slug: str,
+    start_date: date = date(1900, 1, 1),
+    end_date: date = date(2100, 1, 1),
 ) -> pd.DataFrame:
     """
     Function to generate the policy vote breakdowns for a person and party.
     """
+
     duck = await duck_core.child_query()
     df = (
         await PolicyPivotTable(
-            person_id=person_id, party_slug=party_id, chamber_slug=chamber_slug
+            person_id=person_id,
+            party_slug=party_id,
+            chamber_slug=chamber_slug,
+            start_date=start_date.isoformat(),
+            end_date=end_date.isoformat(),
         )
         .compile(duck)
         .df()
@@ -160,13 +172,23 @@ async def generate_voting_records_for_chamber(
             chamber_slug=chamber, policy_id=policy_id
         )
 
-    for p_id in tqdm(person_ids):
-        parties = await get_parties(person_id=p_id, chamber_slug=chamber)
-        for party_id in parties:
-            df = await get_pivot_df(
-                person_id=p_id, party_id=party_id, chamber_slug=chamber
-            )
-            dfs.append(df)
+    for time_period_slug in tqdm(PolicyTimePeriodSlug):
+        # for moment only generate all time
+        if not time_period_slug == PolicyTimePeriodSlug.ALL_TIME:
+            continue
+        time_period = PolicyTimePeriod(slug=time_period_slug)
+        for p_id in tqdm(person_ids):
+            parties = await get_parties(person_id=p_id, chamber_slug=chamber)
+            for party_id in parties:
+                df = await get_pivot_df(
+                    person_id=p_id,
+                    party_id=party_id,
+                    chamber_slug=chamber,
+                    start_date=time_period.start_date,
+                    end_date=time_period.end_date,
+                )
+                df["period_slug"] = time_period.slug
+                dfs.append(df)
 
     new_df: pd.DataFrame = pd.concat(dfs).drop(columns=["num_comparators"])
 

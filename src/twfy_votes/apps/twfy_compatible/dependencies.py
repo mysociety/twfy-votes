@@ -15,6 +15,7 @@ from ..policies.models import (
     Policy,
     PolicyDirection,
     PolicyStrength,
+    PolicyTimePeriodSlug,
     ReducedPersonPolicyLink,
 )
 from . import models as m
@@ -115,7 +116,9 @@ async def GetPopoloPolicy(policy_id: int) -> m.PopoloPolicy:
 
     div_and_votes_lookup = {x.details.division_id: x for x in div_and_votes_collection}
 
-    alignments = await PersonPolicyLink.from_policy_id(policy_id)
+    alignments = await PersonPolicyLink.from_policy_id(
+        policy_id, comparison_period_slug=PolicyTimePeriodSlug.ALL_TIME
+    )
 
     aspects = []
     for link in policy.division_links:

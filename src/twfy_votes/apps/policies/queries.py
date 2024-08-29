@@ -75,12 +75,19 @@ class PolicyPivotTable(BaseQuery):
         list(num_comparators) as num_comparators,
         min(division_year) as start_year,
         max(division_year) as end_year
-        from comparisons_by_policy_vote({{ person_id }}, {{ chamber_slug }}, {{ party_slug }})
+        from comparisons_by_policy_vote({{ person_id }},
+                                        {{ chamber_slug }},
+                                        {{ party_slug }},
+                                        {{ start_date }},
+                                        {{ end_date }}
+                                        )
         group by is_target, policy_id
     """
     person_id: int
     chamber_slug: str
     party_slug: str
+    start_date: str = "1900-01-01"
+    end_date: str = "2100-01-01"
 
 
 class PolicyAffectedPeople(BaseQuery):
@@ -166,25 +173,31 @@ class PolicyDistributionQuery(BaseQuery):
     {% endif %}
     where
         policy_id = {{ policy_id }}
+        and period_slug = {{ period_slug }}
     """
     policy_id: int
+    period_slug: str
     single_comparisons: bool = False
 
 
 class PolicyAgreementPersonQuery(BaseQuery):
     query_template = """
-        select * from policy_agreement_count
+        select * from policy_agreement_count({{start_date}}, {{end_date}})
         where person_id = {{ person_id }}
     """
     person_id: int
+    start_date: str
+    end_date: str
 
 
 class PolicyAgreementPolicyQuery(BaseQuery):
     query_template = """
-        select * from policy_agreement_count
+        select * from policy_agreement_count({{start_date}}, {{end_date}})
         where policy_id = {{ policy_id }}
     """
     policy_id: int
+    start_date: str
+    end_date: str
 
 
 class PolicyDistributionPersonQuery(BaseQuery):
@@ -206,6 +219,8 @@ class PolicyDistributionPersonQuery(BaseQuery):
     {% endif %}
     where
         person_id = {{ person_id }}
+        and period_slug = {{ period_slug }}
     """
     person_id: int
+    period_slug: str
     single_comparisons: bool = False
