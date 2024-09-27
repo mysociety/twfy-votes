@@ -113,7 +113,7 @@ class DivisionIdsVotesQuery(BaseQuery):
         nice_name as person__nice_name,
         party_name as person__party,
         person_id as person__person_id,
-        pw_votes_with_party_difference.* exclude (division_id, __index_level_0__, given_name, last_name, nice_name, party)
+        pw_votes_with_party_difference.* exclude (division_id, given_name, last_name, nice_name, party)
     FROM
         pw_votes_with_party_difference
     WHERE
@@ -131,7 +131,7 @@ class DivisionVotesQuery(BaseQuery):
         nice_name as person__nice_name,
         party as person__party,
         person_id as person__person_id,
-        pw_votes_with_party_difference.* exclude (division_id, __index_level_0__)
+        pw_votes_with_party_difference.* exclude (division_id)
     FROM
         pw_division
     JOIN pw_votes_with_party_difference using (division_id)
@@ -153,7 +153,7 @@ class PersonVotesQuery(BaseQuery):
         nice_name as person__nice_name,
         party as person__party,
         person_id as person__person_id,
-        pw_votes_with_party_difference.* exclude (division_id, __index_level_0__),
+        pw_votes_with_party_difference.* exclude (division_id),
         division_key as division__division_key,
         chamber as division__chamber__slug,
         division_id as division__division_id,
